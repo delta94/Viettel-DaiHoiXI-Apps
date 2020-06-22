@@ -20,3 +20,11 @@ export {
   DynamicStatusBar,
   DynamicStatusBarProps,
 } from './dynamicStatusBar/dynamicStatusBar.component';
+export {
+  ScrollableAvoidKeyboard,
+  ScrollableAvoidKeyboardProps,
+} from './scrollableAvoidKeyboard/scrollableAvoidKeyboard.component';
+export {
+  ValidationInput,
+  ValidationInputProps,
+} from './validationInput/validationInput.component';

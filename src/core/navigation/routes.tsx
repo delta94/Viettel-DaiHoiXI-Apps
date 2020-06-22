@@ -16,22 +16,22 @@ import {
   MainNavigationOptions,
   TopNavigationOptions,
   TopNavigationOptions2,
-  StudyNavigationOptions,
   TopNavigationOptions3,
 } from './options';
 import { SplashContainer } from '@src/containers/splash/splash.container';
+import { SignInContainer } from '@src/containers/auth/signIn/signIn.container';
 
-// // Auth
-// const AuthNavigator: NavigationContainer = createStackNavigator({
-//   ['signIn']: SignInContainer,
-//   ['forgotPassword']: ForgotPasswordContainer,
-// }, {
-//   defaultNavigationOptions: {
-//     header: null,
-//   },
-//   // transitionConfig: () => StackViewTransitionConfigs.FadeInFromBottomAndroid,
-//   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
-// });
+// Auth
+const AuthNavigator: NavigationContainer = createStackNavigator({
+  ['signIn']: SignInContainer,
+  // ['forgotPassword']: ForgotPasswordContainer,
+}, {
+  defaultNavigationOptions: {
+    header: null,
+  },
+  // transitionConfig: () => StackViewTransitionConfigs.FadeInFromBottomAndroid,
+  transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
+});
 
 // Bottom tab
 // const HomeNavigator: NavigationContainer = createStackNavigator({
@@ -88,11 +88,11 @@ import { SplashContainer } from '@src/containers/splash/splash.container';
 const createAppRouter = (container?: NavigationNavigator<any, NavigationProp<NavigationState>>): NavigationContainer => {
   return createAppContainer(createSwitchNavigator({
     ['splash']: SplashContainer,
-    // ['auth']: AuthNavigator,
+    ['auth']: AuthNavigator,
     // ['app']: container,
 
     // ['test']: TestContainer,
-  }, { initialRouteName: 'splash' }));
+  }, { initialRouteName: 'auth' }));
 };
 
 export const Router: NavigationContainer = createAppRouter();

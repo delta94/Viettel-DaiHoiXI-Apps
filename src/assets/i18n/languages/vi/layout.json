@@ -1,0 +1,13 @@
+{
+  "appName": "Edu.One",
+  "header": {
+    "home": ""
+  },
+  "prevHeader": {
+    "home": ""
+  },
+  "tabBarBottom": {
+    "home": "Trang chủ",
+    "other": "Khác"
+  }
+}

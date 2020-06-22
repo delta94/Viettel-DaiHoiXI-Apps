@@ -1,0 +1,13 @@
+{
+  "appName": "DaiHoiXI",
+  "header": {
+    "home": ""
+  },
+  "prevHeader": {
+    "home": ""
+  },
+  "tabBarBottom": {
+    "home": "Home",
+    "other": "Others"
+  }
+}

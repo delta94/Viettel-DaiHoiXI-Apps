@@ -15,15 +15,3 @@ export class RemoteImage implements ImageSource {
     return { uri: this.source };
   }
 }
-
-export class Base64Image implements ImageSource {
-  readonly source: string;
-
-  constructor(source: string) {
-    this.source = source;
-  }
-
-  get imageSource(): ImageSourcePropType {
-    return { uri: `data:image/png;base64,${this.source}` };
-  }
-}

@@ -28,7 +28,6 @@ export type IconElement = React.ReactElement<ImageProps>;
 export const Icon = (source: IconSource, style: StyleProp<ImageStyle>): React.ReactElement<ImageProps> => {
   return (
     <Image
-      resizeMode={'contain'}
       style={style}
       source={source.imageSource}
     />

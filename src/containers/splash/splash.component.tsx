@@ -4,11 +4,10 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { ImageBackground } from 'react-native';
-import { ImageSource } from '@src/assets/images';
+import { View } from 'react-native';
 
 interface ComponentProps {
-  backgroundImage: ImageSource;
+  example?: any;
 }
 
 export type SplashProps = ComponentProps & ThemedComponentProps;
@@ -17,10 +16,9 @@ const SplashComponent: React.FunctionComponent<SplashProps> = (props) => {
   const { themedStyle } = props;
 
   return (
-    <ImageBackground
-      source={props.backgroundImage.imageSource}
-      style={themedStyle.container}
-    />
+    <View style={themedStyle.container}>
+
+    </View>
   );
 };
 

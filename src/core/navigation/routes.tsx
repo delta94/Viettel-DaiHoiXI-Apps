@@ -12,87 +12,92 @@ import {
   StackViewTransitionConfigs,
 } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import {
-  MainNavigationOptions,
-  TopNavigationOptions,
-  TopNavigationOptions2,
-  TopNavigationOptions3,
-} from './options';
+import { MenuNavigationOptions } from './options';
+import { MenuContainer } from '@src/containers/menu/menu.container';
 import { SplashContainer } from '@src/containers/splash/splash.container';
+import { ExampleContainer } from '@src/containers/example/example.container';
 import { SignInContainer } from '@src/containers/auth/signIn/signIn.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
   ['signIn']: SignInContainer,
-  // ['forgotPassword']: ForgotPasswordContainer,
+  ['forgotPassword']: ExampleContainer,
 }, {
   defaultNavigationOptions: {
     header: null,
   },
-  // transitionConfig: () => StackViewTransitionConfigs.FadeInFromBottomAndroid,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
 });
 
 // Bottom tab
-// const HomeNavigator: NavigationContainer = createStackNavigator({
-//   ['home']: HomeContainer,
-// }, {
-//   defaultNavigationOptions: {
-//     header: null,
-//   },
-//   // transitionConfig: () => StackViewTransitionConfigs.FadeInFromBottomAndroid,
-//   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
-// });
+const HomeNavigator: NavigationContainer = createStackNavigator({
+  ['home']: ExampleContainer,
+}, {
+  defaultNavigationOptions: MenuNavigationOptions,
+  transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
+});
 
-// const OthersNavigator: NavigationContainer = createStackNavigator({
-//   ['others']: OthersContainer,
-// }, {
-//   defaultNavigationOptions: MainNavigationOptions,
-//   // transitionConfig: () => StackViewTransitionConfigs.FadeInFromBottomAndroid,
-//   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
-// });
+const MeetingNavigator: NavigationContainer = createStackNavigator({
+  ['meeting']: ExampleContainer,
+}, {
+  defaultNavigationOptions: MenuNavigationOptions,
+  transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
+});
 
-// const HomeNavigationMap: NavigationRouteConfigMap<any, any> = {
-//   ['example']: {
-//     screen: ExampleContainer,
-//     navigationOptions: TopNavigationOptions3,
-//   },
-// };
+const NotificationNavigator: NavigationContainer = createStackNavigator({
+  ['notification']: ExampleContainer,
+}, {
+  defaultNavigationOptions: MenuNavigationOptions,
+  transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
+});
 
-// Others map
-// const OthersNavigationMap: NavigationRouteConfigMap<any, any> = {
-//   ['example']: {
-//     screen: exampleContainer,
-//     navigationOptions: TopNavigationOptions2,
-//   },
-// };
+const AccountNavigator: NavigationContainer = createStackNavigator({
+  ['account']: ExampleContainer,
+}, {
+  defaultNavigationOptions: MenuNavigationOptions,
+  transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
+});
 
-// const MenuNavigator: NavigationNavigator<any, NavigationProp<NavigationState>> = createBottomTabNavigator({
-//   ['tabHome']: HomeNavigator,
-//   ['tabOthers']: OthersNavigator,
-// }, { tabBarComponent: TabBarBottomContainer });
+// Map
+const HomeNavigationMap: NavigationRouteConfigMap<any, any> = {
+};
 
-// const AppNavigator: NavigationContainer = createStackNavigator({
-//   ['menu']: MenuNavigator,
-//   ...HomeNavigationMap,
-//   ...OthersNavigationMap,
-// }, {
-//   headerMode: 'screen',
-//   defaultNavigationOptions: {
-//     header: null,
-//   },
-//   // transitionConfig: () => StackViewTransitionConfigs.FadeInFromBottomAndroid,
-//   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
-// });
+const MeetingNavigationMap: NavigationRouteConfigMap<any, any> = {
+};
 
-const createAppRouter = (container?: NavigationNavigator<any, NavigationProp<NavigationState>>): NavigationContainer => {
+const NotificationNavigationMap: NavigationRouteConfigMap<any, any> = {
+};
+
+const AccountNavigationMap: NavigationRouteConfigMap<any, any> = {
+};
+
+const MenuNavigator: NavigationNavigator<any, NavigationProp<NavigationState>> = createBottomTabNavigator({
+  ['tabHome']: HomeNavigator,
+  ['tabMeeting']: MeetingNavigator,
+  ['tabNotification']: NotificationNavigator,
+  ['tabAccount']: AccountNavigator,
+}, { tabBarComponent: MenuContainer });
+
+const AppNavigator: NavigationContainer = createStackNavigator({
+  ['menu']: MenuNavigator,
+  ...HomeNavigationMap,
+  ...MeetingNavigationMap,
+  ...NotificationNavigationMap,
+  ...AccountNavigationMap,
+}, {
+  headerMode: 'screen',
+  defaultNavigationOptions: {
+    header: null,
+  },
+  transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
+});
+
+const createAppRouter = (container: NavigationNavigator<any, NavigationProp<NavigationState>>): NavigationContainer => {
   return createAppContainer(createSwitchNavigator({
     ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
-    // ['app']: container,
-
-    // ['test']: TestContainer,
+    ['app']: container,
   }, { initialRouteName: 'auth' }));
 };
 
-export const Router: NavigationContainer = createAppRouter();
+export const Router: NavigationContainer = createAppRouter(AppNavigator);

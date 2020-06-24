@@ -5,10 +5,8 @@ import {
   withStyles,
 } from '@kitten/theme';
 import {
-  View,
-  ViewProps,
-  Text,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import {
   BallIndicator,
@@ -20,14 +18,9 @@ import {
   SkypeIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
-import Modal from 'react-native-modal';
 import { useSelector } from 'react-redux';
 import { AppState } from '@src/core/store';
-import {
-  fontSize,
-  averageHW,
-} from '@src/core/utils/utils';
-import { textStyle } from '..';
+import Modal from 'react-native-modal';
 
 export const SPINNER_TYPES = {
   BALL: 'BALL',
@@ -40,10 +33,8 @@ export const SPINNER_TYPES = {
   WAVE: 'WAVE',
 };
 
-interface ComponentProps extends ViewProps {
+interface ComponentProps {
   isVisible?: boolean;
-  backgroundColor?: string;
-  color?: string;
   type?: string;
 }
 
@@ -53,67 +44,60 @@ const SpinnerComponent: React.FunctionComponent<SpinnerProps> = (props) => {
   const appReducer = useSelector((state: AppState) => state.app);
 
   const renderIndicator = (): React.ReactElement => {
-    const { color, type } = props;
-    const indicatorColor: string = color || '#ffffff';
+    const { type } = props;
+    const indicatorColor: string = themedStyle.indicator.color;
+    const indicatorSize: number = themedStyle.indicator.size;
 
     switch (type) {
       case SPINNER_TYPES.BALL: {
-        return <BallIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <BallIndicator size={indicatorSize} color={indicatorColor} />;
       }
       case SPINNER_TYPES.BAR: {
-        return <BarIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <BarIndicator size={indicatorSize} color={indicatorColor} />;
       }
       case SPINNER_TYPES.DOT: {
-        return <DotIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <DotIndicator size={indicatorSize} color={indicatorColor} />;
       }
       case SPINNER_TYPES.MATERIAL: {
-        return <MaterialIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <MaterialIndicator size={indicatorSize} color={indicatorColor} />;
       }
       case SPINNER_TYPES.PACMAN: {
-        return <PacmanIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <PacmanIndicator size={indicatorSize} color={indicatorColor} />;
       }
       case SPINNER_TYPES.PULSE: {
-        return <PulseIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <PulseIndicator size={indicatorSize} color={indicatorColor} />;
       }
       case SPINNER_TYPES.SKYPE: {
-        return <SkypeIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <SkypeIndicator size={indicatorSize} color={indicatorColor} />;
       }
       case SPINNER_TYPES.WAVE: {
-        return <WaveIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <WaveIndicator size={indicatorSize} color={indicatorColor} />;
       }
       default: {
-        return <BarIndicator size={averageHW(10)} color={indicatorColor} />;
+        return <ActivityIndicator size={'large'} />;
       }
     }
   };
 
-  const { backgroundColor, themedStyle, isVisible, style } = props;
-  const viewBoxStyle: any[] = [
-    themedStyle.viewBox,
-    { backgroundColor: backgroundColor || themedStyle.viewBox.backgroundColor },
-    { height: averageHW(appReducer.textSpinner ? 17.5 : 15) },
-    style,
-  ];
+  const { themedStyle, isVisible } = props;
 
   return (
     <Modal
       isVisible={isVisible || appReducer.isEnabledSpinner}
-      animationIn='zoomIn'
-      animationOut='zoomOut'
+      animationIn='slideInUp'
+      animationOut='slideOutDown'
+      animationInTiming={1}
+      animationOutTiming={1}
+      backdropOpacity={0}
+      hasBackdrop={false}
+      backdropTransitionInTiming={1}
+      backdropTransitionOutTiming={1}
       style={themedStyle.container}>
       <StatusBar
-        backgroundColor='rgba(0,0,0,0.7)'
+        backgroundColor='transparent'
         barStyle='light-content'
       />
-      <View style={viewBoxStyle}>
-        {renderIndicator()}
-        {appReducer.textSpinner &&
-          (<Text
-            numberOfLines={1}
-            style={themedStyle.txtDescription}>
-            {appReducer.textSpinner}
-          </Text>)}
-      </View>
+      {renderIndicator()}
     </Modal>
   );
 };
@@ -124,17 +108,8 @@ export const Spinner = withStyles(SpinnerComponent, (theme: ThemeType) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  viewBox: {
-    minWidth: averageHW(20),
-    maxWidth: averageHW(30),
-    borderRadius: averageHW(1),
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  txtDescription: {
-    fontSize: fontSize(3.25),
-    marginTop: averageHW(1),
-    color: theme['text-control-color'],
-    ...textStyle.proTextRegular,
+  indicator: {
+    color: theme['background-dark-color-1'],
+    size: 30,
   },
 }));

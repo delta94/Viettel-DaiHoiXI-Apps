@@ -1,5 +1,5 @@
 import Toast from 'react-native-root-toast';
-import { fontSize } from './utils';
+import { pxToPercentage } from './utils';
 import { textStyle } from '@src/components';
 
 const backgroundColorSuccess: string = '#5cb85c';
@@ -36,7 +36,7 @@ const toastConfig = (message: string, backgroundColor: string): void => {
       width: '90%',
     },
     textStyle: {
-      fontSize: fontSize(2.5),
+      fontSize: pxToPercentage(14),
       textAlign: 'left',
       ...textStyle.semibold,
     },

@@ -74,12 +74,11 @@ export default class ApiService {
     const headers: RequestHeader = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Accept-Language': store.getState().setting.languageKey,
     };
 
     if (hasToken) {
       const sessionReducer = store.getState().session;
-      headers.Authorization = `Bearer ${sessionReducer.token}`;
+      // headers.Authorization = `Bearer ${sessionReducer.token}`;
     }
 
     return headers;

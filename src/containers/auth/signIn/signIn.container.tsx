@@ -1,29 +1,30 @@
 import React from 'react';
-import { Dispatch } from 'redux';
-import { useDispatch } from 'react-redux';
 import { NavigationInjectedProps } from 'react-navigation';
 import { SignIn } from './signIn.component';
-import { SignInFormData } from '@src/core/models/auth/signIn/signIn.model';
-
-export const signInNavigationKey: string = 'SignInContainer';
+import {
+  SignInAccountFormData,
+  SignInPhoneNumberFormData,
+} from '@src/core/models/auth/signIn/signIn.model';
 
 export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
-  const dispatch: Dispatch<any> = useDispatch();
+  const navigationKey: string = 'SignInContainer';
 
-  const onSignInPress = (data: SignInFormData): void => {
+  const onSignInAccountPress = (data: SignInAccountFormData) => {
 
   };
 
-  const onForgotPasswordPress = (): void => {
-    props.navigation.navigate({
-      key: signInNavigationKey,
-      routeName: 'forgotPassword',
-    });
+  const onSignInPhoneNumberPress = (data: SignInPhoneNumberFormData) => {
+
+  };
+
+  const onForgotPasswordPress = () => {
+
   };
 
   return (
     <SignIn
-      onSignInPress={onSignInPress}
+      onSignInAccountPress={onSignInAccountPress}
+      onSignInPhoneNumberPress={onSignInPhoneNumberPress}
       onForgotPasswordPress={onForgotPasswordPress}
     />
   );

@@ -17,11 +17,16 @@ import { MenuContainer } from '@src/containers/menu/menu.container';
 import { SplashContainer } from '@src/containers/splash/splash.container';
 import { ExampleContainer } from '@src/containers/example/example.container';
 import { SignInContainer } from '@src/containers/auth/signIn/signIn.container';
+import { OtpContainer } from '@src/containers/auth/otp/otp.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
   ['signIn']: SignInContainer,
   ['forgotPassword']: ExampleContainer,
+  ['otp']: {
+    screen: OtpContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
 }, {
   defaultNavigationOptions: {
     header: null,

@@ -13,6 +13,10 @@ import {
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
 
+const routeNameDataSource: { [key: string]: string } = {
+  'otp': 'Nhập mã OTP',
+};
+
 export type TopNavigationElement = React.ReactElement<any>;
 export type BottomNavigationElement = React.ReactElement<any>;
 
@@ -30,11 +34,15 @@ const MenuTopNavigationParams: TopNavigationParams = {
     const { routeName } = onGetCurrentRouteState(props.navigation);
     const index: number = onGetCurrentRouteIndex(props.navigation);
 
+    const renderArrowsBack = () => ArrowIosBackFill({
+      tintColor: 'white',
+    });
+
     return (
       <TopNavigationBar
         {...props}
-        title={routeName}
-        backIcon={isRootRoute(index) && ArrowIosBackFill}
+        title={routeNameDataSource[routeName]}
+        backIcon={isRootRoute(index) && renderArrowsBack}
         onBackPress={() => {
           props.navigation.goBack(KEY_NAVIGATION_BACK);
         }}

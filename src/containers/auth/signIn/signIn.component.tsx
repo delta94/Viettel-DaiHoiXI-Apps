@@ -148,9 +148,8 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
           </Tab>
         </TabView>
         <Button
+          size='large'
           style={themedStyle.btnSignIn}
-          textStyle={themedStyle.txtBtnSignIn}
-          size='giant'
           onPress={onSignInButtonPress}>
           {isAccountTab() ? 'Đăng nhập' : 'Tiếp theo'}
         </Button>
@@ -229,8 +228,6 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   },
   btnSignIn: {
     marginHorizontal: pxToPercentage(16),
-  },
-  txtBtnSignIn: {
   },
   btnForgotPassword: {
     marginVertical: pxToPercentage(12),

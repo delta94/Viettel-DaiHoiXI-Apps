@@ -14,7 +14,10 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
   };
 
   const onSignInPhoneNumberPress = (data: SignInPhoneNumberFormData) => {
-
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'otp',
+    });
   };
 
   const onForgotPasswordPress = () => {

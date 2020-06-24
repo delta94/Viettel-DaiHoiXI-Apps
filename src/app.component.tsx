@@ -47,7 +47,7 @@ const App: React.FunctionComponent = () => {
       <PersistGate
         loading={null}
         persistor={persistor}>
-        <DynamicStatusBar barStyle='dark-content' />
+        <DynamicStatusBar barStyle='light-content' />
         <ThemeContext.Provider value={contextValue}>
           <ApplicationProvider
             mapping={mapping}

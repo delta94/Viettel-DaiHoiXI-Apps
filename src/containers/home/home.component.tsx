@@ -1,5 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  ScrollView,
+} from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -10,7 +13,6 @@ import { userDataFake } from '@src/core/data/user';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { HomeMeetingItem } from './homeMeetingItem.component';
 import { meetingDataFake } from '@src/core/data/meeting';
-import { ContainerView } from '@src/components';
 
 interface ComponentProps {
   onMeetingItemPress: () => void;
@@ -56,10 +58,10 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
         user={userDataFake}
         style={themedStyle.profileInfo}
       />
-      <ContainerView>
+      <ScrollView>
         {renderTodayMeeting()}
         {renderFeatureMeeting()}
-      </ContainerView>
+      </ScrollView>
     </View>
   );
 };

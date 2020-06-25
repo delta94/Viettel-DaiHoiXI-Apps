@@ -31,15 +31,13 @@ const NotificationItemComponent: React.FunctionComponent<NotificationItemProps> 
         style,
       ]}>
       <Text
-        numberOfLines={2}
         style={[
-          themedStyle.txtDescription,
+          themedStyle.txtTitle,
           notification.read && themedStyle.txtRead,
         ]}>
-        {notification.description}
+        {notification.title}
       </Text>
       <Text
-        numberOfLines={2}
         style={[
           themedStyle.txtDate,
           notification.read && themedStyle.txtRead,
@@ -65,9 +63,10 @@ export const NotificationItem = withStyles(NotificationItemComponent, (theme: Th
   txtRead: {
     color: theme['text-hint-color'],
   },
-  txtDescription: {
+  txtTitle: {
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
+    textAlign: 'justify',
     ...textStyle.regular,
   },
   txtDate: {

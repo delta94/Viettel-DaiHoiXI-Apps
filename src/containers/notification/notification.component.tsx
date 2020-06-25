@@ -12,23 +12,32 @@ import { pxToPercentage } from '@src/core/utils/utils';
 
 interface ComponentProps {
   notifications: NotificationModel[];
+  onNotificationItemPress: (notification: NotificationModel) => void;
 }
 
 export type NotificationProps = ThemedComponentProps & ComponentProps;
 
 const NotificationComponent: React.FunctionComponent<NotificationProps> = (props) => {
+  const onNotificationItemPress = (notification: NotificationModel): void => {
+    props.onNotificationItemPress(notification);
+  };
+
   const { themedStyle } = props;
 
   return (
     <View style={themedStyle.container}>
       <List
         data={props.notifications}
+        style={themedStyle.container}
         extraData={props.notifications}
         contentContainerStyle={themedStyle.contentContainer}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => {
           return (
-            <NotificationItem notification={item} />
+            <NotificationItem
+              notification={item}
+              onPress={() => onNotificationItemPress(item)}
+            />
           );
         }}
       />

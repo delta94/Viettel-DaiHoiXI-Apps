@@ -20,6 +20,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'home': 'Trang chủ',
   'function': 'Danh sách chức năng',
   'notification': 'Thông báo',
+  'notificationDetail': 'Chi tiết thông báo',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

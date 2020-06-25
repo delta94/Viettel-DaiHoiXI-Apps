@@ -21,6 +21,7 @@ import { OtpContainer } from '@src/containers/auth/otp/otp.container';
 import { HomeContainer } from '@src/containers/home/home.container';
 import { FunctionContainer } from '@src/containers/home/function/function.container';
 import { NotificationContainer } from '@src/containers/notification/notification.container';
+import { NotificationDetailContainer } from '@src/containers/notification/notificationDetail/notificationDetail.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -78,6 +79,10 @@ const MeetingNavigationMap: NavigationRouteConfigMap<any, any> = {
 };
 
 const NotificationNavigationMap: NavigationRouteConfigMap<any, any> = {
+  ['notificationDetail']: {
+    screen: NotificationDetailContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
 };
 
 const AccountNavigationMap: NavigationRouteConfigMap<any, any> = {

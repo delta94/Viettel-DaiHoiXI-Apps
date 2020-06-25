@@ -54,6 +54,8 @@ export const ProfileInfo = withStyles(ProfileInfoComponent, (theme: ThemeType) =
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    borderBottomWidth: pxToPercentage(1),
+    borderBottomColor: theme['border-basic-color-4'],
   },
   sectionDetails: {
     flex: 1,

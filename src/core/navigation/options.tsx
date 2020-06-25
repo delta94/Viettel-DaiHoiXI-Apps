@@ -10,12 +10,15 @@ import {
   onGetCurrentRouteState,
   isRootRoute,
   onGetCurrentRouteIndex,
+  NavigationRouteState,
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
+import { HomeHeader } from '@src/components/header/home.header';
 
-const routeNameDataSource: { [key: string]: string } = {
+export const routeNameDataSource: { [key: string]: string } = {
   'otp': 'Nhập mã OTP',
   'home': 'Trang chủ',
+  'function': 'Chức năng',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;
@@ -52,6 +55,23 @@ const MenuTopNavigationParams: TopNavigationParams = {
   },
 };
 
+const HomeTopNavigationParams: TopNavigationParams = {
+  header: (props: NavigationInjectedProps): TopNavigationElement => {
+    const state: NavigationRouteState = onGetCurrentRouteState(props.navigation);
+
+    const onQRButtonPress = (): void => {
+
+    };
+
+    return (
+      <HomeHeader
+        title={state.routeName}
+        onQRButtonPress={onQRButtonPress}
+      />
+    );
+  },
+};
+
 const MenuBottomNavigationParams: BottomNavigationParams = {
   bottomNavigation: (props: NavigationInjectedProps): BottomNavigationElement => {
     return (
@@ -62,5 +82,10 @@ const MenuBottomNavigationParams: BottomNavigationParams = {
 
 export const MenuNavigationOptions: NavigationParams = {
   ...MenuTopNavigationParams,
+  ...MenuBottomNavigationParams,
+};
+
+export const HomeNavigationOptions: NavigationParams = {
+  ...HomeTopNavigationParams,
   ...MenuBottomNavigationParams,
 };

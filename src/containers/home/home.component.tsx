@@ -13,12 +13,16 @@ import { meetingDataFake } from '@src/core/data/meeting';
 import { ContainerView } from '@src/components';
 
 interface ComponentProps {
-  example?: any;
+  onMeetingItemPress: () => void;
 }
 
 export type HomeProps = ThemedComponentProps & ComponentProps;
 
 const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
+  const onMeetingItemPress = (): void => {
+    props.onMeetingItemPress();
+  };
+
   const { themedStyle } = props;
 
   const renderTodayMeeting = (): React.ReactElement[] => {
@@ -28,6 +32,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
           key={index}
           isToday
           meetingItem={item}
+          onPress={onMeetingItemPress}
         />
       );
     });
@@ -39,6 +44,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
         <HomeMeetingItem
           key={index}
           meetingItem={item}
+          onPress={onMeetingItemPress}
         />
       );
     });

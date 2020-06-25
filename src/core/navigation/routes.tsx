@@ -12,13 +12,14 @@ import {
   StackViewTransitionConfigs,
 } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { MenuNavigationOptions } from './options';
+import { MenuNavigationOptions, HomeNavigationOptions } from './options';
 import { MenuContainer } from '@src/containers/menu/menu.container';
 import { SplashContainer } from '@src/containers/splash/splash.container';
 import { ExampleContainer } from '@src/containers/example/example.container';
 import { SignInContainer } from '@src/containers/auth/signIn/signIn.container';
 import { OtpContainer } from '@src/containers/auth/otp/otp.container';
 import { HomeContainer } from '@src/containers/home/home.container';
+import { FunctionContainer } from '@src/containers/home/function/function.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -37,7 +38,10 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
 
 // Bottom tab
 const HomeNavigator: NavigationContainer = createStackNavigator({
-  ['home']: HomeContainer,
+  ['home']: {
+    screen: HomeContainer,
+    navigationOptions: HomeNavigationOptions,
+  },
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
@@ -66,6 +70,10 @@ const AccountNavigator: NavigationContainer = createStackNavigator({
 
 // Map
 const HomeNavigationMap: NavigationRouteConfigMap<any, any> = {
+  ['function']: {
+    screen: FunctionContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
 };
 
 const MeetingNavigationMap: NavigationRouteConfigMap<any, any> = {

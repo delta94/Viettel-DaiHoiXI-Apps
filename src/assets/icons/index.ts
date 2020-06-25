@@ -785,6 +785,70 @@ export const BellIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const QRCodeIconFill = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/qr-code.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const CongressIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/congress.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const GroupIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/group.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const PoliticianIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/politician.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const VotingIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/voting.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const DemocracyIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/democracy.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const DocumentIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/document.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const SupportIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/support.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

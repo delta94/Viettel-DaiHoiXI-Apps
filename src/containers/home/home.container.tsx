@@ -5,7 +5,16 @@ import { Home } from './home.component';
 export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'HomeContainer';
 
+  const onMeetingItemPress = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'function',
+    });
+  };
+
   return (
-    <Home />
+    <Home
+      onMeetingItemPress={onMeetingItemPress}
+    />
   );
 };

@@ -24,6 +24,8 @@ import { NotificationContainer } from '@src/containers/notification/notification
 import { NotificationDetailContainer } from '@src/containers/notification/notificationDetail/notificationDetail.container';
 import { MeetingNotificationContainer } from '@src/containers/home/meetingNotification/meetingNotification.container';
 import { MeetingNotificationDetailContainer } from '@src/containers/home/meetingNotification/meetingNotificationDetail/meetingNotificationDetail.container';
+import { PressReleaseContainer } from '@src/containers/home/pressRelease/pressRelease.container';
+import { PressReleaseDetailContainer } from '@src/containers/home/pressRelease/pressReleaseDetail/pressReleaseDetail.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -83,6 +85,14 @@ const HomeNavigationMap: NavigationRouteConfigMap<any, any> = {
     screen: MeetingNotificationDetailContainer,
     navigationOptions: MenuNavigationOptions,
   },
+  ['pressRelease']: {
+    screen: PressReleaseContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
+  ['pressReleaseDetail']: {
+    screen: PressReleaseDetailContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
 };
 
 const MeetingNavigationMap: NavigationRouteConfigMap<any, any> = {
@@ -124,7 +134,7 @@ const createAppRouter = (container: NavigationNavigator<any, NavigationProp<Navi
     ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
     ['app']: container,
-  }, { initialRouteName: 'app' }));
+  }, { initialRouteName: 'auth' }));
 };
 
 export const Router: NavigationContainer = createAppRouter(AppNavigator);

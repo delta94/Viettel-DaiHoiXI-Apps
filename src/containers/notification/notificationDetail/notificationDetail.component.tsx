@@ -12,6 +12,7 @@ import {
 import { Notification } from '@src/core/models/notification/notification.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { SafeAreaView } from 'react-navigation';
 
 interface ComponentProps {
   notification: Notification;
@@ -24,14 +25,16 @@ const NotificationDetailComponent: React.FunctionComponent<NotificationDetailPro
 
   return (
     <ScrollView style={themedStyle.container}>
-      <View style={themedStyle.viewItem}>
-        <Text style={themedStyle.txtTitle}>
-          {notification.title}
-        </Text>
-        <Text style={themedStyle.txtDescription}>
-          {notification.description}
-        </Text>
-      </View>
+      <SafeAreaView>
+        <View style={themedStyle.viewItem}>
+          <Text style={themedStyle.txtTitle}>
+            {notification.title}
+          </Text>
+          <Text style={themedStyle.txtDescription}>
+            {notification.description}
+          </Text>
+        </View>
+      </SafeAreaView>
     </ScrollView>
   );
 };

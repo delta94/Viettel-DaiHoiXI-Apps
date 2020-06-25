@@ -22,6 +22,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case AlternativeFunctionEnum.PressRelease: {
+        routeName = 'pressRelease';
 
         break;
       }

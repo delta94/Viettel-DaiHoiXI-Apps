@@ -849,6 +849,14 @@ export const SupportIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const DownloadIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/download.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

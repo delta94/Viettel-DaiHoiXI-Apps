@@ -26,6 +26,7 @@ import { MeetingNotificationContainer } from '@src/containers/home/meetingNotifi
 import { MeetingNotificationDetailContainer } from '@src/containers/home/meetingNotification/meetingNotificationDetail/meetingNotificationDetail.container';
 import { PressReleaseContainer } from '@src/containers/home/pressRelease/pressRelease.container';
 import { PressReleaseDetailContainer } from '@src/containers/home/pressRelease/pressReleaseDetail/pressReleaseDetail.container';
+import { AccountContainer } from '@src/containers/account/account.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -65,7 +66,7 @@ const NotificationNavigator: NavigationContainer = createStackNavigator({
 });
 
 const AccountNavigator: NavigationContainer = createStackNavigator({
-  ['account']: ExampleContainer,
+  ['account']: AccountContainer,
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

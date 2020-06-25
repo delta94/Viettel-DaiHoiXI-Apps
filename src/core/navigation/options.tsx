@@ -25,6 +25,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'meetingNotificationDetail': 'Chi tiết thông báo',
   'pressRelease': 'Thông cáo báo chí',
   'pressReleaseDetail': 'Chi tiết thông cáo',
+  'account': 'Tài khoản',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

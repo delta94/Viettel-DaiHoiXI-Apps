@@ -19,9 +19,10 @@ import { FunctionModel } from '@src/core/models/function/function.model';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import { AlternativeFunctionEnum } from '@src/core/utils/constants';
+import { isTablet } from 'react-native-device-info';
 
 const { width } = Dimensions.get('window');
-const itemWidth: number = width / 2 - pxToPercentage(16);
+const itemWidth: number = width / (isTablet() ? 3 : 2) - pxToPercentage(16);
 
 interface ComponentProps {
   functions: FunctionModel[];
@@ -52,7 +53,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
     <React.Fragment>
       <List
         data={props.functions}
-        numColumns={2}
+        numColumns={isTablet() ? 3 : 2}
         extraData={props.functions}
         style={themedStyle.container}
         contentContainerStyle={themedStyle.contentContainer}
@@ -79,15 +80,18 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
           disabled={true}
           style={themedStyle.viewCard}>
           <Button
+            size={isTablet() ? 'giant' : 'large'}
             onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.Program)}>
             {'Chương trình'}
           </Button>
           <Button
+            size={isTablet() ? 'giant' : 'large'}
             style={themedStyle.btnAlternative}
             onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.Notification)}>
             {'Thông báo'}
           </Button>
           <Button
+            size={isTablet() ? 'giant' : 'large'}
             style={themedStyle.btnAlternative}
             onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.PressRelease)}>
             {'Thông cáo báo chí'}
@@ -117,7 +121,7 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    height: pxToPercentage(168),
+    height: itemWidth,
     borderRadius: pxToPercentage(8),
     borderWidth: pxToPercentage(1),
     borderColor: theme['border-basic-color-4'],
@@ -125,20 +129,20 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     marginHorizontal: pxToPercentage(8),
     marginVertical: pxToPercentage(8),
     paddingVertical: 0,
-    paddingTop: pxToPercentage(50),
+    paddingTop: itemWidth / 3.75,
   },
   btnAlternative: {
     marginTop: pxToPercentage(8),
   },
   txtTitle: {
     textAlign: 'center',
-    fontSize: pxToPercentage(14),
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
     marginTop: pxToPercentage(2),
     ...textStyle.semibold,
   },
   icon: {
-    width: pxToPercentage(50),
-    height: pxToPercentage(50),
+    width: itemWidth / 3,
+    height: itemWidth / 3,
     tintColor: theme['color-primary-default'],
   },
 }));

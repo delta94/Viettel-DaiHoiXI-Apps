@@ -9,3 +9,8 @@ export const ExampleContainer: React.FunctionComponent<NavigationInjectedProps> 
     <Example />
   );
 };
+
+// 16 -> 10.5
+// 14 -> 9
+// 13 -> 8.5
+// 12 -> 7.5

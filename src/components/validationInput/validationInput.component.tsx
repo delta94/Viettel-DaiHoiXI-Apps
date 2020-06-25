@@ -14,6 +14,7 @@ import {
 import { usePrevious } from '@src/core/utils/hookHelper';
 import { textStyle } from '..';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps extends InputProps {
   validator: (value: string) => boolean;
@@ -107,7 +108,7 @@ export const ValidationInput = withStyles(ValidationInputComponent, (theme: Them
   container: {
   },
   textStyle: {
-    fontSize: pxToPercentage(14),
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
     padding: 0,
     marginVertical: pxToPercentage(7),
     ...textStyle.regular,

@@ -16,6 +16,7 @@ import {
 import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   notifications: NotificationModel[];
@@ -79,7 +80,7 @@ export const MeetingNotification = withStyles(MeetingNotificationComponent, (the
     flex: 1,
   },
   txtChooseDate: {
-    fontSize: pxToPercentage(14),
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
     color: theme['text-basic-color'],
     marginRight: pxToPercentage(15),
     marginBottom: pxToPercentage(5),

@@ -15,6 +15,7 @@ import {
 import { MeetingItem } from '@src/core/models/meeting/meeting.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   meetingItem: MeetingItem;
@@ -53,11 +54,10 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
   container: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    height: pxToPercentage(75.3),
     marginVertical: pxToPercentage(8),
     marginHorizontal: pxToPercentage(16),
     paddingHorizontal: pxToPercentage(16),
-    paddingVertical: pxToPercentage(16),
+    paddingVertical: isTablet() ? pxToPercentage(10.5) : pxToPercentage(16),
     borderRadius: pxToPercentage(4),
     borderWidth: pxToPercentage(1),
     borderColor: theme['border-basic-color-4'],
@@ -75,12 +75,12 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
     backgroundColor: theme['color-warning-default'],
   },
   txtName: {
-    fontSize: pxToPercentage(16),
+    fontSize: isTablet() ? pxToPercentage(10.5) : pxToPercentage(16),
     color: theme['text-basic-color'],
     ...textStyle.semibold,
   },
   txtTime: {
-    fontSize: pxToPercentage(14),
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
     color: theme['text-hint-color'],
     ...textStyle.regular,
   },

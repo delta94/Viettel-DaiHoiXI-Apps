@@ -33,6 +33,7 @@ import {
 } from '@src/assets/icons';
 import { IconElement } from '@src/assets/icons/icon.component';
 import { SignInTabEnum } from '@src/core/utils/constants';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   onSignInAccountPress: (formData: SignInAccountFormData) => void;
@@ -148,21 +149,21 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
           </Tab>
         </TabView>
         <Button
-          size='large'
+          size={isTablet() ? 'giant' : 'large'}
           style={themedStyle.btnSignIn}
           onPress={onSignInButtonPress}>
           {isAccountTab() ? 'Đăng nhập' : 'Tiếp theo'}
         </Button>
         {isAccountTab() &&
           (<React.Fragment>
-            <Button
-              style={themedStyle.btnForgotPassword}
-              textStyle={themedStyle.txtBtnForgotPassword}
-              appearance='ghost'
+            <TouchableOpacity
               activeOpacity={0.75}
+              style={themedStyle.btnForgotPassword}
               onPress={onForgotPasswordButtonPress}>
-              {'Quên mật khẩu?'}
-            </Button>
+              <Text style={themedStyle.txtBtnForgotPassword}>
+                {'Quên mật khẩu?'}
+              </Text>
+            </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.75}
               style={themedStyle.btnRecognize}>
@@ -187,9 +188,9 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     backgroundColor: theme['color-custom-100'],
   },
   sectionHeader: {
-    minHeight: pxToPercentage(255),
+    minHeight: isTablet() ? pxToPercentage(160) : pxToPercentage(255),
     paddingHorizontal: pxToPercentage(16),
-    paddingBottom: pxToPercentage(15),
+    paddingBottom: isTablet() ? pxToPercentage(10) : pxToPercentage(15),
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: theme['color-primary-default'],
@@ -207,33 +208,33 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     backgroundColor: theme['color-control-focus-border'],
   },
   tabTitle: {
-    fontSize: pxToPercentage(13),
     color: 'white',
     ...textStyle.bold,
   },
   imgNationalEmblem: {
     marginTop: pxToPercentage(8.5),
-    height: pxToPercentage(107.5),
-    width: pxToPercentage(107.5) * (512 / 384),
+    height: pxToPercentage(isTablet() ? 65 : 107.5),
+    width: pxToPercentage(isTablet() ? 65 : 107.5) * (512 / 384),
   },
   txtHeaderTitle: {
-    fontSize: pxToPercentage(27.5),
+    fontSize: isTablet() ? pxToPercentage(18) : pxToPercentage(27.5),
     fontFamily: 'opensans-bold',
     color: theme['color-primary-default-2'],
   },
   txtHeaderSubtitle: {
-    fontSize: pxToPercentage(17.5),
-    marginTop: pxToPercentage(7),
+    fontSize: isTablet() ? pxToPercentage(11) : pxToPercentage(17.5),
+    marginTop: isTablet() ? pxToPercentage(4) : pxToPercentage(7),
     color: theme['color-primary-default-2'],
   },
   btnSignIn: {
     marginHorizontal: pxToPercentage(16),
   },
   btnForgotPassword: {
+    alignSelf: 'center',
     marginVertical: pxToPercentage(12),
   },
   txtBtnForgotPassword: {
-    fontSize: pxToPercentage(14),
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
     color: theme['color-primary-default'],
     ...textStyle.semibold,
   },
@@ -245,7 +246,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   },
   txtBtnRecognize: {
     marginTop: pxToPercentage(10),
-    fontSize: pxToPercentage(14),
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
     color: theme['color-primary-default'],
     ...textStyle.semibold,
   },
@@ -253,18 +254,18 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     textAlign: 'center',
     marginTop: pxToPercentage(10),
     marginHorizontal: pxToPercentage(32),
-    fontSize: pxToPercentage(14),
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
     color: theme['text-hint-color'],
     ...textStyle.regular,
   },
   iconFingerprint: {
-    height: pxToPercentage(40),
-    width: pxToPercentage(40) * (65 / 72),
+    height: pxToPercentage(isTablet() ? 27.5 : 40),
+    width: pxToPercentage(isTablet() ? 27.5 : 40) * (65 / 72),
     tintColor: theme['color-primary-default'],
   },
   iconFaceID: {
-    height: pxToPercentage(40),
-    width: pxToPercentage(40),
+    height: pxToPercentage(isTablet() ? 27.5 : 40),
+    width: pxToPercentage(isTablet() ? 27.5 : 40),
     tintColor: theme['color-primary-default'],
   },
 }));

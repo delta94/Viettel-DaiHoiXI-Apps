@@ -19,6 +19,7 @@ import {
   Button,
   Layout,
 } from '@kitten/ui';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   onResendOtpPress: () => void;
@@ -62,14 +63,14 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
         />
         <Layout style={themedStyle.viewBtn}>
           <Button
-            size='large'
+            size={isTablet() ? 'giant' : 'large'}
             status='basic'
             style={themedStyle.btn}
             onPress={onResendOtpButtonPress}>
             {'Gửi lại mã'}
           </Button>
           <Button
-            size='large'
+            size={isTablet() ? 'giant' : 'large'}
             status='primary'
             style={themedStyle.btn}
             onPress={onConfirmButtonPress}>
@@ -91,7 +92,7 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
     textAlign: 'center',
     marginTop: pxToPercentage(10),
     marginHorizontal: pxToPercentage(32),
-    fontSize: pxToPercentage(14),
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
     color: theme['text-hint-color'],
     ...textStyle.regular,
   },

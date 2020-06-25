@@ -12,7 +12,7 @@ import {
   StackViewTransitionConfigs,
 } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { MenuNavigationOptions, HomeNavigationOptions } from './options';
+import { MenuNavigationOptions } from './options';
 import { MenuContainer } from '@src/containers/menu/menu.container';
 import { SplashContainer } from '@src/containers/splash/splash.container';
 import { ExampleContainer } from '@src/containers/example/example.container';
@@ -22,6 +22,8 @@ import { HomeContainer } from '@src/containers/home/home.container';
 import { FunctionContainer } from '@src/containers/home/function/function.container';
 import { NotificationContainer } from '@src/containers/notification/notification.container';
 import { NotificationDetailContainer } from '@src/containers/notification/notificationDetail/notificationDetail.container';
+import { MeetingNotificationContainer } from '@src/containers/home/meetingNotification/meetingNotification.container';
+import { MeetingNotificationDetailContainer } from '@src/containers/home/meetingNotification/meetingNotificationDetail/meetingNotificationDetail.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -73,6 +75,14 @@ const HomeNavigationMap: NavigationRouteConfigMap<any, any> = {
     screen: FunctionContainer,
     navigationOptions: MenuNavigationOptions,
   },
+  ['meetingNotification']: {
+    screen: MeetingNotificationContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
+  ['meetingNotificationDetail']: {
+    screen: MeetingNotificationDetailContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
 };
 
 const MeetingNavigationMap: NavigationRouteConfigMap<any, any> = {
@@ -114,7 +124,7 @@ const createAppRouter = (container: NavigationNavigator<any, NavigationProp<Navi
     ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
     ['app']: container,
-  }, { initialRouteName: 'auth' }));
+  }, { initialRouteName: 'app' }));
 };
 
 export const Router: NavigationContainer = createAppRouter(AppNavigator);

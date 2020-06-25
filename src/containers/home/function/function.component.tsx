@@ -18,15 +18,14 @@ import {
 import { FunctionModel } from '@src/core/models/function/function.model';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
+import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 
 const { width } = Dimensions.get('window');
 const itemWidth: number = width / 2 - pxToPercentage(16);
 
 interface ComponentProps {
   functions: FunctionModel[];
-  onProgramPress: () => void;
-  onNotificationPress: () => void;
-  onPressReleasePress: () => void;
+  onAlternativeFunctionPress: (type: number) => void;
 }
 
 export type FunctionProps = ThemedComponentProps & ComponentProps;
@@ -38,19 +37,9 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
     setVisible(true);
   };
 
-  const onProgramButtonPress = (): void => {
+  const onAlternativeFunctionPress = (type: number): void => {
     onHideModal();
-    props.onProgramPress();
-  };
-
-  const onNotificationButtonPress = (): void => {
-    onHideModal();
-    props.onNotificationPress();
-  };
-
-  const onPressReleaseButtonPress = (): void => {
-    onHideModal();
-    props.onPressReleasePress();
+    props.onAlternativeFunctionPress(type);
   };
 
   const onHideModal = (): void => {
@@ -90,17 +79,17 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
           disabled={true}
           style={themedStyle.viewCard}>
           <Button
-            onPress={onProgramButtonPress}>
+            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.Program)}>
             {'Chương trình'}
           </Button>
           <Button
             style={themedStyle.btnAlternative}
-            onPress={onNotificationButtonPress}>
+            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.Notification)}>
             {'Thông báo'}
           </Button>
           <Button
             style={themedStyle.btnAlternative}
-            onPress={onPressReleaseButtonPress}>
+            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.PressRelease)}>
             {'Thông cáo báo chí'}
           </Button>
         </Card>

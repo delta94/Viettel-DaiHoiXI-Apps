@@ -20,6 +20,7 @@ import { SignInContainer } from '@src/containers/auth/signIn/signIn.container';
 import { OtpContainer } from '@src/containers/auth/otp/otp.container';
 import { HomeContainer } from '@src/containers/home/home.container';
 import { FunctionContainer } from '@src/containers/home/function/function.container';
+import { NotificationContainer } from '@src/containers/notification/notification.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -38,10 +39,7 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
 
 // Bottom tab
 const HomeNavigator: NavigationContainer = createStackNavigator({
-  ['home']: {
-    screen: HomeContainer,
-    navigationOptions: HomeNavigationOptions,
-  },
+  ['home']: HomeContainer,
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
@@ -55,7 +53,7 @@ const MeetingNavigator: NavigationContainer = createStackNavigator({
 });
 
 const NotificationNavigator: NavigationContainer = createStackNavigator({
-  ['notification']: ExampleContainer,
+  ['notification']: NotificationContainer,
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

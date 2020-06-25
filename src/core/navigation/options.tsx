@@ -18,7 +18,8 @@ import { HomeHeader } from '@src/components/header/home.header';
 export const routeNameDataSource: { [key: string]: string } = {
   'otp': 'Nhập mã OTP',
   'home': 'Trang chủ',
-  'function': 'Chức năng',
+  'function': 'Danh sách chức năng',
+  'notification': 'Thông báo',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

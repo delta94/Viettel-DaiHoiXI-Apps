@@ -2,28 +2,32 @@ import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { Function } from './function.component';
 import { functionDataFake } from '@src/core/data/function';
+import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
 
-  const onProgramPress = (): void => {
+  const onAlternativeFunctionPress = (type: number): void => {
+    switch (type) {
+      case AlternativeFunctionEnum.Program: {
 
-  };
+        break;
+      }
+      case AlternativeFunctionEnum.Notification: {
 
-  const onNotificationPress = (): void => {
+        break;
+      }
+      case AlternativeFunctionEnum.PressRelease: {
 
-  };
-
-  const onPressReleasePress = (): void => {
-
+        break;
+      }
+    }
   };
 
   return (
     <Function
       functions={functionDataFake}
-      onProgramPress={onProgramPress}
-      onNotificationPress={onNotificationPress}
-      onPressReleasePress={onPressReleasePress}
+      onAlternativeFunctionPress={onAlternativeFunctionPress}
     />
   );
 };

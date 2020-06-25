@@ -11,6 +11,9 @@ import {
 import {
   List,
   ListItem,
+  Modal,
+  Card,
+  Button,
 } from '@kitten/ui';
 import { FunctionModel } from '@src/core/models/function/function.model';
 import { pxToPercentage } from '@src/core/utils/utils';
@@ -21,40 +24,88 @@ const itemWidth: number = width / 2 - pxToPercentage(16);
 
 interface ComponentProps {
   functions: FunctionModel[];
-  onFunctionItemPress: () => void;
+  onProgramPress: () => void;
+  onNotificationPress: () => void;
+  onPressReleasePress: () => void;
 }
 
 export type FunctionProps = ThemedComponentProps & ComponentProps;
 
 const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
+  const [visible, setVisible] = React.useState(false);
+
   const onFunctionItemPress = (): void => {
-    props.onFunctionItemPress();
+    setVisible(true);
+  };
+
+  const onProgramButtonPress = (): void => {
+    onHideModal();
+    props.onProgramPress();
+  };
+
+  const onNotificationButtonPress = (): void => {
+    onHideModal();
+    props.onNotificationPress();
+  };
+
+  const onPressReleaseButtonPress = (): void => {
+    onHideModal();
+    props.onPressReleasePress();
+  };
+
+  const onHideModal = (): void => {
+    setVisible(false);
   };
 
   const { themedStyle } = props;
 
   return (
-    <List
-      data={props.functions}
-      numColumns={2}
-      extraData={props.functions}
-      style={themedStyle.container}
-      contentContainerStyle={themedStyle.contentContainer}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item, index }) => {
-        return (
-          <ListItem
-            activeOpacity={0.75}
-            onPress={onFunctionItemPress}
-            style={themedStyle.btnItem}>
-            {item.icon(themedStyle.icon)}
-            <Text style={themedStyle.txtTitle}>
-              {item.title}
-            </Text>
-          </ListItem>
-        );
-      }}
-    />
+    <React.Fragment>
+      <List
+        data={props.functions}
+        numColumns={2}
+        extraData={props.functions}
+        style={themedStyle.container}
+        contentContainerStyle={themedStyle.contentContainer}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => {
+          return (
+            <ListItem
+              activeOpacity={0.75}
+              onPress={onFunctionItemPress}
+              style={themedStyle.btnItem}>
+              {item.icon(themedStyle.icon)}
+              <Text style={themedStyle.txtTitle}>
+                {item.title}
+              </Text>
+            </ListItem>
+          );
+        }}
+      />
+      <Modal
+        visible={visible}
+        backdropStyle={themedStyle.backdrop}
+        onBackdropPress={onHideModal}>
+        <Card
+          disabled={true}
+          style={themedStyle.viewCard}>
+          <Button
+            onPress={onProgramButtonPress}>
+            {'Chương trình'}
+          </Button>
+          <Button
+            style={themedStyle.btnAlternative}
+            onPress={onNotificationButtonPress}>
+            {'Thông báo'}
+          </Button>
+          <Button
+            style={themedStyle.btnAlternative}
+            onPress={onPressReleaseButtonPress}>
+            {'Thông cáo báo chí'}
+          </Button>
+        </Card>
+      </Modal>
+    </React.Fragment>
   );
 };
 
@@ -66,6 +117,12 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   contentContainer: {
     paddingHorizontal: pxToPercentage(8),
     paddingVertical: pxToPercentage(8),
+  },
+  viewCard: {
+    width: pxToPercentage(300),
+  },
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   btnItem: {
     flex: 1,
@@ -80,6 +137,9 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     marginVertical: pxToPercentage(8),
     paddingVertical: 0,
     paddingTop: pxToPercentage(50),
+  },
+  btnAlternative: {
+    marginTop: pxToPercentage(8),
   },
   txtTitle: {
     textAlign: 'center',

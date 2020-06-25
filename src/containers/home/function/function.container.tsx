@@ -6,14 +6,24 @@ import { functionDataFake } from '@src/core/data/function';
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
 
-  const onFunctionItemPress = (): void => {
+  const onProgramPress = (): void => {
+
+  };
+
+  const onNotificationPress = (): void => {
+
+  };
+
+  const onPressReleasePress = (): void => {
 
   };
 
   return (
     <Function
       functions={functionDataFake}
-      onFunctionItemPress={onFunctionItemPress}
+      onProgramPress={onProgramPress}
+      onNotificationPress={onNotificationPress}
+      onPressReleasePress={onPressReleasePress}
     />
   );
 };

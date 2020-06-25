@@ -444,3 +444,7 @@ export const movieImage5: ImageSource = new RemoteImage(
 export const imageNationalEmblem: ImageSource = {
   imageSource: require('./image-national-emblem.png'),
 };
+
+export const imageUserCircle: ImageSource = {
+  imageSource: require('./source/image-user-circle.png'),
+};

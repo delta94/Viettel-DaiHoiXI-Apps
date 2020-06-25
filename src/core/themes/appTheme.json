@@ -85,6 +85,7 @@
   "color-basic-900": "#1A2138",
   "color-basic-1000": "#151A30",
   "color-basic-1100": "#101426",
+  "color-custom-100": "#fafafa",
   "color-basic-transparent-100": "rgba(143, 155, 179, 0.08)",
   "color-basic-transparent-200": "rgba(143, 155, 179, 0.16)",
   "color-basic-transparent-300": "rgba(143, 155, 179, 0.24)",

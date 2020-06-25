@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView } from '@src/core/navigation';
+// import { SafeAreaView } from '@src/core/navigation';
 import {
   ThemeProvider,
   ThemedComponentProps,
@@ -14,8 +14,13 @@ import {
   ColorPaletteIconOutline,
   LayoutIconOutline,
   StarIconOutline,
+  HomeIconOutline,
+  UserIconOutline,
+  BellIconOutline,
 } from '@src/assets/icons';
 import { themes } from '@src/core/themes';
+import { SafeAreaView } from 'react-native';
+import { pxToPercentage } from '@src/core/utils/utils';
 
 interface ComponentProps {
   selectedIndex: number;
@@ -37,11 +42,12 @@ const MenuComponent: React.FunctionComponent<Props> = (props) => {
       <ThemeProvider theme={{ ...props.theme, ...themes['App Theme'] }}>
         <BottomNavigation
           appearance='noIndicator'
+          style={themedStyle.bottomNavigation}
           selectedIndex={selectedIndex}
           onSelect={onTabSelect}>
           <BottomNavigationTab
             title='Trang chủ'
-            icon={LayoutIconOutline}
+            icon={HomeIconOutline}
           />
           <BottomNavigationTab
             title='Kỳ họp'
@@ -49,11 +55,11 @@ const MenuComponent: React.FunctionComponent<Props> = (props) => {
           />
           <BottomNavigationTab
             title='Thông báo'
-            icon={ColorPaletteIconOutline}
+            icon={BellIconOutline}
           />
           <BottomNavigationTab
             title='Tài khoản'
-            icon={ColorPaletteIconOutline}
+            icon={UserIconOutline}
           />
         </BottomNavigation>
       </ThemeProvider>
@@ -64,5 +70,9 @@ const MenuComponent: React.FunctionComponent<Props> = (props) => {
 export const Menu = withStyles(MenuComponent, (theme: ThemeType) => ({
   safeAreaContainer: {
     backgroundColor: theme['background-basic-color-1'],
+  },
+  bottomNavigation: {
+    borderTopWidth: pxToPercentage(1),
+    borderTopColor: theme['border-basic-color-4'],
   },
 }));

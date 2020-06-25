@@ -761,6 +761,30 @@ export const RefreshIconFill = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const HomeIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/home-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const UserIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/user-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const BellIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/bell-outline.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

@@ -15,6 +15,7 @@ import { KEY_NAVIGATION_BACK } from './constants';
 
 const routeNameDataSource: { [key: string]: string } = {
   'otp': 'Nhập mã OTP',
+  'home': 'Trang chủ',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

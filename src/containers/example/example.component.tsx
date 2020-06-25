@@ -32,5 +32,6 @@ export const Example = withStyles(ExampleComponent, (theme: ThemeType) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: theme['background-basic-color-2'],
   },
 }));

@@ -10,7 +10,10 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
   const navigationKey: string = 'SignInContainer';
 
   const onSignInAccountPress = (data: SignInAccountFormData) => {
-
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'app',
+    });
   };
 
   const onSignInPhoneNumberPress = (data: SignInPhoneNumberFormData) => {

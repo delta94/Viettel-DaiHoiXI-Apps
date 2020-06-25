@@ -13,6 +13,7 @@ import {
 } from '@kitten/ui';
 import { textStyle } from '@src/components';
 import { SafeAreaView } from './safeAreaView.component';
+import { pxToPercentage } from '@src/core/utils/utils';
 
 export interface ComponentProps {
   backIcon?: BackIconProp;
@@ -61,9 +62,13 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
 export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme: ThemeType) => ({
   safeArea: {
     backgroundColor: theme['color-primary-default'],
+    // backgroundColor: theme['background-basic-color-1'],
   },
   topNavigation: {
     backgroundColor: theme['color-primary-default'],
+    // backgroundColor: theme['background-basic-color-1'],
+    // borderBottomWidth: pxToPercentage(1),
+    // borderColor: theme['border-basic-color-4'],
   },
   titleStyle: {
     color: 'white',

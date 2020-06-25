@@ -184,7 +184,7 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
 export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    backgroundColor: theme['background-basic-color-1'],
+    backgroundColor: theme['color-custom-100'],
   },
   sectionHeader: {
     minHeight: pxToPercentage(255),

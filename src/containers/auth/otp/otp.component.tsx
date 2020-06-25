@@ -85,7 +85,7 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(16),
-    backgroundColor: theme['background-basic-color-1'],
+    backgroundColor: theme['color-custom-100'],
   },
   txtOtpNote: {
     textAlign: 'center',

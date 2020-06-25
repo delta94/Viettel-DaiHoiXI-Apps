@@ -18,6 +18,7 @@ import { SplashContainer } from '@src/containers/splash/splash.container';
 import { ExampleContainer } from '@src/containers/example/example.container';
 import { SignInContainer } from '@src/containers/auth/signIn/signIn.container';
 import { OtpContainer } from '@src/containers/auth/otp/otp.container';
+import { HomeContainer } from '@src/containers/home/home.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -36,7 +37,7 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
 
 // Bottom tab
 const HomeNavigator: NavigationContainer = createStackNavigator({
-  ['home']: ExampleContainer,
+  ['home']: HomeContainer,
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

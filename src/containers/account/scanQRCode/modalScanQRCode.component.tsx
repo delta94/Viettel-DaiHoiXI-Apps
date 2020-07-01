@@ -2,7 +2,6 @@ import React from 'react';
 import {
     View,
     TouchableOpacity,
-    Dimensions,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -10,8 +9,10 @@ import {
     ThemeType,
     withStyles,
 } from '@kitten/theme';
+import { isTablet } from 'react-native-device-info';
 import { CloseIconOutline, QRCodeIcon, DownloadIcon, ShareIconOutline, RefreshIconFill } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 interface ComponentProps {
     isVisible: boolean;
@@ -36,7 +37,6 @@ const ModalScanQRCodeComponent: React.FunctionComponent<ModalScanQRCodeProps> = 
             backdropColor={null}
             swipeDirection={['down']}
             onSwipeComplete={onClosePress}
-            backdropOpacity={0.2}
             onBackButtonPress={onClosePress}
             backdropTransitionInTiming={1}
             backdropTransitionOutTiming={1}
@@ -78,36 +78,36 @@ export const ModalScanQRCode = withStyles(ModalScanQRCodeComponent, (theme: Them
         margin: 0,
     },
     view: {
-        height: pxToPercentage(375),
+        height: hp('55%'),
         backgroundColor: 'white',
     },
     iconClose: {
-        width: pxToPercentage(28),
-        height: pxToPercentage(28),
+        width: isTablet() ? pxToPercentage(20) : pxToPercentage(28),
+        height: isTablet() ? pxToPercentage(20) : pxToPercentage(28),
         tintColor: 'rgba(0, 0, 0, 1)',
     },
     iconQRCode: {
-        width: pxToPercentage(200),
-        height: pxToPercentage(200),
+        width: isTablet() ? pxToPercentage(160) : pxToPercentage(200),
+        height: isTablet() ? pxToPercentage(160) : pxToPercentage(200),
         tintColor: 'rgba(0, 0, 0, 1)',
     },
     iconShare: {
-        width: pxToPercentage(35),
-        height: pxToPercentage(35),
+        width: isTablet() ? pxToPercentage(27) : pxToPercentage(37),
+        height: isTablet() ? pxToPercentage(27) : pxToPercentage(37),
         tintColor: 'rgba(0, 0, 0, 1)',
     },
     iconRefresh: {
-        width: pxToPercentage(30),
-        height: pxToPercentage(30),
+        width: isTablet() ? pxToPercentage(22) : pxToPercentage(30),
+        height: isTablet() ? pxToPercentage(22) : pxToPercentage(30),
         tintColor: 'rgba(0, 0, 0, 1)',
     },
     iconDownload: {
-        width: pxToPercentage(32),
-        height: pxToPercentage(32),
+        width: isTablet() ? pxToPercentage(24) : pxToPercentage(32),
+        height: isTablet() ? pxToPercentage(24) : pxToPercentage(32),
         tintColor: 'rgba(0, 0, 0, 1)',
     },
     bnt: {
-        marginLeft: pxToPercentage(70),
+        marginLeft: isTablet() ? pxToPercentage(60) : pxToPercentage(80),
     },
     bntClose: {
         alignSelf: 'flex-start',
@@ -115,7 +115,7 @@ export const ModalScanQRCode = withStyles(ModalScanQRCodeComponent, (theme: Them
         marginLeft: pxToPercentage(5),
     },
     viewQRCode: {
-        flex: 1,
+        height: hp('38%'),
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -123,6 +123,6 @@ export const ModalScanQRCode = withStyles(ModalScanQRCodeComponent, (theme: Them
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
-        marginVertical: pxToPercentage(20),
+        marginTop: pxToPercentage(5),
     },
 }));

@@ -872,7 +872,7 @@ export const QRCodeIcon = (style: StyleProp<ImageStyle>): IconElement => {
 
   return Icon(source, style);
 };
-export const ImageLibraryIcon = (style: StyleProp<ImageStyle>): IconElement => {
+export const PhotoLibraryIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-image-library.png'),
   };

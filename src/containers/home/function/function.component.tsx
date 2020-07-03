@@ -22,8 +22,7 @@ import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
 
 const { width } = Dimensions.get('window');
-const itemWidth: number = width / (isTablet() ? 3 : 2) - pxToPercentage(16);
-
+const itemWidth: number =  (isTablet() ? (width / 3) - pxToPercentage(32) : (width / 2) - pxToPercentage(24));
 interface ComponentProps {
   functions: FunctionModel[];
   onAlternativeFunctionPress: (type: number) => void;
@@ -118,7 +117,8 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   btnItem: {
-    flex: 1,
+    // flex: 1,
+    width: itemWidth,
     flexDirection: 'column',
     alignItems: 'center',
     height: itemWidth,

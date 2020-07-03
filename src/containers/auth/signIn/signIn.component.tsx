@@ -188,7 +188,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     backgroundColor: theme['color-custom-100'],
   },
   sectionHeader: {
-    minHeight: isTablet() ? pxToPercentage(160) : pxToPercentage(255),
+    minHeight: isTablet() ? pxToPercentage(170) : pxToPercentage(255),
     paddingHorizontal: pxToPercentage(16),
     paddingBottom: isTablet() ? pxToPercentage(10) : pxToPercentage(15),
     justifyContent: 'flex-end',
@@ -214,7 +214,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   imgNationalEmblem: {
     marginTop: pxToPercentage(8.5),
     height: pxToPercentage(isTablet() ? 65 : 107.5),
-    width: pxToPercentage(isTablet() ? 65 : 107.5) * (512 / 384),
+    width: pxToPercentage(isTablet() ? 65 : 107.5) * (153 / 103),
   },
   txtHeaderTitle: {
     fontSize: isTablet() ? pxToPercentage(18) : pxToPercentage(27.5),

@@ -26,6 +26,8 @@ import { MeetingNotificationContainer } from '@src/containers/home/meetingNotifi
 import { MeetingNotificationDetailContainer } from '@src/containers/home/meetingNotification/meetingNotificationDetail/meetingNotificationDetail.container';
 import { PressReleaseContainer } from '@src/containers/home/pressRelease/pressRelease.container';
 import { PressReleaseDetailContainer } from '@src/containers/home/pressRelease/pressReleaseDetail/pressReleaseDetail.container';
+import { ProgrammeContainer } from '@src/containers/home/programme/programme.container';
+
 import { AccountContainer } from '@src/containers/account/account.container';
 
 // Auth
@@ -92,6 +94,10 @@ const HomeNavigationMap: NavigationRouteConfigMap<any, any> = {
   },
   ['pressReleaseDetail']: {
     screen: PressReleaseDetailContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
+  ['programmeContainer']: {
+    screen: ProgrammeContainer,
     navigationOptions: MenuNavigationOptions,
   },
 };

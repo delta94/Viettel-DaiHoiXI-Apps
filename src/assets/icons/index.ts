@@ -880,6 +880,38 @@ export const PhotoLibraryIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const ArrowForwardIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./arrow-ios-forward.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const LogoutIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./logout.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const InfomationIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./info.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const PhoneIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./phone.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

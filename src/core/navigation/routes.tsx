@@ -27,7 +27,6 @@ import { MeetingNotificationDetailContainer } from '@src/containers/home/meeting
 import { PressReleaseContainer } from '@src/containers/home/pressRelease/pressRelease.container';
 import { PressReleaseDetailContainer } from '@src/containers/home/pressRelease/pressReleaseDetail/pressReleaseDetail.container';
 import { AccountContainer } from '@src/containers/account/account.container';
-import { ScanQRCodeContainer } from '@src/containers/account/scanQRCode/scanQRCode.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -133,10 +132,10 @@ const AppNavigator: NavigationContainer = createStackNavigator({
 
 const createAppRouter = (container: NavigationNavigator<any, NavigationProp<NavigationState>>): NavigationContainer => {
   return createAppContainer(createSwitchNavigator({
-    ['ScanQRCodeContainer']: ScanQRCodeContainer,
+    ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
     ['app']: container,
-  }, { initialRouteName: 'ScanQRCodeContainer' }));
+  }, { initialRouteName: 'auth' }));
 };
 
 export const Router: NavigationContainer = createAppRouter(AppNavigator);

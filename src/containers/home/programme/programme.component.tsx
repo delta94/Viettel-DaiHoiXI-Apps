@@ -23,7 +23,8 @@ import { isTablet } from 'react-native-device-info';
 import { ScrollView } from 'react-native-gesture-handler';
 
 interface ComponentProps {
-  programmations: ProgrammationModel[];
+  programmationsMorning: ProgrammationModel[];
+  programmationsAfterNoons: ProgrammationModel[];
 }
 
 export type ProgrammeProps = ThemedComponentProps & ComponentProps;
@@ -58,15 +59,17 @@ const ProgrammeComponent: React.FunctionComponent<ProgrammeProps> = (props) => {
       </View>
 
       <ScrollView style={[themedStyle.container]}>
-        <View style={[themedStyle.sessionView]}>
+        {props.programmationsMorning.length !== 0 && (
+          <View style={[themedStyle.sessionView]}>
           <Text style={[themedStyle.txtSession]}>
             {'SÁNG'}
           </Text>
         </View>
+        )}
         <List
           scrollEnabled={false}
-          data={props.programmations}
-          extraData={props.programmations}
+          data={props.programmationsMorning}
+          extraData={props.programmationsMorning}
           contentContainerStyle={themedStyle.contentContainer}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
@@ -81,16 +84,18 @@ const ProgrammeComponent: React.FunctionComponent<ProgrammeProps> = (props) => {
             );
           }}
         />
-        <View style={[themedStyle.sessionView]}>
-          <Text style={[themedStyle.txtSession]}>
-            {'CHIỀU'}
-          </Text>
-        </View>
+        {props.programmationsAfterNoons.length !== 0 && (
+          <View style={[themedStyle.sessionView]}>
+            <Text style={[themedStyle.txtSession]}>
+              {'CHIỀU'}
+            </Text>
+          </View>
+          )}
         <List
           style={[themedStyle.container]}
           scrollEnabled={false}
-          data={props.programmations}
-          extraData={props.programmations}
+          data={props.programmationsAfterNoons}
+          extraData={props.programmationsAfterNoons}
           contentContainerStyle={themedStyle.contentContainer}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
@@ -158,6 +163,6 @@ export const Programmation = withStyles(ProgrammeComponent, (theme: ThemeType) =
   },
   sessionView: {
     paddingTop: pxToPercentage(16),
-    marginLeft : pxToPercentage(16),
+    marginLeft: pxToPercentage(66),
   },
 }));

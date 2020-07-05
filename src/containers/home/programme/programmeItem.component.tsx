@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import {
-  ListItem,
   ListItemProps,
-  Icon,
 } from '@kitten/ui/';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Dimensions} from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -25,19 +23,14 @@ const ProgrammeItemComponent: React.FunctionComponent<ProgrammeItemProps> = (pro
   return (
     <View style={[themedStyle.container]}>
       <View style={[themedStyle.directionView]}>
-        <View style={[
-          themedStyle.placeTimeView,
-          style,
-        ]} >
-          <Text>-</Text>
+        <View style={themedStyle.placeTimeView}>
+        <Text style={themedStyle.txtTime}>-</Text>
         </View>
         <View style={[themedStyle.timeView]} >
-          <Text style={[
-            themedStyle.txtTitle,
-          ]}>
+          <Text style={themedStyle.txtTime}>
             {programmation.fromTime}
           </Text>
-          <Text style={themedStyle.txtTitle}>
+          <Text style={themedStyle.txtTime}>
             {programmation.toTime}
           </Text>
         </View>
@@ -58,6 +51,8 @@ const ProgrammeItemComponent: React.FunctionComponent<ProgrammeItemProps> = (pro
     </View>
   );
 };
+const { width } = Dimensions.get('window');
+const itemWidth: number =  width - pxToPercentage(108);
 
 export const ProgrameItem = withStyles(ProgrammeItemComponent, (theme: ThemeType) => ({
   container: {
@@ -82,24 +77,30 @@ export const ProgrameItem = withStyles(ProgrammeItemComponent, (theme: ThemeType
     textAlign: 'justify',
     ...textStyle.regular,
   },
+  txtTime: {
+    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    color: theme['text-basic-color'],
+    textAlign: 'center',
+    ...textStyle.regular,
+  },
   placeTimeView: {
-    flex: 0.02,
+    width : pxToPercentage(4),
     justifyContent: 'center',
   },
   viewTitile: {
-    flex: 0.81,
     borderWidth: pxToPercentage(1),
     borderColor: theme['border-basic-color-4'],
     paddingHorizontal: pxToPercentage(8),
     paddingVertical: pxToPercentage(8),
     borderRadius: pxToPercentage(4),
     marginVertical: pxToPercentage(12),
-    marginLeft: pxToPercentage(8),
+    marginLeft: pxToPercentage(12),
+    width :  itemWidth,
   },
   timelineView: {
-    flex: 0.06,
     justifyContent: 'center',
     alignItems: 'center',
+    width : pxToPercentage(10),
   },
   lineView: {
     borderWidth: pxToPercentage(1),
@@ -112,8 +113,8 @@ export const ProgrameItem = withStyles(ProgrammeItemComponent, (theme: ThemeType
     borderRadius: pxToPercentage(8),
   },
   timeView: {
-    flex: 0.12,
     justifyContent: 'center',
+    width : pxToPercentage(50),
   },
   viewDotIcon : {
     height: pxToPercentage(16),

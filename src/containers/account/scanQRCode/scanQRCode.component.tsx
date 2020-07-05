@@ -22,20 +22,28 @@ import { ModalScanQRCode } from './modalScanQRCode.component';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 
-export type ScanQRCodeProps = ThemedComponentProps;
+interface ComponentProps {
+  onBackPress: () => void;
+}
+
+export type ScanQRCodeProps = ThemedComponentProps & ComponentProps;
 
 const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) => {
   const [isVisibleMyQRCode, setIsVisibleMyQRCode] = useState<boolean>(false);
 
-  const onMyQRPress = () => {
+  const onBackPress = (): void => {
+    props.onBackPress();
+  };
+
+  const onMyQRPress = (): void => {
     setIsVisibleMyQRCode(true);
   };
 
-  const onClosePress = () => {
+  const onClosePress = (): void => {
     setIsVisibleMyQRCode(false);
   };
 
-  const onKeyboarDismiss = () => {
+  const onKeyboarDismiss = (): void => {
     Keyboard.dismiss();
   };
 
@@ -48,7 +56,8 @@ const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) =>
           <View style={themedStyle.viewHeader}>
             <View style={themedStyle.viewHeaderLeft}>
               <TouchableOpacity
-                activeOpacity={0.75}>
+                activeOpacity={0.75}
+                onPress={onBackPress}>
                 {CloseIcon(themedStyle.iconClose)}
               </TouchableOpacity>
             </View>

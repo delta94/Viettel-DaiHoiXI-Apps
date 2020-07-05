@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -18,7 +19,6 @@ import {
 } from '@src/assets/icons';
 import { SettingButton } from '@src/components/settingButton/settingButton.component';
 import { SettingSwitch } from '@src/components/settingButton/settingSwitch.component';
-import { SafeAreaView } from 'react-navigation';
 import { textStyle } from '@src/components/textStyle';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 

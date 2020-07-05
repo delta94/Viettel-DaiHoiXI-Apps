@@ -13,7 +13,6 @@ import { Notification } from '@src/core/models/notification/notification.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { SafeAreaView } from 'react-navigation';
-import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   notification: Notification;
@@ -62,14 +61,14 @@ export const MeetingNotificationDetail = withStyles(MeetingNotificationDetailCom
   },
   txtTitle: {
     textAlign: 'justify',
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.semibold,
   },
   txtDescription: {
     textAlign: 'justify',
     marginTop: pxToPercentage(15),
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.regular,
   },

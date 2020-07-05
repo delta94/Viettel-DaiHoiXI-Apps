@@ -42,6 +42,7 @@ const MeetingNotificationComponent: React.FunctionComponent<MeetingNotificationP
         </Text>
         <Datepicker
           date={date}
+          size={isTablet() ? 'large' : 'medium'}
           style={themedStyle.datepicker}
           onSelect={nextDate => setDate(nextDate)}
         />
@@ -80,7 +81,7 @@ export const MeetingNotification = withStyles(MeetingNotificationComponent, (the
     flex: 1,
   },
   txtChooseDate: {
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     marginRight: pxToPercentage(15),
     marginBottom: pxToPercentage(5),

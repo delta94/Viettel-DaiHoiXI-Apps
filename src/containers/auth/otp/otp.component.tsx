@@ -92,7 +92,7 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
     textAlign: 'center',
     marginTop: pxToPercentage(10),
     marginHorizontal: pxToPercentage(32),
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-hint-color'],
     ...textStyle.regular,
   },

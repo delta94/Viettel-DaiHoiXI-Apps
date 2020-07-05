@@ -72,8 +72,8 @@ export const Home = withStyles(HomeComponent, (theme: ThemeType) => ({
     backgroundColor: theme['color-custom-100'],
   },
   profileInfo: {
-    marginBottom: pxToPercentage(8),
-    paddingVertical: pxToPercentage(8),
+    marginBottom: pxToPercentage(8, true),
+    paddingVertical: pxToPercentage(8, true),
     paddingHorizontal: pxToPercentage(16),
     backgroundColor: theme['background-basic-color-1'],
   },

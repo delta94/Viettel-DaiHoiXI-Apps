@@ -108,9 +108,9 @@ export const ValidationInput = withStyles(ValidationInputComponent, (theme: Them
   container: {
   },
   textStyle: {
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     padding: 0,
-    marginVertical: pxToPercentage(7),
+    marginVertical: pxToPercentage(7, true),
     ...textStyle.regular,
   },
 }));

@@ -22,7 +22,8 @@ import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
 
 const { width } = Dimensions.get('window');
-const itemWidth: number =  (isTablet() ? (width / 3) - pxToPercentage(32) : (width / 2) - pxToPercentage(24));
+const itemWidth: number = isTablet() ? (width - pxToPercentage(64)) / 3 : (width - pxToPercentage(48)) / 2;
+
 interface ComponentProps {
   functions: FunctionModel[];
   onAlternativeFunctionPress: (type: number) => void;
@@ -107,8 +108,7 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     backgroundColor: theme['color-custom-100'],
   },
   contentContainer: {
-    paddingHorizontal: pxToPercentage(8),
-    paddingVertical: pxToPercentage(8),
+    padding: pxToPercentage(8),
   },
   viewCard: {
     width: pxToPercentage(300),
@@ -117,7 +117,6 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   btnItem: {
-    // flex: 1,
     width: itemWidth,
     flexDirection: 'column',
     alignItems: 'center',
@@ -126,9 +125,7 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     borderWidth: pxToPercentage(1),
     borderColor: theme['border-basic-color-4'],
     maxWidth: itemWidth,
-    marginHorizontal: pxToPercentage(8),
-    marginVertical: pxToPercentage(8),
-    paddingVertical: 0,
+    margin: pxToPercentage(8),
     paddingTop: itemWidth / 3.75,
   },
   btnAlternative: {
@@ -136,7 +133,7 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   },
   txtTitle: {
     textAlign: 'center',
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     marginTop: pxToPercentage(2),
     ...textStyle.semibold,
   },

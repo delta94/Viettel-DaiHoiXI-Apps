@@ -13,7 +13,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
 
     switch (type) {
       case AlternativeFunctionEnum.Program: {
-        routeName = 'programmeContainer';
+        routeName = 'programme';
         break;
       }
       case AlternativeFunctionEnum.Notification: {

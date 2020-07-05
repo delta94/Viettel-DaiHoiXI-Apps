@@ -15,7 +15,6 @@ import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { DownloadIcon } from '@src/assets/icons';
 import { SafeAreaView } from 'react-navigation';
-import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   pressRelease: PressReleaseModel;
@@ -82,14 +81,14 @@ export const PressReleaseDetail = withStyles(PressReleaseDetailComponent, (theme
   },
   txtTitle: {
     textAlign: 'justify',
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.semibold,
   },
   txtDescription: {
     textAlign: 'justify',
     marginTop: pxToPercentage(15),
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.regular,
   },
@@ -98,12 +97,12 @@ export const PressReleaseDetail = withStyles(PressReleaseDetailComponent, (theme
     flexDirection: 'row',
   },
   txtFileTitle: {
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.italic,
   },
   txtFileName: {
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.regular,
   },
@@ -114,7 +113,7 @@ export const PressReleaseDetail = withStyles(PressReleaseDetailComponent, (theme
   },
   txtDownload: {
     marginTop: pxToPercentage(2.5),
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.regular,
   },

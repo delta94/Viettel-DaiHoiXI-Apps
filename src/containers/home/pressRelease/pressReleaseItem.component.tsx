@@ -12,7 +12,6 @@ import {
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
-import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   pressRelease: PressReleaseModel;
@@ -65,7 +64,7 @@ export const PressReleaseItem = withStyles(PressReleaseItemComponent, (theme: Th
     color: theme['text-hint-color'],
   },
   txtTitle: {
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     textAlign: 'justify',
     ...textStyle.regular,
@@ -73,7 +72,7 @@ export const PressReleaseItem = withStyles(PressReleaseItemComponent, (theme: Th
   txtDate: {
     alignSelf: 'flex-end',
     marginTop: pxToPercentage(2),
-    fontSize: isTablet() ? pxToPercentage(7.5) : pxToPercentage(12),
+    fontSize: pxToPercentage(12),
     color: theme['text-basic-color'],
     ...textStyle.regular,
   },

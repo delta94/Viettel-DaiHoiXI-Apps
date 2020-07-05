@@ -14,7 +14,6 @@ import { textStyle } from '@src/components';
 import { User } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   user: User;
@@ -64,13 +63,13 @@ export const ProfileInfo = withStyles(ProfileInfoComponent, (theme: ThemeType) =
     marginLeft: pxToPercentage(16),
   },
   txtName: {
-    fontSize: isTablet() ? pxToPercentage(13) : pxToPercentage(20),
+    fontSize: pxToPercentage(20),
     ...textStyle.bold,
     fontWeight: 'normal',
     color: theme['text-basic-color'],
   },
   txtPosition: {
-    fontSize: isTablet() ? pxToPercentage(8.5) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     ...textStyle.bold,
     ...textStyle.semibold,
     fontWeight: 'normal',

@@ -12,8 +12,8 @@ import {
   TopNavigationProps,
 } from '@kitten/ui';
 import { textStyle } from '@src/components';
-import { SafeAreaView } from './safeAreaView.component';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { SafeAreaView } from 'react-navigation';
+// import { SafeAreaView } from './safeAreaView.component';
 
 export interface ComponentProps {
   backIcon?: BackIconProp;

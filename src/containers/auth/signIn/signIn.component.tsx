@@ -188,9 +188,9 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     backgroundColor: theme['color-custom-100'],
   },
   sectionHeader: {
-    minHeight: isTablet() ? pxToPercentage(170) : pxToPercentage(255),
+    minHeight: pxToPercentage(255),
     paddingHorizontal: pxToPercentage(16),
-    paddingBottom: isTablet() ? pxToPercentage(10) : pxToPercentage(15),
+    paddingBottom: pxToPercentage(15),
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: theme['color-primary-default'],
@@ -213,17 +213,17 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   },
   imgNationalEmblem: {
     marginTop: pxToPercentage(8.5),
-    height: pxToPercentage(isTablet() ? 65 : 107.5),
-    width: pxToPercentage(isTablet() ? 65 : 107.5) * (153 / 103),
+    height: pxToPercentage(107.5),
+    width: pxToPercentage(107.5) * (153 / 103),
   },
   txtHeaderTitle: {
-    fontSize: isTablet() ? pxToPercentage(18) : pxToPercentage(27.5),
+    fontSize: pxToPercentage(27.5),
     fontFamily: 'opensans-bold',
     color: theme['color-primary-default-2'],
   },
   txtHeaderSubtitle: {
-    fontSize: isTablet() ? pxToPercentage(11) : pxToPercentage(17.5),
-    marginTop: isTablet() ? pxToPercentage(4) : pxToPercentage(7),
+    fontSize: pxToPercentage(17.5),
+    marginTop: pxToPercentage(7),
     color: theme['color-primary-default-2'],
   },
   btnSignIn: {
@@ -234,7 +234,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     marginVertical: pxToPercentage(12),
   },
   txtBtnForgotPassword: {
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['color-primary-default'],
     ...textStyle.semibold,
   },
@@ -246,7 +246,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   },
   txtBtnRecognize: {
     marginTop: pxToPercentage(10),
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['color-primary-default'],
     ...textStyle.semibold,
   },
@@ -254,18 +254,18 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     textAlign: 'center',
     marginTop: pxToPercentage(10),
     marginHorizontal: pxToPercentage(32),
-    fontSize: isTablet() ? pxToPercentage(9) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     color: theme['text-hint-color'],
     ...textStyle.regular,
   },
   iconFingerprint: {
-    height: pxToPercentage(isTablet() ? 27.5 : 40),
-    width: pxToPercentage(isTablet() ? 27.5 : 40) * (65 / 72),
+    height: pxToPercentage(40),
+    width: pxToPercentage(40) * (65 / 72),
     tintColor: theme['color-primary-default'],
   },
   iconFaceID: {
-    height: pxToPercentage(isTablet() ? 27.5 : 40),
-    width: pxToPercentage(isTablet() ? 27.5 : 40),
+    height: pxToPercentage(40),
+    width: pxToPercentage(40),
     tintColor: theme['color-primary-default'],
   },
 }));

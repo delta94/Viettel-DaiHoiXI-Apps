@@ -9,7 +9,6 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { isTablet } from 'react-native-device-info';
 import {
   CloseIconOutline,
   QRCodeIcon,
@@ -88,27 +87,27 @@ export const ModalScanQRCode = withStyles(ModalScanQRCodeComponent, (theme: Them
     backgroundColor: 'white',
   },
   iconClose: {
-    width: isTablet() ? pxToPercentage(20) : pxToPercentage(28),
-    height: isTablet() ? pxToPercentage(20) : pxToPercentage(28),
+    width: pxToPercentage(28),
+    height: pxToPercentage(28),
   },
   iconQRCode: {
-    width: isTablet() ? pxToPercentage(160) : pxToPercentage(200),
-    height: isTablet() ? pxToPercentage(160) : pxToPercentage(200),
+    width: pxToPercentage(200),
+    height: pxToPercentage(200),
   },
   iconShare: {
-    width: isTablet() ? pxToPercentage(27) : pxToPercentage(37),
-    height: isTablet() ? pxToPercentage(27) : pxToPercentage(37),
+    width: pxToPercentage(37),
+    height: pxToPercentage(37),
   },
   iconRefresh: {
-    width: isTablet() ? pxToPercentage(22) : pxToPercentage(30),
-    height: isTablet() ? pxToPercentage(22) : pxToPercentage(30),
+    width: pxToPercentage(30),
+    height: pxToPercentage(30),
   },
   iconDownload: {
-    width: isTablet() ? pxToPercentage(24) : pxToPercentage(32),
-    height: isTablet() ? pxToPercentage(24) : pxToPercentage(32),
+    width: pxToPercentage(32),
+    height: pxToPercentage(32),
   },
   btn: {
-    marginLeft: isTablet() ? pxToPercentage(60) : pxToPercentage(80),
+    marginLeft: pxToPercentage(80),
   },
   bntClose: {
     alignSelf: 'flex-start',

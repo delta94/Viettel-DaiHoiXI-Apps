@@ -121,6 +121,9 @@ export const Program = withStyles(ProgramComponent, (theme: ThemeType) => ({
   datepicker: {
     flex: 1,
   },
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
   txtChooseDate: {
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],

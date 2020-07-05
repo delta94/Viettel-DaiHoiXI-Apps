@@ -16,7 +16,6 @@ import {
   PhotoLibraryIcon,
   QRCodeIcon,
 } from '@src/assets/icons';
-import { isTablet } from 'react-native-device-info';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import { ModalScanQRCode } from './modalScanQRCode.component';
@@ -100,17 +99,17 @@ export const ScanQRCode = withStyles(ScanQRCodeComponent, (theme: ThemeType) => 
   sectionTop: {
     flex: 1,
     justifyContent: 'space-between',
-    paddingBottom: isTablet() ? pxToPercentage(10) : pxToPercentage(50),
+    paddingBottom: pxToPercentage(50),
   },
   sectionFooter: {
-    height: isTablet() ? pxToPercentage(100) : pxToPercentage(150),
+    height: pxToPercentage(150),
     backgroundColor: theme['background-basic-color-1'],
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: isTablet() ? pxToPercentage(20) : pxToPercentage(30),
+    paddingBottom: pxToPercentage(30),
   },
   txtFooter: {
-    fontSize: isTablet() ? pxToPercentage(15) : pxToPercentage(17),
+    fontSize: pxToPercentage(17),
     textAlign: 'center',
     color: theme['background-custom-color-2'],
   },
@@ -118,7 +117,7 @@ export const ScanQRCode = withStyles(ScanQRCodeComponent, (theme: ThemeType) => 
     flexDirection: 'row',
     alignItems: 'center',
     height: heightPercentageToDP(6.5),
-    paddingHorizontal: pxToPercentage(15),
+    paddingHorizontal: pxToPercentage(16),
   },
   viewBody: {
     alignItems: 'center',
@@ -128,40 +127,39 @@ export const ScanQRCode = withStyles(ScanQRCodeComponent, (theme: ThemeType) => 
     alignItems: 'center',
   },
   iconQRCode: {
-    width: isTablet() ? pxToPercentage(25) : pxToPercentage(30),
-    height: isTablet() ? pxToPercentage(25) : pxToPercentage(30),
+    width: pxToPercentage(30),
+    height: pxToPercentage(30),
     tintColor: theme['background-custom-color-3'],
   },
   txtQR: {
-    fontSize: isTablet() ? pxToPercentage(13) : pxToPercentage(16),
+    fontSize: pxToPercentage(16),
     color: theme['background-basic-color-1'],
     ...textStyle.bold,
   },
   viewQRCode: {
     backgroundColor: theme['background-custom-color-4'],
-    height: isTablet() ? pxToPercentage(270) : pxToPercentage(335),
-    width: isTablet() ? pxToPercentage(270) : pxToPercentage(335),
-    borderRadius: isTablet() ? pxToPercentage(20) : pxToPercentage(15),
+    height: pxToPercentage(343),
+    width: pxToPercentage(343),
+    borderRadius: pxToPercentage(15),
   },
   btnPhotoLibrary: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   txtPhotoLibrary: {
-    marginLeft: isTablet() ? pxToPercentage(5) : pxToPercentage(10),
-    fontSize: isTablet() ? pxToPercentage(10) : pxToPercentage(14),
+    marginLeft: pxToPercentage(10),
+    fontSize: pxToPercentage(14),
     color: theme['background-basic-color-1'],
-    marginHorizontal: isTablet() ? pxToPercentage(6) : pxToPercentage(12),
     ...textStyle.bold,
   },
   iconClose: {
-    width: isTablet() ? pxToPercentage(17) : pxToPercentage(25),
-    height: isTablet() ? pxToPercentage(17) : pxToPercentage(25),
+    width: pxToPercentage(25),
+    height: pxToPercentage(25),
     tintColor: theme['background-custom-color-5'],
   },
   iconPhoto: {
-    width: isTablet() ? pxToPercentage(17) : pxToPercentage(25),
-    height: isTablet() ? pxToPercentage(17) : pxToPercentage(25),
+    width: pxToPercentage(25),
+    height: pxToPercentage(25),
     tintColor: theme['background-basic-color-1'],
   },
   viewHeaderLeft: {

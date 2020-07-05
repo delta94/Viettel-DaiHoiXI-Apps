@@ -9,8 +9,8 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 export const SafeAreaView: React.FunctionComponent<SafeAreaViewProps> = (props) => {
 
   const statusBarHeight: number = Platform.select({
-    ios: getStatusBarHeight(),
-    android: 0,
+    ios: getStatusBarHeight(false),
+    android: getStatusBarHeight(false),
   });
 
   useEffect(() => {

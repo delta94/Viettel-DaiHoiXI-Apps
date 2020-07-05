@@ -102,16 +102,16 @@ const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) =>
 export const ScanQRCode = withStyles(ScanQRCodeComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    paddingTop: getStatusBarHeight(true),
+    paddingTop: getStatusBarHeight(false),
     backgroundColor: theme['background-custom-color-2'],
   },
   sectionTop: {
     flex: 1,
     justifyContent: 'space-between',
-    paddingBottom: pxToPercentage(50),
+    paddingBottom: heightPercentageToDP(2.5),
   },
   sectionFooter: {
-    height: pxToPercentage(150),
+    height: heightPercentageToDP(20),
     backgroundColor: theme['background-basic-color-1'],
     alignItems: 'center',
     justifyContent: 'center',

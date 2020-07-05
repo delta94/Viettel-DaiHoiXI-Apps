@@ -40,15 +40,15 @@ const ProgramDetailModalComponent: React.FunctionComponent<ProgramDetailModalPro
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={themedStyle.txtTitle}>
           {'Người thực hiện: '}
-          <Text style={themedStyle.txtContent}>
-            {content.implementer}
-          </Text>
+        </Text>
+        <Text style={themedStyle.txtContent}>
+          {content.implementer}
         </Text>
         <Text style={themedStyle.txtTitle}>
           {'Nội dung: '}
-          <Text style={themedStyle.txtContent}>
-            {content.description}
-          </Text>
+        </Text>
+        <Text style={themedStyle.txtContent}>
+          {content.description}
         </Text>
       </ScrollView>
     </Card>

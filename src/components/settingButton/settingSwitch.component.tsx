@@ -11,14 +11,16 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { Switch } from 'react-native-gesture-handler';
-import { isTablet } from 'react-native-device-info';
+import { textStyle } from '..';
+
 interface ComponentProps {
   title: string;
 }
+
 export type SettingSwitchProps = ComponentProps & ThemedComponentProps & ViewProps;
 
 const SettingSwitchComponent: React.FunctionComponent<SettingSwitchProps> = (props) => {
-  const { themedStyle, style } = props;
+  const { themedStyle, style, ...restProps } = props;
   const [isEnable, setIsEnable] = useState(false);
 
   const toggleSwitch = () => {
@@ -26,7 +28,12 @@ const SettingSwitchComponent: React.FunctionComponent<SettingSwitchProps> = (pro
   };
 
   return (
-    <View style={[themedStyle.container, style]}>
+    <View
+      style={[
+        themedStyle.container,
+        style,
+      ]}
+      {...restProps}>
       <View style={themedStyle.viewLeft}>
         <Text style={themedStyle.txtTitle}>
           {props.title}
@@ -34,7 +41,6 @@ const SettingSwitchComponent: React.FunctionComponent<SettingSwitchProps> = (pro
       </View>
       <View style={themedStyle.viewRight}>
         <Switch
-          style={themedStyle.switch}
           value={isEnable}
           onValueChange={toggleSwitch}
         />
@@ -47,30 +53,31 @@ const SettingSwitchComponent: React.FunctionComponent<SettingSwitchProps> = (pro
 export const SettingSwitch = withStyles(SettingSwitchComponent, (theme: ThemeType) => ({
   container: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: 'white',
     alignItems: 'center',
-    height: isTablet() ? pxToPercentage(30) : pxToPercentage(35), //
+    height: pxToPercentage(45),
     marginTop: pxToPercentage(5),
-    borderRadius: isTablet() ? pxToPercentage(3) : pxToPercentage(7),
-    marginHorizontal: pxToPercentage(4),
+    paddingHorizontal: pxToPercentage(4),
+    paddingRight: pxToPercentage(8),
+    borderTopWidth: pxToPercentage(1),
+    borderBottomWidth: pxToPercentage(1),
+    borderColor: theme['border-basic-color-4'],
   },
   viewLeft: {
     flex: 1,
+    paddingLeft: pxToPercentage(7.5),
+    height: pxToPercentage(35),
     justifyContent: 'center',
-    paddingLeft: isTablet() ? pxToPercentage(10) : pxToPercentage(7.5),
   },
   viewRight: {
-    flexDirection: 'row',
-    width: pxToPercentage(50),
-    height: pxToPercentage(30),
-    paddingRight: isTablet() ? pxToPercentage(10) : pxToPercentage(1),
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    width: pxToPercentage(100),
+    height: pxToPercentage(35),
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   txtTitle: {
-    fontSize: isTablet() ? pxToPercentage(12) : pxToPercentage(14),
-  },
-  switch: {
-    transform: isTablet() ? [{ scaleX: 1.5 }, { scaleY: 1.5 }] : [{ scaleX: 1.1 }, { scaleY: 1.1 }], //
+    fontSize: pxToPercentage(14),
+    ...textStyle.regular,
   },
 }));

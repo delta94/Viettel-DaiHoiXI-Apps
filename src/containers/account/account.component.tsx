@@ -11,8 +11,11 @@ import {
 import { ProfileInfoV1 } from '@src/components/profileInfo/profileInfoV1.component';
 import { userDataFake } from '@src/core/data/user';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { isTablet } from 'react-native-device-info';
-import { QRCodeIcon, LogoutIcon, InfomationIcon } from '@src/assets/icons';
+import {
+  QRCodeIcon,
+  LogoutIcon,
+  InfomationIcon,
+} from '@src/assets/icons';
 import { SettingButton } from '@src/components/settingButton/settingButton.component';
 import { SettingSwitch } from '@src/components/settingButton/settingSwitch.component';
 import { SafeAreaView } from 'react-navigation';
@@ -21,11 +24,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface ComponentProps {
   onLogoutPress: () => void;
+  onQRCodePress: () => void;
 }
 
 export type AccountProps = ThemedComponentProps & ComponentProps;
 
 const AccountComponent: React.FunctionComponent<AccountProps> = (props) => {
+  const onQRCodeButtonPress = (): void => {
+    props.onQRCodePress();
+  };
+
   const onLogoutButtonPress = (): void => {
     props.onLogoutPress();
   };
@@ -36,11 +44,6 @@ const AccountComponent: React.FunctionComponent<AccountProps> = (props) => {
 
     <View style={themedStyle.container}>
       <SafeAreaView style={themedStyle.container}>
-        <View style={themedStyle.viewHeader}>
-          <Text style={themedStyle.txtHeader}>
-            {'Tài khoản'}
-          </Text>
-        </View>
         <View style={themedStyle.viewBody}>
           <ProfileInfoV1
             user={userDataFake}
@@ -49,20 +52,26 @@ const AccountComponent: React.FunctionComponent<AccountProps> = (props) => {
           <View style={themedStyle.viewContent}>
             <SettingButton
               title={'Mã QR'}
-              iconLeft={QRCodeIcon} />
+              iconLeft={QRCodeIcon}
+              onPress={onQRCodeButtonPress}
+            />
             <Text style={themedStyle.txtTitle}>
               {'QUẢN LÝ ĐĂNG NHẬP'}
             </Text>
             <SettingButton
-              title={'Lịch sử đăng nhập'} />
+              title={'Lịch sử đăng nhập'}
+            />
             <SettingSwitch
-              title={'Đăng nhập bằng vân tay'} />
+              title={'Đăng nhập bằng vân tay'}
+            />
             <SettingSwitch
-              title={'Đăng nhập bằng nhận diện khuôn mặt'} />
+              title={'Đăng nhập bằng nhận diện khuôn mặt'}
+            />
             <SettingButton
-              style={themedStyle.settingButton}
+              style={themedStyle.btnSetting}
               title={'Thông tin ứng dụng'}
-              iconLeft={InfomationIcon} />
+              iconLeft={InfomationIcon}
+            />
           </View>
         </View>
         <TouchableOpacity
@@ -81,19 +90,13 @@ const AccountComponent: React.FunctionComponent<AccountProps> = (props) => {
 export const Account = withStyles(AccountComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(242, 242, 242, 1)',
-  },
-  viewHeader: {
-    height: isTablet() ? pxToPercentage(50) : pxToPercentage(80),
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'red',
+    backgroundColor: theme['color-custom-100'],
   },
   viewBody: {
     flex: 1,
   },
   profileInfo: {
-    paddingVertical: isTablet() ? pxToPercentage(5) : pxToPercentage(15),
+    paddingVertical: pxToPercentage(15),
     paddingHorizontal: pxToPercentage(15),
     backgroundColor: theme['background-basic-color-1'],
   },
@@ -101,34 +104,28 @@ export const Account = withStyles(AccountComponent, (theme: ThemeType) => ({
     flex: 1,
   },
   btnLogout: {
-    height: isTablet() ? pxToPercentage(30) : pxToPercentage(40),
+    height: pxToPercentage(40),
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: pxToPercentage(4),
-    marginBottom: isTablet() ? pxToPercentage(5) : pxToPercentage(15),
+    marginBottom: pxToPercentage(15),
     flexDirection: 'row',
     borderWidth: pxToPercentage(1),
     borderColor: 'red',
   },
-  txtHeader: {
-    fontSize: isTablet() ? pxToPercentage(15) : pxToPercentage(18),
-    paddingTop: pxToPercentage(14),
-    color: 'white',
-    ...textStyle.bold,
-  },
   txtTitle: {
-    fontSize: isTablet() ? pxToPercentage(12) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
     ...textStyle.regular,
-    paddingTop: isTablet() ? pxToPercentage(13) : pxToPercentage(18),
-    paddingLeft: isTablet() ? pxToPercentage(14) : pxToPercentage(11.5),
+    paddingTop: pxToPercentage(18),
+    paddingLeft: pxToPercentage(11.5),
   },
-  settingButton: {
-    marginTop: isTablet() ? pxToPercentage(12) : pxToPercentage(15),
+  btnSetting: {
+    marginTop: pxToPercentage(15),
   },
   txtBtnLogout: {
     color: 'red',
-    fontSize: isTablet() ? pxToPercentage(10) : pxToPercentage(13),
+    fontSize: pxToPercentage(13),
     ...textStyle.bold,
     marginLeft: pxToPercentage(10),
   },

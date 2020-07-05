@@ -14,18 +14,19 @@ import { textStyle } from '@src/components';
 import { User } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { isTablet } from 'react-native-device-info';
-import { PhoneIcon, PersonIconFill } from '@src/assets/icons';
+import {
+  PhoneIcon,
+  PersonIconFill,
+} from '@src/assets/icons';
 
 interface ComponentProps {
   user: User;
-  children?: React.ReactNode;
 }
 
 export type ProfileInfoProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 const ProfileInfoV1Component: React.FunctionComponent<ProfileInfoProps> = (props) => {
-  const { style, themedStyle, user, children, ...restProps } = props;
+  const { style, themedStyle, user, ...restProps } = props;
 
   return (
     <View
@@ -69,54 +70,49 @@ export const ProfileInfoV1 = withStyles(ProfileInfoV1Component, (theme: ThemeTyp
     alignItems: 'center',
     borderBottomWidth: pxToPercentage(1),
     borderBottomColor: theme['border-basic-color-4'],
-    borderRadius: isTablet() ? pxToPercentage(3) : pxToPercentage(7),
-    marginHorizontal: pxToPercentage(4),
-    marginTop: pxToPercentage(2),
   },
   sectionDetails: {
     flex: 1,
     justifyContent: 'center',
-    marginHorizontal: isTablet() ? pxToPercentage(14) : pxToPercentage(16),
+    marginLeft: pxToPercentage(16),
+  },
+  viewPosition: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: pxToPercentage(4),
+  },
+  viewPhone: {
+    flexDirection: 'row',
+    marginTop: pxToPercentage(5),
   },
   txtName: {
-    fontSize: isTablet() ? pxToPercentage(13) : pxToPercentage(16),
-    ...textStyle.semibold,
+    fontSize: pxToPercentage(20),
+    ...textStyle.bold,
     fontWeight: 'normal',
     color: theme['text-basic-color'],
   },
   txtPosition: {
-    fontSize: isTablet() ? pxToPercentage(11) : pxToPercentage(14),
-    fontWeight: 'normal',
-    color: 'black',
+    flex: 1,
+    fontSize: pxToPercentage(14),
     ...textStyle.regular,
     marginLeft: pxToPercentage(5),
   },
   txtPhone: {
-    fontSize: isTablet() ? pxToPercentage(11) : pxToPercentage(14),
-    fontWeight: 'normal',
-    color: 'black',
+    fontSize: pxToPercentage(14),
     ...textStyle.regular,
     marginLeft: pxToPercentage(9),
   },
   iconPosition: {
-    width: isTablet() ? pxToPercentage(15) : pxToPercentage(20),
-    height: isTablet() ? pxToPercentage(15) : pxToPercentage(20),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
   },
   iconPhone: {
-    width: isTablet() ? pxToPercentage(15) : pxToPercentage(20),
-    height: isTablet() ? pxToPercentage(15) : pxToPercentage(20),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
     borderRadius: pxToPercentage(3),
   },
-  viewPosition: {
-    flexDirection: 'row',
-    marginTop: isTablet() ? pxToPercentage(2) : pxToPercentage(4),
-  },
-  viewPhone: {
-    flexDirection: 'row',
-    marginTop: isTablet() ? pxToPercentage(2) : pxToPercentage(5),
-  },
   avatar: {
-    width: isTablet() ? pxToPercentage(70) : pxToPercentage(90),
-    height: isTablet() ? pxToPercentage(70) : pxToPercentage(90),
+    width: pxToPercentage(70),
+    height: pxToPercentage(70),
   },
 }));

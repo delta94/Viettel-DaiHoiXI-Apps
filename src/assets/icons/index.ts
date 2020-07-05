@@ -882,7 +882,7 @@ export const PhotoLibraryIcon = (style: StyleProp<ImageStyle>): IconElement => {
 
 export const ArrowForwardIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
-    imageSource: require('./arrow-ios-forward.png'),
+    imageSource: require('./eva/arrow-ios-forward.png'),
   };
 
   return Icon(source, style);

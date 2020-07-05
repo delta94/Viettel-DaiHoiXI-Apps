@@ -5,6 +5,13 @@ import { Account } from './account.component';
 export const AccountContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'AccountContainer';
 
+  const onQRCodePress = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'scanQRCode',
+    });
+  };
+
   const onLogoutPress = (): void => {
     props.navigation.navigate({
       key: navigationKey,
@@ -14,6 +21,7 @@ export const AccountContainer: React.FunctionComponent<NavigationInjectedProps> 
 
   return (
     <Account
+      onQRCodePress={onQRCodePress}
       onLogoutPress={onLogoutPress}
     />
   );

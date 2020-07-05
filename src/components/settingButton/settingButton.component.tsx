@@ -15,18 +15,19 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { IconElement } from '@src/assets/icons/icon.component';
 import { ArrowForwardIcon } from '@src/assets/icons';
-import { isTablet } from 'react-native-device-info';
+import { textStyle } from '../textStyle';
 
 interface ComponentProps extends TouchableOpacityProps {
   title: string;
   iconLeft?: IconProp;
 }
+
 export type SettingButtonProps = ComponentProps & ThemedComponentProps;
 
 type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 
 const SettingButtonComponent: React.FunctionComponent<SettingButtonProps> = (props) => {
-  const { themedStyle, style } = props;
+  const { themedStyle, style, ...restProps } = props;
 
   const iconLeft = (): IconElement => {
     return props.iconLeft(themedStyle.iconLeft);
@@ -39,24 +40,17 @@ const SettingButtonComponent: React.FunctionComponent<SettingButtonProps> = (pro
         themedStyle.container,
         style,
       ]}
-    >
-      <View
-        style={[themedStyle.viewLeft,
-        !props.iconLeft ? themedStyle.viewLeftNoIcon : {},
-        ]}>
-        {props.iconLeft && iconLeft()}
-      </View>
-      <View
-        style={[themedStyle.viewCenter,
-        !props.iconLeft ? themedStyle.viewCenterNoIcon : {},
-        ]}>
+      {...restProps}>
+      {props.iconLeft &&
+        (<View style={themedStyle.viewLeft}>
+          {iconLeft()}
+        </View>)}
+      <View style={themedStyle.viewCenter}>
         <Text style={themedStyle.txtTitle}>
           {props.title}
         </Text>
       </View>
-      <View
-        style={[themedStyle.viewRight,
-        ]}>
+      <View style={themedStyle.viewRight}>
         {ArrowForwardIcon(themedStyle.iconRight)}
       </View>
     </TouchableOpacity>
@@ -67,49 +61,45 @@ const SettingButtonComponent: React.FunctionComponent<SettingButtonProps> = (pro
 export const SettingButton = withStyles(SettingButtonComponent, (theme: ThemeType) => ({
   container: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: 'white',
     alignItems: 'center',
-    height: isTablet() ? pxToPercentage(30) : pxToPercentage(35),
+    height: pxToPercentage(45),
     marginTop: pxToPercentage(5),
-    borderRadius: isTablet() ? pxToPercentage(3) : pxToPercentage(7),
-    marginHorizontal: pxToPercentage(4),
+    paddingLeft: pxToPercentage(4),
+    borderTopWidth: pxToPercentage(1),
+    borderBottomWidth: pxToPercentage(1),
+    borderColor: theme['border-basic-color-4'],
   },
   viewLeft: {
-    width: pxToPercentage(40),
-    height: pxToPercentage(30),
+    width: pxToPercentage(27.5),
+    height: pxToPercentage(35),
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  viewLeftNoIcon: {
-    width: isTablet() ? pxToPercentage(10) : pxToPercentage(7.5),
+    alignItems: 'flex-end',
   },
   viewCenter: {
-    width: pxToPercentage(375) - pxToPercentage(155),
-    height: pxToPercentage(30),
+    flex: 1,
+    paddingLeft: pxToPercentage(7.5),
+    height: pxToPercentage(35),
     justifyContent: 'center',
   },
-  viewCenterNoIcon: {
-    width: isTablet() ? pxToPercentage(375) - pxToPercentage(125) : pxToPercentage(375) - pxToPercentage(122.5),
-  },
   viewRight: {
-    flexDirection: 'row',
-    width: pxToPercentage(115),
-    height: pxToPercentage(30),
-    paddingRight: pxToPercentage(7),
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    width: pxToPercentage(40),
+    height: pxToPercentage(35),
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   iconLeft: {
-    height: isTablet() ? pxToPercentage(20) : pxToPercentage(25),
-    width: isTablet() ? pxToPercentage(20) : pxToPercentage(25),
+    height: pxToPercentage(20),
+    width: pxToPercentage(20),
   },
   iconRight: {
-    height: pxToPercentage(29),
-    width: pxToPercentage(29),
+    height: pxToPercentage(25),
+    width: pxToPercentage(25),
     opacity: 0.5,
-    marginRight: pxToPercentage(10),
   },
   txtTitle: {
-    fontSize: isTablet() ? pxToPercentage(12) : pxToPercentage(14),
+    fontSize: pxToPercentage(14),
+    ...textStyle.regular,
   },
 }));

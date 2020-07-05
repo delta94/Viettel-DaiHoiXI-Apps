@@ -28,6 +28,7 @@ import { PressReleaseContainer } from '@src/containers/home/pressRelease/pressRe
 import { PressReleaseDetailContainer } from '@src/containers/home/pressRelease/pressReleaseDetail/pressReleaseDetail.container';
 import { ProgrammeContainer } from '@src/containers/home/program/program.container';
 import { AccountContainer } from '@src/containers/account/account.container';
+import { ScanQRCodeContainer } from '@src/containers/account/scanQRCode/scanQRCode.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -112,6 +113,12 @@ const NotificationNavigationMap: NavigationRouteConfigMap<any, any> = {
 };
 
 const AccountNavigationMap: NavigationRouteConfigMap<any, any> = {
+  ['scanQRCode']: {
+    screen: ScanQRCodeContainer,
+    navigationOptions: {
+      header: null,
+    },
+  },
 };
 
 const MenuNavigator: NavigationNavigator<any, NavigationProp<NavigationState>> = createBottomTabNavigator({

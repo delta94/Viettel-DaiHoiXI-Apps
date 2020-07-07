@@ -11,7 +11,9 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
       routeName: 'function',
     });
   };
+
   const week = '32';
+
   return (
     <Home
       onMeetingItemPress={onMeetingItemPress}

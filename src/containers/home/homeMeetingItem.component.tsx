@@ -27,8 +27,7 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
 
   return (
     <View style={themedStyle.container}
-      {...restProps}
-    >
+      {...restProps}>
       <View style={themedStyle.dateView}>
         <Text style={[themedStyle.txtTime,
         props.isTypeDefault && themedStyle.viewTextDefault,
@@ -39,16 +38,12 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
           {meetingItem.date}
         </Text>
       </View>
-      <View style={{
-        width: pxToPercentage(20),
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+      <View style={themedStyle.timelineView}>
         <View style={themedStyle.lineView} />
         <View style={[
           themedStyle.viewDotIcon,
           props.isTypeDefault && themedStyle.viewDefault,
-        ]} />
+        ]}/>
       </View>
       <View style={[themedStyle.secctionView,
       props.isTypeDefault && themedStyle.viewDefault,
@@ -58,11 +53,10 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
           props.isTypeDefault && themedStyle.viewDefault,
           ]}>
             <Text style={themedStyle.txtTimeHeader} >
-        {meetingItem.fromTime}{' - '}{meetingItem.toTime}
+              {meetingItem.fromTime}{' - '}{meetingItem.toTime}
             </Text>
           </View>
           <View style={themedStyle.detailView}>
-
             <Text style={themedStyle.txtName} >
               {meetingItem.name}
             </Text>
@@ -148,5 +142,10 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
     borderBottomRightRadius: pxToPercentage(30),
     borderBottomLeftRadius: pxToPercentage(30),
     alignItems: 'center',
+  },
+  timelineView: {
+      width: pxToPercentage(20),
+      justifyContent: 'center',
+      alignItems: 'center',
   },
 }));

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
     Text,
     View,
@@ -21,24 +20,26 @@ interface ComponentProps {
     onPressNextWeek: () => void;
     onPressPrevWeek: () => void;
 }
-export type HomeMeetingItemProps = ThemedComponentProps & ComponentProps;
 
+export type HomeMeetingWeekProps = ThemedComponentProps & ComponentProps;
 
-const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = (props) => {
+const HomeMeetingWeekComponent: React.FunctionComponent<HomeMeetingWeekProps> = (props) => {
     const { themedStyle } = props;
+
     const onPressNextWeek = (): void => {
         props.onPressNextWeek();
     };
+
     const onPressPrevWeek = (): void => {
         props.onPressPrevWeek();
     };
+
     return (
         <View style={themedStyle.container}>
             <TouchableOpacity
                 onPress={onPressPrevWeek}
                 activeOpacity={0.75}
-                style={themedStyle.buttonCicleView}
-            >
+                style={themedStyle.buttonCicleView}>
                 {ArrowIosBackFill(themedStyle.qrCodeicon)}
             </TouchableOpacity>
             <View style={themedStyle.centerView} >
@@ -51,15 +52,14 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
             <TouchableOpacity
                 onPress={onPressNextWeek}
                 activeOpacity={0.75}
-                style={themedStyle.buttonCicleView}
-            >
+                style={themedStyle.buttonCicleView}>
                 {ArrowForwardIcon(themedStyle.qrCodeicon)}
             </TouchableOpacity>
         </View>
     );
 };
 
-export const HomeMeetingWeekListItem = withStyles(HomeMeetingItemComponent, (theme: ThemeType) => ({
+export const HomeMeetingWeek = withStyles(HomeMeetingWeekComponent, (theme: ThemeType) => ({
     container: {
         flexDirection: 'row',
         marginVertical: pxToPercentage(8),

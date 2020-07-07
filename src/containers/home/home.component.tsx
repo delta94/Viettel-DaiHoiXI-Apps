@@ -14,11 +14,14 @@ import { userDataFake } from '@src/core/data/user';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { HomeMeetingItem } from './homeMeetingItem.component';
 import { meetingDataFake } from '@src/core/data/meeting';
-import { HomeMeetingWeekListItem } from './homeMeetingWeekItem.component';
+import { HomeMeetingWeek } from './homeMeetingWeek.component';
 interface ComponentProps {
   week: string;
   onMeetingItemPress: () => void;
-}
+}import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export type HomeProps = ThemedComponentProps & ComponentProps;
 
@@ -28,7 +31,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
   };
 
   const onNextWeekItemPress = (): void => {
-    alert('do next week');
+    alert(wp.caller);
   };
 
   const onPrevWeekItemPress = (): void => {
@@ -58,8 +61,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
       return (
         <TouchableOpacity
           activeOpacity={0.75}
-          onPress={onMeetingItemPress}
-        >
+          onPress={onMeetingItemPress}>
           <HomeMeetingItem
             key={index}
             meetingItem={item}
@@ -75,7 +77,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
         style={themedStyle.profileInfo}
       />
       <ScrollView style={themedStyle.scrollView} showsVerticalScrollIndicator={false} >
-        <HomeMeetingWeekListItem
+        <HomeMeetingWeek
           meetingItemWeek={props.week}
           onPressNextWeek={onNextWeekItemPress}
           onPressPrevWeek={onPrevWeekItemPress}

@@ -922,7 +922,7 @@ export const CommunistIcon = (style: StyleProp<ImageStyle>): IconElement => {
 
 export const ChatIconDark = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
-    imageSource: require('./chatIonDark.png'),
+    imageSource: require('./icon-chat.png'),
   };
 
   return Icon(source, style);

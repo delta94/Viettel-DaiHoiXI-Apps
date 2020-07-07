@@ -25,12 +25,20 @@ import {
   DynamicStatusBar,
   Spinner,
 } from './components';
+import { isTablet } from 'react-native-device-info';
+import Orientation from 'react-native-orientation-locker';
 
 const App: React.FunctionComponent = () => {
   const [theme, setTheme] = useState<ThemeKey>('App Theme');
 
   useEffect(() => {
     console.disableYellowBox = true;
+
+    if (isTablet()) {
+      Orientation.lockToLandscape();
+    } else {
+      Orientation.lockToPortrait();
+    }
   }, []);
 
   const contextValue: ThemeContextType = {

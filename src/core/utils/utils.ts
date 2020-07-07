@@ -3,24 +3,19 @@ import { isTablet } from 'react-native-device-info';
 
 const { width, height } = Dimensions.get('window');
 // default: 812 x 375, iPhone 11 Pro
-const percentageWidth: number = width / 375;
+const percentageWidth: number = width / 768;
+const percentageHeight: number = height / 1024;
 
 export const isEmpty = (value: any): boolean => {
   return (value === undefined || value === '' || value === null);
 };
 
 export const pxToPercentage = (value: number, noTablet?: boolean): number => {
-  let result = percentageWidth * value;
-
-  // if (hasTablet) {
-  //   result *= 0.65;
-  // }
-
-  if (isTablet() && !noTablet) {
-    result *= 0.625;
+  if (isTablet()) {
+    return height > width ? percentageHeight * value : percentageWidth * value;
   }
 
-  return result;
+  return height > width ? percentageWidth * value : percentageHeight * value;
 };
 
 export const generateCaptcha = (length: number): string => {

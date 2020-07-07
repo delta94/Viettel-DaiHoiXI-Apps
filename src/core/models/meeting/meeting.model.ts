@@ -1,9 +1,13 @@
 export class MeetingItem {
   name: string;
-  time: string;
+  fromTime: string;
+  toTime: string;
+  date: string;
+  week: string;
+  numberOfDate: string;
 }
 
 export class Meeting {
-  today: MeetingItem[];
-  feature: MeetingItem[];
+  default: MeetingItem[];
+  pink: MeetingItem[];
 }

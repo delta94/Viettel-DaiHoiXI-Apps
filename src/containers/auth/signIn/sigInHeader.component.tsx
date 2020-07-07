@@ -11,8 +11,8 @@ import {
   TopNavigationProps,
 } from '@kitten/ui';
 import {
-  starIcon,
-  bualiemIcon,
+  StarIcon,
+  CommunistIcon,
 } from '@src/assets/icons';
 import { SafeAreaView } from 'react-navigation';
 import { pxToPercentage } from '@src/core/utils/utils';
@@ -31,10 +31,10 @@ const SigInHeaderComponent: React.FunctionComponent<SigInHeaderProps> = (props) 
       <View style={themedStyle.viewStatusbar}>
         <View style={themedStyle.viewSession}>
           <View style={themedStyle.viewFlag}>
-            {bualiemIcon(themedStyle.icon)}
+            {CommunistIcon(themedStyle.icon)}
           </View>
           <View style={themedStyle.viewFlag}>
-            {starIcon(themedStyle.icon)}
+            {StarIcon(themedStyle.icon)}
           </View>
           <View style={themedStyle.topNavigation}>
             <Text style={themedStyle.titleStyle}>

@@ -3,7 +3,7 @@ import {
   RegisterIcon,
   HandIcon,
   DocumentIcon2,
-  GroupiConFill,
+  GroupIconFill,
   DelegateListIcon,
   SitmapIcon,
   UserCheckIcon,
@@ -12,7 +12,7 @@ import {
 export const functionDataFake: FunctionModel[] = [
   {
     title: 'Thông tin',
-    icon: GroupiConFill,
+    icon: GroupIconFill,
   },
   {
     title: 'Danh sách đại biểu',

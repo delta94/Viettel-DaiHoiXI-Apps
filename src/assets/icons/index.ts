@@ -912,7 +912,7 @@ export const PhoneIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
-export const bualiemIcon = (style: StyleProp<ImageStyle>): IconElement => {
+export const CommunistIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-flag.png'),
   };
@@ -920,7 +920,15 @@ export const bualiemIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
-export const starIcon = (style: StyleProp<ImageStyle>): IconElement => {
+export const ChatIconDark = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./chatIonDark.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const StarIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-star.png'),
   };
@@ -928,9 +936,25 @@ export const starIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
-export const GroupiConFill = (style: StyleProp<ImageStyle>): IconElement => {
+export const UserEditIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./person.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const GroupIconFill = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-group.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const LogoutIconThin = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-logout.png'),
   };
 
   return Icon(source, style);

@@ -1,28 +1,56 @@
 import { Meeting } from '../models/meeting/meeting.model';
 
 export const meetingDataFake: Meeting = {
-  today: [
+  default: [
     {
       name: 'Hội nghị Thành uỷ',
-      time: 'Hôm nay',
+      fromTime: '8:00',
+      toTime: '8:00',
+      date: 'hai',
+      week: '32',
+      numberOfDate: '27',
     },
     {
-      name: 'Hội nghị Ban thường vụ',
-      time: 'Hôm nay',
+      name: 'Hội nghị ban thường vụ',
+      fromTime: '8:00',
+      toTime: '8:00',
+      date: 'hai',
+      week: '32',
+      numberOfDate: '27',
     },
   ],
-  feature: [
+  pink: [
     {
-      name: 'Hội nghị Thành uỷ',
-      time: '11:11 11/07/2020',
+      name: 'Hội nghị ban thường vụ',
+      fromTime: '8:00',
+      toTime: '8:00',
+      date: 'ba',
+      week: '32',
+      numberOfDate: '27',
     },
     {
-      name: 'Hội nghị Ban thường vụ',
-      time: '11:11 11/08/2020',
+      name: 'Hội nghị Thành uỷ',
+      fromTime: '8:00',
+      toTime: '8:00',
+      date: 'bốn',
+      week: '32',
+      numberOfDate: '27',
+    },
+    {
+      name: 'Hội nghị ban thường vụ',
+      fromTime: '8:00',
+      toTime: '8:00',
+      date: 'năm',
+      week: '32',
+      numberOfDate: '27',
     },
     {
       name: 'Hội nghị Thành uỷ',
-      time: '11:11 11/09/2020',
+      fromTime: '8:00',
+      toTime: '8:00',
+      date: 'sáu',
+      numberOfDate: '27',
+      week: '32',
     },
   ],
 };

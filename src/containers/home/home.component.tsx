@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -13,8 +14,9 @@ import { userDataFake } from '@src/core/data/user';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { HomeMeetingItem } from './homeMeetingItem.component';
 import { meetingDataFake } from '@src/core/data/meeting';
-
+import { HomeMeetingWeekListItem } from './homeMeetingWeekItem.component';
 interface ComponentProps {
+  week: string;
   onMeetingItemPress: () => void;
 }
 
@@ -25,40 +27,59 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
     props.onMeetingItemPress();
   };
 
+  const onNextWeekItemPress = (): void => {
+    alert('do next week');
+  };
+
+  const onPrevWeekItemPress = (): void => {
+    alert('do prev week');
+  };
   const { themedStyle } = props;
-
+  // sessison default color
   const renderTodayMeeting = (): React.ReactElement[] => {
-    return meetingDataFake.today.map((item, index) => {
+    return meetingDataFake.default.map((item, index) => {
       return (
-        <HomeMeetingItem
-          key={index}
-          isToday
-          meetingItem={item}
+        <TouchableOpacity
+          activeOpacity={0.75}
           onPress={onMeetingItemPress}
-        />
+        >
+          <HomeMeetingItem
+            key={index}
+            isTypeDefault
+            meetingItem={item}
+          />
+        </TouchableOpacity>
       );
     });
   };
-
+  // sessison pink color
   const renderFeatureMeeting = (): React.ReactElement[] => {
-    return meetingDataFake.feature.map((item, index) => {
+    return meetingDataFake.pink.map((item, index) => {
       return (
-        <HomeMeetingItem
-          key={index}
-          meetingItem={item}
+        <TouchableOpacity
+          activeOpacity={0.75}
           onPress={onMeetingItemPress}
-        />
+        >
+          <HomeMeetingItem
+            key={index}
+            meetingItem={item}
+          />
+        </TouchableOpacity>
       );
     });
   };
-
   return (
     <View style={themedStyle.container}>
       <ProfileInfo
         user={userDataFake}
         style={themedStyle.profileInfo}
       />
-      <ScrollView>
+      <ScrollView style={themedStyle.scrollView} showsVerticalScrollIndicator={false} >
+        <HomeMeetingWeekListItem
+          meetingItemWeek={props.week}
+          onPressNextWeek={onNextWeekItemPress}
+          onPressPrevWeek={onPrevWeekItemPress}
+        />
         {renderTodayMeeting()}
         {renderFeatureMeeting()}
       </ScrollView>
@@ -70,6 +91,16 @@ export const Home = withStyles(HomeComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     backgroundColor: theme['color-custom-100'],
+  },
+  scrollView: {
+    marginVertical: pxToPercentage(6),
+    marginHorizontal: pxToPercentage(8),
+    paddingHorizontal: pxToPercentage(8),
+    paddingVertical: pxToPercentage(4),
+    borderTopLeftRadius: pxToPercentage(16),
+    borderTopRightRadius: pxToPercentage(16),
+    borderWidth: pxToPercentage(1),
+    borderColor: theme['border-basic-color-4'],
   },
   profileInfo: {
     marginBottom: pxToPercentage(8, true),

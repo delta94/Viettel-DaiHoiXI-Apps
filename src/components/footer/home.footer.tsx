@@ -4,7 +4,7 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import {View, Text, SafeAreaView} from 'react-native';
+import {Text, SafeAreaView} from 'react-native';
 
 import { textStyle } from '..';
 import { pxToPercentage } from '@src/core/utils/utils';

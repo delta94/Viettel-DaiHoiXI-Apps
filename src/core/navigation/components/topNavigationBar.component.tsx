@@ -10,16 +10,12 @@ import {
   Text,
 } from 'react-native';
 import {
-  TopNavigation,
-  TopNavigationAction,
-  TopNavigationActionProps,
   TopNavigationProps,
 } from '@kitten/ui';
 import {
   starIcon,
   bualiemIcon,
 } from '@src/assets/icons';
-import { textStyle } from '@src/components';
 import { SafeAreaView } from 'react-navigation';
 import { pxToPercentage } from '@src/core/utils/utils';
 
@@ -31,11 +27,10 @@ export interface ComponentProps {
 export type TopNavigationBarProps = TopNavigationProps & ComponentProps;
 
 type BackIconProp = (style: StyleType) => React.ReactElement<ImageProps>;
-type BackButtonElement = React.ReactElement<TopNavigationActionProps>;
 
 const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> = (props) => {
 
-  const { themedStyle, backIcon } = props;
+  const { themedStyle } = props;
 
   const title = 'ĐẠI HỘI ĐẠI BIỂU ĐẢNG BỘ THÀNH PHỐ HỒ CHÍ MINH\nLẦN THỨ XI, NHIỆM KỲ 2020 - 2025';
   return (

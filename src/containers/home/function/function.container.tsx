@@ -36,10 +36,16 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
     }
   };
 
+  const onPressBackIcon = (): void => {
+    props.navigation.goBack();
+  };
+
+
   return (
     <Function
       functions={functionDataFake}
       onAlternativeFunctionPress={onAlternativeFunctionPress}
+      onPressBackIcon ={onPressBackIcon}
     />
   );
 };

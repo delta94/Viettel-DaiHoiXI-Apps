@@ -10,15 +10,10 @@ import {
     ThemeType,
     withStyles,
 } from '@kitten/theme';
-import { Avatar } from '@kitten/ui';
 import { textStyle } from '@src/components';
 import { User } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
-import {
-    PhoneIcon,
-    PersonIconFill,
-} from '@src/assets/icons';
 
 interface ComponentProps {
     user: User;

@@ -3,7 +3,6 @@ import {
     View,
     ViewProps,
     Text,
-    Image,
     TouchableOpacity,
 } from 'react-native';
 import {
@@ -11,24 +10,21 @@ import {
     ThemeType,
     withStyles,
 } from '@kitten/theme';
-import { Avatar } from '@kitten/ui';
-import { textStyle } from '@src/components';
-import { User } from '@src/core/models/user/user.model';
-import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import {
-    PhoneIcon,
-    PersonIconFill,
+    LogoutIcon,
+    UserIconOutline,
+    QRCodeIconFill,
+    EmailIconFill,
 } from '@src/assets/icons';
+import { textStyle } from '../textStyle';
 
-// interface ComponentProps {
-//     onPressGobackIcon: () => void;
-//     onPressEditUserIcon: () => void;
-//     onPressQRcodeIcon: () => void;
-//     onPressChatIcon: () => void;
-//   }
+interface ComponentProps {
+    onPressBackIcon: () => void;
+  }
 
-export type FunctionProps = ThemedComponentProps & ViewProps;
+
+export type FunctionProps = ThemedComponentProps & ViewProps &ComponentProps;
 
 const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
     const { style, themedStyle, ...restProps } = props;
@@ -36,13 +32,38 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
         <View
             style={[themedStyle.container, style]}
             {...restProps}>
-                <TouchableOpacity
+            <TouchableOpacity style={themedStyle.btn}
+            activeOpacity={0.75}
+            onPress={props.onPressBackIcon}
+            >
+                {LogoutIcon(themedStyle.icon)}
+                <Text style={themedStyle.txtButton}>
+                    {'Thoát'}
+                </Text>
+            </TouchableOpacity>
+            <View style={themedStyle.viewSession}>
+                <TouchableOpacity style={themedStyle.btn}
                 >
-                <View style={{backgroundColor: 'red', height: 100, width: 100}}>
-                {PhoneIcon}
-                </View>
+                    {UserIconOutline(themedStyle.icon)}
+                    <Text style={themedStyle.txtButton}>
+                        {'Chỉnh sửa \nthông tin cá nhân'}
+                    </Text>
                 </TouchableOpacity>
-
+                <TouchableOpacity style={themedStyle.btn}
+                >
+                    {QRCodeIconFill(themedStyle.icon)}
+                    <Text style={themedStyle.txtButton}>
+                        {'Quét mã'}
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={themedStyle.btn}
+                >
+                    {EmailIconFill(themedStyle.icon)}
+                    <Text style={themedStyle.txtButton}>
+                        {'Trò chuyện'}
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -50,8 +71,37 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
 export const FunctionHeader = withStyles(FunctionComponent, (theme: ThemeType) => ({
     container: {
         flexDirection: 'row',
-        borderBottomWidth: pxToPercentage(1),
-        borderBottomColor: theme['border-basic-color-4'],
-        height: pxToPercentage(30),
+        height: pxToPercentage(40), // h 54
+        alignItems: 'center',
+        marginTop: pxToPercentage(10),
     },
+    btn: {
+        flexDirection: 'row',
+        width: pxToPercentage(120), // w 128
+        height: pxToPercentage(44), // h 50
+        justifyContent: 'center',
+        backgroundColor: '#B4211A',
+        alignItems: 'center',
+        marginHorizontal: pxToPercentage(12),
+        borderRadius: pxToPercentage(30),
+
+    },
+    icon: {
+        width: pxToPercentage(24), // w 27
+        height: pxToPercentage(24), // w 27
+        tintColor: theme['border-basic-color-4'],
+    },
+    txtButton: {
+        fontSize: pxToPercentage(10), // font size 20
+        marginHorizontal: pxToPercentage(6),
+        color: theme['border-basic-color-4'],
+        ...textStyle.regular,
+    },
+    viewSession: {
+        marginLeft: pxToPercentage(100),
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        flex: 1,
+    },
+
 }));

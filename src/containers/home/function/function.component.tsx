@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   Dimensions,
+  View,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -20,16 +21,19 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
-import {ProfileInfoV2} from '@src/components/profileInfo/profileinfov2.component';
+import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfov2.component';
 import { userDataFake } from '@src/core/data/user';
-import {HeaderFunctionContainer} from '@src/components/function/headerFunction.container';
+import { FunctionHeader } from '@src/components/function/headerFunction.component';
+import { Footer } from '@src/components/footer/home.footer';
+import { types } from '@babel/core';
 
 const { width } = Dimensions.get('window');
-const itemWidth: number = isTablet() ? (width - pxToPercentage(64)) / 3 : (width - pxToPercentage(48)) / 2;
+const itemWidth: number = isTablet() ? (width - pxToPercentage(64)) / 4 : (width - pxToPercentage(48)) / 2;
 
 interface ComponentProps {
   functions: FunctionModel[];
   onAlternativeFunctionPress: (type: number) => void;
+  onPressBackIcon: () => void;
 }
 
 export type FunctionProps = ThemedComponentProps & ComponentProps;
@@ -46,36 +50,42 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
     props.onAlternativeFunctionPress(type);
   };
 
+
   const onHideModal = (): void => {
     setVisible(false);
   };
+
 
   const { themedStyle } = props;
 
   return (
     <React.Fragment>
-      <ProfileInfoV2 user={userDataFake}/>
-      <List
-        data={props.functions}
-        numColumns={isTablet() ? 3 : 2}
-        extraData={props.functions}
-        style={themedStyle.container}
-        contentContainerStyle={themedStyle.contentContainer}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item, index }) => {
-          return (
-            <ListItem
-              activeOpacity={0.75}
-              onPress={onFunctionItemPress}
-              style={themedStyle.btnItem}>
-              {item.icon(themedStyle.icon)}
-              <Text style={themedStyle.txtTitle}>
-                {item.title}
-              </Text>
-            </ListItem>
-          );
-        }}
+      <FunctionHeader
+        onPressBackIcon={props.onPressBackIcon}
       />
+      <ProfileInfoV2 user={userDataFake} />
+        <List
+          data={props.functions}
+          numColumns={isTablet() ? 4 : 2}
+          extraData={props.functions}
+          style={themedStyle.container}
+          contentContainerStyle={themedStyle.contentContainer}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => {
+            return (
+              <ListItem
+                activeOpacity={0.75}
+                onPress={onFunctionItemPress}
+                style={themedStyle.btnItem}>
+                {item.icon(themedStyle.icon)}
+                <Text style={themedStyle.txtTitle}>
+                  {item.title}
+                </Text>
+              </ListItem>
+            );
+          }}
+        />
+      <Footer />
       <Modal
         visible={visible}
         backdropStyle={themedStyle.backdrop}
@@ -109,27 +119,25 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
 export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    backgroundColor: theme['color-custom-100'],
   },
   contentContainer: {
-    padding: pxToPercentage(8),
+    padding: pxToPercentage(12),
   },
   viewCard: {
-    width: pxToPercentage(300),
+    width: pxToPercentage(186),
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   btnItem: {
-    width: itemWidth,
+    width: pxToPercentage(160), // w 186
+    height: pxToPercentage(148), // h 174
     flexDirection: 'column',
     alignItems: 'center',
-    height: itemWidth,
     borderRadius: pxToPercentage(8),
     borderWidth: pxToPercentage(1),
     borderColor: theme['border-basic-color-4'],
-    maxWidth: itemWidth,
-    margin: pxToPercentage(8),
+    margin: pxToPercentage(12.5),
     paddingTop: itemWidth / 3.75,
   },
   btnAlternative: {

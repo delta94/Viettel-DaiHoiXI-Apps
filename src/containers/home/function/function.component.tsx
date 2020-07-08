@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   Dimensions,
-  View,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -25,9 +24,9 @@ import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfov2.compone
 import { userDataFake } from '@src/core/data/user';
 import { FunctionHeader } from '@src/components/function/headerFunction.component';
 import { Footer } from '@src/components/footer/home.footer';
-import { types } from '@babel/core';
 
 const { width } = Dimensions.get('window');
+
 const itemWidth: number = isTablet() ? (width - pxToPercentage(64)) / 4 : (width - pxToPercentage(48)) / 2;
 
 interface ComponentProps {
@@ -64,27 +63,27 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
         onPressBackIcon={props.onPressBackIcon}
       />
       <ProfileInfoV2 user={userDataFake} />
-        <List
-          data={props.functions}
-          numColumns={isTablet() ? 4 : 2}
-          extraData={props.functions}
-          style={themedStyle.container}
-          contentContainerStyle={themedStyle.contentContainer}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => {
-            return (
-              <ListItem
-                activeOpacity={0.75}
-                onPress={onFunctionItemPress}
-                style={themedStyle.btnItem}>
-                {item.icon(themedStyle.icon)}
-                <Text style={themedStyle.txtTitle}>
-                  {item.title}
-                </Text>
-              </ListItem>
-            );
-          }}
-        />
+      <List
+        data={props.functions}
+        numColumns={isTablet() ? 4 : 2}
+        extraData={props.functions}
+        style={themedStyle.container}
+        contentContainerStyle={themedStyle.contentContainer}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => {
+          return (
+            <ListItem
+              activeOpacity={0.75}
+              onPress={onFunctionItemPress}
+              style={themedStyle.btnItem}>
+              {item.icon(themedStyle.icon)}
+              <Text style={themedStyle.txtTitle}>
+                {item.title}
+              </Text>
+            </ListItem>
+          );
+        }}
+      />
       <Footer />
       <Modal
         visible={visible}
@@ -147,11 +146,11 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     textAlign: 'center',
     fontSize: pxToPercentage(14),
     marginTop: pxToPercentage(2),
-    ...textStyle.semibold,
+    ...textStyle.regular,
   },
   icon: {
-    width: itemWidth / 3,
-    height: itemWidth / 3,
+    width: pxToPercentage(42),
+    height: pxToPercentage(46),
     tintColor: theme['color-primary-default'],
   },
 }));

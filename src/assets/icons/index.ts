@@ -928,6 +928,38 @@ export const starIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const groupiConFill = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-group.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const delegateListIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-booklist.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const usercheckIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-usecheck.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const sitmapIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-sitmap.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

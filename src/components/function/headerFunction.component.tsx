@@ -21,20 +21,21 @@ import { textStyle } from '../textStyle';
 
 interface ComponentProps {
     onPressBackIcon: () => void;
-  }
+}
 
-
-export type FunctionProps = ThemedComponentProps & ViewProps &ComponentProps;
+export type FunctionProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
+
     const { style, themedStyle, ...restProps } = props;
+
     return (
         <View
             style={[themedStyle.container, style]}
             {...restProps}>
             <TouchableOpacity style={themedStyle.btn}
-            activeOpacity={0.75}
-            onPress={props.onPressBackIcon}
+                activeOpacity={0.75}
+                onPress={props.onPressBackIcon}
             >
                 {LogoutIcon(themedStyle.icon)}
                 <Text style={themedStyle.txtButton}>
@@ -42,21 +43,27 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
                 </Text>
             </TouchableOpacity>
             <View style={themedStyle.viewSession}>
-                <TouchableOpacity style={themedStyle.btn}
+                <TouchableOpacity
+                    style={themedStyle.btn}
+                    activeOpacity={0.75}
                 >
                     {UserIconOutline(themedStyle.icon)}
                     <Text style={themedStyle.txtButton}>
                         {'Chỉnh sửa \nthông tin cá nhân'}
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={themedStyle.btn}
+                <TouchableOpacity
+                    style={themedStyle.btn}
+                    activeOpacity={0.75}
                 >
                     {QRCodeIconFill(themedStyle.icon)}
                     <Text style={themedStyle.txtButton}>
                         {'Quét mã'}
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={themedStyle.btn}
+                <TouchableOpacity
+                    style={themedStyle.btn}
+                    activeOpacity={0.75}
                 >
                     {EmailIconFill(themedStyle.icon)}
                     <Text style={themedStyle.txtButton}>

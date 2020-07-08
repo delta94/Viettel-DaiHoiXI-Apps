@@ -6,17 +6,20 @@ import {
   VotingIcon,
   DemocracyIcon,
   DocumentIcon,
-  SupportIcon,
+  groupiConFill,
+  delegateListIcon,
+  usercheckIcon,
+  sitmapIcon,
 } from '@src/assets/icons';
 
 export const functionDataFake: FunctionModel[] = [
   {
-    title: 'Xem thông tin đại hội, hội nghị',
-    icon: CongressIcon,
+    title: 'Thông tin',
+    icon: groupiConFill,
   },
   {
-    title: 'Nhân sự',
-    icon: GroupIcon,
+    title: 'Danh sách đại biểu',
+    icon: delegateListIcon,
   },
   {
     title: 'Tư liệu',
@@ -24,10 +27,10 @@ export const functionDataFake: FunctionModel[] = [
   },
   {
     title: 'Điểm danh',
-    icon: DemocracyIcon,
+    icon: usercheckIcon,
   },
   {
-    title: 'Phát biểu',
+    title: 'Đăng ký phát biểu',
     icon: PoliticianIcon,
   },
   {
@@ -35,7 +38,7 @@ export const functionDataFake: FunctionModel[] = [
     icon: VotingIcon,
   },
   {
-    title: 'Hỗ trợ',
-    icon: SupportIcon,
+    title: 'Sơ đồ chỗ ngồi',
+    icon: sitmapIcon,
   },
 ];

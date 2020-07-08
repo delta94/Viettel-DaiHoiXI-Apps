@@ -1,44 +1,41 @@
 import { FunctionModel } from '../models/function/function.model';
 import {
-  CongressIcon,
-  PoliticianIcon,
-  GroupIcon,
-  VotingIcon,
-  DemocracyIcon,
-  DocumentIcon,
-  groupiConFill,
-  delegateListIcon,
-  usercheckIcon,
-  sitmapIcon,
+  RegisterIcon,
+  HandIcon,
+  DocumentIcon2,
+  GroupiConFill,
+  DelegateListIcon,
+  SitmapIcon,
+  UserCheckIcon,
 } from '@src/assets/icons';
 
 export const functionDataFake: FunctionModel[] = [
   {
     title: 'Thông tin',
-    icon: groupiConFill,
+    icon: GroupiConFill,
   },
   {
     title: 'Danh sách đại biểu',
-    icon: delegateListIcon,
+    icon: DelegateListIcon,
   },
   {
     title: 'Tư liệu',
-    icon: DocumentIcon,
+    icon: DocumentIcon2,
   },
   {
     title: 'Điểm danh',
-    icon: usercheckIcon,
+    icon: UserCheckIcon,
   },
   {
     title: 'Đăng ký phát biểu',
-    icon: PoliticianIcon,
+    icon: RegisterIcon,
   },
   {
     title: 'Biểu quyết',
-    icon: VotingIcon,
+    icon: HandIcon,
   },
   {
     title: 'Sơ đồ chỗ ngồi',
-    icon: sitmapIcon,
+    icon: SitmapIcon,
   },
 ];

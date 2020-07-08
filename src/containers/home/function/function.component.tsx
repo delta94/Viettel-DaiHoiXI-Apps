@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Text,
-  Dimensions,
+  ScrollView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -22,12 +22,8 @@ import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
 import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfov2.component';
 import { userDataFake } from '@src/core/data/user';
-import { FunctionHeader } from '@src/components/function/headerFunction.component';
+import { HeaderFunction } from '@src/components/function/headerFunction.component';
 import { Footer } from '@src/components/footer/home.footer';
-
-const { width } = Dimensions.get('window');
-
-const itemWidth: number = isTablet() ? (width - pxToPercentage(64)) / 4 : (width - pxToPercentage(48)) / 2;
 
 interface ComponentProps {
   functions: FunctionModel[];
@@ -49,41 +45,42 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
     props.onAlternativeFunctionPress(type);
   };
 
-
   const onHideModal = (): void => {
     setVisible(false);
   };
-
 
   const { themedStyle } = props;
 
   return (
     <React.Fragment>
-      <FunctionHeader
-        onPressBackIcon={props.onPressBackIcon}
-      />
-      <ProfileInfoV2 user={userDataFake} />
-      <List
-        data={props.functions}
-        numColumns={isTablet() ? 4 : 2}
-        extraData={props.functions}
-        style={themedStyle.container}
-        contentContainerStyle={themedStyle.contentContainer}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item, index }) => {
-          return (
-            <ListItem
-              activeOpacity={0.75}
-              onPress={onFunctionItemPress}
-              style={themedStyle.btnItem}>
-              {item.icon(themedStyle.icon)}
-              <Text style={themedStyle.txtTitle}>
-                {item.title}
-              </Text>
-            </ListItem>
-          );
-        }}
-      />
+      <ScrollView>
+        <HeaderFunction
+          onPressBackIcon={props.onPressBackIcon}
+        />
+        <ProfileInfoV2 user={userDataFake} />
+        <List
+          scrollEnabled={false}
+          data={props.functions}
+          numColumns={4}
+          extraData={props.functions}
+          style={themedStyle.container}
+          contentContainerStyle={themedStyle.contentContainer}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => {
+            return (
+              <ListItem
+                activeOpacity={0.75}
+                onPress={onFunctionItemPress}
+                style={themedStyle.btnItem}>
+                {item.icon(themedStyle.icon)}
+                <Text style={themedStyle.txtTitle}>
+                  {item.title}
+                </Text>
+              </ListItem>
+            );
+          }}
+        />
+      </ScrollView>
       <Footer />
       <Modal
         visible={visible}
@@ -137,7 +134,7 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     borderWidth: pxToPercentage(1),
     borderColor: theme['border-basic-color-4'],
     margin: pxToPercentage(12.5),
-    paddingTop: itemWidth / 3.75,
+    justifyContent: 'center',
   },
   btnAlternative: {
     marginTop: pxToPercentage(8),
@@ -146,11 +143,13 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     textAlign: 'center',
     fontSize: pxToPercentage(14),
     marginTop: pxToPercentage(2),
+    paddingVertical: pxToPercentage(2),
     ...textStyle.regular,
   },
   icon: {
-    width: pxToPercentage(42),
+    width: pxToPercentage(50),
     height: pxToPercentage(46),
-    tintColor: theme['color-primary-default'],
+    tintColor: theme['color-primary-4'],
+    resizeMode: 'contain',
   },
 }));

@@ -40,7 +40,6 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
     props.navigation.goBack();
   };
 
-
   return (
     <Function
       functions={functionDataFake}

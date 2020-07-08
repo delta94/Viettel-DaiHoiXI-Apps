@@ -6,4 +6,7 @@ export const userDataFake: User = {
   full_name: 'VÕ THỊ DUNG',
   position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
   phone: '0123456789',
+  nest: '2',
+  delegateNumber: '23',
+  group: 'ĐẢNG BỘ KHỐI DÂN CHÍNH - ĐẢNG THÀNH PHỐ',
 };

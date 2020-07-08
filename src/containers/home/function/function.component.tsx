@@ -20,6 +20,9 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
+import {ProfileInfoV2} from '@src/components/profileInfo/profileinfov2.component';
+import { userDataFake } from '@src/core/data/user';
+import {HeaderFunctionContainer} from '@src/components/function/headerFunction.container';
 
 const { width } = Dimensions.get('window');
 const itemWidth: number = isTablet() ? (width - pxToPercentage(64)) / 3 : (width - pxToPercentage(48)) / 2;
@@ -51,6 +54,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
 
   return (
     <React.Fragment>
+      <ProfileInfoV2 user={userDataFake}/>
       <List
         data={props.functions}
         numColumns={isTablet() ? 3 : 2}

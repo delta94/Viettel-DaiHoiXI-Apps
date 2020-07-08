@@ -66,7 +66,7 @@ export const HomeHeader = withStyles(HomeHeaderComponent, (theme: ThemeType) => 
     backgroundColor: theme['color-primary-default'],
   },
   titleStyle: {
-    color: 'white',
+    color: 'yellow',
     ...textStyle.bold,
   },
   iconQRCode: {

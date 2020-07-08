@@ -3,4 +3,7 @@ export class User {
   full_name: string;
   position: string;
   phone: string;
+  nest: string;
+  delegateNumber: string;
+  group: string;
 }

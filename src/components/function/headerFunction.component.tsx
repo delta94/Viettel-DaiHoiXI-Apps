@@ -4,6 +4,7 @@ import {
   ViewProps,
   Text,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -29,7 +30,7 @@ const FunctionComponent: React.FunctionComponent<HeaderFunctionProps> = (props) 
   const { style, themedStyle, ...restProps } = props;
 
   return (
-    <View
+    <SafeAreaView
       style={[
         themedStyle.container,
         style,
@@ -81,51 +82,52 @@ const FunctionComponent: React.FunctionComponent<HeaderFunctionProps> = (props) 
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export const HeaderFunction = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flexDirection: 'row',
-    height: pxToPercentage(40), // h 54
+    height: pxToPercentage(54), // h 54
     alignItems: 'center',
-    marginTop: pxToPercentage(15),
+    backgroundColor: theme['color-primary-7'],
   },
   btn: {
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: '#B4211A',
     alignItems: 'center',
-    marginHorizontal: pxToPercentage(12),
-    borderRadius: pxToPercentage(30),
+    marginHorizontal: pxToPercentage(20),
+    borderRadius: pxToPercentage(8),
+    borderWidth: pxToPercentage(1),
+    borderColor: theme['color-primary-2'],
   },
   btnQr: {
-    width: pxToPercentage(120), // w 150
-    height: pxToPercentage(44), // h 54
+    width: pxToPercentage(105), // w 150
+    height: pxToPercentage(35), // h 54
   },
   btnExit: {
     width: pxToPercentage(100), // w 128
-    height: pxToPercentage(44), // h 54
+    height: pxToPercentage(35), // h 54
   },
   btnEditUser: {
-    width: pxToPercentage(165), // w 226
-    height: pxToPercentage(44), // h 54
+    width: pxToPercentage(150), // w 226
+    height: pxToPercentage(35), // h 54
   },
   btnchat: {
-    width: pxToPercentage(125), // w 176
-    height: pxToPercentage(44), // h 54
+    width: pxToPercentage(110), // w 176
+    height: pxToPercentage(35), // h 54
   },
   icon: {
     width: pxToPercentage(24), // w 27
-    height: pxToPercentage(24), // w 27
-    tintColor: theme['border-basic-color-4'],
+    height: pxToPercentage(20), // w 27
+    tintColor: theme['color-primary-2'],
     resizeMode: 'contain',
   },
   txtButton: {
-    fontSize: pxToPercentage(13), // font size 20
+    fontSize: pxToPercentage(12), // font size 20
     marginHorizontal: pxToPercentage(6),
-    color: theme['border-basic-color-4'],
+    color: theme['color-primary-2'],
     ...textStyle.regular,
   },
   viewSession: {

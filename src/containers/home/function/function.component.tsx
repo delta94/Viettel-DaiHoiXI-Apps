@@ -53,7 +53,8 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
 
   return (
     <React.Fragment>
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}>
         <HeaderFunction
           onPressBackIcon={props.onPressBackIcon}
         />
@@ -115,6 +116,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
 export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    backgroundColor: theme['color-primary-2'],
   },
   contentContainer: {
     padding: pxToPercentage(12),
@@ -129,12 +131,12 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     width: pxToPercentage(160), // w 186
     height: pxToPercentage(148), // h 174
     flexDirection: 'column',
-    alignItems: 'center',
-    borderRadius: pxToPercentage(8),
-    borderWidth: pxToPercentage(1),
-    borderColor: theme['border-basic-color-4'],
-    margin: pxToPercentage(12.5),
     justifyContent: 'center',
+    borderRadius: pxToPercentage(8),
+    borderWidth: pxToPercentage(2),
+    borderColor: theme['color-primary-3'],
+    margin: pxToPercentage(12.5),
+    backgroundColor: theme['color-primary-2'],
   },
   btnAlternative: {
     marginTop: pxToPercentage(8),
@@ -144,12 +146,13 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
     fontSize: pxToPercentage(14),
     marginTop: pxToPercentage(2),
     paddingVertical: pxToPercentage(2),
+    color: theme['color-primary-3'],
     ...textStyle.regular,
   },
   icon: {
     width: pxToPercentage(50),
     height: pxToPercentage(46),
-    tintColor: theme['color-primary-4'],
+    tintColor: theme['color-primary-3'],
     resizeMode: 'contain',
   },
 }));

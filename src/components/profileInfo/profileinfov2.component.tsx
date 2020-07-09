@@ -26,10 +26,7 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props
 
   return (
     <View
-      style={[
-        themedStyle.container,
-        style,
-      ]}
+      style={themedStyle.container}
       {...restProps}>
       <Image
         style={themedStyle.avatar}
@@ -71,12 +68,12 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props
 export const ProfileInfoV2 = withStyles(ProfileInfoV2Component, (theme: ThemeType) => ({
   container: {
     flexDirection: 'row',
-    marginTop: pxToPercentage(2),
+    backgroundColor: theme['color-primary-7'],
+    paddingBottom: pxToPercentage(2),
   },
   sectionDetails: {
     flex: 1,
     marginLeft: pxToPercentage(8),
-    paddingVertical: pxToPercentage(12),
   },
   txtName: {
     fontSize: pxToPercentage(17), // size 24
@@ -99,11 +96,11 @@ export const ProfileInfoV2 = withStyles(ProfileInfoV2Component, (theme: ThemeTyp
   avatar: {
     width: pxToPercentage(70), // width 96
     height: pxToPercentage(85), // height 128
-    marginHorizontal: pxToPercentage(12),
-    marginVertical: pxToPercentage(12),
+    marginHorizontal: pxToPercentage(20),
     borderRadius: pxToPercentage(4),
   },
   viewDelegateNumber: {
     flexDirection: 'row',
+    paddingVertical: pxToPercentage(2),
   },
 }));

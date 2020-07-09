@@ -29,9 +29,11 @@ const HomeFooterComponent: React.FunctionComponent<HomeFooterProps> = (props) =>
 
 export const Footer = withStyles(HomeFooterComponent, (theme: ThemeType) => ({
   container: {
-    backgroundColor: theme['color-primary-0'],
+    backgroundColor: theme['color-primary-2'],
     height: pxToPercentage(32), // hieght 74
     justifyContent: 'center',
+    borderTopWidth: pxToPercentage(2),
+    borderColor: theme['color-primary-3'],
   },
   txtFooter: {
     fontSize: pxToPercentage(15), // size 20

@@ -18,7 +18,7 @@ import {
 } from '@src/assets/icons';
 import { SafeAreaView } from 'react-navigation';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { viewStyle } from '@src/components/viewStyle';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export interface ComponentProps {
   backIcon?: BackIconProp;
@@ -36,17 +36,19 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
 
   return (
     <SafeAreaView style={themedStyle.safeArea}>
-      <View style={themedStyle.viewSession}>
-        <View style={themedStyle.viewFlag}>
-          {bualiemIcon(themedStyle.icon)}
-        </View>
-        <View style={themedStyle.viewFlag}>
-          {starIcon(themedStyle.icon)}
-        </View>
-        <View style={themedStyle.topNavigation}>
-          <Text style={themedStyle.titleStyle}>
-            {title}
-          </Text>
+      <View style={themedStyle.viewStatusbar}>
+        <View style={themedStyle.viewSession}>
+          <View style={themedStyle.viewFlag}>
+            {bualiemIcon(themedStyle.icon)}
+          </View>
+          <View style={themedStyle.viewFlag}>
+            {starIcon(themedStyle.icon)}
+          </View>
+          <View style={themedStyle.topNavigation}>
+            <Text style={themedStyle.titleStyle}>
+              {title}
+            </Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -55,38 +57,40 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
 
 export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme: ThemeType) => ({
   safeArea: {
+    backgroundColor: theme['color-primary-2'],
+    paddingTop: getStatusBarHeight(false),
+  },
+  viewStatusbar: {
     backgroundColor: theme['color-primary-0'],
-    paddingTop: pxToPercentage(30), // 45
-    ...viewStyle.shadow,
+    paddingTop: pxToPercentage(8),
   },
   topNavigation: {
     flex: 1, // width 596
     backgroundColor: theme['color-primary-0'],
-    height: pxToPercentage(64),
-    justifyContent: 'center',
+    height: pxToPercentage(50),
   },
   titleStyle: {
-    color: theme['color-primary-1'],
-    fontSize: pxToPercentage(18), // font size 24 SFProDisplay-Regular
+    color: theme['color-primary-2'],
+    fontSize: pxToPercentage(16), // font size 24 SFProDisplay-Regular
     textAlign: 'center',
   },
   viewFlag: {
-    width: pxToPercentage(80), // width 96
-    height: pxToPercentage(60), // height 64
+    width: pxToPercentage(60), // width 96
+    height: pxToPercentage(40), // height 64
     backgroundColor: theme['color-primary-2'],
     marginHorizontal: pxToPercentage(19),
     marginLeft: pxToPercentage(0),
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: pxToPercentage(6),
   },
   viewSession: {
     flexDirection: 'row',
-    marginBottom: pxToPercentage(16),
     marginHorizontal: pxToPercentage(38),
   },
   icon: {
-    width: pxToPercentage(34),
-    height: pxToPercentage(30),
+    width: pxToPercentage(26),
+    height: pxToPercentage(22),
     tintColor: theme['color-primary-1'],
   },
 }));

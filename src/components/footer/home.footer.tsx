@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { textStyle } from '..';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { isTablet } from 'react-native-device-info';
 
 export type HomeFooterProps = ThemedComponentProps;
 
@@ -36,7 +37,7 @@ export const Footer = withStyles(HomeFooterComponent, (theme: ThemeType) => ({
     borderColor: theme['color-primary-3'],
   },
   txtFooter: {
-    fontSize: pxToPercentage(15), // size 20
+    fontSize: isTablet() ? pxToPercentage(15) : pxToPercentage(9), // size 20
     color: theme['color-primary-3'],
     textAlign: 'center',
     ...textStyle.regular,

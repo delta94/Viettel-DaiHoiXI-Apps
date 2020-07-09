@@ -34,6 +34,11 @@ import {
 import { IconElement } from '@src/assets/icons/icon.component';
 import { SignInTabEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import { SigInHeader } from './sigInHeader.component';
 
 interface ComponentProps {
   onSignInAccountPress: (formData: SignInAccountFormData) => void;
@@ -110,8 +115,12 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
 
   return (
     <ScrollableAvoidKeyboard>
-      <View style={themedStyle.container}>
-        <View style={themedStyle.sectionHeader}>
+      <SigInHeader />
+      <View style={[
+        themedStyle.container,
+        isTablet() && themedStyle.tabletContainer,
+      ]}>
+        <View style={[themedStyle.sectionHeader, isTablet() && themedStyle.tabletSectionHeader]}>
           <Text style={themedStyle.txtHeaderTitle}>
             {'ĐẠI HỘI XI'}
           </Text>
@@ -123,60 +132,65 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
             style={themedStyle.imgNationalEmblem}
           />
         </View>
-        <TabView
-          style={themedStyle.tabView}
-          tabBarStyle={themedStyle.tabBar}
-          indicatorStyle={themedStyle.tabViewIndicator}
-          selectedIndex={state.selectedTabIndex}
-          onSelect={onTabSelect}>
-          <Tab
-            title='Tài khoản'
-            titleStyle={themedStyle.tabTitle}>
-            <SignInAccountForm
-              style={themedStyle.tabContentContainer}
-              onDataChange={onAccountFormDataChange}
-            />
-          </Tab>
-          <Tab
-            title='Số điện thoại'
-            titleStyle={themedStyle.tabTitle}>
-            <View>
-              <SignInPhoneNumberForm
+        <View style={[
+          themedStyle.viewTab,
+          isTablet() && themedStyle.tabletViewTabControl,
+        ]}>
+          <TabView
+            style={isTablet() && themedStyle.tabView}
+            tabBarStyle={themedStyle.tabBar}
+            indicatorStyle={themedStyle.tabViewIndicator}
+            selectedIndex={state.selectedTabIndex}
+            onSelect={onTabSelect}>
+            <Tab
+              title='Tài khoản'
+              titleStyle={themedStyle.tabTitle}>
+              <SignInAccountForm
                 style={themedStyle.tabContentContainer}
-                onDataChange={onPhoneNumberFormDataChange}
+                onDataChange={onAccountFormDataChange}
               />
-            </View>
-          </Tab>
-        </TabView>
-        <Button
-          size={isTablet() ? 'giant' : 'large'}
-          style={themedStyle.btnSignIn}
-          onPress={onSignInButtonPress}>
-          {isAccountTab() ? 'Đăng nhập' : 'Tiếp theo'}
-        </Button>
-        {isAccountTab() &&
-          (<React.Fragment>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              style={themedStyle.btnForgotPassword}
-              onPress={onForgotPasswordButtonPress}>
-              <Text style={themedStyle.txtBtnForgotPassword}>
-                {'Quên mật khẩu?'}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              style={themedStyle.btnRecognize}>
-              {renderRecognizeIcon()}
-              <Text style={themedStyle.txtBtnRecognize}>
-                {'Đăng nhập bằng vân tay'}
-              </Text>
-            </TouchableOpacity>
-          </React.Fragment>)}
-        {!isAccountTab() &&
-          (<Text style={themedStyle.txtOtpNote}>
-            {'Chúng tôi sẽ gửi một SMS chưa mã OTP đến số điện thoại này'}
-          </Text>)}
+            </Tab>
+            <Tab
+              title='Số điện thoại'
+              titleStyle={themedStyle.tabTitle}>
+              <View>
+                <SignInPhoneNumberForm
+                  style={themedStyle.tabContentContainer}
+                  onDataChange={onPhoneNumberFormDataChange}
+                />
+              </View>
+            </Tab>
+          </TabView>
+          <Button
+            size={isTablet() ? 'giant' : 'large'}
+            style={themedStyle.btnSignIn}
+            onPress={onSignInButtonPress}>
+            {isAccountTab() ? 'Đăng nhập' : 'Tiếp theo'}
+          </Button>
+          {isAccountTab() &&
+            (<React.Fragment>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                style={themedStyle.btnForgotPassword}
+                onPress={onForgotPasswordButtonPress}>
+                <Text style={themedStyle.txtBtnForgotPassword}>
+                  {'Quên mật khẩu?'}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                style={themedStyle.btnRecognize}>
+                {renderRecognizeIcon()}
+                <Text style={themedStyle.txtBtnRecognize}>
+                  {'Đăng nhập bằng vân tay'}
+                </Text>
+              </TouchableOpacity>
+            </React.Fragment>)}
+          {!isAccountTab() &&
+            (<Text style={themedStyle.txtOtpNote}>
+              {'Chúng tôi sẽ gửi một SMS chưa mã OTP đến số điện thoại này'}
+            </Text>)}
+        </View>
       </View>
     </ScrollableAvoidKeyboard>
   );
@@ -186,14 +200,15 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     backgroundColor: theme['color-custom-100'],
+    flexDirection: isTablet() ? 'row' : 'column',
   },
   sectionHeader: {
     minHeight: pxToPercentage(255),
     paddingHorizontal: pxToPercentage(16),
     paddingBottom: pxToPercentage(15),
-    justifyContent: 'flex-end',
+    justifyContent: isTablet() ? 'center' : 'flex-end',
     alignItems: 'center',
-    backgroundColor: theme['color-primary-default'],
+    backgroundColor: theme['color-primary-7'],
   },
   tabContentContainer: {
     marginVertical: pxToPercentage(16),
@@ -202,13 +217,15 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   tabView: {
   },
   tabBar: {
-    backgroundColor: theme['color-primary-default'],
+    backgroundColor: theme['color-primary-7'],
+    height: pxToPercentage(40),
+
   },
   tabViewIndicator: {
     backgroundColor: theme['color-control-focus-border'],
   },
   tabTitle: {
-    color: 'white',
+    color: theme['color-primary-2'],
     ...textStyle.bold,
   },
   imgNationalEmblem: {
@@ -219,15 +236,16 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   txtHeaderTitle: {
     fontSize: pxToPercentage(27.5),
     fontFamily: 'opensans-bold',
-    color: theme['color-primary-default-2'],
+    color: theme['color-primary-2'],
   },
   txtHeaderSubtitle: {
     fontSize: pxToPercentage(17.5),
     marginTop: pxToPercentage(7),
-    color: theme['color-primary-default-2'],
+    color: theme['color-primary-2'],
   },
   btnSignIn: {
     marginHorizontal: pxToPercentage(16),
+    backgroundColor: theme['color-primary-2'],
   },
   btnForgotPassword: {
     alignSelf: 'center',
@@ -235,7 +253,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   },
   txtBtnForgotPassword: {
     fontSize: pxToPercentage(14),
-    color: theme['color-primary-default'],
+    color: theme['color-primary-2'],
     ...textStyle.semibold,
   },
   btnRecognize: {
@@ -247,7 +265,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   txtBtnRecognize: {
     marginTop: pxToPercentage(10),
     fontSize: pxToPercentage(14),
-    color: theme['color-primary-default'],
+    color: theme['color-primary-2'],
     ...textStyle.semibold,
   },
   txtOtpNote: {
@@ -261,11 +279,20 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   iconFingerprint: {
     height: pxToPercentage(40),
     width: pxToPercentage(40) * (65 / 72),
-    tintColor: theme['color-primary-default'],
+    tintColor: theme['color-primary-2'],
   },
   iconFaceID: {
     height: pxToPercentage(40),
     width: pxToPercentage(40),
-    tintColor: theme['color-primary-default'],
+    tintColor: theme['color-primary-2'],
+  },
+  tabletViewTabControl: {
+    flex: 1,
+  },
+  tabletSectionHeader: {
+    width: wp(45),
+  },
+  recognizeIcon: {
+    tintColor: theme['color-primary-2'],
   },
 }));

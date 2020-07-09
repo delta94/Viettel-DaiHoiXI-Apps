@@ -29,6 +29,7 @@ import {
   isEmpty,
   pxToPercentage,
 } from '@src/core/utils/utils';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   /**
@@ -95,6 +96,7 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
       style={[
         themedStyle.container,
         style,
+        isTablet() && themedStyle.tabletContainer,
       ]}>
       <ValidationInput
         style={themedStyle.inputUsername}
@@ -119,6 +121,9 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
 
 export const SignInAccountForm = withStyles(SignInAccountFormComponent, (theme: ThemeType) => ({
   container: {},
+  tabletContainer: {
+    paddingTop: pxToPercentage(20),
+  },
   inputUsername: {},
   inputPassword: {
     marginTop: pxToPercentage(7.5),

@@ -89,7 +89,7 @@ const FunctionComponent: React.FunctionComponent<HeaderFunctionProps> = (props) 
 export const HeaderFunction = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flexDirection: 'row',
-    height: pxToPercentage(54), // h 54
+    height: pxToPercentage(56), // h 54
     alignItems: 'center',
     backgroundColor: theme['color-primary-7'],
   },
@@ -104,19 +104,19 @@ export const HeaderFunction = withStyles(FunctionComponent, (theme: ThemeType) =
   },
   btnQr: {
     width: pxToPercentage(105), // w 150
-    height: pxToPercentage(35), // h 54
+    height: pxToPercentage(36), // h 54
   },
   btnExit: {
     width: pxToPercentage(100), // w 128
-    height: pxToPercentage(35), // h 54
+    height: pxToPercentage(36), // h 54
   },
   btnEditUser: {
     width: pxToPercentage(150), // w 226
-    height: pxToPercentage(35), // h 54
+    height: pxToPercentage(36), // h 54
   },
   btnchat: {
     width: pxToPercentage(110), // w 176
-    height: pxToPercentage(35), // h 54
+    height: pxToPercentage(36), // h 54
   },
   icon: {
     width: pxToPercentage(24), // w 27

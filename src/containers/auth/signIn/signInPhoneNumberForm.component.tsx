@@ -16,7 +16,7 @@ import {
   textStyle,
   ValidationInput,
 } from '@src/components';
-import { RefreshIconFill } from '@src/assets/icons';
+import { RefreshIconFill, PaperPlaneIconFill } from '@src/assets/icons';
 import {
   PhoneNumberValidator,
   NumberValidator,
@@ -27,6 +27,7 @@ import {
   isEmpty,
   pxToPercentage,
 } from '@src/core/utils/utils';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   /**
@@ -117,7 +118,8 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
 };
 
 export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, (theme: ThemeType) => ({
-  container: {},
+  container: {
+  },
   viewCaptcha: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -131,5 +133,8 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
   },
   inputCaptcha: {
     // width: '35%',
+  },
+  inputPhoneNumber: {
+    marginTop: isTablet() ? pxToPercentage(22) : pxToPercentage(0),
   },
 }));

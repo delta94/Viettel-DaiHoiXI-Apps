@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  StyleType,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
 import {
-  ImageProps,
   View,
   Text,
 } from 'react-native';
@@ -21,16 +19,9 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { isTablet } from 'react-native-device-info';
 
-export interface ComponentProps {
-  backIcon?: BackIconProp;
-  onBackPress?: () => void;
-}
+export type SigInHeaderProps = TopNavigationProps;
 
-export type TopNavigationBarProps = TopNavigationProps & ComponentProps;
-
-type BackIconProp = (style: StyleType) => React.ReactElement<ImageProps>;
-
-const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> = (props) => {
+const SigInHeaderComponent: React.FunctionComponent<SigInHeaderProps> = (props) => {
   const { themedStyle } = props;
 
   const title = 'ĐẠI HỘI ĐẠI BIỂU ĐẢNG BỘ THÀNH PHỐ HỒ CHÍ MINH\nLẦN THỨ XI, NHIỆM KỲ 2020 - 2025';
@@ -56,7 +47,7 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
   );
 };
 
-export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme: ThemeType) => ({
+export const SigInHeader = withStyles(SigInHeaderComponent, (theme: ThemeType) => ({
   safeArea: {
     backgroundColor: theme['color-primary-2'],
     paddingTop: getStatusBarHeight(false),

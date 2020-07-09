@@ -16,7 +16,7 @@ import {
   textStyle,
   ValidationInput,
 } from '@src/components';
-import { RefreshIconFill, PaperPlaneIconFill } from '@src/assets/icons';
+import { RefreshIconFill } from '@src/assets/icons';
 import {
   PhoneNumberValidator,
   NumberValidator,
@@ -105,7 +105,6 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
             disabled
             onIconPress={() => { }}
             icon={RefreshIconFill}
-            style={themedStyle.inputCaptcha}
             textStyle={textStyle.regular}
             placeholder='ABCD'
             validator={NumberValidator}
@@ -130,9 +129,6 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
   },
   btnCaptcha: {
     width: '35%',
-  },
-  inputCaptcha: {
-    // width: '35%',
   },
   inputPhoneNumber: {
     marginTop: isTablet() ? pxToPercentage(22) : pxToPercentage(0),

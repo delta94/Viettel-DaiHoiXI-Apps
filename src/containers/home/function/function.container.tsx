@@ -4,6 +4,7 @@ import { Function } from './function.component';
 import { functionDataFake } from '@src/core/data/function';
 import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isEmpty } from '@src/core/utils/utils';
+import { userDataFake } from '@src/core/data/user';
 
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
@@ -42,9 +43,10 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
 
   return (
     <Function
+      user={userDataFake}
       functions={functionDataFake}
       onAlternativeFunctionPress={onAlternativeFunctionPress}
-      onPressBackIcon ={onPressBackIcon}
+      onPressBackIcon={onPressBackIcon}
     />
   );
 };

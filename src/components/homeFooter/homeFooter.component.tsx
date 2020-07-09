@@ -28,7 +28,7 @@ const HomeFooterComponent: React.FunctionComponent<HomeFooterProps> = (props) =>
   );
 };
 
-export const Footer = withStyles(HomeFooterComponent, (theme: ThemeType) => ({
+export const HomeFooter = withStyles(HomeFooterComponent, (theme: ThemeType) => ({
   container: {
     backgroundColor: theme['color-primary-2'],
     height: pxToPercentage(32), // hieght 74

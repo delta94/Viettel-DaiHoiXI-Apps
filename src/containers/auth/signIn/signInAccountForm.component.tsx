@@ -94,12 +94,10 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
     <View
       {...restProps}
       style={[
-        themedStyle.container,
         style,
         isTablet() && themedStyle.tabletContainer,
       ]}>
       <ValidationInput
-        style={themedStyle.inputUsername}
         textStyle={textStyle.regular}
         placeholder='Tên đăng nhập'
         validator={NameValidator}
@@ -120,11 +118,9 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
 };
 
 export const SignInAccountForm = withStyles(SignInAccountFormComponent, (theme: ThemeType) => ({
-  container: {},
   tabletContainer: {
     paddingTop: pxToPercentage(20),
   },
-  inputUsername: {},
   inputPassword: {
     marginTop: pxToPercentage(7.5),
   },

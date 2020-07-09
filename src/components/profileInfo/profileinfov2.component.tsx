@@ -30,34 +30,34 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props
       {...restProps}>
       <Image
         style={themedStyle.avatar}
-        source={(new RemoteImage(user.avatar)).imageSource}
+        source={(new RemoteImage(props.user.avatar)).imageSource}
       />
-      <View style={themedStyle.sectionDetails}>
+      <View style={themedStyle.viewSectionDetails}>
         <Text
           numberOfLines={1}
           style={themedStyle.txtName}>
-          {`Đồng chí ` + user.full_name}
+          {`Đồng chí ${props.user.full_name}`}
         </Text>
         <Text
           numberOfLines={1}
           style={themedStyle.txtPosition}>
-          {user.position}
+          {props.user.position}
         </Text>
         <Text
           numberOfLines={1}
           style={themedStyle.txtPosition}>
-          {`Đoàn: ` + user.group}
+          {`Đoàn: ${props.user.group}`}
         </Text>
         <View style={themedStyle.viewDelegateNumber}>
           <Text
             numberOfLines={1}
             style={themedStyle.txtPosition}>
-            {`Tổ: ` + user.nest}
+            {`Tổ: ${props.user.nest}`}
           </Text>
           <Text
             numberOfLines={1}
             style={themedStyle.txtPosition}>
-            {`Số đại biểu: ` + user.delegateNumber}
+            {`Số đại biểu: ${props.user.delegateNumber}`}
           </Text>
         </View>
       </View>
@@ -71,7 +71,7 @@ export const ProfileInfoV2 = withStyles(ProfileInfoV2Component, (theme: ThemeTyp
     backgroundColor: theme['color-primary-7'],
     paddingBottom: pxToPercentage(2),
   },
-  sectionDetails: {
+  viewSectionDetails: {
     flex: 1,
     marginLeft: pxToPercentage(8),
   },

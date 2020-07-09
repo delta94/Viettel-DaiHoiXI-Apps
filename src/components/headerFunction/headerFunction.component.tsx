@@ -44,7 +44,7 @@ const FunctionComponent: React.FunctionComponent<HeaderFunctionProps> = (props) 
         onPress={props.onPressBackIcon}>
         {ExitIcon(themedStyle.icon)}
         <Text style={themedStyle.txtButton}>
-          {'Thoát'}
+          {'Quay lại'}
         </Text>
       </TouchableOpacity>
       <View style={themedStyle.viewSession}>
@@ -101,22 +101,19 @@ export const HeaderFunction = withStyles(FunctionComponent, (theme: ThemeType) =
     borderRadius: pxToPercentage(8),
     borderWidth: pxToPercentage(1),
     borderColor: theme['color-primary-2'],
+    height: pxToPercentage(36), // h 54
   },
   btnQr: {
     width: pxToPercentage(105), // w 150
-    height: pxToPercentage(36), // h 54
   },
   btnExit: {
     width: pxToPercentage(100), // w 128
-    height: pxToPercentage(36), // h 54
   },
   btnEditUser: {
     width: pxToPercentage(150), // w 226
-    height: pxToPercentage(36), // h 54
   },
   btnchat: {
     width: pxToPercentage(110), // w 176
-    height: pxToPercentage(36), // h 54
   },
   icon: {
     width: pxToPercentage(24), // w 27

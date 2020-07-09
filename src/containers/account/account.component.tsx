@@ -3,6 +3,7 @@ import {
   View,
   Text,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -20,7 +21,6 @@ import {
 import { SettingButton } from '@src/components/settingButton/settingButton.component';
 import { SettingSwitch } from '@src/components/settingButton/settingSwitch.component';
 import { textStyle } from '@src/components/textStyle';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface ComponentProps {
   onLogoutPress: () => void;
@@ -30,60 +30,57 @@ interface ComponentProps {
 export type AccountProps = ThemedComponentProps & ComponentProps;
 
 const AccountComponent: React.FunctionComponent<AccountProps> = (props) => {
-  const onQRCodeButtonPress = (): void => {
+  const onQRCodePress = (): void => {
     props.onQRCodePress();
   };
 
-  const onLogoutButtonPress = (): void => {
+  const onLogoutPress = (): void => {
     props.onLogoutPress();
   };
 
   const { themedStyle } = props;
 
   return (
-
-    <View style={themedStyle.container}>
-      <SafeAreaView style={themedStyle.container}>
-        <View style={themedStyle.viewBody}>
-          <ProfileInfoV1
-            user={userDataFake}
-            style={themedStyle.profileInfo}
+    <SafeAreaView style={themedStyle.container}>
+      <View style={themedStyle.viewBody}>
+        <ProfileInfoV1
+          user={userDataFake}
+          style={themedStyle.profileInfo}
+        />
+        <View style={themedStyle.viewContent}>
+          <SettingButton
+            title={'Mã QR'}
+            iconLeft={QRCodeIcon}
+            onPress={onQRCodePress}
           />
-          <View style={themedStyle.viewContent}>
-            <SettingButton
-              title={'Mã QR'}
-              iconLeft={QRCodeIcon}
-              onPress={onQRCodeButtonPress}
-            />
-            <Text style={themedStyle.txtTitle}>
-              {'QUẢN LÝ ĐĂNG NHẬP'}
-            </Text>
-            <SettingButton
-              title={'Lịch sử đăng nhập'}
-            />
-            <SettingSwitch
-              title={'Đăng nhập bằng vân tay'}
-            />
-            <SettingSwitch
-              title={'Đăng nhập bằng nhận diện khuôn mặt'}
-            />
-            <SettingButton
-              style={themedStyle.btnSetting}
-              title={'Thông tin ứng dụng'}
-              iconLeft={InfomationIcon}
-            />
-          </View>
-        </View>
-        <TouchableOpacity
-          style={themedStyle.btnLogout}
-          onPress={onLogoutButtonPress}>
-          {LogoutIcon(themedStyle.iconLogout)}
-          <Text style={themedStyle.txtBtnLogout}>
-            {'ĐĂNG XUẤT'}
+          <Text style={themedStyle.txtTitle}>
+            {'QUẢN LÝ ĐĂNG NHẬP'}
           </Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    </View>
+          <SettingButton
+            title={'Lịch sử đăng nhập'}
+          />
+          <SettingSwitch
+            title={'Đăng nhập bằng vân tay'}
+          />
+          <SettingSwitch
+            title={'Đăng nhập bằng nhận diện khuôn mặt'}
+          />
+          <SettingButton
+            style={themedStyle.btnSetting}
+            title={'Thông tin ứng dụng'}
+            iconLeft={InfomationIcon}
+          />
+        </View>
+      </View>
+      <TouchableOpacity
+        style={themedStyle.btnLogout}
+        onPress={onLogoutPress}>
+        {LogoutIcon(themedStyle.iconLogout)}
+        <Text style={themedStyle.txtBtnLogout}>
+          {'ĐĂNG XUẤT'}
+        </Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 

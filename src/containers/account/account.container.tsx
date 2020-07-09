@@ -13,7 +13,10 @@ export const AccountContainer: React.FunctionComponent<NavigationInjectedProps> 
   };
 
   const onLogoutPress = (): void => {
-   alert('0');
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'auth',
+    });
   };
 
   return (

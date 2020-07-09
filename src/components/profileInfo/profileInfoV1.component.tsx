@@ -35,28 +35,31 @@ const ProfileInfoV1Component: React.FunctionComponent<ProfileInfoProps> = (props
       <Avatar
         size='giant'
         style={themedStyle.avatar}
-        source={(new RemoteImage(user.avatar)).imageSource}
+        source={(new RemoteImage(props.user.avatar)).imageSource}
       />
-      <View style={themedStyle.sectionDetails}>
+      <View style={themedStyle.viewProfileDetail}>
         <Text
           numberOfLines={1}
           style={themedStyle.txtName}>
-          {user.full_name}
+          {props.user.full_name}
         </Text>
         <View style={themedStyle.viewPosition}>
-          {PersonIconFill(themedStyle.iconPosition)}
+          {PersonIconFill(themedStyle.icon)}
           <Text
             numberOfLines={2}
-            style={themedStyle.txtPosition}>
-            {user.position}
+            style={themedStyle.txtProfileDetail}>
+            {props.user.position}
           </Text>
         </View>
         <View style={themedStyle.viewPhone}>
-          {PhoneIcon(themedStyle.iconPhone)}
+          {PhoneIcon([
+            themedStyle.icon,
+            themedStyle.iconPhone,
+          ])}
           <Text
             numberOfLines={1}
-            style={themedStyle.txtPhone}>
-            {user.phone}
+            style={themedStyle.txtProfileDetail}>
+            {props.user.phone}
           </Text>
         </View>
       </View>
@@ -71,8 +74,7 @@ export const ProfileInfoV1 = withStyles(ProfileInfoV1Component, (theme: ThemeTyp
     borderBottomWidth: pxToPercentage(1),
     borderBottomColor: theme['border-basic-color-4'],
   },
-  sectionDetails: {
-    flex: 1,
+  viewProfileDetail: {
     justifyContent: 'center',
     marginLeft: pxToPercentage(16),
   },
@@ -91,24 +93,16 @@ export const ProfileInfoV1 = withStyles(ProfileInfoV1Component, (theme: ThemeTyp
     fontWeight: 'normal',
     color: theme['text-basic-color'],
   },
-  txtPosition: {
-    flex: 1,
-    fontSize: pxToPercentage(14),
-    ...textStyle.regular,
-    marginLeft: pxToPercentage(5),
-  },
-  txtPhone: {
+  txtProfileDetail: {
     fontSize: pxToPercentage(14),
     ...textStyle.regular,
     marginLeft: pxToPercentage(9),
   },
-  iconPosition: {
+  icon: {
     width: pxToPercentage(20),
     height: pxToPercentage(20),
   },
   iconPhone: {
-    width: pxToPercentage(20),
-    height: pxToPercentage(20),
     borderRadius: pxToPercentage(3),
   },
   avatar: {

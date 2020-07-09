@@ -13,7 +13,7 @@ import {
   NavigationRouteState,
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
-import { HomeHeader } from '@src/components/header/home.header';
+import { HomeHeader } from '@src/components/homeHeader/homeHeader.component';
 
 export const routeNameDataSource: { [key: string]: string } = {
   'otp': 'Nhập mã OTP',

@@ -20,12 +20,13 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
-import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfov2.component';
-import { userDataFake } from '@src/core/data/user';
-import { HeaderFunction } from '@src/components/function/headerFunction.component';
-import { Footer } from '@src/components/footer/home.footer';
+import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfoV2.component';
+import { HeaderFunction } from '@src/components/headerFunction/headerFunction.component';
+import { HomeFooter } from '@src/components/homeFooter/homeFooter.component';
+import { User } from '@src/core/models/user/user.model';
 
 interface ComponentProps {
+  user: User;
   functions: FunctionModel[];
   onAlternativeFunctionPress: (type: number) => void;
   onPressBackIcon: () => void;
@@ -58,7 +59,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
         <HeaderFunction
           onPressBackIcon={props.onPressBackIcon}
         />
-        <ProfileInfoV2 user={userDataFake} />
+        <ProfileInfoV2 user={props.user} />
         <List
           scrollEnabled={false}
           data={props.functions}
@@ -82,7 +83,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
           }}
         />
       </ScrollView>
-      <Footer />
+      <HomeFooter />
       <Modal
         visible={visible}
         backdropStyle={themedStyle.backdrop}

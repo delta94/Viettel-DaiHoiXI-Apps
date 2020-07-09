@@ -1040,6 +1040,46 @@ export const HandIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const NotificationIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-notification.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const ProgramIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-program.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const ThongCaoIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-thong-cao.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const LeftArrowIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/left-arrow.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const RightArrowIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/right-arrow.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

@@ -9,7 +9,7 @@ export class ProgramContent {
 }
 
 export class Program {
-  section: number;
+  section: string;
   @Type(() => ProgramContent)
   contents: ProgramContent[];
 

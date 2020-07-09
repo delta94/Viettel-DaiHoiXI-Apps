@@ -108,6 +108,12 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
             onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.PressRelease)}>
             {'Thông cáo báo chí'}
           </Button>
+          <Button
+            size={isTablet() ? 'giant' : 'large'}
+            style={themedStyle.btnAlternative}
+            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.DelegateDetail)}>
+            {'chi tiết đại biểu'}
+          </Button>
         </Card>
       </Modal>
     </React.Fragment>

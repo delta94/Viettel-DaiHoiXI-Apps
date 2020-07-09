@@ -12,4 +12,5 @@ export enum AlternativeFunctionEnum {
   Program = 0,
   Notification,
   PressRelease,
+  DelegateDetail,
 }

@@ -27,6 +27,11 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
 
         break;
       }
+      case AlternativeFunctionEnum.DelegateDetail: {
+        routeName = 'delegateDetails';
+
+        break;
+      }
     }
 
     if (!isEmpty(routeName)) {

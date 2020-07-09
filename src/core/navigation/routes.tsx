@@ -29,6 +29,7 @@ import { PressReleaseDetailContainer } from '@src/containers/home/pressRelease/p
 import { ProgrammeContainer } from '@src/containers/home/program/program.container';
 import { AccountContainer } from '@src/containers/account/account.container';
 import { ScanQRCodeContainer } from '@src/containers/account/scanQRCode/scanQRCode.container';
+import { DelegateDetailContainer} from '@src/containers/home/delegateDetails/delegateDetail.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -98,6 +99,10 @@ const HomeNavigationMap: NavigationRouteConfigMap<any, any> = {
   },
   ['programme']: {
     screen: ProgrammeContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
+  ['delegateDetails']: {
+    screen: DelegateDetailContainer,
     navigationOptions: MenuNavigationOptions,
   },
 };

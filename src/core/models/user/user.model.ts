@@ -4,4 +4,6 @@ export class User {
   position: string;
   phone: string;
   organ: string;
+  sdb: string;
+  to: number;
 }

@@ -32,6 +32,7 @@ interface ComponentProps {
 export type ProgramProps = ThemedComponentProps & ComponentProps;
 
 const DelegateGroupComponent: React.FunctionComponent<ProgramProps> = (props) => {
+
   const { themedStyle } = props;
 
   const onChangeText = (): void => {
@@ -114,7 +115,7 @@ export const DelegateGroup = withStyles(DelegateGroupComponent, (theme: ThemeTyp
     paddingBottom: pxToPercentage(16),
   },
   backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: theme['color-custom-800'],
   },
   txtChooseDate: {
     fontSize: pxToPercentage(14),

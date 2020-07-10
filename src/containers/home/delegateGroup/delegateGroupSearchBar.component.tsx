@@ -14,7 +14,8 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { SearchIconOutline } from '@src/assets/icons';
 
 interface ComponentProps {
-    onSearchTextChange: (type: number) => void;
+    onChangeText: () => void;
+    onSearchTextChange: () => void;
 }
 
 export type DelegateGroupContentItemProps = ThemedComponentProps & ComponentProps;
@@ -22,8 +23,8 @@ export type DelegateGroupContentItemProps = ThemedComponentProps & ComponentProp
 const DelegateGroupContentItemComponent: React.FunctionComponent<DelegateGroupContentItemProps> = (props) => {
     const { themedStyle } = props;
 
-    const onSearchTextChange = () => {
-        props.onSearchTextChange;
+    const onSearchTextChange = (): void => {
+        props.onSearchTextChange();
     };
 
     return (

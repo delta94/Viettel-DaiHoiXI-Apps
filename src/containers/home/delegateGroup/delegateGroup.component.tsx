@@ -26,12 +26,17 @@ interface ComponentProps {
   onHeaderDelegateGroupPress: (type: number) => void;
   onSearchTextChange: () => void;
   sections: number;
+  onChangeText: () => void;
 }
 
 export type ProgramProps = ThemedComponentProps & ComponentProps;
 
 const DelegateGroupComponent: React.FunctionComponent<ProgramProps> = (props) => {
   const { themedStyle } = props;
+
+  const onChangeText = (): void => {
+    props.onChangeText();
+  };
 
   const renderDelegateGroupContents = (contents: DelegateContent[]): React.ReactElement[] => {
     return contents.map((item, index) => {
@@ -86,6 +91,7 @@ const DelegateGroupComponent: React.FunctionComponent<ProgramProps> = (props) =>
       </View>
       <DelegateGroupSearchBar
         onSearchTextChange={props.onSearchTextChange}
+        onChangeText={onChangeText}
       />
       <ScrollView
         style={themedStyle.scrollView}

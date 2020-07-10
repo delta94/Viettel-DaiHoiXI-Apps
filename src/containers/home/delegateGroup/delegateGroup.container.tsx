@@ -16,8 +16,12 @@ export const DelegateGroupContainer: React.FunctionComponent<NavigationInjectedP
     alert('search');
   };
 
+  const onChangeText = (): void => {
+  };
+
   return (
     <DelegateGroup
+      onChangeText={onChangeText}
       delegateGroups={delegateGroupListDataFake}
       sections={sections}
       onHeaderDelegateGroupPress={onHeaderDelegateGroupPress}

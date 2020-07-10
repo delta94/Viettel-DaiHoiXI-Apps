@@ -1,4 +1,4 @@
-export class UserDetails {
+export class UserDetail {
     avatar: string;
     full_name: string;
     position: string;

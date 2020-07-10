@@ -1,5 +1,5 @@
 import { User } from '../models/user/user.model';
-import { UserDetails } from '../models/user/userDetails';
+import { UserDetail } from '../models/user/userDetails';
 
 
 export const userDataFake: User = {
@@ -11,7 +11,7 @@ export const userDataFake: User = {
   organ: 'Văn phòng thành ủy',
 };
 
-export const userDetailsDataFake: UserDetails = {
+export const userDetailsDataFake: UserDetail = {
   avatar:
     'https://vcdn-vnexpress.vnecdn.net/2016/05/25/Vo-Thi-Dung-TPHCM-6031-1446118-2504-7878-1464171876.jpg',
   full_name: 'VÕ THỊ DUNG',

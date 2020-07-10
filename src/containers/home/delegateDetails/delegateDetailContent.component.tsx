@@ -8,62 +8,62 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { User as UserModel } from '@src/core/models/user//userDetails';
+import { UserDetail } from '@src/core/models/user//userDetails';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 
 interface ComponentProps {
-  users: UserModel;
+  user: UserDetail;
 }
 
 export type DelegateDetailContentProps = ThemedComponentProps & ComponentProps;
 
 const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailContentProps> = (props) => {
-  const { themedStyle, users } = props;
+  const { themedStyle } = props;
 
   return (
     <View style={themedStyle.container}>
-      <View style={themedStyle.viewSection}>
+      <View style={themedStyle.viewSectionRow}>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>{'ngày sinh '}</Text>
-          <Text style={themedStyle.txtItem}>{users.birthDay}</Text>
+          <Text style={themedStyle.txtItem}>{props.user.birthDay}</Text>
         </View>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>{'Số đại biểu '}</Text>
-          <Text style={themedStyle.txtItem}>{users.number}</Text>
+          <Text style={themedStyle.txtItem}>{props.user.number}</Text>
         </View>
       </View>
       <View style={themedStyle.breakLine} />
       <View style={themedStyle.viewSectionRow}>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>{'Dân tộc '}</Text>
-          <Text style={themedStyle.txtItem}>{users.nation}</Text>
+          <Text style={themedStyle.txtItem}>{props.user.nation}</Text>
         </View>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>{'Giới tính '}</Text>
-          <Text style={themedStyle.txtItem}>{users.sex}</Text>
+          <Text style={themedStyle.txtItem}>{props.user.sex}</Text>
         </View>
       </View>
       <View style={themedStyle.breakLine} />
       <View style={themedStyle.viewSectionRow}>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>{'quê quán'}</Text>
-          <Text style={themedStyle.txtItem}>{users.hometown}</Text>
+          <Text style={themedStyle.txtItem}>{props.user.hometown}</Text>
         </View>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>{'Tôn giáo'}</Text>
-          <Text style={themedStyle.txtItem}>{users.religion}</Text>
+          <Text style={themedStyle.txtItem}>{props.user.religion}</Text>
         </View>
       </View>
       <View style={themedStyle.breakLine} />
       <View style={themedStyle.viewSectionRow}>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>{'Ngày vào đảng dự bị'}</Text>
-          <Text style={themedStyle.txtItem}>{users.preparatoryDay}</Text>
+          <Text style={themedStyle.txtItem}>{props.user.preparatoryDay}</Text>
         </View>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>{'Ngày vào đảng chỉnh thức'}</Text>
-          <Text style={themedStyle.txtItem}>{users.officialDay}</Text>
+          <Text style={themedStyle.txtItem}>{props.user.officialDay}</Text>
         </View>
       </View>
       <View style={themedStyle.breakLine} />
@@ -73,14 +73,14 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
             {'Học vấn phổ thông'}
           </Text>
           <Text style={themedStyle.txtItem}>
-            {users.Education}</Text>
+            {props.user.Education}</Text>
         </View>
         <View style={themedStyle.viewBlock}>
           <Text style={themedStyle.txtTitle}>
             {'Học hàm, học vị'}
           </Text>
           <Text style={themedStyle.txtItem}>
-            {users.degree}
+            {props.user.degree}
           </Text>
         </View>
       </View>
@@ -90,7 +90,7 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
           <Text style={themedStyle.txtTitle}>
             {'Cơ quan'}</Text>
           <Text style={themedStyle.txtItem}>
-            {users.position}
+            {props.user.position}
           </Text>
         </View>
       </View>
@@ -101,7 +101,7 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
             {'Chuyên môn, nghiệp vụ, ngoại ngữ'}
           </Text>
           <Text style={themedStyle.txtItem}>
-            {users.specialize}
+            {props.user.specialize}
           </Text>
         </View>
       </View>
@@ -112,7 +112,7 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
             {'Lý luận chính trị'}
           </Text>
           <Text style={themedStyle.txtItem}>
-            {users.politicalTheory}
+            {props.user.politicalTheory}
           </Text>
         </View>
       </View>
@@ -123,7 +123,7 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
             {'Kỷ luật'}
           </Text>
           <Text style={themedStyle.txtItem}>
-            {users.discipline}
+            {props.user.discipline}
           </Text>
         </View>
       </View>
@@ -134,7 +134,7 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
             {'Khen thưởng'}
           </Text>
           <Text style={themedStyle.txtItem}>
-            {users.Bonus}
+            {props.user.Bonus}
           </Text>
         </View>
       </View>
@@ -145,7 +145,7 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
             {'Đoàn'}
           </Text>
           <Text style={themedStyle.txtItem}>
-            {users.group}
+            {props.user.group}
           </Text>
         </View>
       </View>
@@ -156,7 +156,7 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
             {'ghi chú'}
           </Text>
           <Text style={themedStyle.txtItem}>
-            {users.note}
+            {props.user.note}
           </Text>
         </View>
       </View>

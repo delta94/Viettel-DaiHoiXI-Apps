@@ -8,25 +8,25 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { User as UserModel } from '@src/core/models/user//userDetails';
+import { UserDetail as UserDetailModel } from '@src/core/models/user//userDetails';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { ProfileInfoV3 } from '@src/components/profileInfo/profileinfoV3.compoent';
 import { DelegateDetailContent } from './delegateDetailContent.component';
 
 interface ComponentProps {
-  users: UserModel;
+  userDetail: UserDetailModel;
 }
 
 export type DelegateDetailProps = ThemedComponentProps & ComponentProps;
 
 const DelegateDetailComponent: React.FunctionComponent<DelegateDetailProps> = (props) => {
-  const { themedStyle, users } = props;
+  const { themedStyle } = props;
   return (
     <ScrollView style={themedStyle.container}>
       <Text style={themedStyle.txtTitle}>{'Thông tin đại biểu'}</Text>
-      <ProfileInfoV3 user={users} />
-      <DelegateDetailContent users={users} />
+      <ProfileInfoV3 user={props.userDetail} />
+      <DelegateDetailContent user={props.userDetail} />
     </ScrollView>
   );
 };

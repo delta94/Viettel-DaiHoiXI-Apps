@@ -30,8 +30,6 @@ const DelegateGroupComponent: React.FunctionComponent<ProgramProps> = (props) =>
   const [date, setDate] = React.useState<Date>(new Date());
   // const [DelegateContentSelected, setDelegateContentSelected] = React.useState<DelegateContent>(new DelegateContent);
 
-
-
   const { themedStyle } = props;
 
   const renderDelegateGroupContents = (contents: DelegateContent[]): React.ReactElement[] => {
@@ -39,8 +37,7 @@ const DelegateGroupComponent: React.FunctionComponent<ProgramProps> = (props) =>
       return (
         <TouchableOpacity
           key={index}
-          activeOpacity={0.75}
-        >
+          activeOpacity={0.75}>
           <DelegateGroupContentItem delegateGroups={item} />
         </TouchableOpacity>
       );
@@ -96,7 +93,6 @@ export const DelegateGroup = withStyles(DelegateGroupComponent, (theme: ThemeTyp
   scrollViewContainer: {
     paddingBottom: pxToPercentage(16),
   },
-
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },

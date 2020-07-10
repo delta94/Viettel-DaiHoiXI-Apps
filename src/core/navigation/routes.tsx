@@ -29,7 +29,8 @@ import { PressReleaseDetailContainer } from '@src/containers/home/pressRelease/p
 import { ProgrammeContainer } from '@src/containers/home/program/program.container';
 import { AccountContainer } from '@src/containers/account/account.container';
 import { ScanQRCodeContainer } from '@src/containers/account/scanQRCode/scanQRCode.container';
-import { DelegateDetailContainer} from '@src/containers/home/delegateDetails/delegateDetail.container';
+import { DelegateDetailContainer } from '@src/containers/home/delegateDetails/delegateDetail.container';
+import { DelegateGroupContainer } from '@src/containers/home/delegateGroup/delegateGroup.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -101,8 +102,12 @@ const HomeNavigationMap: NavigationRouteConfigMap<any, any> = {
     screen: ProgrammeContainer,
     navigationOptions: MenuNavigationOptions,
   },
-  ['delegateDetails']: {
+  ['delegateDetail']: {
     screen: DelegateDetailContainer,
+    navigationOptions: MenuNavigationOptions,
+  },
+  ['delegateGroup']: {
+    screen: DelegateGroupContainer,
     navigationOptions: MenuNavigationOptions,
   },
 };

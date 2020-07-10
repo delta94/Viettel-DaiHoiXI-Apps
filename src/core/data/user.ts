@@ -1,7 +1,6 @@
 import { User } from '../models/user/user.model';
 import { UserDetail } from '../models/user/userDetail.model';
 
-
 export const userDataFake: User = {
   avatar:
     'https://vcdn-vnexpress.vnecdn.net/2016/05/25/Vo-Thi-Dung-TPHCM-6031-1446118-2504-7878-1464171876.jpg',
@@ -11,7 +10,7 @@ export const userDataFake: User = {
   organ: 'Văn phòng thành ủy',
 };
 
-export const userDetailsDataFake: UserDetail = {
+export const userDetailDataFake: UserDetail = {
   avatar:
     'https://vcdn-vnexpress.vnecdn.net/2016/05/25/Vo-Thi-Dung-TPHCM-6031-1446118-2504-7878-1464171876.jpg',
   full_name: 'VÕ THỊ DUNG',

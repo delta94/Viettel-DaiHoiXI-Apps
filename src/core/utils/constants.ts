@@ -13,4 +13,5 @@ export enum AlternativeFunctionEnum {
   Notification,
   PressRelease,
   DelegateDetail,
+  groupDelegateList,
 }

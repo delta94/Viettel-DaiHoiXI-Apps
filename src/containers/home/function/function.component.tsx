@@ -23,10 +23,10 @@ import { isTablet } from 'react-native-device-info';
 import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfoV2.component';
 import { HeaderFunction } from '@src/components/headerFunction/headerFunction.component';
 import { HomeFooter } from '@src/components/homeFooter/homeFooter.component';
-import { User } from '@src/core/models/user/user.model';
+import { UserDetail } from '@src/core/models/user/userDetail.model';
 
 interface ComponentProps {
-  user: User;
+  userDetail: UserDetail;
   functions: FunctionModel[];
   onAlternativeFunctionPress: (type: number) => void;
   onPressBackIcon: () => void;
@@ -59,7 +59,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
         <HeaderFunction
           onPressBackIcon={props.onPressBackIcon}
         />
-        <ProfileInfoV2 user={props.user} />
+        <ProfileInfoV2 userDetail={props.userDetail} />
         <List
           scrollEnabled={false}
           data={props.functions}
@@ -111,8 +111,8 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
           <Button
             size={isTablet() ? 'giant' : 'large'}
             style={themedStyle.btnAlternative}
-            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.DelegateDetail)}>
-            {'chi tiết đại biểu'}
+            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.groupDelegateList)}>
+            {'Danh sách tổ'}
           </Button>
         </Card>
       </Modal>

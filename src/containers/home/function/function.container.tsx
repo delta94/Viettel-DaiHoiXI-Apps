@@ -4,7 +4,7 @@ import { Function } from './function.component';
 import { functionDataFake } from '@src/core/data/function';
 import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isEmpty } from '@src/core/utils/utils';
-import { userDataFake } from '@src/core/data/user';
+import { userDetailDataFake } from '@src/core/data/user';
 
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
@@ -27,8 +27,8 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
 
         break;
       }
-      case AlternativeFunctionEnum.DelegateDetail: {
-        routeName = 'delegateDetails';
+      case AlternativeFunctionEnum.groupDelegateList: {
+        routeName = 'delegateGroup';
 
         break;
       }
@@ -48,7 +48,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
 
   return (
     <Function
-      user={userDataFake}
+      userDetail={userDetailDataFake}
       functions={functionDataFake}
       onAlternativeFunctionPress={onAlternativeFunctionPress}
       onPressBackIcon={onPressBackIcon}

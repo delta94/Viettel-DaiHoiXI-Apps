@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -16,10 +16,15 @@ import { DatePicker } from '@src/components/datePicker/datePicker.component';
 import { SafeAreaView } from 'react-navigation';
 
 interface ComponentProps {
+  day: number;
+  month: number;
+  year: number;
   tabSelected: number;
   onTabSelected: (value: number) => void;
   dateSelected: number;
   onDateSelected: (value: number) => void;
+  onIncrementDate: () => void;
+  onDecrementDate: () => void;
 }
 
 export type CongressInformationProps = ThemedComponentProps & ComponentProps;
@@ -27,12 +32,20 @@ export type CongressInformationProps = ThemedComponentProps & ComponentProps;
 const CongressInformationComponent: React.FunctionComponent<CongressInformationProps> = (props) => {
   const { themedStyle } = props;
 
-  const onTabSelected = (value: number) => {
+  const onTabSelected = (value: number): void => {
     props.onTabSelected(value);
   };
 
-  const onDateSelected = (value: number) => {
+  const onDateSelected = (value: number): void => {
     props.onDateSelected(value);
+  };
+
+  const onIncrementDate = (): void => {
+    props.onIncrementDate();
+  };
+
+  const onDecrementDate = (): void => {
+    props.onDecrementDate();
   };
 
   return (
@@ -51,7 +64,11 @@ const CongressInformationComponent: React.FunctionComponent<CongressInformationP
             </Text>
             <View style={themedStyle.viewDate}>
               <DatePicker
-                day={8}
+                year={props.year}
+                day={props.day}
+                month={props.month}
+                onDecrementDate={onDecrementDate}
+                onIncrementDate={onIncrementDate}
                 selected={props.dateSelected}
                 onDateSelected={onDateSelected}
               />

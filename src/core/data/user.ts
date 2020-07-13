@@ -1,5 +1,5 @@
 import { User } from '../models/user/user.model';
-import { UserDetail } from '../models/user/userDetails';
+import { UserDetail } from '../models/user/userDetail.model';
 
 
 export const userDataFake: User = {

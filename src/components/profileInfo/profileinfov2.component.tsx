@@ -11,18 +11,18 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
-import { User } from '@src/core/models/user/user.model';
+import { UserDetail } from '@src/core/models/user/userDetail.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 
 interface ComponentProps {
-  user: User;
+  userDetail: UserDetail;
 }
 
 export type ProfileInfoProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props) => {
-  const { style, themedStyle, user, ...restProps } = props;
+  const { style, themedStyle, ...restProps } = props;
 
   return (
     <View
@@ -30,34 +30,34 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props
       {...restProps}>
       <Image
         style={themedStyle.avatar}
-        source={(new RemoteImage(props.user.avatar)).imageSource}
+        source={(new RemoteImage(props.userDetail.avatar)).imageSource}
       />
       <View style={themedStyle.viewSectionDetails}>
         <Text
           numberOfLines={1}
           style={themedStyle.txtName}>
-          {`Đồng chí ${props.user.full_name}`}
+          {`Đồng chí ${props.userDetail.full_name}`}
         </Text>
         <Text
           numberOfLines={1}
           style={themedStyle.txtPosition}>
-          {props.user.position}
+          {props.userDetail.position}
         </Text>
         <Text
           numberOfLines={1}
           style={themedStyle.txtPosition}>
-          {`Đoàn: ${props.user.group}`}
+          {`Đoàn: ${props.userDetail.group}`}
         </Text>
         <View style={themedStyle.viewDelegateNumber}>
           <Text
             numberOfLines={1}
             style={themedStyle.txtPosition}>
-            {`Tổ: ${props.user.nest}`}
+            {`Tổ: ${props.userDetail.group}`}
           </Text>
           <Text
             numberOfLines={1}
             style={themedStyle.txtPosition}>
-            {`Số đại biểu: ${props.user.delegateNumber}`}
+            {`Số đại biểu: ${props.userDetail.number}`}
           </Text>
         </View>
       </View>

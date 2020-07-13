@@ -8,7 +8,7 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { UserDetail } from '@src/core/models/user//userDetails';
+import { UserDetail } from '@src/core/models/user/userDetail.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 

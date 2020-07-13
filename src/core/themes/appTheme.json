@@ -104,6 +104,7 @@
   "color-custom-500": "rgba(64, 64, 64, 1)",
   "color-custom-600": "rgba(0, 0, 0, 1)",
   "color-custom-700": "#4682b4",
+  "color-custom-800": "rgba(0, 0, 0, 0.5)",
   "color-basic-transparent-100": "rgba(143, 155, 179, 0.08)",
   "color-basic-transparent-200": "rgba(143, 155, 179, 0.16)",
   "color-basic-transparent-300": "rgba(143, 155, 179, 0.24)",

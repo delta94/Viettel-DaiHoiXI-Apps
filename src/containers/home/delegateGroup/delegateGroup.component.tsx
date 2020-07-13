@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -22,14 +23,14 @@ import { DelegateGroupSearchBar } from './delegateGroupSearchBar.component';
 
 interface ComponentProps {
   delegateGroups: DelegateGroupModel[];
+  onHeaderDelegateGroupPress: (type: number) => void;
+  onSearchTextChange: () => void;
+  sections: number;
 }
 
 export type ProgramProps = ThemedComponentProps & ComponentProps;
 
 const DelegateGroupComponent: React.FunctionComponent<ProgramProps> = (props) => {
-  const [date, setDate] = React.useState<Date>(new Date());
-  // const [DelegateContentSelected, setDelegateContentSelected] = React.useState<DelegateContent>(new DelegateContent);
-
   const { themedStyle } = props;
 
   const renderDelegateGroupContents = (contents: DelegateContent[]): React.ReactElement[] => {
@@ -47,38 +48,51 @@ const DelegateGroupComponent: React.FunctionComponent<ProgramProps> = (props) =>
   const renderHeaderFunctionDelegateGroups = (): React.ReactElement[] => {
     return props.delegateGroups.map((item, index) => {
       return (
-        <DelegateGroupFunctionHeaderItem delegateGroups={item.section} />
+        <DelegateGroupFunctionHeaderItem
+          onHeaderDelegateGroupPress={props.onHeaderDelegateGroupPress}
+          delegateGroups={item.section}
+          sections={props.sections}
+        />
       );
     });
   };
 
   const renderDelegateGroups = (): React.ReactElement[] => {
     return props.delegateGroups.map((item, index) => {
-      return (
-        <React.Fragment key={index}>
-          <View style={themedStyle.viewSection}>
-            <Text style={themedStyle.txtSection}>
-              {`Tổ ${item.section}`}
-            </Text>
-          </View>
-          {renderDelegateGroupContents(item.contents)}
-        </React.Fragment>
-      );
+      if (item.section === props.sections) {
+        return (
+          <React.Fragment key={index}>
+            <View style={themedStyle.viewSection}>
+              <Text style={themedStyle.txtSection}>
+                {`Tổ ${item.section}`}
+              </Text>
+            </View>
+            {renderDelegateGroupContents(item.contents)}
+          </React.Fragment>
+        );
+      }
     });
   };
 
   return (
-    <View style={themedStyle.container}>
-      <View style={themedStyle.viewHeaderFuction}>
-        {renderHeaderFunctionDelegateGroups()}
+    <SafeAreaView style={themedStyle.container}>
+      <View>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          style={themedStyle.viewHeaderFuction}>
+          {renderHeaderFunctionDelegateGroups()}
+        </ScrollView>
       </View>
-      <DelegateGroupSearchBar />
+      <DelegateGroupSearchBar
+        onSearchTextChange={props.onSearchTextChange}
+      />
       <ScrollView
         style={themedStyle.scrollView}
         contentContainerStyle={themedStyle.scrollViewContainer}>
         {renderDelegateGroups()}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

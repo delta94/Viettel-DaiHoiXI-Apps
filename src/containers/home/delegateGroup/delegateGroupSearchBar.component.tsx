@@ -13,10 +13,18 @@ import { NameValidator } from '@src/core/validators';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { SearchIconOutline } from '@src/assets/icons';
 
-export type DelegateGroupContentItemProps = ThemedComponentProps;
+interface ComponentProps {
+    onSearchTextChange: (type: number) => void;
+}
+
+export type DelegateGroupContentItemProps = ThemedComponentProps & ComponentProps;
 
 const DelegateGroupContentItemComponent: React.FunctionComponent<DelegateGroupContentItemProps> = (props) => {
     const { themedStyle } = props;
+
+    const onSearchTextChange = () => {
+        props.onSearchTextChange;
+    };
 
     return (
         <View
@@ -29,6 +37,7 @@ const DelegateGroupContentItemComponent: React.FunctionComponent<DelegateGroupCo
                 placeholder='Tìm kiếm'
                 icon={SearchIconOutline}
                 validator={NameValidator}
+                onChangeText={onSearchTextChange}
             />
         </View>
     );

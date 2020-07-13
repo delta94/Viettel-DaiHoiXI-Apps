@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Text,
-    View,
+    TouchableOpacity,
 } from 'react-native';
 import {
     ThemedComponentProps,
@@ -9,9 +9,12 @@ import {
     withStyles,
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 
 interface ComponentProps {
     delegateGroups: number;
+    sections: number;
+    onHeaderDelegateGroupPress: (type: number) => void;
 }
 
 export type DelegateGroupFunctionHeaderItemProps = ThemedComponentProps & ComponentProps;
@@ -19,11 +22,17 @@ export type DelegateGroupFunctionHeaderItemProps = ThemedComponentProps & Compon
 const DelegateGroupFunctionHeaderItemComponent: React.FunctionComponent<DelegateGroupFunctionHeaderItemProps> = (props) => {
     const { themedStyle, delegateGroups } = props;
 
+    const onHeaderDelegateGroupPress = (type: number) => {
+        props.onHeaderDelegateGroupPress(type);
+    };
+
     return (
-        <View
-            style={themedStyle.container}>
+        <TouchableOpacity
+            onPress={() => onHeaderDelegateGroupPress(delegateGroups)}
+            activeOpacity={0.75}
+            style={[themedStyle.container, props.sections === delegateGroups && themedStyle.checked]}>
             <Text style={themedStyle.txtDelegateGroup}>{`Tổ ${delegateGroups}`}</Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
@@ -31,14 +40,18 @@ export const DelegateGroupFunctionHeaderItem = withStyles(DelegateGroupFunctionH
     container: {
         borderWidth: pxToPercentage(1),
         borderColor: theme['border-basic-color-4'],
-        width: pxToPercentage(30),
         justifyContent: 'center',
         height: pxToPercentage(45),
         marginVertical: pxToPercentage(8),
-        flex: 1,
+        width: widthPercentageToDP(32),
     },
     txtDelegateGroup: {
         fontSize: pxToPercentage(16),
         textAlign: 'center',
+    },
+    checked: {
+        borderBottomWidth: pxToPercentage(2),
+        borderBottomColor: 'red',
+
     },
 }));

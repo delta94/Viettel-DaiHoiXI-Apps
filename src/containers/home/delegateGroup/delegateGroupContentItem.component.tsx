@@ -13,23 +13,21 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { DelegateContent } from '@src/core/models/delegateGroup/delegateGroup.model';
 
 interface ComponentProps {
-  delegateGroups: DelegateContent;
+  delegateGroup: DelegateContent;
 }
 
 export type DelegateGroupContentItemProps = ThemedComponentProps & ComponentProps;
 
 const DelegateGroupContentItemComponent: React.FunctionComponent<DelegateGroupContentItemProps> = (props) => {
-  const { themedStyle, delegateGroups: content } = props;
+  const { themedStyle } = props;
 
   return (
     <View
-      style={[
-        themedStyle.container,
-      ]}>
+      style={themedStyle.container}>
       <View style={themedStyle.viewName}>
         <Text
           style={themedStyle.txtName}>
-          {`${content.count}. ${content.full_name}`}
+          {`${props.delegateGroup.count}. ${props.delegateGroup.full_name}`}
         </Text>
       </View>
       <View style={themedStyle.viewSection}>
@@ -43,7 +41,7 @@ const DelegateGroupContentItemComponent: React.FunctionComponent<DelegateGroupCo
           <Text
             style={themedStyle.txtRight}
             numberOfLines={2}>
-            {content.position}
+            {props.delegateGroup.position}
           </Text>
         </View>
       </View>
@@ -57,8 +55,8 @@ const DelegateGroupContentItemComponent: React.FunctionComponent<DelegateGroupCo
         <View style={themedStyle.viewRight}>
           <Text
             style={themedStyle.txtRight}
-            numberOfLines={2}>
-            {content.count}
+            numberOfLines={1}>
+            {props.delegateGroup.count}
           </Text>
         </View>
       </View>
@@ -72,8 +70,8 @@ const DelegateGroupContentItemComponent: React.FunctionComponent<DelegateGroupCo
         <View style={themedStyle.viewRight}>
           <Text
             style={themedStyle.txtRight}
-            numberOfLines={2}>
-            {content.count}
+            numberOfLines={1}>
+            {props.delegateGroup.status}
           </Text>
         </View>
       </View>
@@ -108,10 +106,6 @@ export const DelegateGroupContentItem = withStyles(DelegateGroupContentItemCompo
     fontSize: pxToPercentage(14),
     color: 'red',
     ...textStyle.proRoundedSemibold,
-  },
-  txtDetail: {
-    fontSize: pxToPercentage(12),
-    paddingTop: pxToPercentage(8),
   },
   txtRight: {
     fontSize: pxToPercentage(12),

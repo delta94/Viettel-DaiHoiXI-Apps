@@ -17,8 +17,8 @@ import {
 } from '@src/core/models/delegateGroup/delegateGroup.model';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
-import { DelegateGroupContentItem } from './delegateGroupContentItem.componet';
-import { DelegateGroupFunctionHeaderItem } from './delegateGroupFunctionHeaderItem';
+import { DelegateGroupContentItem } from './delegateGroupContentItem.component';
+import { DelegateGroupFunctionHeaderItem } from './delegateGroupFunctionHeaderItem.component';
 import { DelegateGroupSearchBar } from './delegateGroupSearchBar.component';
 
 interface ComponentProps {
@@ -45,7 +45,7 @@ const DelegateGroupComponent: React.FunctionComponent<ProgramProps> = (props) =>
         <TouchableOpacity
           key={index}
           activeOpacity={0.75}>
-          <DelegateGroupContentItem delegateGroups={item} />
+          <DelegateGroupContentItem delegateGroup={item} />
         </TouchableOpacity>
       );
     });

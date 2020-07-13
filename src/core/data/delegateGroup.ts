@@ -11,6 +11,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '1',
+        status: 'Có',
       },
       {
         avatar:
@@ -19,6 +20,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '2',
+        status: 'Có',
       },
       {
         avatar:
@@ -27,6 +29,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '3',
+        status: 'Có',
       },
       {
         avatar:
@@ -35,6 +38,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '4',
+        status: 'Không',
       },
       {
         avatar:
@@ -43,6 +47,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '5',
+        status: 'Không',
       },
     ],
   },
@@ -56,6 +61,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '1',
+        status: 'Có',
       },
       {
         avatar:
@@ -64,6 +70,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '2',
+        status: 'Không',
       },
       {
         avatar:
@@ -72,6 +79,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '3',
+        status: 'Không',
       },
       {
         avatar:
@@ -80,6 +88,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '4',
+        status: 'Không',
       },
     ],
   },
@@ -93,6 +102,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '1',
+        status: 'Không',
       },
       {
         avatar:
@@ -101,6 +111,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '2',
+        status: 'Không',
       },
       {
         avatar:
@@ -109,6 +120,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '3',
+        status: 'Không',
       },
       {
         avatar:
@@ -117,6 +129,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '4',
+        status: 'Không',
       },
       {
         avatar:
@@ -125,6 +138,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '5',
+        status: 'Không',
       },
       {
         avatar:
@@ -133,6 +147,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '6',
+        status: 'Không',
       },
     ],
   },
@@ -146,6 +161,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '1',
+        status: 'Không',
       },
       {
         avatar:
@@ -154,6 +170,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '2',
+        status: 'Có',
       },
       {
         avatar:
@@ -162,6 +179,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '3',
+        status: 'Có',
       },
     ],
   },
@@ -175,6 +193,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '1',
+        status: 'Có',
       },
       {
         avatar:
@@ -183,6 +202,7 @@ export const delegateGroupListDataFake: DelegateGroup[] = [
         position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
         phone: '0123456789',
         count: '2',
+        status: 'Có',
       },
     ],
   },

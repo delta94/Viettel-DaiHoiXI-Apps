@@ -6,12 +6,14 @@ export class DelegateContent {
     position: string;
     phone: string;
     count: string;
+    status: string;
     constructor() {
         this.avatar = '';
         this.full_name = '';
         this.position = '';
         this.phone = '';
         this.count = '';
+        this.status = '';
     }
 }
 

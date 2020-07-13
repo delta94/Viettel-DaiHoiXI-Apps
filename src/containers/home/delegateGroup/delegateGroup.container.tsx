@@ -13,7 +13,6 @@ export const DelegateGroupContainer: React.FunctionComponent<NavigationInjectedP
   };
 
   const onSearchTextChange = (): void => {
-    alert('search');
   };
 
   const onChangeText = (): void => {

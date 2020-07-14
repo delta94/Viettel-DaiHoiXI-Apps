@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   View,
-  TouchableOpacity,
+  Text,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -10,14 +10,9 @@ import {
   withStyles,
 } from '@kitten/theme';
 import {
-  CloseIconOutline,
   QRCodeIcon,
-  DownloadIcon,
-  ShareIconOutline,
-  RefreshIconFill,
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 interface ComponentProps {
   isVisible: boolean;
@@ -47,30 +42,16 @@ const ModalScanQRCodeComponent: React.FunctionComponent<ModalScanQRCodeProps> = 
       backdropTransitionOutTiming={1}
       style={themedStyle.container}>
       <View style={themedStyle.viewBox}>
-        <TouchableOpacity
-          activeOpacity={0.75}
-          style={themedStyle.bntClose}
-          onPress={onClosePress}>
-          {CloseIconOutline(themedStyle.iconClose)}
-        </TouchableOpacity>
-        <View style={themedStyle.viewQRCode}>
-          {QRCodeIcon(themedStyle.iconQRCode)}
+        <View style={themedStyle.viewHeader}>
+          <Text style={themedStyle.txtTitle}>{'MÃ QR CODE CỦA TÔI'}</Text>
         </View>
-        <View style={themedStyle.viewButton}>
-          <TouchableOpacity
-            activeOpacity={0.75}>
-            {RefreshIconFill(themedStyle.iconRefresh)}
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.75}
-            style={themedStyle.btn}>
-            {ShareIconOutline(themedStyle.iconShare)}
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.75}
-            style={themedStyle.btn}>
-            {DownloadIcon(themedStyle.iconDownload)}
-          </TouchableOpacity>
+        <View>
+          <View style={themedStyle.viewQRCode}>
+            {QRCodeIcon(themedStyle.iconQRCode)}
+          </View>
+          <Text style={themedStyle.txtFooter}>
+            {'Quý đại biểu vui lòng quẹt QR CODE qua máy\n scan mã đặt ở bàn điểm danh để điểm danh\n trước khi vào hội trường'}
+          </Text>
         </View>
       </View>
     </Modal>
@@ -79,35 +60,37 @@ const ModalScanQRCodeComponent: React.FunctionComponent<ModalScanQRCodeProps> = 
 
 export const ModalScanQRCode = withStyles(ModalScanQRCodeComponent, (theme: ThemeType) => ({
   container: {
-    justifyContent: 'flex-end',
     margin: 0,
   },
   viewBox: {
-    height: hp(55),
+    flex: 1,
     backgroundColor: 'white',
+  },
+  viewHeader: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme['color-primary-11'],
+    borderRadius: pxToPercentage(10),
+  },
+  txtTitle: {
+    fontSize: pxToPercentage(18),
+    alignItems: 'center',
+    fontWeight: 'bold',
+    paddingVertical: pxToPercentage(10),
+  },
+  txtFooter: {
+    fontSize: pxToPercentage(17),
+    textAlign: 'center',
+    color: theme['background-custom-color-2'],
+    marginTop: pxToPercentage(20),
   },
   iconClose: {
     width: pxToPercentage(28),
     height: pxToPercentage(28),
   },
   iconQRCode: {
-    width: pxToPercentage(200),
-    height: pxToPercentage(200),
-  },
-  iconShare: {
-    width: pxToPercentage(37),
-    height: pxToPercentage(37),
-  },
-  iconRefresh: {
-    width: pxToPercentage(30),
-    height: pxToPercentage(30),
-  },
-  iconDownload: {
-    width: pxToPercentage(32),
-    height: pxToPercentage(32),
-  },
-  btn: {
-    marginLeft: pxToPercentage(80),
+    width: pxToPercentage(250),
+    height: pxToPercentage(250),
   },
   bntClose: {
     alignSelf: 'flex-start',
@@ -115,14 +98,8 @@ export const ModalScanQRCode = withStyles(ModalScanQRCodeComponent, (theme: Them
     marginLeft: pxToPercentage(5),
   },
   viewQRCode: {
-    height: hp(38),
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  viewButton: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: pxToPercentage(5),
+    marginTop: pxToPercentage(20),
   },
 }));

@@ -55,11 +55,11 @@ const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) =>
         <View style={themedStyle.sectionTop}>
           <View style={themedStyle.viewHeader}>
             <View style={themedStyle.viewHeaderLeft}>
-              <TouchableOpacity
+              {<TouchableOpacity
                 activeOpacity={0.75}
                 onPress={onBackPress}>
                 {CloseIcon(themedStyle.iconClose)}
-              </TouchableOpacity>
+              </TouchableOpacity>}
             </View>
             <View style={themedStyle.viewHeaderRight}>
               <TouchableOpacity
@@ -87,7 +87,7 @@ const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) =>
         </View>
         <View style={themedStyle.sectionFooter}>
           <Text style={themedStyle.txtFooter}>
-            {'Quét mã để truy cập nhanh vào\ncác tính năng của ứng dụng'}
+            {'Quý đại biểu vui lòng quẹt QR CODE qua máy\n scan mã đặt ở bàn điểm danh để điểm danh\n trước khi vào hội trường'}
           </Text>
         </View>
         <ModalScanQRCode

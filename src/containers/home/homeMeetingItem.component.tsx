@@ -43,7 +43,7 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
         <View style={[
           themedStyle.viewDotIcon,
           props.isTypeDefault && themedStyle.viewDefault,
-        ]}/>
+        ]} />
       </View>
       <View style={[themedStyle.secctionView,
       props.isTypeDefault && themedStyle.viewDefault,
@@ -74,8 +74,6 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
   },
   secctionView: {
     flex: 1,
-    borderWidth: pxToPercentage(1),
-    borderColor: theme['border-basic-color-4'],
     overflow: 'hidden',
     borderRadius: pxToPercentage(12),
     backgroundColor: theme['color-warning-default'],
@@ -83,7 +81,7 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
     marginRight: pxToPercentage(4),
   },
   viewHeader: {
-    backgroundColor: theme['border-basic-color-1'],
+    backgroundColor: theme['color-primary-100'],
     marginRight: pxToPercentage(1.5),
     marginLeft: pxToPercentage(6),
     borderRadius: pxToPercentage(12),
@@ -126,8 +124,8 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
     alignItems: 'center',
   },
   viewDotIcon: {
-    height: pxToPercentage(16),
-    width: pxToPercentage(16),
+    height: pxToPercentage(10),
+    width: pxToPercentage(10),
     position: 'absolute',
     borderRadius: pxToPercentage(8),
     backgroundColor: theme['color-warning-default'],
@@ -144,8 +142,8 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
     alignItems: 'center',
   },
   timelineView: {
-      width: pxToPercentage(20),
-      justifyContent: 'center',
-      alignItems: 'center',
+    width: pxToPercentage(20),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));

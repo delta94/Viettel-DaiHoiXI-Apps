@@ -45,7 +45,7 @@ const HomeMeetingWeekComponent: React.FunctionComponent<HomeMeetingWeekProps> = 
             <View style={themedStyle.centerView} >
                 <View style={themedStyle.buttonWeek}>
                     <Text style={themedStyle.txtWeek}>
-                        {'Tuần '}{props.meetingItemWeek}
+                        {`Tuần ${props.meetingItemWeek}`}
                     </Text>
                 </View>
             </View>

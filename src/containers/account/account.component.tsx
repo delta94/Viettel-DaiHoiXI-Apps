@@ -21,6 +21,7 @@ import {
 import { SettingButton } from '@src/components/settingButton/settingButton.component';
 import { SettingSwitch } from '@src/components/settingButton/settingSwitch.component';
 import { textStyle } from '@src/components/textStyle';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   onLogoutPress: () => void;
@@ -101,12 +102,12 @@ export const Account = withStyles(AccountComponent, (theme: ThemeType) => ({
     flex: 1,
   },
   btnLogout: {
-    height: pxToPercentage(40),
+    height: isTablet() ? pxToPercentage(30) : pxToPercentage(40),
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: pxToPercentage(4),
-    marginBottom: pxToPercentage(15),
+    marginBottom: isTablet() ? pxToPercentage(10) : pxToPercentage(15),
     flexDirection: 'row',
     borderWidth: pxToPercentage(1),
     borderColor: 'red',

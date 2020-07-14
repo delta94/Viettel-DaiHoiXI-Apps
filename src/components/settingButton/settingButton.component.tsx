@@ -16,6 +16,7 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { IconElement } from '@src/assets/icons/icon.component';
 import { ArrowForwardIcon } from '@src/assets/icons';
 import { textStyle } from '../textStyle';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps extends TouchableOpacityProps {
   title: string;
@@ -64,7 +65,7 @@ export const SettingButton = withStyles(SettingButtonComponent, (theme: ThemeTyp
     justifyContent: 'space-between',
     backgroundColor: 'white',
     alignItems: 'center',
-    height: pxToPercentage(45),
+    height: isTablet() ? pxToPercentage(35) : pxToPercentage(45),
     marginTop: pxToPercentage(5),
     paddingLeft: pxToPercentage(4),
     borderTopWidth: pxToPercentage(1),

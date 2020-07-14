@@ -12,6 +12,7 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { Switch } from 'react-native-gesture-handler';
 import { textStyle } from '..';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   title: string;
@@ -56,7 +57,7 @@ export const SettingSwitch = withStyles(SettingSwitchComponent, (theme: ThemeTyp
     justifyContent: 'space-between',
     backgroundColor: 'white',
     alignItems: 'center',
-    height: pxToPercentage(45),
+    height: isTablet() ? pxToPercentage(35) : pxToPercentage(45),
     marginTop: pxToPercentage(5),
     paddingHorizontal: pxToPercentage(4),
     paddingRight: pxToPercentage(8),

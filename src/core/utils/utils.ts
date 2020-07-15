@@ -4,8 +4,8 @@ import { isTablet } from 'react-native-device-info';
 const { width, height } = Dimensions.get('window');
 // default: 812 x 375, iPhone 11 Pro
 // default: 1024 x 768, iPad Pro 9.7-inch
-const perWidthTablet: number = width / 768;
-const perHeightTablet: number = height / 1024;
+const perWidthTablet: number = width / 1260;
+const perHeightTablet: number = height / 2160;
 const perWidthPhone: number = width / 375;
 const perHeightPhone: number = height / 812;
 

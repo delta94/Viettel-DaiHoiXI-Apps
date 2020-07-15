@@ -28,6 +28,7 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props
     <View
       style={themedStyle.container}
       {...restProps}>
+      <View style={themedStyle.viewSection}>
       <Image
         style={themedStyle.avatar}
         source={(new RemoteImage(props.userDetail.avatar)).imageSource}
@@ -61,43 +62,52 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props
           </Text>
         </View>
       </View>
+      </View>
     </View>
   );
 };
 
 export const ProfileInfoV2 = withStyles(ProfileInfoV2Component, (theme: ThemeType) => ({
   container: {
-    flexDirection: 'row',
     backgroundColor: theme['color-primary-7'],
     paddingBottom: pxToPercentage(2),
+    marginHorizontal: pxToPercentage(353),
+    marginTop: pxToPercentage(28),
+  },
+  viewSection: {
+    flexDirection: 'row',
+    width: pxToPercentage(1396),
+    height: pxToPercentage(240),
   },
   viewSectionDetails: {
     flex: 1,
     marginLeft: pxToPercentage(8),
+    justifyContent: 'center',
   },
   txtName: {
-    fontSize: pxToPercentage(17), // size 24
+    fontSize: pxToPercentage(36), // size 24
     ...textStyle.semibold,
     fontWeight: 'normal',
     color: theme['text-basic-color'],
   },
   txtPosition: {
-    fontSize: pxToPercentage(13),
+    fontSize: pxToPercentage(36),
     ...textStyle.light,
     marginLeft: pxToPercentage(0),
     marginVertical: pxToPercentage(2),
     marginHorizontal: pxToPercentage(32),
   },
   txtPhone: {
-    fontSize: pxToPercentage(12),
+    fontSize: pxToPercentage(36),
     ...textStyle.regular,
     marginLeft: pxToPercentage(9),
   },
   avatar: {
-    width: pxToPercentage(70), // width 96
-    height: pxToPercentage(85), // height 128
+    width: pxToPercentage(150), // width 96
+    height: pxToPercentage(200), // height 128
     marginHorizontal: pxToPercentage(20),
     borderRadius: pxToPercentage(4),
+    margin: pxToPercentage(20),
   },
   viewDelegateNumber: {
     flexDirection: 'row',

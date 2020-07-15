@@ -123,42 +123,45 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
 export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    backgroundColor: theme['color-primary-2'],
+    backgroundColor: theme['color-primary-12'],
+    marginHorizontal: pxToPercentage(180),
   },
   contentContainer: {
     padding: pxToPercentage(12),
   },
   viewCard: {
-    width: pxToPercentage(186),
+    width: pxToPercentage(500),
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   btnItem: {
-    width: pxToPercentage(160), // w 186
-    height: pxToPercentage(148), // h 174
+    width: pxToPercentage(420), // w 186
+    height: pxToPercentage(245), // h 174
     flexDirection: 'column',
     justifyContent: 'center',
-    borderRadius: pxToPercentage(8),
+    borderRadius: pxToPercentage(25),
     borderWidth: pxToPercentage(2),
     borderColor: theme['color-primary-3'],
-    margin: pxToPercentage(12.5),
+    marginRight: pxToPercentage(40),
+    marginTop: pxToPercentage(30),
+    marginBottom: pxToPercentage(28),
     backgroundColor: theme['color-primary-2'],
   },
   btnAlternative: {
-    marginTop: pxToPercentage(8),
+    marginTop: pxToPercentage(10),
   },
   txtTitle: {
     textAlign: 'center',
-    fontSize: pxToPercentage(14),
-    marginTop: pxToPercentage(2),
+    fontSize: pxToPercentage(36),
+    marginTop: pxToPercentage(4),
     paddingVertical: pxToPercentage(2),
     color: theme['color-primary-3'],
     ...textStyle.regular,
   },
   icon: {
-    width: pxToPercentage(50),
-    height: pxToPercentage(46),
+    width: pxToPercentage(88),
+    height: pxToPercentage(88),
     tintColor: theme['color-primary-3'],
     resizeMode: 'contain',
   },

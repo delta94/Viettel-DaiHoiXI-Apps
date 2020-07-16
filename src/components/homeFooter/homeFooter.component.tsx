@@ -11,6 +11,7 @@ import {
 import { textStyle } from '..';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { isTablet } from 'react-native-device-info';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 
 export type HomeFooterProps = ThemedComponentProps;
 
@@ -35,6 +36,7 @@ export const HomeFooter = withStyles(HomeFooterComponent, (theme: ThemeType) => 
     justifyContent: 'center',
     borderTopWidth: pxToPercentage(2),
     borderColor: theme['color-primary-3'],
+    width: widthPercentageToDP(100),
   },
   txtFooter: {
     fontSize: isTablet() ? pxToPercentage(15) : pxToPercentage(9), // size 20

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   ScrollView,
+  View,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -53,7 +54,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
   const { themedStyle } = props;
 
   return (
-    <React.Fragment>
+    <View style={themedStyle.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}>
         <HeaderFunction
@@ -65,7 +66,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
           data={props.functions}
           numColumns={4}
           extraData={props.functions}
-          style={themedStyle.container}
+          style={themedStyle.viewList}
           contentContainerStyle={themedStyle.contentContainer}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
@@ -116,24 +117,26 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
           </Button>
         </Card>
       </Modal>
-    </React.Fragment>
+    </View>
   );
 };
 
 export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewList: {
     backgroundColor: theme['color-primary-12'],
-    marginHorizontal: pxToPercentage(180),
   },
   contentContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: pxToPercentage(12),
   },
-  viewCard: {
-    width: pxToPercentage(500),
-  },
   backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: theme['color-custom-800'],
   },
   btnItem: {
     width: pxToPercentage(420), // w 186

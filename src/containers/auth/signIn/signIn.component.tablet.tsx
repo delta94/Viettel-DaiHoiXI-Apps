@@ -33,6 +33,7 @@ import {
 } from '@src/assets/icons';
 import { IconElement } from '@src/assets/icons/icon.component';
 import { SignInTabEnum } from '@src/core/utils/constants';
+import { viewStyle } from '@src/components/viewStyle';
 
 interface ComponentProps {
   onSignInAccountPress: (formData: SignInAccountFormData) => void;
@@ -40,7 +41,7 @@ interface ComponentProps {
   onForgotPasswordPress: () => void;
 }
 
-export type SignInProps = ThemedComponentProps & ComponentProps;
+export type SignInTabletProps = ThemedComponentProps & ComponentProps;
 
 interface State {
   selectedTabIndex: number;
@@ -48,7 +49,7 @@ interface State {
   phoneNumberFormData: SignInPhoneNumberFormData;
 }
 
-const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
+const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props) => {
   const [state, setState] = useState<State>({
     selectedTabIndex: SignInTabEnum.Account,
     accountFormData: undefined,
@@ -110,167 +111,180 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
   return (
     <ScrollableAvoidKeyboard>
       <View style={themedStyle.container}>
-        <View style={themedStyle.sectionHeader}>
-          <Text style={themedStyle.txtHeaderTitle}>
-            {'ĐẠI HỘI XI'}
-          </Text>
-          <Text style={themedStyle.txtHeaderSubtitle}>
-            {'ĐẢNG BỘ TP HỒ CHÍ MINH'}
-          </Text>
-          <Image
-            source={imageNationalEmblem.imageSource}
-            style={themedStyle.imgNationalEmblem}
-          />
-        </View>
-        <View style={themedStyle.sectionTab}>
-          <TabView
-            style={themedStyle.tabView}
-            tabBarStyle={themedStyle.tabBar}
-            indicatorStyle={themedStyle.tabViewIndicator}
-            selectedIndex={state.selectedTabIndex}
-            onSelect={onTabSelect}>
-            <Tab
-              title='Tài khoản'
-              titleStyle={themedStyle.tabTitle}>
-              <SignInAccountForm
-                style={themedStyle.tabContentContainer}
-                onDataChange={onAccountFormDataChange}
-              />
-            </Tab>
-            <Tab
-              title='Số điện thoại'
-              titleStyle={themedStyle.tabTitle}>
-              <View>
-                <SignInPhoneNumberForm
+        <View style={themedStyle.sectionBox}>
+          <View style={themedStyle.sectionHeader}>
+            <Text style={themedStyle.txtHeaderTitle}>
+              {'ĐẠI HỘI XI'}
+            </Text>
+            <Text style={themedStyle.txtHeaderSubtitle}>
+              {'ĐẢNG BỘ TP HỒ CHÍ MINH'}
+            </Text>
+            <Image
+              source={imageNationalEmblem.imageSource}
+              style={themedStyle.imgNationalEmblem}
+            />
+          </View>
+          <View style={themedStyle.sectionTab}>
+            <TabView
+              style={themedStyle.tabView}
+              tabBarStyle={themedStyle.tabBar}
+              indicatorStyle={themedStyle.tabViewIndicator}
+              selectedIndex={state.selectedTabIndex}
+              onSelect={onTabSelect}>
+              <Tab
+                title='Tài khoản'
+                titleStyle={themedStyle.tabTitle}>
+                <SignInAccountForm
                   style={themedStyle.tabContentContainer}
-                  onDataChange={onPhoneNumberFormDataChange}
+                  onDataChange={onAccountFormDataChange}
                 />
-              </View>
-            </Tab>
-          </TabView>
-          <Button
-            size={'large'}
-            style={themedStyle.btnSignIn}
-            onPress={onSignInButtonPress}>
-            {isAccountTab() ? 'Đăng nhập' : 'Tiếp theo'}
-          </Button>
-          {isAccountTab() &&
-            (<React.Fragment>
-              <TouchableOpacity
-                activeOpacity={0.75}
-                style={themedStyle.btnForgotPassword}
-                onPress={onForgotPasswordButtonPress}>
-                <Text style={themedStyle.txtBtnForgotPassword}>
-                  {'Quên mật khẩu?'}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.75}
-                style={themedStyle.btnRecognize}>
-                {renderRecognizeIcon()}
-                <Text style={themedStyle.txtBtnRecognize}>
-                  {'Đăng nhập bằng vân tay'}
-                </Text>
-              </TouchableOpacity>
-            </React.Fragment>)}
-          {!isAccountTab() &&
-            (<Text style={themedStyle.txtOtpNote}>
-              {'Chúng tôi sẽ gửi một SMS chưa mã OTP đến số điện thoại này'}
-            </Text>)}
+              </Tab>
+              <Tab
+                title='Số điện thoại'
+                titleStyle={themedStyle.tabTitle}>
+                <View>
+                  <SignInPhoneNumberForm
+                    style={themedStyle.tabContentContainer}
+                    onDataChange={onPhoneNumberFormDataChange}
+                  />
+                </View>
+              </Tab>
+            </TabView>
+            <Button
+              size={'large'}
+              style={themedStyle.btnSignIn}
+              onPress={onSignInButtonPress}>
+              {isAccountTab() ? 'Đăng nhập' : 'Tiếp theo'}
+            </Button>
+            {isAccountTab() &&
+              (<React.Fragment>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  style={themedStyle.btnForgotPassword}
+                  onPress={onForgotPasswordButtonPress}>
+                  <Text style={themedStyle.txtBtnForgotPassword}>
+                    {'Quên mật khẩu?'}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  style={themedStyle.btnRecognize}>
+                  {renderRecognizeIcon()}
+                  <Text style={themedStyle.txtBtnRecognize}>
+                    {'Đăng nhập bằng vân tay'}
+                  </Text>
+                </TouchableOpacity>
+              </React.Fragment>)}
+            {!isAccountTab() &&
+              (<Text style={themedStyle.txtOtpNote}>
+                {'Chúng tôi sẽ gửi một SMS chưa mã OTP đến số điện thoại này'}
+              </Text>)}
+          </View>
         </View>
       </View>
     </ScrollableAvoidKeyboard>
   );
 };
 
-export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
+export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme['color-primary-2'],
+  },
+  sectionBox: {
+    width: pxToPercentage(900),
+    height: pxToPercentage(1200),
     backgroundColor: theme['color-custom-100'],
+    borderRadius: pxToPercentage(40),
+    ...viewStyle.shadow1,
   },
   sectionHeader: {
     justifyContent: 'flex-end',
     alignItems: 'center',
-    minHeight: pxToPercentage(255),
+    minHeight: pxToPercentage(400),
     paddingHorizontal: pxToPercentage(16),
-    paddingBottom: pxToPercentage(15),
-    backgroundColor: theme['color-primary-2'],
+    borderTopLeftRadius: pxToPercentage(40),
+    borderTopRightRadius: pxToPercentage(40),
+    backgroundColor: theme['color-primary-0'],
   },
   sectionTab: {
   },
   tabContentContainer: {
-    marginVertical: pxToPercentage(16),
-    paddingHorizontal: pxToPercentage(16),
+    marginVertical: pxToPercentage(32),
+    paddingHorizontal: pxToPercentage(32),
   },
   tabView: {
   },
   tabBar: {
-    backgroundColor: theme['color-primary-2'],
+    height: pxToPercentage(100),
+    backgroundColor: theme['color-primary-0'],
   },
   tabViewIndicator: {
     backgroundColor: theme['color-control-focus-border'],
   },
   tabTitle: {
-    color: theme['color-primary-3'],
+    color: theme['color-primary-2'],
     ...textStyle.proTextBold,
   },
   imgNationalEmblem: {
-    marginTop: pxToPercentage(8.5),
-    height: pxToPercentage(107.5),
-    width: pxToPercentage(107.5) * (153 / 103),
+    marginTop: pxToPercentage(20),
+    height: pxToPercentage(225),
+    width: pxToPercentage(225) * (153 / 103),
   },
   txtHeaderTitle: {
-    fontSize: pxToPercentage(27.5),
-    color: theme['color-primary-0'],
+    fontSize: pxToPercentage(55),
+    color: theme['color-primary-2'],
     ...textStyle.proTextRegular,
   },
   txtHeaderSubtitle: {
-    fontSize: pxToPercentage(17.5),
+    fontSize: pxToPercentage(35),
     marginTop: pxToPercentage(7),
-    color: theme['color-primary-0'],
+    color: theme['color-primary-2'],
     ...textStyle.proTextRegular,
   },
   btnSignIn: {
-    marginHorizontal: pxToPercentage(16),
+    marginHorizontal: pxToPercentage(32),
     backgroundColor: theme['color-primary-2'],
   },
   btnForgotPassword: {
     alignSelf: 'center',
-    marginVertical: pxToPercentage(12),
+    marginVertical: pxToPercentage(24),
   },
   txtBtnForgotPassword: {
-    fontSize: pxToPercentage(14),
+    fontSize: pxToPercentage(28),
     color: theme['color-primary-2'],
-    ...textStyle.proTextRegular,
+    ...textStyle.proTextSemibold,
   },
   btnRecognize: {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginTop: pxToPercentage(10),
+    marginTop: pxToPercentage(20),
   },
   txtBtnRecognize: {
-    marginTop: pxToPercentage(10),
-    fontSize: pxToPercentage(14),
+    marginTop: pxToPercentage(20),
+    fontSize: pxToPercentage(28),
     color: theme['color-primary-2'],
     ...textStyle.proTextRegular,
   },
   txtOtpNote: {
     textAlign: 'center',
-    marginTop: pxToPercentage(10),
-    marginHorizontal: pxToPercentage(32),
-    fontSize: pxToPercentage(14),
+    marginTop: pxToPercentage(20),
+    marginHorizontal: pxToPercentage(64),
+    fontSize: pxToPercentage(28),
     color: theme['text-hint-color'],
     ...textStyle.proTextRegular,
   },
   iconFingerprint: {
-    height: pxToPercentage(40),
-    width: pxToPercentage(40) * (65 / 72),
+    height: pxToPercentage(80),
+    width: pxToPercentage(80) * (65 / 72),
     tintColor: theme['color-primary-2'],
   },
   iconFaceID: {
-    height: pxToPercentage(40),
-    width: pxToPercentage(40),
+    height: pxToPercentage(80),
+    width: pxToPercentage(80),
     tintColor: theme['color-primary-2'],
   },
 }));

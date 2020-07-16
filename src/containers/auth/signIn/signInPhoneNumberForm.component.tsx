@@ -122,15 +122,12 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
   viewCaptcha: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: pxToPercentage(7.5),
+    marginTop: isTablet() ? pxToPercentage(15) : pxToPercentage(7.5),
   },
   inputVerification: {
     width: '63%',
   },
   btnCaptcha: {
     width: '35%',
-  },
-  inputPhoneNumber: {
-    marginTop: isTablet() ? pxToPercentage(22) : pxToPercentage(0),
   },
 }));

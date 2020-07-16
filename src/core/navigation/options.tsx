@@ -5,7 +5,6 @@ import {
 } from 'react-navigation';
 import { MenuContainer } from '@src/containers/menu/menu.container';
 import { ArrowIosBackFill } from '@src/assets/icons';
-import { TopNavigationBar } from './components/topNavigationBar.component';
 import {
   onGetCurrentRouteState,
   isRootRoute,
@@ -14,6 +13,7 @@ import {
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
 import { HomeHeader } from '@src/components/homeHeader/homeHeader.component';
+import { TopNavigationBar } from './components/topNavigationBar.component';
 
 export const routeNameDataSource: { [key: string]: string } = {
   'otp': 'Nhập mã OTP',

@@ -5,6 +5,8 @@ import {
   SignInAccountFormData,
   SignInPhoneNumberFormData,
 } from '@src/core/models/auth/signIn/signIn.model';
+import { isTablet } from 'react-native-device-info';
+import { SignInTablet } from './signIn.component.tablet';
 
 export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'SignInContainer';
@@ -26,6 +28,16 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
   const onForgotPasswordPress = () => {
 
   };
+
+  if (isTablet()) {
+    return (
+      <SignInTablet
+        onSignInAccountPress={onSignInAccountPress}
+        onSignInPhoneNumberPress={onSignInPhoneNumberPress}
+        onForgotPasswordPress={onForgotPasswordPress}
+      />
+    );
+  }
 
   return (
     <SignIn

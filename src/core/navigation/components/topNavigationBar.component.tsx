@@ -6,20 +6,15 @@ import {
 } from '@kitten/theme';
 import {
   ImageProps,
-  View,
-  Text,
 } from 'react-native';
 import {
+  TopNavigation,
+  TopNavigationAction,
+  TopNavigationActionProps,
   TopNavigationProps,
 } from '@kitten/ui';
-import {
-  StarIcon,
-  CommunistIcon,
-} from '@src/assets/icons';
+import { textStyle } from '@src/components';
 import { SafeAreaView } from 'react-navigation';
-import { pxToPercentage } from '@src/core/utils/utils';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { isTablet } from 'react-native-device-info';
 
 export interface ComponentProps {
   backIcon?: BackIconProp;
@@ -29,29 +24,38 @@ export interface ComponentProps {
 export type TopNavigationBarProps = TopNavigationProps & ComponentProps;
 
 type BackIconProp = (style: StyleType) => React.ReactElement<ImageProps>;
+type BackButtonElement = React.ReactElement<TopNavigationActionProps>;
 
 const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> = (props) => {
-  const { themedStyle } = props;
+  const onBackButtonPress = () => {
+    if (props.onBackPress) {
+      props.onBackPress();
+    }
+  };
 
-  const title = 'ĐẠI HỘI ĐẠI BIỂU ĐẢNG BỘ THÀNH PHỐ HỒ CHÍ MINH\nLẦN THỨ XI, NHIỆM KỲ 2020 - 2025';
+  const renderBackButton = (source: BackIconProp): BackButtonElement => {
+    return (
+      <TopNavigationAction
+        icon={source}
+        onPress={onBackButtonPress}
+      />
+    );
+  };
+
+  const { themedStyle, title, backIcon } = props;
+
+  const leftControlElement: BackButtonElement | null = backIcon ? renderBackButton(backIcon) : null;
 
   return (
     <SafeAreaView style={themedStyle.safeArea}>
-      <View style={themedStyle.viewStatusbar}>
-        <View style={themedStyle.viewSession}>
-          <View style={themedStyle.viewFlag}>
-            {CommunistIcon(themedStyle.icon)}
-          </View>
-          <View style={themedStyle.viewFlag}>
-            {StarIcon(themedStyle.icon)}
-          </View>
-          <View style={themedStyle.topNavigation}>
-            <Text style={themedStyle.titleStyle}>
-              {title}
-            </Text>
-          </View>
-        </View>
-      </View>
+      <TopNavigation
+        style={themedStyle.header}
+        alignment='center'
+        title={title}
+        titleStyle={themedStyle.titleStyle}
+        subtitleStyle={textStyle.regular}
+        leftControl={leftControlElement}
+      />
     </SafeAreaView>
   );
 };
@@ -59,40 +63,13 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
 export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme: ThemeType) => ({
   safeArea: {
     backgroundColor: theme['color-primary-2'],
-    paddingTop: getStatusBarHeight(false),
   },
-  viewStatusbar: {
-    backgroundColor: theme['color-primary-0'],
-    paddingTop: pxToPercentage(8),
-  },
-  topNavigation: {
-    flex: 1, // width 596
-    backgroundColor: theme['color-primary-0'],
-    height: pxToPercentage(50),
+  header: {
+    backgroundColor: theme['background-basic-custom-color-3'],
   },
   titleStyle: {
-    color: theme['color-primary-2'],
-    fontSize: isTablet() ? pxToPercentage(16) : pxToPercentage(10), // font size 24 SFProDisplay-Regular
-    textAlign: 'center',
-  },
-  viewFlag: {
-    width: isTablet() ? pxToPercentage(60) : pxToPercentage(40), // width 96
-    height: isTablet() ? pxToPercentage(40) : pxToPercentage(35), // height 64
-    backgroundColor: theme['color-primary-2'],
-    marginHorizontal: isTablet() ? pxToPercentage(19) : pxToPercentage(10),
-    marginLeft: pxToPercentage(0),
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: pxToPercentage(6),
-  },
-  viewSession: {
-    flexDirection: 'row',
-    marginHorizontal: isTablet() ? pxToPercentage(38) : pxToPercentage(10),
-  },
-  icon: {
-    width: isTablet() ? pxToPercentage(26) : pxToPercentage(20),
-    height: isTablet() ? pxToPercentage(22) : pxToPercentage(20),
-    tintColor: theme['color-primary-1'],
-    resizeMode: 'contain',
+    // fontSize: fontSize(3),
+    color: theme['text-control-color'],
+    ...textStyle.semibold,
   },
 }));

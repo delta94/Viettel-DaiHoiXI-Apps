@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { imageNationalEmblem } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   example?: any;
@@ -35,11 +36,10 @@ export const Splash = withStyles(SplashComponent, (theme: ThemeType) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme['color-primary-default'],
+    backgroundColor: theme['color-primary-2'],
   },
   img: {
-    marginTop: pxToPercentage(8.5),
-    height: pxToPercentage(107.5),
-    width: pxToPercentage(107.5) * (153 / 103),
+    height: pxToPercentage(isTablet() ? 215 : 107.5),
+    width: pxToPercentage(isTablet() ? 215 : 107.5) * (153 / 103),
   },
 }));

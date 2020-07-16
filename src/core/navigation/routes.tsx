@@ -31,6 +31,7 @@ import { AccountContainer } from '@src/containers/account/account.container';
 import { ScanQRCodeContainer } from '@src/containers/account/scanQRCode/scanQRCode.container';
 import { DelegateDetailContainer } from '@src/containers/home/delegateDetails/delegateDetail.container';
 import { DelegateGroupContainer } from '@src/containers/home/delegateGroup/delegateGroup.container';
+import { isTablet } from 'react-native-device-info';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -38,7 +39,7 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
   ['forgotPassword']: ExampleContainer,
   ['otp']: {
     screen: OtpContainer,
-    navigationOptions: MenuNavigationOptions,
+    navigationOptions: !isTablet() && MenuNavigationOptions,
   },
 }, {
   defaultNavigationOptions: {

@@ -99,7 +99,7 @@ const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = 
       ]}
       onChangeText={onChangeText}
       textStyle={themedStyle.textStyle}
-      size={isTablet() ? 'large' : 'medium'}
+      size={isTablet() ? 'large' : 'large'}
       maxLength={256}
     />
   );
@@ -111,7 +111,6 @@ export const ValidationInput = withStyles(ValidationInputComponent, (theme: Them
   textStyle: {
     fontSize: isTablet() ? pxToPercentage(28) : pxToPercentage(14),
     padding: 0,
-    marginVertical: pxToPercentage(7, true),
     ...textStyle.regular,
   },
 }));

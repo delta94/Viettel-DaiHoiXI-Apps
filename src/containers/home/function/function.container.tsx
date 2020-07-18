@@ -9,21 +9,15 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
   const navigationKey: string = 'FunctionContainer';
 
   const onFunctionItemPress = (type: number): void => {
+    let routeName: string;
+
     switch (type) {
       case FunctionEnum.ThongTin: {
-        props.navigation.navigate({
-          key: navigationKey,
-          routeName: 'conferenceInfo',
-        });
-
+        routeName = 'conferenceInfo';
         break;
       }
       case FunctionEnum.DanhSachDaiBieu: {
-        props.navigation.navigate({
-          key: navigationKey,
-          routeName: 'delegateList',
-        });
-
+        routeName = 'delegateList';
         break;
       }
       case FunctionEnum.TaiLieu: {
@@ -43,10 +37,11 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.DangKyPhatBieu: {
-
+        routeName = false ? 'speechList' : 'signUpToSpeak';
         break;
       }
       case FunctionEnum.ToThaoLuan: {
+        routeName = 'delegateGroup';
 
         break;
       }
@@ -54,6 +49,11 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
     }
+
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName,
+    });
   };
 
   return (

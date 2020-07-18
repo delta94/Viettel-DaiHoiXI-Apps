@@ -10,24 +10,24 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { Select } from '@kitten/ui';
-import { DelegateList as ListCongressmenModel } from '@src/core/models/delegate/delegateList.model';
+import { DelegateGroup as DelegateGroupModel } from '@src/core/models/delegate/delegateGroup.model';
 import { User as UserModel } from '@src/core/models/user/user.model';
 import { pxToPercentage } from '@src/core/utils/utils';
 import {
   textStyle,
   ValidationInput,
 } from '@src/components';
-import { DelegateListItem } from './delegateListItem';
+import { DelegateGroupItem } from './delegateGroupItem';
 import { StringValidator } from '@src/core/validators';
 
 interface ComponentProps {
-  delegateList: ListCongressmenModel[];
+  delegateGroup: DelegateGroupModel;
   onDelegateItemPress: (delegate: UserModel) => void;
 }
 
-export type DelegateListProps = ThemedComponentProps & ComponentProps;
+export type DelegateGroupProps = ThemedComponentProps & ComponentProps;
 
-const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props) => {
+const DelegateGroupComponent: React.FunctionComponent<DelegateGroupProps> = (props) => {
   const { themedStyle } = props;
   const [selectedIndex, setSelectedIndex] = useState<any>(null);
 
@@ -38,34 +38,36 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewSearch}>
+        <Select
+          data={[
+            { text: 'Tất cả' },
+            { text: 'Tổ 1' },
+            { text: 'Tổ 2' },
+          ]}
+          textStyle={themedStyle.txtSelectInput}
+          selectedOption={selectedIndex}
+          placeholder='Chọn tổ'
+          size={'large'}
+          onSelect={item => setSelectedIndex(item)}>
+        </Select>
         <ValidationInput
+          style={themedStyle.textInput}
           textStyle={textStyle.proTextRegular}
           placeholder='Nhập họ tên đại biểu'
           validator={StringValidator}
           onChangeText={() => { }}
         />
-        <Select
-          data={[
-            { text: 'Tất cả' },
-            { text: 'Đảng Bộ Khối Dân Chủ Đảng' },
-            { text: 'Đảng Bộ Quận 1' },
-          ]}
-          textStyle={themedStyle.txtSelectInput}
-          selectedOption={selectedIndex}
-          placeholder='Chọn đoàn đại biểu'
-          onSelect={item => setSelectedIndex(item)}>
-        </Select>
       </View>
       <FlatList
-        data={props.delegateList}
-        extraData={props.delegateList}
+        data={props.delegateGroup.delegates}
+        extraData={props.delegateGroup}
         contentContainerStyle={themedStyle.flatListContainer}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => {
           return (
-            <DelegateListItem
-              delegateList={item}
-              onDelegateItemPress={onDelegateItemPress}
+            <DelegateGroupItem
+              delegate={item}
+              onPress={() => onDelegateItemPress(item)}
             />
           );
         }}
@@ -75,7 +77,7 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
   );
 };
 
-export const DelegateList = withStyles(DelegateListComponent, (theme: ThemeType) => ({
+export const DelegateGroup = withStyles(DelegateGroupComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     backgroundColor: theme['color-custom-100'],
@@ -84,11 +86,16 @@ export const DelegateList = withStyles(DelegateListComponent, (theme: ThemeType)
     padding: pxToPercentage(8),
   },
   flatListContainer: {
+    paddingVertical: pxToPercentage(4),
+    paddingHorizontal: pxToPercentage(8),
   },
   txtSelectInput: {
     fontSize: pxToPercentage(14),
     padding: 0,
-    marginVertical: pxToPercentage(7, true),
+    // marginVertical: pxToPercentage(7),
     ...textStyle.proTextRegular,
+  },
+  textInput: {
+    marginTop: pxToPercentage(4),
   },
 }));

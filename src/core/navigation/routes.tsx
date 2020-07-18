@@ -22,11 +22,14 @@ import { OtpContainer } from '@src/containers/auth/otp/otp.container';
 import { HomeContainer } from '@src/containers/home/home.container';
 import { FunctionContainer } from '@src/containers/home/function/function.container';
 import { ScanQRCodeContainer } from '@src/containers/home/scanQRCode/scanQRCode.container';
-import { ConferenceInfoContainer } from '@src/containers/home/conferenceInformation/conferenceInfo.container';
-import { NotificationDetailContainer } from '@src/containers/home/conferenceInformation/notificationDetail/notificationDetail.container';
-import { PressReleaseDetailContainer } from '@src/containers/home/conferenceInformation/pressReleaseDetail/pressReleaseDetail.container';
-import { DelegateListContainer } from '@src/containers/home/delegateList/delegateList.container';
-import { DelegateDetailContainer } from '@src/containers/home/delegateList/delegateDetail/delegateDetail.container';
+import { ConferenceInfoContainer } from '@src/containers/home/conferenceInfo/conferenceInfo.container';
+import { NotificationDetailContainer } from '@src/containers/home/conferenceInfo/notificationDetail/notificationDetail.container';
+import { PressReleaseDetailContainer } from '@src/containers/home/conferenceInfo/pressReleaseDetail/pressReleaseDetail.container';
+import { DelegateListContainer } from '@src/containers/home/delegate/delegateList/delegateList.container';
+import { DelegateDetailContainer } from '@src/containers/home/delegate/delegateDetail/delegateDetail.container';
+import { SpeechListContainer } from '@src/containers/home/speechManagement/speechList/speechList.container';
+import { DelegateGroupContainer } from '@src/containers/home/delegate/delegateGroup/delegateGroup.container';
+import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/signUpToSpeak/signUpToSpeak.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -62,7 +65,10 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['notificationDetail']: NotificationDetailContainer,
   ['pressReleaseDetail']: PressReleaseDetailContainer,
   ['delegateList']: DelegateListContainer,
+  ['delegateGroup']: DelegateGroupContainer,
   ['delegateDetail']: DelegateDetailContainer,
+  ['speechList']: SpeechListContainer,
+  ['signUpToSpeak']: SignUpToSpeakContainer,
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
@@ -73,7 +79,7 @@ const createAppRouter = (container: NavigationNavigator<any, NavigationProp<Navi
     ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
     ['app']: container,
-  }, { initialRouteName: 'app' }));
+  }, { initialRouteName: 'splash' }));
 };
 
 export const Router: NavigationContainer = createAppRouter(AppNavigator);

@@ -28,6 +28,6 @@ const HrComponent: React.FunctionComponent<HrProps> = (props) => {
 export const Hr = withStyles(HrComponent, (theme: ThemeType) => ({
   container: {
     height: pxToPercentage(1.001),
-    backgroundColor: theme['color-gray-1300'],
+    backgroundColor: theme['color-basic-400'],
   },
 }));

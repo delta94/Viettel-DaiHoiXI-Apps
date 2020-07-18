@@ -12,6 +12,7 @@ import { UserDetail } from '@src/core/models/user/userDetail.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
+import { Hr } from '@src/components/hr/hr.component';
 
 interface ComponentProps {
   user: UserDetail;
@@ -80,65 +81,65 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
         secondTitle: 'Số đại biểu',
         secondValue: user.delegate_number,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeOne({
         firstTitle: 'Dân tộc',
         firstValue: user.nation,
         secondTitle: 'Giới tính',
         secondValue: user.sex,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeOne({
         firstTitle: 'Quê quán',
         firstValue: user.hometown,
         secondTitle: 'Tôn giáo',
         secondValue: user.religion,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeOne({
         firstTitle: 'Ngày vào đảng dự bị',
         firstValue: user.preparatoryDay,
         secondTitle: 'Ngày vào đảng chính thức',
         secondValue: user.officialDay,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeOne({
         firstTitle: 'Học vấn phổ thông',
         firstValue: user.education,
         secondTitle: 'Học hàm, học vị',
         secondValue: user.degree,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeTwo({
         title: 'Cơ quan',
         value: user.position,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeTwo({
         title: 'Chuyên môn, nghiệp vụ, ngoại ngữ',
         value: user.specialize,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeTwo({
         title: 'Lý luận chính trị',
         value: user.politicalTheory,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeTwo({
         title: 'Kỷ luật',
         value: user.discipline,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeTwo({
         title: 'Khen thưởng',
         value: user.bonus,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeTwo({
         title: 'Đoàn',
         value: user.group,
       })}
-      <View style={themedStyle.breakLine} />
+      <Hr />
       {renderInfoTypeTwo({
         title: 'Ghi chú',
         value: user.note,
@@ -172,9 +173,5 @@ export const DelegateDetailContent = withStyles(DelegateDetailContentComponent, 
     flexDirection: 'row',
     paddingVertical: pxToPercentage(10),
     paddingHorizontal: pxToPercentage(8),
-  },
-  breakLine: {
-    height: pxToPercentage(1),
-    backgroundColor: theme['color-primary-11'],
   },
 }));

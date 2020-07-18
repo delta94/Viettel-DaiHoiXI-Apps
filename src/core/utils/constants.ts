@@ -18,3 +18,11 @@ export enum FunctionEnum {
   DangKyPhatBieu,
   ToThaoLuan,
 }
+
+export enum SpeechStatusEnum {
+  Pending,
+  Refused,
+  Accepted,
+  Speaking,
+  Finished,
+}

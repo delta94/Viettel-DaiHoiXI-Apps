@@ -136,7 +136,7 @@ export const DelegateListItem = withStyles(DelegateListItemComponent, (theme: Th
   },
   viewItem: {
     marginVertical: pxToPercentage(4),
-    borderRadius: pxToPercentage(12.5),
+    borderRadius: pxToPercentage(5),
     backgroundColor: theme['color-basic-100'],
     ...viewStyle.shadow2,
   },

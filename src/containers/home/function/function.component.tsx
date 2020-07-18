@@ -72,8 +72,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
 export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    paddingTop: pxToPercentage(8),
-    paddingHorizontal: pxToPercentage(8),
+    padding: pxToPercentage(8),
   },
   viewList: {
     flex: 1,

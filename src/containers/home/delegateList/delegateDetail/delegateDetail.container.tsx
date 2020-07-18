@@ -8,7 +8,7 @@ export const DelegateDetailContainer: React.FunctionComponent<NavigationInjected
 
   return (
     <DelegateDetail
-      userDetail={userDetailDataFake}
+      delegateDetail={userDetailDataFake}
     />
   );
 };

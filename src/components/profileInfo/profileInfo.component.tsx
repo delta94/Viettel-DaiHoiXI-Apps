@@ -41,83 +41,87 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
   };
 
   return (
-    <View
-      style={[
-        themedStyle.container,
-        style,
-      ]}>
-      <View style={themedStyle.sectionBody}>
-        <Image
-          resizeMode='cover'
-          source={(new RemoteImage(user.avatar)).imageSource}
-          style={themedStyle.imgAvatar}
-        />
-        <View style={themedStyle.viewInfo}>
-          <Text
-            numberOfLines={1}
-            style={[
-              themedStyle.txtInfo,
-              themedStyle.txtBold,
-            ]}>
-            {`Đồng chí ${user.full_name.toUpperCase()}`}
-          </Text>
-          <Text
-            numberOfLines={2}
-            style={[
-              themedStyle.txtInfo,
-              themedStyle.txtItalic,
-            ]}>
-            {user.position}
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={themedStyle.txtInfo}>
-            {'Cơ quan: '}
+    <React.Fragment>
+      <View style={themedStyle.viewCard} />
+
+      <View
+        style={[
+          themedStyle.container,
+          style,
+        ]}>
+        <View style={themedStyle.sectionBody}>
+          <Image
+            resizeMode='cover'
+            source={(new RemoteImage(user.avatar)).imageSource}
+            style={themedStyle.imgAvatar}
+          />
+          <View style={themedStyle.viewInfo}>
             <Text
               numberOfLines={1}
               style={[
                 themedStyle.txtInfo,
                 themedStyle.txtBold,
               ]}>
-              {user.unit}
+              {`Đồng chí ${user.full_name.toUpperCase()}`}
             </Text>
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={themedStyle.txtInfo}>
-            {'Số điện thoại: '}
             <Text
-              numberOfLines={1}
+              numberOfLines={2}
               style={[
                 themedStyle.txtInfo,
-                themedStyle.txtBold,
+                themedStyle.txtItalic,
               ]}>
-              {user.phone}
+              {user.position}
             </Text>
-          </Text>
+            <Text
+              numberOfLines={1}
+              style={themedStyle.txtInfo}>
+              {'Cơ quan: '}
+              <Text
+                numberOfLines={1}
+                style={[
+                  themedStyle.txtInfo,
+                  themedStyle.txtBold,
+                ]}>
+                {user.unit}
+              </Text>
+            </Text>
+            <Text
+              numberOfLines={1}
+              style={themedStyle.txtInfo}>
+              {'Số điện thoại: '}
+              <Text
+                numberOfLines={1}
+                style={[
+                  themedStyle.txtInfo,
+                  themedStyle.txtBold,
+                ]}>
+                {user.phone}
+              </Text>
+            </Text>
+          </View>
+        </View>
+        <View style={themedStyle.sectionFooter}>
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={onEditProfileButtonPress}
+            style={themedStyle.btn}>
+            {EditPersonIconOther(themedStyle.iconBtnEdit)}
+            <Text style={themedStyle.txtBtn}>
+              {'SỬA THÔNG TIN'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={onLogoutButtonPress}
+            style={themedStyle.btn}>
+            {LogoutIconOther(themedStyle.iconBtnLogout)}
+            <Text style={themedStyle.txtBtn}>
+              {'ĐĂNG XUẤT'}
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={themedStyle.sectionFooter}>
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={onEditProfileButtonPress}
-          style={themedStyle.btn}>
-          {EditPersonIconOther(themedStyle.iconBtnEdit)}
-          <Text style={themedStyle.txtBtn}>
-            {'SỬA THÔNG TIN'}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={onLogoutButtonPress}
-          style={themedStyle.btn}>
-          {LogoutIconOther(themedStyle.iconBtnLogout)}
-          <Text style={themedStyle.txtBtn}>
-            {'ĐĂNG XUẤT'}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </React.Fragment>
   );
 };
 
@@ -137,6 +141,12 @@ export const ProfileInfo = withStyles(ProfileInfoComponent, (theme: ThemeType) =
     borderBottomLeftRadius: pxToPercentage(12.5),
     borderBottomRightRadius: pxToPercentage(12.5),
     backgroundColor: theme['background-basic-color-4'],
+  },
+  viewCard: {
+    position: 'absolute',
+    height: pxToPercentage(40),
+    width: pxToPercentage(375),
+    backgroundColor: theme['color-primary-2'],
   },
   btn: {
     flex: 1,

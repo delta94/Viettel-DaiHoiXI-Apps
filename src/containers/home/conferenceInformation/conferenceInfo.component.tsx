@@ -96,8 +96,7 @@ const ConferenceInfoComponent: React.FunctionComponent<ConferenceInfoProps> = (p
 export const ConferenceInfo = withStyles(ConferenceInfoComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    paddingTop: pxToPercentage(8),
-    paddingHorizontal: pxToPercentage(8),
+    padding: pxToPercentage(8),
     backgroundColor: theme['color-primary-11'],
   },
   viewContent: {

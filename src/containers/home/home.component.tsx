@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -64,7 +65,6 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
 
   return (
     <React.Fragment>
-      <View style={themedStyle.viewCard} />
       <View style={themedStyle.container}>
         <ProfileInfo
           user={props.user}
@@ -83,6 +83,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
           </ScrollView>
         </View>
       </View>
+      <SafeAreaView />
     </React.Fragment>
   );
 };
@@ -91,6 +92,7 @@ export const Home = withStyles(HomeComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(8),
+    paddingBottom: pxToPercentage(8),
     backgroundColor: theme['color-primary-11'],
   },
   viewCard: {
@@ -98,11 +100,10 @@ export const Home = withStyles(HomeComponent, (theme: ThemeType) => ({
     backgroundColor: theme['color-primary-2'],
   },
   viewProfileInfo: {
-    top: -pxToPercentage(40),
   },
   viewContent: {
     flex: 1,
-    top: -pxToPercentage(32),
+    marginTop: pxToPercentage(8),
     borderRadius: pxToPercentage(12.5),
     paddingHorizontal: pxToPercentage(8),
     backgroundColor: theme['color-custom-100'],

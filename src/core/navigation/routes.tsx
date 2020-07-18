@@ -25,6 +25,8 @@ import { ScanQRCodeContainer } from '@src/containers/home/scanQRCode/scanQRCode.
 import { ConferenceInfoContainer } from '@src/containers/home/conferenceInformation/conferenceInfo.container';
 import { NotificationDetailContainer } from '@src/containers/home/conferenceInformation/notificationDetail/notificationDetail.container';
 import { PressReleaseDetailContainer } from '@src/containers/home/conferenceInformation/pressReleaseDetail/pressReleaseDetail.container';
+import { DelegateListContainer } from '@src/containers/home/delegateList/delegateList.container';
+import { DelegateDetailContainer } from '@src/containers/home/delegateList/delegateDetail/delegateDetail.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -59,6 +61,8 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['conferenceInfo']: ConferenceInfoContainer,
   ['notificationDetail']: NotificationDetailContainer,
   ['pressReleaseDetail']: PressReleaseDetailContainer,
+  ['delegateList']: DelegateListContainer,
+  ['delegateDetail']: DelegateDetailContainer,
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

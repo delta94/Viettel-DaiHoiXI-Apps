@@ -56,7 +56,7 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
         </Text>
         <ValidationInput
           style={themedStyle.inputOtp}
-          textStyle={textStyle.regular}
+          textStyle={textStyle.proTextRegular}
           placeholder='Mã OTP'
           validator={NumberValidator}
           onChangeText={onOtpInputTextChange}

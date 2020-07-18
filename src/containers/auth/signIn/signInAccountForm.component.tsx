@@ -95,14 +95,14 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
       {...restProps}
       style={[themedStyle.container, style]}>
       <ValidationInput
-        textStyle={textStyle.regular}
+        textStyle={textStyle.proTextRegular}
         placeholder='Tên đăng nhập'
         validator={NameValidator}
         onChangeText={onUsernameInputTextChange}
       />
       <ValidationInput
         style={themedStyle.inputPassword}
-        textStyle={textStyle.regular}
+        textStyle={textStyle.proTextRegular}
         placeholder='Mật khẩu'
         icon={secureTextEntry ? EyeOffIconFill : EyeIconFill}
         onIconPress={onSetSecureTextEntry}

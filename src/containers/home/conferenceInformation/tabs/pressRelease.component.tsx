@@ -59,7 +59,7 @@ const PressReleaseComponent: React.FunctionComponent<PressReleaseProps> = (props
 export const PressRelease = withStyles(PressReleaseComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    color: theme['color-custom-100'],
+    backgroundColor: theme['color-custom-100'],
   },
   scrollViewContainer: {
     padding: pxToPercentage(8),

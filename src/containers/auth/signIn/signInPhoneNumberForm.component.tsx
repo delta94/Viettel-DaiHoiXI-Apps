@@ -84,7 +84,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
       style={[themedStyle.container, style]}>
       <ValidationInput
         style={themedStyle.inputPhoneNumber}
-        textStyle={textStyle.regular}
+        textStyle={textStyle.proTextRegular}
         placeholder='Số điện thoại'
         validator={PhoneNumberValidator}
         onChangeText={onUsernameInputTextChange}
@@ -92,7 +92,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput
           style={themedStyle.inputVerification}
-          textStyle={textStyle.regular}
+          textStyle={textStyle.proTextRegular}
           placeholder='Mã xác nhận'
           validator={NumberValidator}
           onChangeText={onUsernameInputTextChange}

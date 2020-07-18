@@ -18,6 +18,7 @@ import {
 import { SafeAreaView } from 'react-navigation';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface ComponentProps {
   title: string;
@@ -96,6 +97,7 @@ const HomeNavigationBarComponent: React.FunctionComponent<HomeNavigationBarProps
 
 export const HomeNavigationBar = withStyles(HomeNavigationBarComponent, (theme: ThemeType) => ({
   safeArea: {
+    paddingTop: getStatusBarHeight(false),
     backgroundColor: theme['color-primary-2'],
   },
   header: {
@@ -103,7 +105,7 @@ export const HomeNavigationBar = withStyles(HomeNavigationBarComponent, (theme: 
   },
   titleStyle: {
     color: theme['text-control-color'],
-    ...textStyle.semibold,
+    ...textStyle.proTextSemibold,
   },
   iconQRCode: {
     width: pxToPercentage(25),

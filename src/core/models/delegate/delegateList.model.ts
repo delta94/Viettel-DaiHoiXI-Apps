@@ -1,11 +1,12 @@
 import { Type } from 'class-transformer';
 import { User } from '../user/user.model';
-export class ListCongressmen {
-  doanDB: string;
+
+export class DelegateList {
+  group: string;
   @Type(() => User)
-  congressmen: User[];
+  delegates: User[];
 
   constructor() {
-    this.congressmen = [];
+    this.delegates = [];
   }
 }

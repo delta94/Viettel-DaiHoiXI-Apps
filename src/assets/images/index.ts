@@ -448,3 +448,7 @@ export const imageNationalEmblem: ImageSource = {
 export const imageUserCircle: ImageSource = {
   imageSource: require('./source/image-user-circle.png'),
 };
+
+export const imageBannerName: ImageSource = {
+  imageSource: require('./source/image-banner-name.png'),
+};

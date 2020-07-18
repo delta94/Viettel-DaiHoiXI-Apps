@@ -36,6 +36,7 @@ const NotificationComponent: React.FunctionComponent<NotificationProps> = (props
       <FlatList
         data={props.notifications}
         extraData={props.notifications}
+        style={themedStyle.flatList}
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={themedStyle.scrollViewContainer}
@@ -59,7 +60,10 @@ const NotificationComponent: React.FunctionComponent<NotificationProps> = (props
 export const Notification = withStyles(NotificationComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    color: theme['color-custom-100'],
+    backgroundColor: theme['color-custom-100'],
+  },
+  flatList: {
+    backgroundColor: theme['color-custom-100'],
   },
   scrollViewContainer: {
     padding: pxToPercentage(8),

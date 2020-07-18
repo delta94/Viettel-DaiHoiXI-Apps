@@ -19,6 +19,10 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.DanhSachDaiBieu: {
+        props.navigation.navigate({
+          key: navigationKey,
+          routeName: 'delegateList',
+        });
 
         break;
       }

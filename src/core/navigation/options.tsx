@@ -21,6 +21,8 @@ export const routeNameDataSource: { [key: string]: string } = {
   'conferenceInfo': 'Thông tin',
   'notificationDetail': 'Chi tiết thông báo',
   'pressReleaseDetail': 'Chi tiết thông cáo',
+  'delegateList': 'Danh sách đại biểu',
+  'delegateDetail': 'Thông tin đại biểu',
 
   // 'meetingNotification': 'Thông báo kỳ họp',
   // 'meetingNotificationDetail': 'Chi tiết thông báo',
@@ -28,7 +30,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   // 'pressReleaseDetail': 'Chi tiết thông cáo',
   // 'account': 'Tài khoản',
   // 'programme': 'Chương trình',
-  // 'delegateDetail': 'Chi tiết đại biểu',
+
   // 'delegateGroup': 'Danh sách tổ',
 };
 

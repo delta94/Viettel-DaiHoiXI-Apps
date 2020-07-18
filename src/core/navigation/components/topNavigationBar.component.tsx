@@ -15,6 +15,8 @@ import {
 } from '@kitten/ui';
 import { textStyle } from '@src/components';
 import { SafeAreaView } from 'react-navigation';
+import { pxToPercentage } from '@src/core/utils/utils';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export interface ComponentProps {
   backIcon?: BackIconProp;
@@ -62,6 +64,7 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
 
 export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme: ThemeType) => ({
   safeArea: {
+    paddingTop: getStatusBarHeight(false),
     backgroundColor: theme['color-primary-2'],
   },
   header: {
@@ -69,6 +72,6 @@ export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme: Th
   },
   titleStyle: {
     color: theme['text-control-color'],
-    ...textStyle.semibold,
+    ...textStyle.proTextSemibold,
   },
 }));

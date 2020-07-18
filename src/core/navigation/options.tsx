@@ -64,6 +64,7 @@ const MenuTopNavigationParams: TopNavigationParams = {
 
 const HomeMenuTopNavigationParams: TopNavigationParams = {
   header: (props: NavigationInjectedProps): TopNavigationElement => {
+    const keyNavigation: string = 'HomeMenuTopNavigation';
     const { routeName } = onGetCurrentRouteState(props.navigation);
     const index: number = onGetCurrentRouteIndex(props.navigation);
 
@@ -72,6 +73,10 @@ const HomeMenuTopNavigationParams: TopNavigationParams = {
     };
 
     const onQRCodePress = () => {
+      props.navigation.navigate({
+        key: keyNavigation,
+        routeName: 'scanQRCode',
+      });
     };
 
     const onMessagePress = () => {

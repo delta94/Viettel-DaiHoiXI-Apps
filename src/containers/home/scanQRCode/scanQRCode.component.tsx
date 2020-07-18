@@ -18,7 +18,7 @@ import {
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
-import { ModalScanQRCode } from './modalScanQRCode.component';
+import { MyQRCodeModal } from './myQRCodeModal.component';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 
@@ -52,29 +52,27 @@ const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) =>
   return (
     <TouchableWithoutFeedback onPress={onKeyboarDismiss}>
       <View style={themedStyle.container}>
-        <View style={themedStyle.sectionTop}>
-          <View style={themedStyle.viewHeader}>
-            <View style={themedStyle.viewHeaderLeft}>
-              {<TouchableOpacity
-                activeOpacity={0.75}
-                onPress={onBackPress}>
-                {CloseIcon(themedStyle.iconClose)}
-              </TouchableOpacity>}
-            </View>
-            <View style={themedStyle.viewHeaderRight}>
-              <TouchableOpacity
-                activeOpacity={0.75}
-                style={themedStyle.btnPhotoLibrary}>
-                {PhotoLibraryIcon(themedStyle.iconPhoto)}
-                <Text style={themedStyle.txtPhotoLibrary}>
-                  {'Thư viện'}
-                </Text>
-              </TouchableOpacity>
-            </View>
+        <View style={themedStyle.viewHeader}>
+          <View style={themedStyle.viewHeaderLeft}>
+            {<TouchableOpacity
+              activeOpacity={0.75}
+              onPress={onBackPress}>
+              {CloseIcon(themedStyle.iconClose)}
+            </TouchableOpacity>}
           </View>
-          <View style={themedStyle.viewBody}>
-            <View style={themedStyle.viewQRCode} />
+          <View style={themedStyle.viewHeaderRight}>
+            <TouchableOpacity
+              activeOpacity={0.75}
+              style={themedStyle.btnPhotoLibrary}>
+              {PhotoLibraryIcon(themedStyle.iconPhoto)}
+              <Text style={themedStyle.txtPhotoLibrary}>
+                {'Thư viện'}
+              </Text>
+            </TouchableOpacity>
           </View>
+        </View>
+        <View style={themedStyle.viewBody}>
+          <View style={themedStyle.viewQRCode} />
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={onMyQRPress}
@@ -85,12 +83,7 @@ const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) =>
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={themedStyle.sectionFooter}>
-          <Text style={themedStyle.txtFooter}>
-            {'Quý đại biểu vui lòng quẹt QR CODE qua máy\n scan mã đặt ở bàn điểm danh để điểm danh\n trước khi vào hội trường'}
-          </Text>
-        </View>
-        <ModalScanQRCode
+        <MyQRCodeModal
           isVisible={isVisibleMyQRCode}
           onClosePress={onClosePress}
         />
@@ -105,23 +98,6 @@ export const ScanQRCode = withStyles(ScanQRCodeComponent, (theme: ThemeType) => 
     paddingTop: getStatusBarHeight(false),
     backgroundColor: theme['background-custom-color-2'],
   },
-  sectionTop: {
-    flex: 1,
-    justifyContent: 'space-between',
-    paddingBottom: heightPercentageToDP(2.5),
-  },
-  sectionFooter: {
-    height: heightPercentageToDP(20),
-    backgroundColor: theme['background-basic-color-1'],
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: pxToPercentage(30),
-  },
-  txtFooter: {
-    fontSize: pxToPercentage(17),
-    textAlign: 'center',
-    color: theme['background-custom-color-2'],
-  },
   viewHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -129,10 +105,19 @@ export const ScanQRCode = withStyles(ScanQRCodeComponent, (theme: ThemeType) => 
     paddingHorizontal: pxToPercentage(16),
   },
   viewBody: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingBottom: heightPercentageToDP(6.5),
+  },
+  viewQRCode: {
+    height: pxToPercentage(343),
+    width: pxToPercentage(343),
+    borderRadius: pxToPercentage(16),
+    backgroundColor: theme['background-custom-color-4'],
   },
   btnMyQR: {
+    marginTop: pxToPercentage(25),
     alignItems: 'center',
   },
   iconQRCode: {
@@ -141,25 +126,20 @@ export const ScanQRCode = withStyles(ScanQRCodeComponent, (theme: ThemeType) => 
     tintColor: theme['background-custom-color-3'],
   },
   txtQR: {
-    fontSize: pxToPercentage(16),
+    fontSize: pxToPercentage(14),
+    marginTop: pxToPercentage(5),
     color: theme['background-basic-color-1'],
-    ...textStyle.bold,
-  },
-  viewQRCode: {
-    backgroundColor: theme['background-custom-color-4'],
-    height: pxToPercentage(343),
-    width: pxToPercentage(343),
-    borderRadius: pxToPercentage(15),
+    ...textStyle.proTextBold,
   },
   btnPhotoLibrary: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   txtPhotoLibrary: {
-    marginLeft: pxToPercentage(10),
+    marginLeft: pxToPercentage(5),
     fontSize: pxToPercentage(14),
     color: theme['background-basic-color-1'],
-    ...textStyle.bold,
+    ...textStyle.proTextBold,
   },
   iconClose: {
     width: pxToPercentage(25),

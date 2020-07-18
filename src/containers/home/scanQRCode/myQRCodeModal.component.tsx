@@ -2,8 +2,8 @@ import React from 'react';
 import {
   View,
   Text,
+  TouchableOpacity,
 } from 'react-native';
-import Modal from 'react-native-modal';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -11,17 +11,20 @@ import {
 } from '@kitten/theme';
 import {
   QRCodeIcon,
+  CloseIconOutline,
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { textStyle } from '@src/components';
+import Modal from 'react-native-modal';
 
 interface ComponentProps {
   isVisible: boolean;
   onClosePress: () => void;
 }
 
-export type ModalScanQRCodeProps = ThemedComponentProps & ComponentProps;
+export type MyQRCodeModalProps = ThemedComponentProps & ComponentProps;
 
-const ModalScanQRCodeComponent: React.FunctionComponent<ModalScanQRCodeProps> = (props) => {
+const MyQRCodeModalComponent: React.FunctionComponent<MyQRCodeModalProps> = (props) => {
   const onClosePress = (): void => {
     props.onClosePress();
   };
@@ -34,7 +37,7 @@ const ModalScanQRCodeComponent: React.FunctionComponent<ModalScanQRCodeProps> = 
       animationIn='slideInUp'
       animationOut='slideOutDown'
       onBackdropPress={onClosePress}
-      backdropColor={null}
+      backdropOpacity={0.5}
       swipeDirection={['down']}
       onSwipeComplete={onClosePress}
       onBackButtonPress={onClosePress}
@@ -43,13 +46,19 @@ const ModalScanQRCodeComponent: React.FunctionComponent<ModalScanQRCodeProps> = 
       style={themedStyle.container}>
       <View style={themedStyle.viewBox}>
         <View style={themedStyle.viewHeader}>
-          <Text style={themedStyle.txtTitle}>{'MÃ QR CODE CỦA TÔI'}</Text>
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={onClosePress}
+            style={themedStyle.btnClose}>
+            {CloseIconOutline(themedStyle.iconClose)}
+          </TouchableOpacity>
+          <Text style={themedStyle.txtTitle}>
+            {'MÃ QR CODE CỦA TÔI'}
+          </Text>
         </View>
-        <View>
-          <View style={themedStyle.viewQRCode}>
-            {QRCodeIcon(themedStyle.iconQRCode)}
-          </View>
-          <Text style={themedStyle.txtFooter}>
+        <View style={themedStyle.viewQRCode}>
+          {QRCodeIcon(themedStyle.iconQRCode)}
+          <Text style={themedStyle.txtNote}>
             {'Quý đại biểu vui lòng quẹt QR CODE qua máy\n scan mã đặt ở bàn điểm danh để điểm danh\n trước khi vào hội trường'}
           </Text>
         </View>
@@ -58,48 +67,51 @@ const ModalScanQRCodeComponent: React.FunctionComponent<ModalScanQRCodeProps> = 
   );
 };
 
-export const ModalScanQRCode = withStyles(ModalScanQRCodeComponent, (theme: ThemeType) => ({
+export const MyQRCodeModal = withStyles(MyQRCodeModalComponent, (theme: ThemeType) => ({
   container: {
     margin: 0,
+    justifyContent: 'flex-end',
   },
   viewBox: {
-    flex: 1,
+    height: pxToPercentage(475),
     backgroundColor: 'white',
   },
   viewHeader: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme['color-primary-11'],
-    borderRadius: pxToPercentage(10),
+  },
+  viewQRCode: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: pxToPercentage(20),
   },
   txtTitle: {
-    fontSize: pxToPercentage(18),
-    alignItems: 'center',
-    fontWeight: 'bold',
+    fontSize: pxToPercentage(15),
     paddingVertical: pxToPercentage(10),
+    color: theme['text-basic-color'],
+    ...textStyle.proTextSemibold,
   },
-  txtFooter: {
-    fontSize: pxToPercentage(17),
+  iconQRCode: {
+    width: pxToPercentage(300),
+    height: pxToPercentage(300),
+  },
+  txtNote: {
+    marginTop: pxToPercentage(20),
+    fontSize: pxToPercentage(15),
     textAlign: 'center',
     color: theme['background-custom-color-2'],
-    marginTop: pxToPercentage(20),
+    ...textStyle.proTextRegular,
+  },
+  btnClose: {
+    position: 'absolute',
+    alignSelf: 'flex-start',
+    marginLeft: pxToPercentage(5),
   },
   iconClose: {
     width: pxToPercentage(28),
     height: pxToPercentage(28),
-  },
-  iconQRCode: {
-    width: pxToPercentage(250),
-    height: pxToPercentage(250),
-  },
-  bntClose: {
-    alignSelf: 'flex-start',
-    marginTop: pxToPercentage(5),
-    marginLeft: pxToPercentage(5),
-  },
-  viewQRCode: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: pxToPercentage(20),
+    tintColor: theme['color-basic-800'],
   },
 }));

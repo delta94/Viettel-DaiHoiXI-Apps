@@ -58,7 +58,12 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['programme']: ProgrammeContainer,
   ['delegateDetail']: DelegateDetailContainer,
   ['delegateGroup']: DelegateGroupContainer,
-  ['scanQRCode']: ScanQRCodeContainer,
+  ['scanQRCode']: {
+    screen: ScanQRCodeContainer,
+    navigationOptions: {
+      header: null,
+    },
+  },
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
@@ -69,7 +74,7 @@ const createAppRouter = (container: NavigationNavigator<any, NavigationProp<Navi
     ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
     ['app']: container,
-  }, { initialRouteName: 'splash' }));
+  }, { initialRouteName: 'app' }));
 };
 
 export const Router: NavigationContainer = createAppRouter(AppNavigator);

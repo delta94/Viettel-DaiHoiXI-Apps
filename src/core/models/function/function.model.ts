@@ -1,4 +1,3 @@
-import { IconSource } from '@src/assets/icons';
 import { StyleType } from '@kitten/theme';
 import { ImageProps } from 'react-native';
 

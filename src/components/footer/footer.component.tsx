@@ -13,9 +13,9 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { isTablet } from 'react-native-device-info';
 import { widthPercentageToDP } from 'react-native-responsive-screen';
 
-export type HomeFooterProps = ThemedComponentProps;
+export type FooterProps = ThemedComponentProps;
 
-const HomeFooterComponent: React.FunctionComponent<HomeFooterProps> = (props) => {
+const FooterComponent: React.FunctionComponent<FooterProps> = (props) => {
   const { themedStyle } = props;
 
   const title = 'CHÀO MỪNG ĐẠI HỘI ĐẠI BIỂU ĐẢNG BỘ THÀNH PHỐ HỒ CHÍ MINH LẦN THỨ XI, NHIỆM KỲ 2020 - 2025';
@@ -29,7 +29,7 @@ const HomeFooterComponent: React.FunctionComponent<HomeFooterProps> = (props) =>
   );
 };
 
-export const HomeFooter = withStyles(HomeFooterComponent, (theme: ThemeType) => ({
+export const Footer = withStyles(FooterComponent, (theme: ThemeType) => ({
   container: {
     backgroundColor: theme['color-primary-2'],
     height: pxToPercentage(32), // hieght 74

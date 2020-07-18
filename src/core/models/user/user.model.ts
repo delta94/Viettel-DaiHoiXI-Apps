@@ -7,7 +7,4 @@ export class User {
   group: string;
   team_number: number;
   delegate_number: number;
-  //
-  sdb?: string;
-  to?: number;
 }

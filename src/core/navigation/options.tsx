@@ -8,7 +8,6 @@ import {
   onGetCurrentRouteState,
   isRootRoute,
   onGetCurrentRouteIndex,
-  NavigationRouteState,
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
 import { TopNavigationBar } from './components/topNavigationBar.component';
@@ -23,15 +22,6 @@ export const routeNameDataSource: { [key: string]: string } = {
   'pressReleaseDetail': 'Chi tiết thông cáo',
   'delegateList': 'Danh sách đại biểu',
   'delegateDetail': 'Thông tin đại biểu',
-
-  // 'meetingNotification': 'Thông báo kỳ họp',
-  // 'meetingNotificationDetail': 'Chi tiết thông báo',
-  // 'pressRelease': 'Thông cáo báo chí',
-  // 'pressReleaseDetail': 'Chi tiết thông cáo',
-  // 'account': 'Tài khoản',
-  // 'programme': 'Chương trình',
-
-  // 'delegateGroup': 'Danh sách tổ',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

@@ -23,7 +23,7 @@ import { AlternativeFunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
 import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfoV2.component';
 import { HeaderFunction } from '@src/components/headerFunction/headerFunction.component';
-import { HomeFooter } from '@src/components/homeFooter/homeFooter.component';
+import { Footer } from '@src/components/footer/footer.component';
 import { UserDetail } from '@src/core/models/user/userDetail.model';
 
 interface ComponentProps {
@@ -84,7 +84,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
           }}
         />
       </ScrollView>
-      <HomeFooter />
+      <Footer />
       <Modal
         visible={visible}
         backdropStyle={themedStyle.backdrop}

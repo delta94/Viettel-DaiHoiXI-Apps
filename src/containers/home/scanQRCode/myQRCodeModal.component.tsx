@@ -94,8 +94,8 @@ export const MyQRCodeModal = withStyles(MyQRCodeModalComponent, (theme: ThemeTyp
     ...textStyle.proTextSemibold,
   },
   iconQRCode: {
-    width: pxToPercentage(300),
-    height: pxToPercentage(300),
+    width: pxToPercentage(275),
+    height: pxToPercentage(275),
   },
   txtNote: {
     marginTop: pxToPercentage(20),

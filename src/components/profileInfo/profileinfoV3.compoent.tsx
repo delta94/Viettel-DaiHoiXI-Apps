@@ -13,7 +13,10 @@ import {
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
 import { UserDetail as UserDetailModel } from '@src/core/models/user/userDetail.model';
-import { RemoteImage, imageBannerName } from '@src/assets/images';
+import {
+  RemoteImage,
+  imageBannerName,
+} from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
 
@@ -32,7 +35,6 @@ const ProfileInfoV3Component: React.FunctionComponent<ProfileInfoV3Props> = (pro
         themedStyle.container,
         style,
       ]}>
-      <View style={themedStyle.viewCard} />
       <View style={themedStyle.sectionBody}>
         <Image
           resizeMode='cover'

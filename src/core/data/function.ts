@@ -1,5 +1,14 @@
 import { FunctionModel } from '../models/function/function.model';
-import { InformationIconOther, DelegateListIconOther, DocumentIconOther, AssetsIconOther, SeatMapIconOther, PersonIconOther, SignUpToSpeakIconOther, PeopleIconOther } from '@src/assets/icons';
+import {
+  InformationIconOther,
+  DelegateListIconOther,
+  DocumentIconOther,
+  AssetsIconOther,
+  SeatMapIconOther,
+  PersonIconOther,
+  SignUpToSpeakIconOther,
+  PeopleIconOther,
+} from '@src/assets/icons';
 import { FunctionEnum } from '../utils/constants';
 
 export const functionDataFake: FunctionModel[] = [

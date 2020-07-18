@@ -15,7 +15,6 @@ import {
 } from '@kitten/ui';
 import { textStyle } from '@src/components';
 import { SafeAreaView } from 'react-navigation';
-import { pxToPercentage } from '@src/core/utils/utils';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export interface ComponentProps {

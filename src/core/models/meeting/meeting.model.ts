@@ -3,11 +3,10 @@ export class MeetingItem {
   fromTime: string;
   toTime: string;
   date: string;
-  week: string;
-  numberOfDate: string;
+  day: string;
+  isExample: boolean;
 }
 
 export class Meeting {
-  default: MeetingItem[];
-  pink: MeetingItem[];
+  meetings: MeetingItem[];
 }

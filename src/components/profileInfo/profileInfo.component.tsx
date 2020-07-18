@@ -7,9 +7,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
-import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
@@ -20,191 +17,169 @@ import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
 import {
-  QRCodeIcon,
   LogoutIconThin,
-  ChatIconDark,
   UserEditIcon,
 } from '@src/assets/icons';
 
 interface ComponentProps {
   user: User;
-  children?: React.ReactNode;
+  onEditProfilePress: () => void;
+  onLogoutPress: () => void;
 }
-
-import { SafeAreaView } from 'react-navigation';
 
 export type ProfileInfoProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) => {
-  const { style, themedStyle, user, children, ...restProps } = props;
+  const { style, themedStyle, user } = props;
 
-  const Footer = () => (
-    <View  {...props} style={themedStyle.fotterView}>
-      <TouchableOpacity
-        style={themedStyle.btn}
-        activeOpacity={0.75}>
-        {UserEditIcon(themedStyle.iconLogout)}
-        <Text style={themedStyle.txtButton}>{'SỬA THÔNG TIN'}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={themedStyle.btn}
-        activeOpacity={0.75}>
-        {LogoutIconThin(themedStyle.iconLogout)}
-        <Text style={themedStyle.txtButton}>{'ĐĂNG XUẤT'}</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  const onEditProfileButtonPress = (): void => {
+    props.onEditProfilePress();
+  };
 
-  const TopMenu = () => (
-    <View  {...props} style={themedStyle.headerView}>
-      {QRCodeIcon(themedStyle.qrCodeicon)}
-      {ChatIconDark(themedStyle.qrCodeicon)}
-    </View>
-  );
+  const onLogoutButtonPress = (): void => {
+    props.onLogoutPress();
+  };
 
-  const CardItem = () => {
-    return (
-      <View style={themedStyle.cardDetailView}>
+  return (
+    <View
+      style={[
+        themedStyle.container,
+        style,
+      ]}>
+      <View style={themedStyle.sectionBody}>
         <Image
-          resizeMode='stretch'
+          resizeMode='cover'
           source={(new RemoteImage(user.avatar)).imageSource}
-          style={themedStyle.img}
+          style={themedStyle.imgAvatar}
         />
-        <View style={themedStyle.sectionDetails}>
+        <View style={themedStyle.viewInfo}>
           <Text
             numberOfLines={1}
-            style={themedStyle.txtName}>
-            {'Đồng chí '}{user.full_name}
+            style={[
+              themedStyle.txtInfo,
+              themedStyle.txtBold,
+            ]}>
+            {`Đồng chí ${user.full_name.toUpperCase()}`}
           </Text>
           <Text
             numberOfLines={2}
-            style={themedStyle.txtPosition}>
+            style={[
+              themedStyle.txtInfo,
+              themedStyle.txtItalic,
+            ]}>
             {user.position}
           </Text>
           <Text
             numberOfLines={1}
-            style={themedStyle.txtPhone}>
-            {'Cơ quan: '}{user.organ}
+            style={themedStyle.txtInfo}>
+            {'Cơ quan: '}
+            <Text
+              numberOfLines={1}
+              style={[
+                themedStyle.txtInfo,
+                themedStyle.txtBold,
+              ]}>
+              {user.organ}
+            </Text>
           </Text>
           <Text
             numberOfLines={1}
-            style={themedStyle.txtPhone}>
-            {'Số điện thoại: '}{user.phone}
+            style={themedStyle.txtInfo}>
+            {'Số điện thoại: '}
+            <Text
+              numberOfLines={1}
+              style={[
+                themedStyle.txtInfo,
+                themedStyle.txtBold,
+              ]}>
+              {user.phone}
+            </Text>
           </Text>
-          {children}
         </View>
       </View>
-    );
-  };
-
-  return (
-    <SafeAreaView>
-      <View style={themedStyle.backgroundView}>
+      <View style={themedStyle.sectionFooter}>
+        <TouchableOpacity
+          activeOpacity={0.75}
+          onPress={onEditProfileButtonPress}
+          style={themedStyle.btn}>
+          {UserEditIcon(themedStyle.iconBtnEdit)}
+          <Text style={themedStyle.txtBtn}>
+            {'SỬA THÔNG TIN'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.75}
+          onPress={onLogoutButtonPress}
+          style={themedStyle.btn}>
+          {LogoutIconThin(themedStyle.iconBtnLogout)}
+          <Text style={themedStyle.txtBtn}>
+            {'ĐĂNG XUẤT'}
+          </Text>
+        </TouchableOpacity>
       </View>
-      <TopMenu />
-      <View style={themedStyle.cardView} >
-        <CardItem />
-        <Footer />
-      </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
-const buttonWidth: number = wp(40);
-
 export const ProfileInfo = withStyles(ProfileInfoComponent, (theme: ThemeType) => ({
-
-  cardView: {
-    marginTop: pxToPercentage(10),
-    borderRadius: pxToPercentage(16),
-    marginHorizontal: pxToPercentage(8),
-    borderWidth: pxToPercentage(1),
-    backgroundColor: theme['border-basic-color-1'],
-    ...viewStyle.shadow,
+  container: {
+    borderRadius: pxToPercentage(12.5),
+    backgroundColor: theme['color-basic-100'],
+    ...viewStyle.shadow2,
   },
-  cardDetailView: {
+  sectionBody: {
     flexDirection: 'row',
-    marginVertical: pxToPercentage(8),
+    margin: pxToPercentage(12.5),
   },
-  sectionDetails: {
-    flex: 1,
-    flexDirection: 'column',
-    marginRight: pxToPercentage(6),
-  },
-  txtName: {
-    fontSize: pxToPercentage(16),
-    ...textStyle.bold,
-    fontWeight: 'normal',
-    color: theme['text-basic-color'],
-
-  },
-  txtPosition: {
-    fontSize: pxToPercentage(12),
-    ...textStyle.bold,
-    ...textStyle.italic,
-    fontWeight: 'normal',
-    color: theme['text-hint-color'],
-    paddingTop: pxToPercentage(4),
-
-  },
-  txtPhone: {
-    fontSize: pxToPercentage(12),
-    ...textStyle.regular,
-    fontWeight: 'normal',
-    color: theme['text-hint-color'],
-    paddingTop: pxToPercentage(4),
-
-  },
-  img: {
-    width: pxToPercentage(85),
-    height: '98%',
-    borderRadius: pxToPercentage(10),
-    marginHorizontal: pxToPercentage(12),
-    marginVertical: pxToPercentage(4),
-  },
-  fotterView: {
+  sectionFooter: {
     flexDirection: 'row',
-    backgroundColor: theme['border-basic-color-4'],
-    borderBottomLeftRadius: pxToPercentage(16),
-    borderBottomRightRadius: pxToPercentage(16),
-    marginTop: pxToPercentage(20),
-    ...viewStyle.shadow,
-  },
-  backgroundView: {
-    height: pxToPercentage(90),
-    width: '100%',
-    backgroundColor: theme['color-primary-default'],
-    position: 'absolute',
+    height: pxToPercentage(35),
+    borderBottomLeftRadius: pxToPercentage(12.5),
+    borderBottomRightRadius: pxToPercentage(12.5),
+    backgroundColor: theme['background-basic-color-4'],
   },
   btn: {
+    flex: 1,
     flexDirection: 'row',
-    width: buttonWidth,
-    marginHorizontal: pxToPercentage(12),
-    marginVertical: pxToPercentage(8),
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  txtButton: {
-    color: 'red',
+  txtBtn: {
     textAlign: 'center',
-    ...textStyle.semibold,
     fontSize: pxToPercentage(12),
+    marginLeft: pxToPercentage(5),
+    color: theme['color-primary-2'],
+    ...textStyle.proTextSemibold,
   },
-  iconLogout: {
-    width: pxToPercentage(16),
-    height: pxToPercentage(16),
-    tintColor: 'red',
-    marginRight: pxToPercentage(6),
+  iconBtnEdit: {
+    tintColor: theme['color-primary-2'],
+    width: pxToPercentage(22.5),
+    height: pxToPercentage(22.5),
   },
-  headerView: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginHorizontal: pxToPercentage(8),
+  iconBtnLogout: {
+    tintColor: theme['color-primary-2'],
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
   },
-  qrCodeicon: {
-    width: pxToPercentage(28),
-    height: pxToPercentage(28),
-    marginRight: pxToPercentage(6),
-    marginLeft: pxToPercentage(6),
-    tintColor: theme['border-basic-color-4'],
+  imgAvatar: {
+    height: pxToPercentage(100),
+    width: pxToPercentage(75),
+    borderRadius: pxToPercentage(5),
+    marginRight: pxToPercentage(12.5),
+  },
+  viewInfo: {
+    flex: 1,
+    justifyContent: 'space-around',
+  },
+  txtInfo: {
+    fontSize: pxToPercentage(13),
+    color: theme['text-basic-color'],
+    ...textStyle.proTextRegular,
+  },
+  txtBold: {
+    ...textStyle.proTextBold,
+  },
+  txtItalic: {
+    ...textStyle.proTextRegularItalic,
   },
 }));

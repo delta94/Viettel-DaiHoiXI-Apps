@@ -3,7 +3,6 @@ import {
   NavigationParams,
   NavigationInjectedProps,
 } from 'react-navigation';
-import { MenuContainer } from '@src/containers/menu/menu.container';
 import { ArrowIosBackFill } from '@src/assets/icons';
 import {
   onGetCurrentRouteState,
@@ -12,15 +11,13 @@ import {
   NavigationRouteState,
 } from './util';
 import { KEY_NAVIGATION_BACK } from './constants';
-import { HomeHeader } from '@src/components/homeHeader/homeHeader.component';
 import { TopNavigationBar } from './components/topNavigationBar.component';
+import { HomeNavigationBar } from './components/homeNavigationBar.component';
 
 export const routeNameDataSource: { [key: string]: string } = {
   'otp': 'Nhập mã OTP',
   'home': 'Trang chủ',
   'function': 'Danh sách chức năng',
-  'notification': 'Thông báo',
-  'notificationDetail': 'Chi tiết thông báo',
   'meetingNotification': 'Thông báo kỳ họp',
   'meetingNotificationDetail': 'Chi tiết thông báo',
   'pressRelease': 'Thông cáo báo chí',
@@ -65,37 +62,38 @@ const MenuTopNavigationParams: TopNavigationParams = {
   },
 };
 
-const HomeTopNavigationParams: TopNavigationParams = {
+const HomeMenuTopNavigationParams: TopNavigationParams = {
   header: (props: NavigationInjectedProps): TopNavigationElement => {
-    const state: NavigationRouteState = onGetCurrentRouteState(props.navigation);
+    const { routeName } = onGetCurrentRouteState(props.navigation);
+    const index: number = onGetCurrentRouteIndex(props.navigation);
 
-    const onQRButtonPress = (): void => {
+    const onBackPress = () => {
+      props.navigation.goBack(KEY_NAVIGATION_BACK);
+    };
+
+    const onQRCodePress = () => {
+    };
+
+    const onMessagePress = () => {
 
     };
 
+    const renderArrowsBack = () => ArrowIosBackFill({
+      tintColor: 'white',
+    });
+
     return (
-      <HomeHeader
-        title={state.routeName}
-        onQRButtonPress={onQRButtonPress}
+      <HomeNavigationBar
+        {...props}
+        title={routeNameDataSource[routeName]}
+        backIcon={isRootRoute(index) && renderArrowsBack}
+        onBack={onBackPress}
+        onQRCodePress={onQRCodePress}
+        onMessagePress={onMessagePress}
       />
     );
   },
 };
 
-const MenuBottomNavigationParams: BottomNavigationParams = {
-  bottomNavigation: (props: NavigationInjectedProps): BottomNavigationElement => {
-    return (
-      <MenuContainer {...props} />
-    );
-  },
-};
-
-export const MenuNavigationOptions: NavigationParams = {
-  ...MenuTopNavigationParams,
-  ...MenuBottomNavigationParams,
-};
-
-export const HomeNavigationOptions: NavigationParams = {
-  ...HomeTopNavigationParams,
-  ...MenuBottomNavigationParams,
-};
+export const MenuNavigationOptions: NavigationParams = MenuTopNavigationParams;
+export const HomeNavigationOptions: NavigationParams = HomeMenuTopNavigationParams;

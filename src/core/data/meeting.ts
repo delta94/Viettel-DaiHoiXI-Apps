@@ -1,56 +1,44 @@
-import { Meeting } from '../models/meeting/meeting.model';
+import { MeetingItem } from '../models/meeting/meeting.model';
 
-export const meetingDataFake: Meeting = {
-  default: [
-    {
-      name: 'Hội nghị Thành uỷ',
-      fromTime: '8:00',
-      toTime: '8:00',
-      date: 'hai',
-      week: '32',
-      numberOfDate: '27',
-    },
-    {
-      name: 'Hội nghị ban thường vụ',
-      fromTime: '8:00',
-      toTime: '8:00',
-      date: 'hai',
-      week: '32',
-      numberOfDate: '27',
-    },
-  ],
-  pink: [
-    {
-      name: 'Hội nghị ban thường vụ',
-      fromTime: '8:00',
-      toTime: '8:00',
-      date: 'ba',
-      week: '32',
-      numberOfDate: '27',
-    },
-    {
-      name: 'Hội nghị Thành uỷ',
-      fromTime: '8:00',
-      toTime: '8:00',
-      date: 'bốn',
-      week: '32',
-      numberOfDate: '27',
-    },
-    {
-      name: 'Hội nghị ban thường vụ',
-      fromTime: '8:00',
-      toTime: '8:00',
-      date: 'năm',
-      week: '32',
-      numberOfDate: '27',
-    },
-    {
-      name: 'Hội nghị Thành uỷ',
-      fromTime: '8:00',
-      toTime: '8:00',
-      date: 'sáu',
-      numberOfDate: '27',
-      week: '32',
-    },
-  ],
-};
+export const meetingDataFake: MeetingItem[] = [
+  {
+    name: 'Họp thường trực Thành uỷ',
+    fromTime: '08:00',
+    toTime: '09:00',
+    date: '15',
+    day: 'Hai',
+    isExample: false,
+  },
+  {
+    name: 'Họp Ban thường vụ',
+    fromTime: '08:00',
+    toTime: '09:00',
+    date: '17',
+    day: 'Tư',
+    isExample: false,
+  },
+  {
+    name: 'Hội nghị lần thứ 31 Ban chấp hành Đảng bộ TP.Hồ Chí Minh',
+    fromTime: '08:00',
+    toTime: '17:00',
+    date: '19',
+    day: 'Sáu',
+    isExample: true,
+  },
+  {
+    name: 'Hội nghị lần thứ 31 Ban chấp hành Đảng bộ TP.Hồ Chí Minh',
+    fromTime: '08:00',
+    toTime: '17:00',
+    date: '20',
+    day: 'Bảy',
+    isExample: true,
+  },
+  {
+    name: 'Hội nghị lần thứ 31 Ban chấp hành Đảng bộ TP.Hồ Chí Minh',
+    fromTime: '08:00',
+    toTime: '17:00',
+    date: '22',
+    day: 'Hai',
+    isExample: true,
+  },
+];

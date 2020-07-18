@@ -93,8 +93,7 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
               </Button>
               <Button
                 size={'large'}
-                status='primary'
-                style={themedStyle.btn}
+                style={themedStyle.btnAccept}
                 onPress={onConfirmButtonPress}>
                 {'Xác nhận'}
               </Button>
@@ -160,5 +159,9 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   },
   btn: {
     width: '49%',
+  },
+  btnAccept: {
+    width: '49%',
+    backgroundColor: theme['color-primary-2'],
   },
 }));

@@ -49,10 +49,10 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
   return (
     <SafeAreaView style={themedStyle.safeArea}>
       <TopNavigation
-        style={themedStyle.header}
         alignment='center'
         title={title}
         titleStyle={themedStyle.titleStyle}
+        style={themedStyle.header}
         subtitleStyle={textStyle.regular}
         leftControl={leftControlElement}
       />
@@ -68,7 +68,6 @@ export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme: Th
     backgroundColor: theme['background-basic-custom-color-3'],
   },
   titleStyle: {
-    // fontSize: fontSize(3),
     color: theme['text-control-color'],
     ...textStyle.semibold,
   },

@@ -142,12 +142,10 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
               <Tab
                 title='Số điện thoại'
                 titleStyle={themedStyle.tabTitle}>
-                <View>
-                  <SignInPhoneNumberForm
-                    style={themedStyle.tabContentContainer}
-                    onDataChange={onPhoneNumberFormDataChange}
-                  />
-                </View>
+                <SignInPhoneNumberForm
+                  style={themedStyle.tabContentContainer}
+                  onDataChange={onPhoneNumberFormDataChange}
+                />
               </Tab>
             </TabView>
             <Button
@@ -196,7 +194,7 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
   sectionBox: {
     width: pxToPercentage(900),
     height: pxToPercentage(1200),
-    backgroundColor: theme['color-custom-100'],
+    backgroundColor: theme['color-primary-0'],
     borderRadius: pxToPercentage(40),
     ...viewStyle.shadow1,
   },
@@ -210,6 +208,10 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
     backgroundColor: theme['color-primary-0'],
   },
   sectionTab: {
+    flex: 1,
+    borderBottomLeftRadius: pxToPercentage(40),
+    borderBottomRightRadius: pxToPercentage(40),
+    backgroundColor: theme['color-custom-100'],
   },
   tabContentContainer: {
     marginVertical: pxToPercentage(32),

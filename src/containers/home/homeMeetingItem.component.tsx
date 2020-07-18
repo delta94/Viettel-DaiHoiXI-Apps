@@ -5,6 +5,8 @@ import {
 import {
   Text,
   View,
+  TouchableOpacityProps,
+  TouchableOpacity,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -14,136 +16,172 @@ import {
 import { MeetingItem } from '@src/core/models/meeting/meeting.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { } from 'react-native-gesture-handler';
 
-interface ComponentProps {
-  meetingItem: MeetingItem;
-  isTypeDefault?: boolean;
+interface ComponentProps extends TouchableOpacityProps {
+  meeting: MeetingItem;
 }
 
 export type HomeMeetingItemProps = ThemedComponentProps & ComponentProps & ListItemProps;
 
 const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = (props) => {
-  const { style, themedStyle, meetingItem, ...restProps } = props;
+  const { style, themedStyle, meeting, ...restProps } = props;
 
   return (
-    <View style={themedStyle.container}
-      {...restProps}>
-      <View style={themedStyle.dateView}>
-        <Text style={[themedStyle.txtTime,
-        props.isTypeDefault && themedStyle.viewTextDefault,
-        ]}>
-          {meetingItem.numberOfDate}
-        </Text>
-        <Text style={themedStyle.txtDate}>
-          {meetingItem.date}
-        </Text>
+    <TouchableOpacity
+      activeOpacity={0.75}
+      {...restProps}
+      style={themedStyle.container}>
+      <View style={themedStyle.sectionDate}>
+        <View style={themedStyle.viewDate}>
+          <Text
+            style={[
+              themedStyle.txtDate,
+              meeting.isExample && themedStyle.txtDateOther,
+            ]}>
+            {meeting.date}
+          </Text>
+          <Text style={themedStyle.txtDay}>
+            {meeting.day}
+          </Text>
+        </View>
+        <View style={themedStyle.viewTimeline}>
+          <View style={themedStyle.viewLine} />
+          <View
+            style={[
+              themedStyle.viewDot,
+              meeting.isExample && themedStyle.viewDotOther,
+            ]}
+          />
+        </View>
       </View>
-      <View style={themedStyle.timelineView}>
-        <View style={themedStyle.lineView} />
-        <View style={[
-          themedStyle.viewDotIcon,
-          props.isTypeDefault && themedStyle.viewDefault,
-        ]} />
-      </View>
-      <View style={[themedStyle.secctionView,
-      props.isTypeDefault && themedStyle.viewDefault,
-      ]}>
-        <View style={themedStyle.viewHeader}>
-          <View style={[themedStyle.viewTimeHeader,
-          props.isTypeDefault && themedStyle.viewDefault,
+      <View style={themedStyle.sectionContent}>
+        <View
+          style={[
+            themedStyle.viewContent,
+            meeting.isExample && themedStyle.viewContentOther,
           ]}>
-            <Text style={themedStyle.txtTimeHeader} >
-              {meetingItem.fromTime}{' - '}{meetingItem.toTime}
-            </Text>
-          </View>
-          <View style={themedStyle.detailView}>
-            <Text style={themedStyle.txtName} >
-              {meetingItem.name}
+          <View style={themedStyle.viewContentInner}>
+            <View
+              style={[
+                themedStyle.viewTime,
+                meeting.isExample && themedStyle.viewTimeOther,
+              ]}>
+              <Text
+                style={[
+                  themedStyle.txtTime,
+                  meeting.isExample && themedStyle.txtTimeOther,
+                ]}>
+                {`${meeting.fromTime} - ${meeting.toTime}`}
+              </Text>
+            </View>
+            <Text style={themedStyle.txtName}>
+              {meeting.name}
             </Text>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: ThemeType) => ({
   container: {
-    flex: 1,
     flexDirection: 'row',
+    height: pxToPercentage(110),
   },
-  secctionView: {
+  sectionDate: {
+    flexDirection: 'row',
+    width: pxToPercentage(65),
+  },
+  sectionContent: {
+    flex: 1,
+    paddingVertical: pxToPercentage(10),
+  },
+  viewDate: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: pxToPercentage(40),
+  },
+  viewTimeline: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: pxToPercentage(25),
+  },
+  viewContent: {
+    flex: 1,
+    paddingLeft: pxToPercentage(7.5),
+    paddingBottom: pxToPercentage(1.5),
+    paddingRight: pxToPercentage(1.5),
+    borderRadius: pxToPercentage(12.5),
+    backgroundColor: theme['color-primary-0'],
+  },
+  viewContentInner: {
     flex: 1,
     overflow: 'hidden',
-    borderRadius: pxToPercentage(12),
-    backgroundColor: theme['color-warning-default'],
-    marginVertical: pxToPercentage(12),
-    marginRight: pxToPercentage(4),
+    justifyContent: 'center',
+    opacity: 0.9,
+    paddingHorizontal: pxToPercentage(15),
+    borderRadius: pxToPercentage(12.5),
+    backgroundColor: theme['color-custom-100'],
   },
-  viewHeader: {
-    backgroundColor: theme['color-primary-100'],
-    marginRight: pxToPercentage(1.5),
-    marginLeft: pxToPercentage(6),
-    borderRadius: pxToPercentage(12),
-    marginBottom: pxToPercentage(1),
-  },
-  viewDefault: {
-    backgroundColor: 'pink',
-  },
-  viewTextDefault: {
-    color: 'pink',
-  },
-  txtName: {
-    fontSize: pxToPercentage(14),
-    color: theme['text-basic-color'],
-    ...textStyle.regular,
-  },
-  txtDate: {
-    fontSize: pxToPercentage(14),
-    color: theme['text-basic-color'],
-    ...textStyle.regular,
+  viewTime: {
+    position: 'absolute',
+    alignSelf: 'center',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    borderRadius: pxToPercentage(15),
+    paddingBottom: pxToPercentage(2),
+    top: -pxToPercentage(20),
+    width: pxToPercentage(150),
+    height: pxToPercentage(40),
+    backgroundColor: theme['color-primary-0'],
   },
   txtTime: {
-    fontSize: pxToPercentage(17),
-    color: theme['color-warning-default'],
-    ...textStyle.extrabold,
-  },
-  txtTimeHeader: {
     fontSize: pxToPercentage(12),
     color: theme['text-basic-color'],
-    ...textStyle.regular,
+    ...textStyle.proTextRegular,
   },
-  lineView: {
-    borderWidth: pxToPercentage(1),
-    borderColor: theme['border-basic-color-4'],
-    height: '110%',
+  txtTimeOther: {
+    color: theme['color-custom-100'],
   },
-  dateView: {
-    width: pxToPercentage(35),
-    justifyContent: 'center',
-    alignItems: 'center',
+  viewTimeOther: {
+    backgroundColor: theme['color-primary-2'],
   },
-  viewDotIcon: {
-    height: pxToPercentage(10),
-    width: pxToPercentage(10),
+  viewContentOther: {
+    backgroundColor: theme['color-primary-2'],
+  },
+  viewLine: {
+    width: pxToPercentage(1),
+    height: pxToPercentage(110),
+    backgroundColor: theme['color-basic-400'],
+  },
+  viewDot: {
     position: 'absolute',
-    borderRadius: pxToPercentage(8),
-    backgroundColor: theme['color-warning-default'],
+    width: pxToPercentage(10),
+    height: pxToPercentage(10),
+    borderRadius: pxToPercentage(5),
+    backgroundColor: theme['color-primary-0'],
   },
-  detailView: {
-    paddingVertical: pxToPercentage(12),
-    paddingHorizontal: pxToPercentage(12),
+  viewDotOther: {
+    backgroundColor: theme['color-primary-2'],
   },
-  viewTimeHeader: {
-    backgroundColor: theme['color-warning-default'],
-    marginHorizontal: pxToPercentage(50),
-    borderBottomRightRadius: pxToPercentage(30),
-    borderBottomLeftRadius: pxToPercentage(30),
-    alignItems: 'center',
+  txtDate: {
+    fontSize: pxToPercentage(20),
+    color: theme['color-primary-0'],
+    ...textStyle.proTextRegularItalic,
   },
-  timelineView: {
-    width: pxToPercentage(20),
-    justifyContent: 'center',
-    alignItems: 'center',
+  txtDateOther: {
+    color: theme['color-primary-2'],
+  },
+  txtDay: {
+    fontSize: pxToPercentage(13),
+    marginTop: pxToPercentage(2.5),
+    color: theme['text-basic-color'],
+    ...textStyle.proTextRegular,
+  },
+  txtName: {
+    fontSize: pxToPercentage(13),
+    ...textStyle.proTextRegular,
   },
 }));

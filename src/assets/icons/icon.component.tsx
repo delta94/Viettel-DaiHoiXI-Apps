@@ -29,6 +29,7 @@ export const Icon = (source: IconSource, style: StyleProp<ImageStyle>): React.Re
   return (
     <Image
       style={style}
+      resizeMode='contain'
       source={source.imageSource}
     />
   );

@@ -18,14 +18,18 @@ export const routeNameDataSource: { [key: string]: string } = {
   'otp': 'Nhập mã OTP',
   'home': 'Trang chủ',
   'function': 'Danh sách chức năng',
-  'meetingNotification': 'Thông báo kỳ họp',
-  'meetingNotificationDetail': 'Chi tiết thông báo',
-  'pressRelease': 'Thông cáo báo chí',
+  'conferenceInfo': 'Thông tin',
+  'notificationDetail': 'Chi tiết thông báo',
   'pressReleaseDetail': 'Chi tiết thông cáo',
-  'account': 'Tài khoản',
-  'programme': 'Chương trình',
-  'delegateDetail': 'Chi tiết đại biểu',
-  'delegateGroup': 'Danh sách tổ',
+
+  // 'meetingNotification': 'Thông báo kỳ họp',
+  // 'meetingNotificationDetail': 'Chi tiết thông báo',
+  // 'pressRelease': 'Thông cáo báo chí',
+  // 'pressReleaseDetail': 'Chi tiết thông cáo',
+  // 'account': 'Tài khoản',
+  // 'programme': 'Chương trình',
+  // 'delegateDetail': 'Chi tiết đại biểu',
+  // 'delegateGroup': 'Danh sách tổ',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

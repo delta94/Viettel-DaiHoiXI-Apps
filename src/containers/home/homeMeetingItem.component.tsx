@@ -182,6 +182,7 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
   },
   txtName: {
     fontSize: pxToPercentage(13),
+    color: theme['text-basic-color'],
     ...textStyle.proTextRegular,
   },
 }));

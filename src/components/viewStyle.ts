@@ -27,4 +27,17 @@ export const viewStyle: { [key: string]: ViewStyle } = {
     // shadow android
     elevation: 10,
   },
+  shadow3: {
+    // shadow ios
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.325,
+    shadowRadius: 2,
+
+    // shadow android
+    elevation: 10,
+  },
 };

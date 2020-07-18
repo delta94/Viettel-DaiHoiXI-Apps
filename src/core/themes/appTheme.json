@@ -181,7 +181,7 @@
   "text-control-color": "$color-basic-100",
   "text-disabled-color": "$color-basic-800",
   "text-hint-color": "$color-basic-600",
-  "text-primary-color": "$color-primary-default",
+  "text-primary-color": "$color-primary-6",
   "text-primary-focus-color": "$color-primary-focus",
   "text-primary-hover-color": "$color-primary-hover",
   "text-primary-active-color": "$color-primary-active",

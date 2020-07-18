@@ -140,12 +140,10 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
             <Tab
               title='Số điện thoại'
               titleStyle={themedStyle.tabTitle}>
-              <View>
-                <SignInPhoneNumberForm
-                  style={themedStyle.tabContentContainer}
-                  onDataChange={onPhoneNumberFormDataChange}
-                />
-              </View>
+              <SignInPhoneNumberForm
+                style={themedStyle.tabContentContainer}
+                onDataChange={onPhoneNumberFormDataChange}
+              />
             </Tab>
           </TabView>
           <Button

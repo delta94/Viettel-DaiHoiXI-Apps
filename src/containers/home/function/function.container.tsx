@@ -11,6 +11,10 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
   const onFunctionItemPress = (type: number): void => {
     switch (type) {
       case FunctionEnum.ThongTin: {
+        props.navigation.navigate({
+          key: navigationKey,
+          routeName: 'conferenceInfo',
+        });
 
         break;
       }

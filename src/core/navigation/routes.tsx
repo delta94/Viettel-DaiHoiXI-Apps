@@ -21,14 +21,10 @@ import { SignInContainer } from '@src/containers/auth/signIn/signIn.container';
 import { OtpContainer } from '@src/containers/auth/otp/otp.container';
 import { HomeContainer } from '@src/containers/home/home.container';
 import { FunctionContainer } from '@src/containers/home/function/function.container';
-import { MeetingNotificationContainer } from '@src/containers/home/meetingNotification/meetingNotification.container';
-import { MeetingNotificationDetailContainer } from '@src/containers/home/meetingNotification/meetingNotificationDetail/meetingNotificationDetail.container';
-import { PressReleaseContainer } from '@src/containers/home/pressRelease/pressRelease.container';
-import { PressReleaseDetailContainer } from '@src/containers/home/pressRelease/pressReleaseDetail/pressReleaseDetail.container';
-import { ProgrammeContainer } from '@src/containers/home/program/program.container';
 import { ScanQRCodeContainer } from '@src/containers/home/scanQRCode/scanQRCode.container';
-import { DelegateDetailContainer } from '@src/containers/home/delegateDetails/delegateDetail.container';
-import { DelegateGroupContainer } from '@src/containers/home/delegateGroup/delegateGroup.container';
+import { ConferenceInfoContainer } from '@src/containers/home/conferenceInformation/conferenceInfo.container';
+import { NotificationDetailContainer } from '@src/containers/home/conferenceInformation/notificationDetail/notificationDetail.container';
+import { PressReleaseDetailContainer } from '@src/containers/home/conferenceInformation/pressReleaseDetail/pressReleaseDetail.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -54,19 +50,15 @@ const AppNavigator: NavigationContainer = createStackNavigator({
     screen: FunctionContainer,
     navigationOptions: HomeNavigationOptions,
   },
-  ['meetingNotification']: MeetingNotificationContainer,
-  ['meetingNotificationDetail']: MeetingNotificationDetailContainer,
-  ['pressRelease']: PressReleaseContainer,
-  ['pressReleaseDetail']: PressReleaseDetailContainer,
-  ['programme']: ProgrammeContainer,
-  ['delegateDetail']: DelegateDetailContainer,
-  ['delegateGroup']: DelegateGroupContainer,
   ['scanQRCode']: {
     screen: ScanQRCodeContainer,
     navigationOptions: {
       header: null,
     },
   },
+  ['conferenceInfo']: ConferenceInfoContainer,
+  ['notificationDetail']: NotificationDetailContainer,
+  ['pressReleaseDetail']: PressReleaseDetailContainer,
 }, {
   defaultNavigationOptions: MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

@@ -1148,6 +1148,14 @@ export const PhotoLibraryIconOther = (style: StyleProp<ImageStyle>): IconElement
   return Icon(source, style);
 };
 
+export const BellIconFill = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./eva/bell.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

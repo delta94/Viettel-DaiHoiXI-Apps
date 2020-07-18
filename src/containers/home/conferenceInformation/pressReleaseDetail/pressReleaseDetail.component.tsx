@@ -13,8 +13,9 @@ import {
 import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { DownloadIcon } from '@src/assets/icons';
 import { SafeAreaView } from 'react-navigation';
+import { viewStyle } from '@src/components/viewStyle';
+import { DownloadIcon } from '@src/assets/icons';
 
 interface ComponentProps {
   pressRelease: PressReleaseModel;
@@ -26,15 +27,21 @@ const PressReleaseDetailComponent: React.FunctionComponent<PressReleaseDetailPro
   const { themedStyle, pressRelease } = props;
 
   return (
-
     <ScrollView style={themedStyle.container}>
       <SafeAreaView>
         <View style={themedStyle.viewItem}>
           <Text style={themedStyle.txtTitle}>
             {pressRelease.title}
           </Text>
-          <Text style={themedStyle.txtDescription}>
-            {pressRelease.description}
+          <Text
+            style={[
+              themedStyle.txtDescription,
+              themedStyle.txtBold,
+            ]}>
+            {'Nội dung: '}
+            <Text style={themedStyle.txtDescription}>
+              {pressRelease.description}
+            </Text>
           </Text>
           <View style={themedStyle.viewFile}>
             <Text style={themedStyle.txtFileTitle}>
@@ -62,35 +69,35 @@ const PressReleaseDetailComponent: React.FunctionComponent<PressReleaseDetailPro
 export const PressReleaseDetail = withStyles(PressReleaseDetailComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    paddingTop: pxToPercentage(8),
-    backgroundColor: theme['background-basic-color-2'],
+    padding: pxToPercentage(8),
+    color: theme['color-custom-100'],
   },
   viewItem: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    marginVertical: pxToPercentage(8),
-    marginHorizontal: pxToPercentage(16),
-    paddingHorizontal: pxToPercentage(9),
-    paddingVertical: pxToPercentage(9),
-    borderRadius: pxToPercentage(4),
-    borderWidth: pxToPercentage(1),
-    borderColor: theme['border-basic-color-4'],
-  },
-  txtRead: {
-    color: theme['text-hint-color'],
+    padding: pxToPercentage(8),
+    borderRadius: pxToPercentage(5),
+    justifyContent: 'center',
+    backgroundColor: theme['color-custom-100'],
+    ...viewStyle.shadow2,
   },
   txtTitle: {
     textAlign: 'justify',
+    lineHeight: pxToPercentage(25),
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
-    ...textStyle.semibold,
+    ...textStyle.proTextBold,
   },
   txtDescription: {
     textAlign: 'justify',
+    lineHeight: pxToPercentage(25),
     marginTop: pxToPercentage(15),
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
-    ...textStyle.regular,
+    ...textStyle.proTextRegular,
+  },
+  txtBold: {
+    ...textStyle.proTextBold,
   },
   viewFile: {
     marginTop: pxToPercentage(30),
@@ -99,12 +106,12 @@ export const PressReleaseDetail = withStyles(PressReleaseDetailComponent, (theme
   txtFileTitle: {
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
-    ...textStyle.italic,
+    ...textStyle.proTextRegularItalic,
   },
   txtFileName: {
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
-    ...textStyle.regular,
+    ...textStyle.proTextRegular,
   },
   btnDownload: {
     marginTop: pxToPercentage(7.5),
@@ -115,10 +122,10 @@ export const PressReleaseDetail = withStyles(PressReleaseDetailComponent, (theme
     marginTop: pxToPercentage(2.5),
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
-    ...textStyle.regular,
+    ...textStyle.proTextRegular,
   },
   iconDownload: {
-    width: pxToPercentage(50),
-    height: pxToPercentage(50),
+    width: pxToPercentage(40),
+    height: pxToPercentage(40),
   },
 }));

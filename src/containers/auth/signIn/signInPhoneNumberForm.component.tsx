@@ -16,7 +16,7 @@ import {
   textStyle,
   ValidationInput,
 } from '@src/components';
-import { RefreshIconFill } from '@src/assets/icons';
+import { RefreshIconOther } from '@src/assets/icons';
 import {
   PhoneNumberValidator,
   NumberValidator,
@@ -104,7 +104,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
           <ValidationInput
             disabled
             onIconPress={() => { }}
-            icon={RefreshIconFill}
+            icon={RefreshIconOther}
             textStyle={textStyle.regular}
             placeholder='ABCD'
             validator={NumberValidator}

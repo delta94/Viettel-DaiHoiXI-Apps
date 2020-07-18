@@ -12,9 +12,9 @@ import {
   withStyles,
 } from '@kitten/theme';
 import {
-  CloseIcon,
-  PhotoLibraryIcon,
-  QRCodeIcon,
+  CloseIconOther,
+  PhotoLibraryIconOther,
+  QRCodeIconOther,
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
@@ -57,14 +57,14 @@ const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) =>
             {<TouchableOpacity
               activeOpacity={0.75}
               onPress={onBackPress}>
-              {CloseIcon(themedStyle.iconClose)}
+              {CloseIconOther(themedStyle.iconClose)}
             </TouchableOpacity>}
           </View>
           <View style={themedStyle.viewHeaderRight}>
             <TouchableOpacity
               activeOpacity={0.75}
               style={themedStyle.btnPhotoLibrary}>
-              {PhotoLibraryIcon(themedStyle.iconPhoto)}
+              {PhotoLibraryIconOther(themedStyle.iconPhoto)}
               <Text style={themedStyle.txtPhotoLibrary}>
                 {'Thư viện'}
               </Text>
@@ -77,7 +77,7 @@ const ScanQRCodeComponent: React.FunctionComponent<ScanQRCodeProps> = (props) =>
             activeOpacity={0.75}
             onPress={onMyQRPress}
             style={themedStyle.btnMyQR}>
-            {QRCodeIcon(themedStyle.iconQRCode)}
+            {QRCodeIconOther(themedStyle.iconQRCode)}
             <Text style={themedStyle.txtQR}>
               {'Mã QR của tôi'}
             </Text>

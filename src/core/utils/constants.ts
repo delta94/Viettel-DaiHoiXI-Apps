@@ -8,10 +8,13 @@ export enum SignInTabEnum {
   PhoneNumber,
 }
 
-export enum AlternativeFunctionEnum {
-  Program = 0,
-  Notification,
-  PressRelease,
-  DelegateDetail,
-  groupDelegateList,
+export enum FunctionEnum {
+  ThongTin,
+  DanhSachDaiBieu,
+  TaiLieu,
+  PhimAnhHinhAnh,
+  SoDoChoNgoi,
+  DiemDanh,
+  DangKyPhatBieu,
+  ToThaoLuan,
 }

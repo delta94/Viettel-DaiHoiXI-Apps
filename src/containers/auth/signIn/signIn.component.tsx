@@ -28,8 +28,8 @@ import { SignInAccountForm } from './signInAccountForm.component';
 import { SignInPhoneNumberForm } from './signInPhoneNumberForm.component';
 import { pxToPercentage } from '@src/core/utils/utils';
 import {
-  FingerprintIcon,
-  FaceIDIcon,
+  FingerprintIconOther,
+  FaceIDIconOther,
 } from '@src/assets/icons';
 import { IconElement } from '@src/assets/icons/icon.component';
 import { SignInTabEnum } from '@src/core/utils/constants';
@@ -104,7 +104,7 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
   const { themedStyle } = props;
 
   const renderRecognizeIcon = (): IconElement => {
-    return true ? FingerprintIcon(themedStyle.iconFingerprint) : FaceIDIcon(themedStyle.iconFaceID);
+    return true ? FingerprintIconOther(themedStyle.iconFingerprint) : FaceIDIconOther(themedStyle.iconFaceID);
   };
 
   return (

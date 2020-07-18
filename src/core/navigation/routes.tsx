@@ -50,7 +50,10 @@ const AppNavigator: NavigationContainer = createStackNavigator({
     screen: HomeContainer,
     navigationOptions: HomeNavigationOptions,
   },
-  ['function']: FunctionContainer,
+  ['function']: {
+    screen: FunctionContainer,
+    navigationOptions: HomeNavigationOptions,
+  },
   ['meetingNotification']: MeetingNotificationContainer,
   ['meetingNotificationDetail']: MeetingNotificationDetailContainer,
   ['pressRelease']: PressReleaseContainer,

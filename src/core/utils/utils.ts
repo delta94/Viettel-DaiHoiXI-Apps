@@ -30,3 +30,15 @@ export const generateCaptcha = (length: number): string => {
 
   return result;
 };
+
+export const chunk = <T>(array: Array<T>, size: number): T[][] => {
+  const chunkedArr: T[][] = [];
+  const copied: T[] = [...array];
+  const numOfChild: number = Math.ceil(copied.length / size);
+
+  for (let i = 0; i < numOfChild; i++) {
+    chunkedArr.push(copied.splice(0, size));
+  }
+
+  return chunkedArr;
+};

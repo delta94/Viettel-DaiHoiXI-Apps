@@ -11,57 +11,102 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
-import { UserDetail } from '@src/core/models/user/userDetail.model';
+import { User } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
+import { viewStyle } from '../viewStyle';
 
 interface ComponentProps {
-  userDetail: UserDetail;
+  user: User;
 }
 
-export type ProfileInfoProps = ThemedComponentProps & ViewProps & ComponentProps;
+export type ProfileInfoV2Props = ThemedComponentProps & ViewProps & ComponentProps;
 
-const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props) => {
-  const { style, themedStyle, ...restProps } = props;
+const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoV2Props> = (props) => {
+  const { style, themedStyle, user } = props;
 
   return (
     <View
-      style={themedStyle.container}
-      {...restProps}>
-      <View style={themedStyle.viewSection}>
-      <Image
-        style={themedStyle.avatar}
-        source={(new RemoteImage(props.userDetail.avatar)).imageSource}
-      />
-      <View style={themedStyle.viewSectionDetails}>
-        <Text
-          numberOfLines={1}
-          style={themedStyle.txtName}>
-          {`Đồng chí ${props.userDetail.full_name}`}
+      style={[
+        themedStyle.container,
+        style,
+      ]}>
+      <View style={themedStyle.sectionHeader}>
+        <Text style={themedStyle.txtHeader}>
+          {'ĐẠI HỘI ĐẠI BIỂU ĐẢNG BỘ THÀNH PHỐ LẦN THỨ XI, NHIỆM KỲ 2020 - 2025'}
         </Text>
-        <Text
-          numberOfLines={1}
-          style={themedStyle.txtPosition}>
-          {props.userDetail.position}
-        </Text>
-        <Text
-          numberOfLines={1}
-          style={themedStyle.txtPosition}>
-          {`Đoàn: ${props.userDetail.group}`}
-        </Text>
-        <View style={themedStyle.viewDelegateNumber}>
-          <Text
-            numberOfLines={1}
-            style={themedStyle.txtPosition}>
-            {`Tổ: ${props.userDetail.group}`}
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={themedStyle.txtPosition}>
-            {`Số đại biểu: ${props.userDetail.number}`}
-          </Text>
-        </View>
       </View>
+      <View style={themedStyle.sectionBody}>
+        <Image
+          resizeMode='cover'
+          source={(new RemoteImage(user.avatar)).imageSource}
+          style={themedStyle.imgAvatar}
+        />
+        <View style={themedStyle.viewInfo}>
+          <Text
+            numberOfLines={1}
+            style={[
+              themedStyle.txtInfo,
+              themedStyle.txtBold,
+            ]}>
+            {`Đồng chí ${user.full_name.toUpperCase()}`}
+          </Text>
+          <Text
+            numberOfLines={2}
+            style={[
+              themedStyle.txtInfo,
+              themedStyle.txtItalic,
+            ]}>
+            {user.position}
+          </Text>
+          <Text
+            numberOfLines={2}
+            style={[
+              themedStyle.txtInfo,
+              themedStyle.txtItalic,
+            ]}>
+            {'Đoàn: '}
+            <Text
+              numberOfLines={2}
+              style={[
+                themedStyle.txtInfo,
+                themedStyle.txtBoldItalic,
+              ]}>
+              {user.group}
+            </Text>
+          </Text>
+          <View style={themedStyle.viewRow}>
+            <Text
+              numberOfLines={1}
+              style={themedStyle.txtInfo}>
+              {'Tổ: '}
+              <Text
+                numberOfLines={1}
+                style={[
+                  themedStyle.txtInfo,
+                  themedStyle.txtBold,
+                ]}>
+                {user.team_number}
+              </Text>
+            </Text>
+            <Text
+              numberOfLines={1}
+              style={[
+                themedStyle.txtInfo,
+                themedStyle.txtDelegateNumber,
+              ]}>
+              {'Số đại biểu: '}
+              <Text
+                numberOfLines={1}
+                style={[
+                  themedStyle.txtInfo,
+                  themedStyle.txtBold,
+                ]}>
+                {user.delegate_number}
+              </Text>
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -69,48 +114,51 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoProps> = (props
 
 export const ProfileInfoV2 = withStyles(ProfileInfoV2Component, (theme: ThemeType) => ({
   container: {
-    backgroundColor: theme['color-primary-7'],
-    paddingBottom: pxToPercentage(2),
-    marginHorizontal: pxToPercentage(353),
-    marginTop: pxToPercentage(28),
+    borderRadius: pxToPercentage(12.5),
+    backgroundColor: theme['color-basic-100'],
+    ...viewStyle.shadow2,
   },
-  viewSection: {
+  sectionHeader: {
+    paddingVertical: pxToPercentage(12.5),
+    paddingHorizontal: pxToPercentage(25),
+  },
+  sectionBody: {
     flexDirection: 'row',
-    width: pxToPercentage(1396),
-    height: pxToPercentage(240),
+    padding: pxToPercentage(12.5),
   },
-  viewSectionDetails: {
+  txtHeader: {
+    fontSize: pxToPercentage(14),
+    textAlign: 'center',
+    ...textStyle.proTextBold,
+  },
+  imgAvatar: {
+    height: pxToPercentage(105),
+    width: pxToPercentage(75),
+    borderRadius: pxToPercentage(5),
+    marginRight: pxToPercentage(12.5),
+  },
+  viewInfo: {
     flex: 1,
-    marginLeft: pxToPercentage(8),
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
-  txtName: {
-    fontSize: pxToPercentage(36), // size 24
-    ...textStyle.semibold,
-    fontWeight: 'normal',
-    color: theme['text-basic-color'],
-  },
-  txtPosition: {
-    fontSize: pxToPercentage(36),
-    ...textStyle.light,
-    marginLeft: pxToPercentage(0),
-    marginVertical: pxToPercentage(2),
-    marginHorizontal: pxToPercentage(32),
-  },
-  txtPhone: {
-    fontSize: pxToPercentage(36),
-    ...textStyle.regular,
-    marginLeft: pxToPercentage(9),
-  },
-  avatar: {
-    width: pxToPercentage(150), // width 96
-    height: pxToPercentage(200), // height 128
-    marginHorizontal: pxToPercentage(20),
-    borderRadius: pxToPercentage(4),
-    margin: pxToPercentage(20),
-  },
-  viewDelegateNumber: {
+  viewRow: {
     flexDirection: 'row',
-    paddingVertical: pxToPercentage(2),
+  },
+  txtInfo: {
+    fontSize: pxToPercentage(13),
+    color: theme['text-basic-color'],
+    ...textStyle.proTextRegular,
+  },
+  txtBold: {
+    ...textStyle.proTextBold,
+  },
+  txtItalic: {
+    ...textStyle.proTextRegularItalic,
+  },
+  txtBoldItalic: {
+    ...textStyle.proTextBoldItalic,
+  },
+  txtDelegateNumber: {
+    marginLeft: pxToPercentage(40),
   },
 }));

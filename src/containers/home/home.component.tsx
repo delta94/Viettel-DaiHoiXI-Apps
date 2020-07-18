@@ -9,14 +9,15 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { ProfileInfo } from '@src/components/profileInfo/profileInfo.component';
-import { userDataFake } from '@src/core/data/user';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { HomeMeetingItem } from './homeMeetingItem.component';
 import { HomeMeetingWeek } from './homeMeetingWeek.component';
 import { MeetingItem } from '@src/core/models/meeting/meeting.model';
 import { viewStyle } from '@src/components/viewStyle';
+import { User } from '@src/core/models/user/user.model';
 
 interface ComponentProps {
+  user: User;
   currentWeek: number;
   meetings: MeetingItem[];
   onMeetingItemPress: () => void;
@@ -55,6 +56,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
         <HomeMeetingItem
           key={index}
           meeting={item}
+          onPress={onMeetingItemPress}
         />
       );
     });
@@ -65,7 +67,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
       <View style={themedStyle.viewCard} />
       <View style={themedStyle.container}>
         <ProfileInfo
-          user={userDataFake}
+          user={props.user}
           style={themedStyle.viewProfileInfo}
           onEditProfilePress={onEditProfilePress}
           onLogoutPress={onLogoutPress}

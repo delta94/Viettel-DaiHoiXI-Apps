@@ -3,7 +3,11 @@ export class User {
   full_name: string;
   position: string;
   phone: string;
-  organ: string;
-  sdb: string;
-  to: number;
+  unit: string;
+  group: string;
+  team_number: number;
+  delegate_number: number;
+  //
+  sdb?: string;
+  to?: number;
 }

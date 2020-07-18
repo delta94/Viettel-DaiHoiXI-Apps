@@ -12,8 +12,8 @@ import {
   TopNavigation,
 } from '@kitten/ui';
 import {
-  QRCodeIcon,
-  MessageIcon,
+  QRCodeIconOther,
+  MessageIconOther,
 } from '@src/assets/icons';
 import { SafeAreaView } from 'react-navigation';
 import { textStyle } from '@src/components';
@@ -57,11 +57,11 @@ const HomeNavigationBarComponent: React.FunctionComponent<HomeNavigationBarProps
   };
 
   const renderQRCodeIcon = (style: StyleType): React.ReactElement<ImageProps> => {
-    return QRCodeIcon({ ...style, ...themedStyle.iconQRCode });
+    return QRCodeIconOther({ ...style, ...themedStyle.iconQRCode });
   };
 
   const renderMessageIcon = (style: StyleType): React.ReactElement<ImageProps> => {
-    return MessageIcon({ ...style, ...themedStyle.iconMessage });
+    return MessageIconOther({ ...style, ...themedStyle.iconMessage });
   };
 
   const renderRightControls = (): React.ReactElement<TopNavigationActionProps>[] => {

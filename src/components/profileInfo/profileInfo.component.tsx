@@ -17,8 +17,8 @@ import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
 import {
-  LogoutIconThin,
-  UserEditIcon,
+  LogoutIconOther,
+  EditPersonIconOther,
 } from '@src/assets/icons';
 
 interface ComponentProps {
@@ -79,7 +79,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
                 themedStyle.txtInfo,
                 themedStyle.txtBold,
               ]}>
-              {user.organ}
+              {user.unit}
             </Text>
           </Text>
           <Text
@@ -102,7 +102,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
           activeOpacity={0.75}
           onPress={onEditProfileButtonPress}
           style={themedStyle.btn}>
-          {UserEditIcon(themedStyle.iconBtnEdit)}
+          {EditPersonIconOther(themedStyle.iconBtnEdit)}
           <Text style={themedStyle.txtBtn}>
             {'SỬA THÔNG TIN'}
           </Text>
@@ -111,7 +111,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
           activeOpacity={0.75}
           onPress={onLogoutButtonPress}
           style={themedStyle.btn}>
-          {LogoutIconThin(themedStyle.iconBtnLogout)}
+          {LogoutIconOther(themedStyle.iconBtnLogout)}
           <Text style={themedStyle.txtBtn}>
             {'ĐĂNG XUẤT'}
           </Text>
@@ -129,7 +129,7 @@ export const ProfileInfo = withStyles(ProfileInfoComponent, (theme: ThemeType) =
   },
   sectionBody: {
     flexDirection: 'row',
-    margin: pxToPercentage(12.5),
+    padding: pxToPercentage(12.5),
   },
   sectionFooter: {
     flexDirection: 'row',
@@ -162,14 +162,14 @@ export const ProfileInfo = withStyles(ProfileInfoComponent, (theme: ThemeType) =
     height: pxToPercentage(20),
   },
   imgAvatar: {
-    height: pxToPercentage(100),
+    height: pxToPercentage(105),
     width: pxToPercentage(75),
     borderRadius: pxToPercentage(5),
     marginRight: pxToPercentage(12.5),
   },
   viewInfo: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
   },
   txtInfo: {
     fontSize: pxToPercentage(13),

@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { Home } from './home.component';
 import { meetingDataFake } from '@src/core/data/meeting';
+import { userDataFake } from '@src/core/data/user';
 
 export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'HomeContainer';
@@ -26,6 +27,7 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
 
   return (
     <Home
+      user={userDataFake}
       currentWeek={32}
       meetings={meetingDataFake}
       onEditProfilePress={onEditProfilePress}

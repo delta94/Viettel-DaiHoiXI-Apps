@@ -137,22 +137,6 @@ export const ComponentsIconButtonDark = (style: StyleProp<ImageStyle>): IconElem
   return Icon(source, style);
 };
 
-export const ComponentsIconButtonGroup = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-button-group.png'),
-  };
-
-  return Icon(source, style);
-};
-
-export const ComponentsIconButtonGroupDark = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-button-group-dark.png'),
-  };
-
-  return Icon(source, style);
-};
-
 export const ComponentsIconCheckBox = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-checkbox.png'),
@@ -737,30 +721,6 @@ export const TwitterIconFill = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
-export const FingerprintIcon = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-fingerprint.png'),
-  };
-
-  return Icon(source, style);
-};
-
-export const FaceIDIcon = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-face-id.png'),
-  };
-
-  return Icon(source, style);
-};
-
-export const RefreshIconFill = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-refresh.png'),
-  };
-
-  return Icon(source, style);
-};
-
 export const HomeIconOutline = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./eva/home-outline.png'),
@@ -865,21 +825,6 @@ export const CloseIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
-export const QRCodeIcon = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-qr-code.png'),
-  };
-
-  return Icon(source, style);
-};
-export const PhotoLibraryIcon = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-image-library.png'),
-  };
-
-  return Icon(source, style);
-};
-
 export const ArrowForwardIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./eva/arrow-ios-forward.png'),
@@ -939,22 +884,6 @@ export const StarIcon = (style: StyleProp<ImageStyle>): IconElement => {
 export const UserEditIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./person.png'),
-  };
-
-  return Icon(source, style);
-};
-
-export const GroupIconFill = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-group.png'),
-  };
-
-  return Icon(source, style);
-};
-
-export const LogoutIconThin = (style: StyleProp<ImageStyle>): IconElement => {
-  const source: IconSource = {
-    imageSource: require('./icon-logout.png'),
   };
 
   return Icon(source, style);
@@ -1080,9 +1009,140 @@ export const RightArrowIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
-export const MessageIcon = (style: StyleProp<ImageStyle>): IconElement => {
+// =============================// =============================// =============================
+// =============================// =============================// =============================
+
+export const AssetsIconOther = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
-    imageSource: require('./icon-message.png'),
+    imageSource: require('./other/icon-assets.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const DelegateListIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-delegate-list.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const DocumentIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-document.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const InformationIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-information.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const PeopleIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-people.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const PersonIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-person.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const SeatMapIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-seat-map.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const SignUpToSpeakIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-sign-up-to-speak.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const CloseIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-close.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const EditPersonIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-edit-person.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const FingerprintIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-fingerprint.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const FaceIDIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-face-id.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const LogoutIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-logout.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const MessageIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-message.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const QRCodeIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-qr-code.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const RefreshIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-refresh.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const PhotoLibraryIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-library.png'),
   };
 
   return Icon(source, style);

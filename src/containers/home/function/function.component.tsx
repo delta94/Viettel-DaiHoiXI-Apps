@@ -1,122 +1,70 @@
 import React from 'react';
 import {
   Text,
-  ScrollView,
   View,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import {
-  List,
-  ListItem,
-  Modal,
-  Card,
-  Button,
-} from '@kitten/ui';
 import { FunctionModel } from '@src/core/models/function/function.model';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { textStyle } from '@src/components';
-import { AlternativeFunctionEnum } from '@src/core/utils/constants';
-import { isTablet } from 'react-native-device-info';
 import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfoV2.component';
-import { HeaderFunction } from '@src/components/headerFunction/headerFunction.component';
-import { HomeFooter } from '@src/components/homeFooter/homeFooter.component';
-import { UserDetail } from '@src/core/models/user/userDetail.model';
+import { userDataFake } from '@src/core/data/user';
+import { User } from '@src/core/models/user/user.model';
+import { viewStyle } from '@src/components/viewStyle';
+import { textStyle } from '@src/components';
 
 interface ComponentProps {
-  userDetail: UserDetail;
+  user: User;
   functions: FunctionModel[];
-  onAlternativeFunctionPress: (type: number) => void;
-  onPressBackIcon: () => void;
+  onFunctionItemPress: (type: number) => void;
 }
 
 export type FunctionProps = ThemedComponentProps & ComponentProps;
 
 const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
-  const [visible, setVisible] = React.useState(false);
-
-  const onFunctionItemPress = (): void => {
-    setVisible(true);
-  };
-
-  const onAlternativeFunctionPress = (type: number): void => {
-    onHideModal();
-    props.onAlternativeFunctionPress(type);
-  };
-
-  const onHideModal = (): void => {
-    setVisible(false);
+  const onFunctionItemPress = (type: number): void => {
+    props.onFunctionItemPress(type);
   };
 
   const { themedStyle } = props;
 
   return (
     <View style={themedStyle.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}>
-        <HeaderFunction
-          onPressBackIcon={props.onPressBackIcon}
-        />
-        <ProfileInfoV2 userDetail={props.userDetail} />
-        <List
-          scrollEnabled={false}
+      <ProfileInfoV2
+        user={userDataFake}
+        style={themedStyle.viewProfileInfo}
+      />
+      <View style={themedStyle.viewList}>
+        <FlatList
           data={props.functions}
-          numColumns={4}
           extraData={props.functions}
-          style={themedStyle.viewList}
-          contentContainerStyle={themedStyle.contentContainer}
+          numColumns={3}
+          contentContainerStyle={themedStyle.viewListContainer}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => {
             return (
-              <ListItem
+              <TouchableOpacity
                 activeOpacity={0.75}
-                onPress={onFunctionItemPress}
-                style={themedStyle.btnItem}>
-                {item.icon(themedStyle.icon)}
-                <Text style={themedStyle.txtTitle}>
+                onPress={() => onFunctionItemPress(item.type)}
+                style={themedStyle.viewItem}>
+                <View style={themedStyle.viewItemCircle}>
+                  {item.icon(themedStyle.icon)}
+                </View>
+                <Text style={themedStyle.txtItem}>
                   {item.title}
                 </Text>
-              </ListItem>
+              </TouchableOpacity>
             );
           }}
         />
-      </ScrollView>
-      <HomeFooter />
-      <Modal
-        visible={visible}
-        backdropStyle={themedStyle.backdrop}
-        onBackdropPress={onHideModal}>
-        <Card
-          disabled={true}
-          style={themedStyle.viewCard}>
-          <Button
-            size={isTablet() ? 'giant' : 'large'}
-            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.Program)}>
-            {'Chương trình'}
-          </Button>
-          <Button
-            size={isTablet() ? 'giant' : 'large'}
-            style={themedStyle.btnAlternative}
-            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.Notification)}>
-            {'Thông báo'}
-          </Button>
-          <Button
-            size={isTablet() ? 'giant' : 'large'}
-            style={themedStyle.btnAlternative}
-            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.PressRelease)}>
-            {'Thông cáo báo chí'}
-          </Button>
-          <Button
-            size={isTablet() ? 'giant' : 'large'}
-            style={themedStyle.btnAlternative}
-            onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.groupDelegateList)}>
-            {'Danh sách tổ'}
-          </Button>
-        </Card>
-      </Modal>
+      </View>
+      <SafeAreaView />
     </View>
   );
 };
@@ -124,48 +72,43 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
 export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingTop: pxToPercentage(8),
+    paddingHorizontal: pxToPercentage(8),
   },
   viewList: {
-    backgroundColor: theme['color-primary-12'],
+    flex: 1,
+    marginTop: pxToPercentage(8),
+    borderRadius: pxToPercentage(12.5),
+    backgroundColor: theme['color-basic-100'],
+    ...viewStyle.shadow2,
   },
-  contentContainer: {
+  viewListContainer: {
+  },
+  viewItem: {
+    width: pxToPercentage(119.666),
+    height: pxToPercentage(140),
+    paddingTop: pxToPercentage(10),
+    paddingHorizontal: pxToPercentage(10),
+    alignItems: 'center',
+  },
+  viewItemCircle: {
+    width: pxToPercentage(90),
+    height: pxToPercentage(90),
+    borderRadius: pxToPercentage(45),
     justifyContent: 'center',
     alignItems: 'center',
-    padding: pxToPercentage(12),
-  },
-  backdrop: {
-    backgroundColor: theme['color-custom-800'],
-  },
-  btnItem: {
-    width: pxToPercentage(420), // w 186
-    height: pxToPercentage(245), // h 174
-    flexDirection: 'column',
-    justifyContent: 'center',
-    borderRadius: pxToPercentage(25),
-    borderWidth: pxToPercentage(2),
-    borderColor: theme['color-primary-3'],
-    marginRight: pxToPercentage(40),
-    marginTop: pxToPercentage(30),
-    marginBottom: pxToPercentage(28),
     backgroundColor: theme['color-primary-2'],
   },
-  btnAlternative: {
-    marginTop: pxToPercentage(10),
-  },
-  txtTitle: {
-    textAlign: 'center',
-    fontSize: pxToPercentage(36),
-    marginTop: pxToPercentage(4),
-    paddingVertical: pxToPercentage(2),
-    color: theme['color-primary-3'],
-    ...textStyle.regular,
-  },
   icon: {
-    width: pxToPercentage(88),
-    height: pxToPercentage(88),
-    tintColor: theme['color-primary-3'],
-    resizeMode: 'contain',
+    width: pxToPercentage(40),
+    height: pxToPercentage(40),
+    tintColor: theme['color-custom-100'],
+  },
+  txtItem: {
+    textAlign: 'center',
+    marginTop: pxToPercentage(5),
+    fontSize: pxToPercentage(14),
+    color: theme['text-basic-color'],
+    ...textStyle.proTextRegular,
   },
 }));

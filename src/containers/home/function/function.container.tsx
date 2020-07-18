@@ -2,56 +2,57 @@ import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { Function } from './function.component';
 import { functionDataFake } from '@src/core/data/function';
-import { AlternativeFunctionEnum } from '@src/core/utils/constants';
-import { isEmpty } from '@src/core/utils/utils';
-import { userDetailDataFake } from '@src/core/data/user';
+import { userDataFake } from '@src/core/data/user';
+import { FunctionEnum } from '@src/core/utils/constants';
 
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
 
-  const onAlternativeFunctionPress = (type: number): void => {
-    let routeName: string = '';
-
+  const onFunctionItemPress = (type: number): void => {
     switch (type) {
-      case AlternativeFunctionEnum.Program: {
-        routeName = 'programme';
-        break;
-      }
-      case AlternativeFunctionEnum.Notification: {
-        routeName = 'meetingNotification';
+      case FunctionEnum.ThongTin: {
 
         break;
       }
-      case AlternativeFunctionEnum.PressRelease: {
-        routeName = 'pressRelease';
+      case FunctionEnum.DanhSachDaiBieu: {
 
         break;
       }
-      case AlternativeFunctionEnum.groupDelegateList: {
-        routeName = 'delegateGroup';
+      case FunctionEnum.TaiLieu: {
 
+        break;
+      }
+      case FunctionEnum.PhimAnhHinhAnh: {
+
+        break;
+      }
+      case FunctionEnum.SoDoChoNgoi: {
+
+        break;
+      }
+      case FunctionEnum.DiemDanh: {
+
+        break;
+      }
+      case FunctionEnum.DangKyPhatBieu: {
+
+        break;
+      }
+      case FunctionEnum.ToThaoLuan: {
+
+        break;
+      }
+      default: {
         break;
       }
     }
-
-    if (!isEmpty(routeName)) {
-      props.navigation.navigate({
-        key: navigationKey,
-        routeName,
-      });
-    }
-  };
-
-  const onPressBackIcon = (): void => {
-    props.navigation.goBack();
   };
 
   return (
     <Function
-      userDetail={userDetailDataFake}
+      user={userDataFake}
       functions={functionDataFake}
-      onAlternativeFunctionPress={onAlternativeFunctionPress}
-      onPressBackIcon={onPressBackIcon}
+      onFunctionItemPress={onFunctionItemPress}
     />
   );
 };

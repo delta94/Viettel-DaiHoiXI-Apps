@@ -7,4 +7,5 @@ type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 export class FunctionModel {
   title: string;
   icon: IconProp;
+  type: number;
 }

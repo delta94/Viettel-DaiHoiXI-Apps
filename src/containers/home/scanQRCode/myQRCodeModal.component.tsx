@@ -10,7 +10,7 @@ import {
   withStyles,
 } from '@kitten/theme';
 import {
-  QRCodeIcon,
+  QRCodeIconOther,
   CloseIconOutline,
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
@@ -57,7 +57,7 @@ const MyQRCodeModalComponent: React.FunctionComponent<MyQRCodeModalProps> = (pro
           </Text>
         </View>
         <View style={themedStyle.viewQRCode}>
-          {QRCodeIcon(themedStyle.iconQRCode)}
+          {QRCodeIconOther(themedStyle.iconQRCode)}
           <Text style={themedStyle.txtNote}>
             {'Quý đại biểu vui lòng quẹt QR CODE qua máy\n scan mã đặt ở bàn điểm danh để điểm danh\n trước khi vào hội trường'}
           </Text>

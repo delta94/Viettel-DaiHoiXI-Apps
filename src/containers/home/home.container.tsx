@@ -7,10 +7,13 @@ import { userDataFake } from '@src/core/data/user';
 export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'HomeContainer';
 
-  const onMeetingItemPress = (): void => {
+  const onMeetingItemPress = (isExample: boolean): void => {
     props.navigation.navigate({
       key: navigationKey,
       routeName: 'function',
+      params: {
+        isExample,
+      },
     });
   };
 

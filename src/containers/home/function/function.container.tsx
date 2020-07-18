@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { Function } from './function.component';
 import { functionDataFake } from '@src/core/data/function';
@@ -7,6 +10,13 @@ import { FunctionEnum } from '@src/core/utils/constants';
 
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
+  const [isExample, setIsExample] = useState<boolean>(false);
+
+  useEffect(() => {
+    const isExampleTemp: boolean = props.navigation.getParam('isExample');
+
+    setIsExample(isExampleTemp);
+  }, []);
 
   const onFunctionItemPress = (type: number): void => {
     let routeName: string;
@@ -37,7 +47,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.DangKyPhatBieu: {
-        routeName = false ? 'speechList' : 'signUpToSpeak';
+        routeName = isExample ? 'speechList' : 'signUpToSpeak';
         break;
       }
       case FunctionEnum.ToThaoLuan: {

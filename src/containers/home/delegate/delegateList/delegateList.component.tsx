@@ -29,7 +29,7 @@ export type DelegateListProps = ThemedComponentProps & ComponentProps;
 
 const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props) => {
   const { themedStyle } = props;
-  const [selectedIndex, setSelectedIndex] = useState<any>(null);
+  const [selectedOption, setSelectedOption] = useState<any>(null);
 
   const onDelegateItemPress = (congressman: UserModel): void => {
     props.onDelegateItemPress(congressman);
@@ -51,10 +51,11 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
             { text: 'Đảng Bộ Quận 1' },
           ]}
           textStyle={themedStyle.txtSelectInput}
-          selectedOption={selectedIndex}
+          keyExtractor={(item) => item.text}
+          selectedOption={selectedOption}
           placeholder='Chọn đoàn đại biểu'
           size={'large'}
-          onSelect={item => setSelectedIndex(item)}>
+          onSelect={setSelectedOption}>
         </Select>
       </View>
       <FlatList

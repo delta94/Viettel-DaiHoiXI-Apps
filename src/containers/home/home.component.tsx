@@ -21,7 +21,7 @@ interface ComponentProps {
   user: User;
   currentWeek: number;
   meetings: MeetingItem[];
-  onMeetingItemPress: () => void;
+  onMeetingItemPress: (isExample: boolean) => void;
   onEditProfilePress: () => void;
   onLogoutPress: () => void;
 }
@@ -39,8 +39,8 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
     props.onLogoutPress();
   };
 
-  const onMeetingItemPress = (): void => {
-    props.onMeetingItemPress();
+  const onMeetingItemPress = (isExample: boolean): void => {
+    props.onMeetingItemPress(isExample);
   };
 
   const onNextWeekPress = (): void => {
@@ -57,7 +57,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
         <HomeMeetingItem
           key={index}
           meeting={item}
-          onPress={onMeetingItemPress}
+          onPress={() => onMeetingItemPress(item.isExample)}
         />
       );
     });

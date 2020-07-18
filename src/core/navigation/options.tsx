@@ -24,6 +24,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'delegateGroup': 'Tổ thảo luận',
   'delegateDetail': 'Thông tin đại biểu',
   'speechList': 'Đăng ký phát biểu',
+  'signUpToSpeak': 'Đăng ký phát biểu',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

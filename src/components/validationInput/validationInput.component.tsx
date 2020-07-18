@@ -91,6 +91,8 @@ const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = 
     <Input
       autoCapitalize='none'
       status={getStatus()}
+      textStyle={themedStyle.textStyle}
+      maxLength={256}
       {...restProps}
       value={value}
       style={[
@@ -98,9 +100,7 @@ const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = 
         style,
       ]}
       onChangeText={onChangeText}
-      textStyle={themedStyle.textStyle}
       size={isTablet() ? 'large' : 'large'}
-      maxLength={256}
     />
   );
 };

@@ -29,7 +29,7 @@ export type DelegateGroupProps = ThemedComponentProps & ComponentProps;
 
 const DelegateGroupComponent: React.FunctionComponent<DelegateGroupProps> = (props) => {
   const { themedStyle } = props;
-  const [selectedIndex, setSelectedIndex] = useState<any>(null);
+  const [selectedOption, setSelectedOption] = useState<any>(null);
 
   const onDelegateItemPress = (congressman: UserModel): void => {
     props.onDelegateItemPress(congressman);
@@ -45,10 +45,11 @@ const DelegateGroupComponent: React.FunctionComponent<DelegateGroupProps> = (pro
             { text: 'Tổ 2' },
           ]}
           textStyle={themedStyle.txtSelectInput}
-          selectedOption={selectedIndex}
+          selectedOption={selectedOption}
+          keyExtractor={(item) => item.text}
           placeholder='Chọn tổ'
           size={'large'}
-          onSelect={item => setSelectedIndex(item)}>
+          onSelect={setSelectedOption}>
         </Select>
         <ValidationInput
           style={themedStyle.textInput}
@@ -92,7 +93,6 @@ export const DelegateGroup = withStyles(DelegateGroupComponent, (theme: ThemeTyp
   txtSelectInput: {
     fontSize: pxToPercentage(14),
     padding: 0,
-    // marginVertical: pxToPercentage(7),
     ...textStyle.proTextRegular,
   },
   textInput: {

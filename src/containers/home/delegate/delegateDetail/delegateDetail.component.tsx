@@ -21,6 +21,7 @@ export type DelegateDetailProps = ThemedComponentProps & ComponentProps;
 
 const DelegateDetailComponent: React.FunctionComponent<DelegateDetailProps> = (props) => {
   const { themedStyle } = props;
+
   return (
     <React.Fragment>
       <ScrollView

@@ -1,5 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  Text,
+} from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -12,8 +15,10 @@ import {
   MessageIconOther,
   ArrowPrevIcon,
 } from '@src/assets/icons';
+import { textStyle } from '../textStyle';
 
 interface ComponentProps {
+  title: string;
   onBackPress: () => void;
   onMessagePress: () => void;
   onHelpPress: () => void;
@@ -38,13 +43,20 @@ const BackHeaderComponent: React.FunctionComponent<BackHeaderProps> = (props) =>
 
   return (
     <View style={themedStyle.container}>
-      <Button
-        title='Quay lại'
-        icon={ArrowPrevIcon}
-        iconStyle={themedStyle.iconBtnBack}
-        onPress={onBackPress}
-      />
-      <View style={themedStyle.viewRow}>
+      <View style={themedStyle.viewLeft}>
+        <Button
+          title='Quay lại'
+          icon={ArrowPrevIcon}
+          iconStyle={themedStyle.iconBtnBack}
+          onPress={onBackPress}
+        />
+      </View>
+      <View style={themedStyle.viewCenter}>
+        <Text style={themedStyle.txtTitle}>
+          {props.title}
+        </Text>
+      </View>
+      <View style={themedStyle.viewRight}>
         <Button
           icon={QuestionIcon}
           style={themedStyle.btnHelp}
@@ -69,8 +81,24 @@ export const BackHeader = withStyles(BackHeaderComponent, (theme: ThemeType) => 
     alignItems: 'center',
     height: pxToPercentage(120),
   },
-  viewRow: {
+  viewLeft: {
     flexDirection: 'row',
+    width: pxToPercentage(450),
+  },
+  viewCenter: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewRight: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: pxToPercentage(450),
+  },
+  txtTitle: {
+    fontSize: pxToPercentage(58),
+    color: theme['color-custom-100'],
+    ...textStyle.proDisplayBold,
   },
   btnHelp: {
     marginRight: pxToPercentage(20),

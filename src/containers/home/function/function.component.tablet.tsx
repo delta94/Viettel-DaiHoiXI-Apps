@@ -80,6 +80,7 @@ const FunctionTabletComponent: React.FunctionComponent<FunctionTabletProps> = (p
   return (
     <View style={themedStyle.container}>
       <BackHeader
+        title={'THÔNG TIN ĐẠI HỘI'}
         onBackPress={onBackPress}
         onMessagePress={onMessagePress}
         onHelpPress={onHelpPress}

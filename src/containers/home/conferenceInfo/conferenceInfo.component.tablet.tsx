@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import {
   View,
-  SafeAreaView,
   TouchableOpacity,
   Text,
   ImageProps,
 } from 'react-native';
-import {
-  TabView,
-  Tab,
-} from '@kitten/ui';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -19,12 +14,7 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
-import { Program } from './tabs/program.component';
-import { Notification } from './tabs/notification.component';
-import { PressRelease } from './tabs/pressRelease.component';
 import {
-  ListIconFill,
-  FileTextIconFill,
   MenuIcon,
   PressReleaseIcon,
   SoundIcon,
@@ -36,7 +26,8 @@ import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProgramTabEnum } from '@src/core/utils/constants';
 import { DateSelector } from '@src/components/dateSelector/dateSelector.component';
 import { ProgramTablet } from './tabs/tablet/program.component.tablet';
-import { IconElement } from '@src/assets/icons/icon.component';
+import { PressReleaseTablet } from './tabs/tablet/pressRelease.component.tablet';
+import { NotificationTablet } from './tabs/tablet/notification.component.tablet';
 
 interface ComponentProps {
   programs: ProgramModel[];
@@ -53,10 +44,6 @@ type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 
 const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTabletProps> = (props) => {
   const [selectedTab, setSelectedTab] = useState<number>(ProgramTabEnum.ChuongTrinh);
-
-  const onTabSelect = (selectedTabIndexParam: number) => {
-    setSelectedTab(selectedTabIndexParam);
-  };
 
   const onNotificationItemPress = (notification: NotificationModel): void => {
     props.onNotificationItemPress(notification);
@@ -108,10 +95,27 @@ const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTable
     );
   };
 
+  const getTitleByType = (): string => {
+    switch (selectedTab) {
+      case ProgramTabEnum.ChuongTrinh: {
+        return 'CHƯƠNG TRÌNH';
+      }
+      case ProgramTabEnum.ThongCao: {
+        return 'THÔNG CÁO';
+      }
+      case ProgramTabEnum.ThongBao: {
+        return 'THÔNG BÁO';
+      }
+      default: {
+        return undefined;
+      }
+    }
+  };
+
   return (
     <View style={themedStyle.container}>
       <BackHeader
-        title={'CHƯƠNG TRÌNH'}
+        title={getTitleByType()}
         onBackPress={onBackPress}
         onMessagePress={onMessagePress}
         onHelpPress={onHelpPress}
@@ -131,6 +135,16 @@ const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTable
           {selectedTab === ProgramTabEnum.ChuongTrinh &&
             (<ProgramTablet
               programs={props.programs}
+            />)}
+          {selectedTab === ProgramTabEnum.ThongCao &&
+            (<PressReleaseTablet
+              pressReleases={props.pressReleases}
+              onPressReleaseItemPress={onPressReleaseItemPress}
+            />)}
+          {selectedTab === ProgramTabEnum.ThongBao &&
+            (<NotificationTablet
+              notifications={props.notifications}
+              onNotificationItemPress={onNotificationItemPress}
             />)}
         </View>
       </View>

@@ -43,7 +43,6 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
   return (
     <React.Fragment>
       <View style={themedStyle.viewCard} />
-
       <View
         style={[
           themedStyle.container,

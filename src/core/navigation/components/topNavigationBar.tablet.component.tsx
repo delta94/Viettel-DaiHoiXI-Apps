@@ -51,7 +51,7 @@ export const TopNavigationBarTablet = withStyles(TopNavigationBarTabletComponent
   },
   container: {
     flexDirection: 'row',
-    height: pxToPercentage(128),
+    height: pxToPercentage(120),
     backgroundColor: theme['color-primary-0'],
   },
   viewLeftRight: {
@@ -67,13 +67,13 @@ export const TopNavigationBarTablet = withStyles(TopNavigationBarTabletComponent
   },
   titleStyle: {
     color: theme['color-primary-2'],
-    fontSize: pxToPercentage(43),
+    fontSize: pxToPercentage(42),
     textAlign: 'center',
-    ...textStyle.proTextSemibold,
+    ...textStyle.proDisplayBold,
   },
   viewFlag: {
     width: pxToPercentage(130),
-    height: pxToPercentage(87.37),
+    height: pxToPercentage(80),
     marginHorizontal: pxToPercentage(13),
     backgroundColor: theme['color-primary-2'],
     alignItems: 'center',
@@ -81,7 +81,7 @@ export const TopNavigationBarTablet = withStyles(TopNavigationBarTabletComponent
   },
   icon: {
     width: pxToPercentage(46),
-    height: pxToPercentage(40.63),
+    height: pxToPercentage(40),
     tintColor: theme['color-primary-0'],
   },
 }));

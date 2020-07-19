@@ -12,6 +12,7 @@ import {
 import { KEY_NAVIGATION_BACK } from './constants';
 import { TopNavigationBar } from './components/topNavigationBar.component';
 import { HomeNavigationBar } from './components/homeNavigationBar.component';
+import { TopNavigationBarTablet } from './components/topNavigationBar.tablet.component';
 
 export const routeNameDataSource: { [key: string]: string } = {
   'otp': 'Nhập mã OTP',
@@ -34,10 +35,6 @@ export interface TopNavigationParams extends NavigationParams {
   header: (props: NavigationInjectedProps) => TopNavigationElement | null;
 }
 
-export interface BottomNavigationParams extends NavigationParams {
-  bottomNavigation: (props: NavigationInjectedProps) => BottomNavigationElement | null;
-}
-
 const MenuTopNavigationParams: TopNavigationParams = {
   header: (props: NavigationInjectedProps): TopNavigationElement => {
     // @ts-ignore (private API)
@@ -58,6 +55,12 @@ const MenuTopNavigationParams: TopNavigationParams = {
         }}
       />
     );
+  },
+};
+
+const MenuTopNavigationTabletParams: TopNavigationParams = {
+  header: (props: NavigationInjectedProps): TopNavigationElement => {
+    return <TopNavigationBarTablet />;
   },
 };
 
@@ -100,4 +103,5 @@ const HomeMenuTopNavigationParams: TopNavigationParams = {
 };
 
 export const MenuNavigationOptions: NavigationParams = MenuTopNavigationParams;
+export const MenuNavigationTabletOptions: NavigationParams = MenuTopNavigationTabletParams;
 export const HomeNavigationOptions: NavigationParams = HomeMenuTopNavigationParams;

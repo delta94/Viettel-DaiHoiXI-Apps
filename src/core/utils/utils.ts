@@ -3,15 +3,15 @@ import { isTablet } from 'react-native-device-info';
 
 const { width, height } = Dimensions.get('window');
 const perWidthTablet: number = width / 2160;
-const perHeightTablet: number = height / 1260;
+const perHeightTablet: number = height / 2160;
 const perWidthPhone: number = width / 375;
-const perHeightPhone: number = height / 812;
+const perHeightPhone: number = height / 375;
 
 export const isEmpty = (value: any): boolean => {
   return (value === undefined || value === '' || value === null);
 };
 
-export const pxToPercentage = (value: number, noTablet?: boolean): number => {
+export const pxToPercentage = (value: number): number => {
   if (isTablet()) {
     return height > width ? perHeightTablet * value : perWidthTablet * value;
   }
@@ -41,4 +41,18 @@ export const chunk = <T>(array: Array<T>, size: number): T[][] => {
   }
 
   return chunkedArr;
+};
+
+export const addDays = function (dateParam: Date, dayCount: number) {
+  const date = new Date(dateParam);
+  date.setDate(date.getDate() + dayCount);
+
+  return date;
+};
+
+export const minusDays = function (dateParam: Date, dayCount: number) {
+  const date = new Date(dateParam);
+  date.setDate(date.getDate() - dayCount);
+
+  return date;
 };

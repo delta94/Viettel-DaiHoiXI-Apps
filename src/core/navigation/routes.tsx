@@ -14,6 +14,7 @@ import { isTablet } from 'react-native-device-info';
 import {
   MenuNavigationOptions,
   HomeNavigationOptions,
+  MenuNavigationTabletOptions,
 } from './options';
 import { SplashContainer } from '@src/containers/splash/splash.container';
 import { ExampleContainer } from '@src/containers/example/example.container';
@@ -49,7 +50,7 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
 const AppNavigator: NavigationContainer = createStackNavigator({
   ['home']: {
     screen: HomeContainer,
-    navigationOptions: HomeNavigationOptions,
+    navigationOptions: isTablet() ? MenuNavigationTabletOptions : HomeNavigationOptions,
   },
   ['function']: {
     screen: FunctionContainer,
@@ -79,7 +80,7 @@ const createAppRouter = (container: NavigationNavigator<any, NavigationProp<Navi
     ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
     ['app']: container,
-  }, { initialRouteName: 'splash' }));
+  }, { initialRouteName: 'app' }));
 };
 
 export const Router: NavigationContainer = createAppRouter(AppNavigator);

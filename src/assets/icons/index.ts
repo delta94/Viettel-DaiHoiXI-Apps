@@ -265,6 +265,47 @@ export const PhotoLibraryIconOther = (style: StyleProp<ImageStyle>): IconElement
   return Icon(source, style);
 };
 
+export const QuestionIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-question.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const ArrowPrevIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-arrow-prev.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const ArrowNextIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-arrow-next.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const SearchIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-search.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const PersonIcon2 = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-person-2.png'),
+  };
+
+  return Icon(source, style);
+};
+
+
 export {
   Icon,
   IconSource,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { Home } from './home.component';
-import { HomeTablet } from './tablet/home.component.tablet';
+import { HomeTablet } from './home.component.tablet';
 import { meetingDataFake } from '@src/core/data/meeting';
 import { userDataFake } from '@src/core/data/user';
 import { isTablet } from 'react-native-device-info';

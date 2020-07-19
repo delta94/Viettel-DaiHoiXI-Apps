@@ -23,7 +23,7 @@ import { IconElement } from '@src/assets/icons/icon.component';
 import { viewStyle } from '../viewStyle';
 
 interface ComponentProps extends TouchableOpacityProps {
-  title: string;
+  title?: string;
   icon?: IconProp;
   iconStyle?: StyleProp<ImageStyle>;
   titleStyle?: StyleProp<TextStyle>;

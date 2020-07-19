@@ -54,7 +54,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   },
   ['function']: {
     screen: FunctionContainer,
-    navigationOptions: HomeNavigationOptions,
+    navigationOptions: isTablet() ? MenuNavigationTabletOptions : HomeNavigationOptions,
   },
   ['scanQRCode']: {
     screen: ScanQRCodeContainer,

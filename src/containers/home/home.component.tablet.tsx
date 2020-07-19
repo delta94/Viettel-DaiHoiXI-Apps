@@ -14,7 +14,6 @@ import { MeetingItem } from '@src/core/models/meeting/meeting.model';
 import { viewStyle } from '@src/components/viewStyle';
 import { User } from '@src/core/models/user/user.model';
 import { HomeHeader } from '@src/components/header/homeHeader.component';
-import { WeekSelector } from '@src/components/weekSelector/weekSelector.component';
 import { ProfileInfoTablet } from '@src/components/profileInfo/profileInfo.component.tablet';
 import { Table } from '@src/components/table/table.component';
 import { Thead } from '@src/components/table/thead.component';
@@ -114,11 +113,6 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
           numDates={4}
           onDatePress={onDatePress}
         />
-        {/* <WeekSelector
-          weekSelected={30}
-          numWeeks={4}
-          onWeekPress={onWeekPress}
-        /> */}
         <Table style={themedStyle.viewTable}>
           <Thead>
             <Th alignItems='center' width={110}>

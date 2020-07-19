@@ -1,169 +1,189 @@
-// import React from 'react';
-// import {
-//   Text,
-//   ScrollView,
-//   View,
-// } from 'react-native';
-// import {
-//   ThemedComponentProps,
-//   ThemeType,
-//   withStyles,
-// } from '@kitten/theme';
-// import {
-//   List,
-//   ListItem,
-//   Modal,
-//   Card,
-//   Button,
-// } from '@kitten/ui';
-// import { FunctionModel } from '@src/core/models/function/function.model';
-// import { pxToPercentage } from '@src/core/utils/utils';
-// import { textStyle } from '@src/components';
-// import { AlternativeFunctionEnum } from '@src/core/utils/constants';
-// import { isTablet } from 'react-native-device-info';
-// import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfoV2.component';
-// import { UserDetail } from '@src/core/models/user/userDetail.model';
+import React from 'react';
+import {
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from '@kitten/theme';
+import { FunctionModel } from '@src/core/models/function/function.model';
+import { pxToPercentage } from '@src/core/utils/utils';
+import { User } from '@src/core/models/user/user.model';
+import { viewStyle } from '@src/components/viewStyle';
+import { textStyle } from '@src/components';
+import { BackHeader } from '@src/components/header/backHeader.component';
+import { ProfileInfoV2Tablet } from '@src/components/profileInfo/profileInfoV2.component.tablet';
+import { FunctionEnum } from '@src/core/utils/constants';
 
-// interface ComponentProps {
-//   userDetail: UserDetail;
-//   functions: FunctionModel[];
-//   onAlternativeFunctionPress: (type: number) => void;
-//   onPressBackIcon: () => void;
-// }
+interface ComponentProps {
+  user: User;
+  functions: FunctionModel[];
+  onFunctionItemPress: (type: number) => void;
+  onBackPress: () => void;
+}
 
-// export type FunctionProps = ThemedComponentProps & ComponentProps;
+export type FunctionTabletProps = ThemedComponentProps & ComponentProps;
 
-// const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
-//   const [visible, setVisible] = React.useState(false);
+const FunctionTabletComponent: React.FunctionComponent<FunctionTabletProps> = (props) => {
+  const onFunctionItemPress = (type: number): void => {
+    props.onFunctionItemPress(type);
+  };
 
-//   const onFunctionItemPress = (): void => {
-//     setVisible(true);
-//   };
+  const onMessagePress = (): void => {
 
-//   const onAlternativeFunctionPress = (type: number): void => {
-//     onHideModal();
-//     props.onAlternativeFunctionPress(type);
-//   };
+  };
 
-//   const onHideModal = (): void => {
-//     setVisible(false);
-//   };
+  const onBackPress = (): void => {
+    props.onBackPress();
+  };
 
-//   const { themedStyle } = props;
+  const onHelpPress = (): void => {
 
-//   return (
-//     <View style={themedStyle.container}>
-//       <ScrollView
-//         showsVerticalScrollIndicator={false}>
-//         {/* <HeaderFunction
-//           onPressBackIcon={props.onPressBackIcon}
-//         /> */}
-//         <ProfileInfoV2 userDetail={props.userDetail} />
-//         <List
-//           scrollEnabled={false}
-//           data={props.functions}
-//           numColumns={4}
-//           extraData={props.functions}
-//           style={themedStyle.viewList}
-//           contentContainerStyle={themedStyle.contentContainer}
-//           keyExtractor={(item, index) => index.toString()}
-//           renderItem={({ item, index }) => {
-//             return (
-//               <ListItem
-//                 activeOpacity={0.75}
-//                 onPress={onFunctionItemPress}
-//                 style={themedStyle.btnItem}>
-//                 {item.icon(themedStyle.icon)}
-//                 <Text style={themedStyle.txtTitle}>
-//                   {item.title}
-//                 </Text>
-//               </ListItem>
-//             );
-//           }}
-//         />
-//       </ScrollView>
-//       <Footer />
-//       <Modal
-//         visible={visible}
-//         backdropStyle={themedStyle.backdrop}
-//         onBackdropPress={onHideModal}>
-//         <Card
-//           disabled={true}
-//           style={themedStyle.viewCard}>
-//           <Button
-//             size={isTablet() ? 'giant' : 'large'}
-//             onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.Program)}>
-//             {'Chương trình'}
-//           </Button>
-//           <Button
-//             size={isTablet() ? 'giant' : 'large'}
-//             style={themedStyle.btnAlternative}
-//             onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.Notification)}>
-//             {'Thông báo'}
-//           </Button>
-//           <Button
-//             size={isTablet() ? 'giant' : 'large'}
-//             style={themedStyle.btnAlternative}
-//             onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.PressRelease)}>
-//             {'Thông cáo báo chí'}
-//           </Button>
-//           <Button
-//             size={isTablet() ? 'giant' : 'large'}
-//             style={themedStyle.btnAlternative}
-//             onPress={() => onAlternativeFunctionPress(AlternativeFunctionEnum.groupDelegateList)}>
-//             {'Danh sách tổ'}
-//           </Button>
-//         </Card>
-//       </Modal>
-//     </View>
-//   );
-// };
+  };
 
-// export const FunctionTablet = withStyles(FunctionComponent, (theme: ThemeType) => ({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   viewList: {
-//     backgroundColor: theme['color-primary-12'],
-//   },
-//   contentContainer: {
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     padding: pxToPercentage(12),
-//   },
-//   backdrop: {
-//     backgroundColor: theme['color-custom-800'],
-//   },
-//   btnItem: {
-//     width: pxToPercentage(420), // w 186
-//     height: pxToPercentage(245), // h 174
-//     flexDirection: 'column',
-//     justifyContent: 'center',
-//     borderRadius: pxToPercentage(25),
-//     borderWidth: pxToPercentage(2),
-//     borderColor: theme['color-primary-3'],
-//     marginRight: pxToPercentage(40),
-//     marginTop: pxToPercentage(30),
-//     marginBottom: pxToPercentage(28),
-//     backgroundColor: theme['color-primary-2'],
-//   },
-//   btnAlternative: {
-//     marginTop: pxToPercentage(10),
-//   },
-//   txtTitle: {
-//     textAlign: 'center',
-//     fontSize: pxToPercentage(36),
-//     marginTop: pxToPercentage(4),
-//     paddingVertical: pxToPercentage(2),
-//     color: theme['color-primary-3'],
-//     ...textStyle.regular,
-//   },
-//   icon: {
-//     width: pxToPercentage(88),
-//     height: pxToPercentage(88),
-//     tintColor: theme['color-primary-3'],
-//     resizeMode: 'contain',
-//   },
-// }));
+  const { themedStyle } = props;
+
+  const getIconStyle = (type: number) => {
+    switch (type) {
+      case FunctionEnum.ThongTin:
+      case FunctionEnum.DanhSachDaiBieu: {
+        return themedStyle.icon;
+      }
+      case FunctionEnum.TaiLieu: {
+        return themedStyle.iconTaiLieu;
+      }
+      case FunctionEnum.PhimAnhHinhAnh: {
+        return themedStyle.iconPhimAnh;
+      }
+      case FunctionEnum.SoDoChoNgoi: {
+        return themedStyle.iconSoDo;
+      }
+      case FunctionEnum.DiemDanh: {
+        return themedStyle.iconDiemDanh;
+      }
+      case FunctionEnum.DangKyPhatBieu: {
+        return themedStyle.iconDangKyPhatBieu;
+      }
+      case FunctionEnum.ToThaoLuan: {
+        return themedStyle.iconToThaoLuan;
+      }
+      default: {
+        return undefined;
+      }
+    }
+  };
+
+  return (
+    <View style={themedStyle.container}>
+      <BackHeader
+        onBackPress={onBackPress}
+        onMessagePress={onMessagePress}
+        onHelpPress={onHelpPress}
+      />
+      <View style={themedStyle.viewCard}>
+        <ProfileInfoV2Tablet
+          user={props.user}
+          onProfilePress={() => { }}
+          onQRCodePress={() => { }}
+          onSearchPress={() => { }}
+        />
+        <FlatList
+          data={props.functions}
+          extraData={props.functions}
+          numColumns={4}
+          contentContainerStyle={themedStyle.viewListContainer}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => {
+            return (
+              <TouchableOpacity
+                activeOpacity={0.75}
+                onPress={() => onFunctionItemPress(item.type)}
+                style={themedStyle.viewItem}>
+                {item.icon([getIconStyle(item.type)])}
+                <Text style={themedStyle.txtItem}>
+                  {item.title.toUpperCase()}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
+    </View>
+  );
+};
+
+export const FunctionTablet = withStyles(FunctionTabletComponent, (theme: ThemeType) => ({
+  container: {
+    flex: 1,
+    paddingHorizontal: pxToPercentage(31),
+    paddingBottom: pxToPercentage(31),
+    backgroundColor: theme['color-primary-2'],
+  },
+  viewCard: {
+    flex: 1,
+    borderRadius: pxToPercentage(40),
+    padding: pxToPercentage(20),
+    backgroundColor: theme['color-custom-100'],
+    ...viewStyle.shadow2,
+  },
+  viewListContainer: {
+    alignItems: 'center',
+  },
+  viewItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: pxToPercentage(400),
+    height: pxToPercentage(272),
+    borderRadius: pxToPercentage(32),
+    marginHorizontal: pxToPercentage(28),
+    marginBottom: pxToPercentage(56),
+    backgroundColor: theme['color-primary-2'],
+  },
+  txtItem: {
+    textAlign: 'center',
+    lineHeight: pxToPercentage(55),
+    marginTop: pxToPercentage(24),
+    fontSize: pxToPercentage(34),
+    color: theme['color-primary-0'],
+    ...textStyle.proDisplayBold,
+  },
+  icon: {
+    width: pxToPercentage(88),
+    height: pxToPercentage(88),
+    tintColor: theme['color-primary-0'],
+  },
+  iconTaiLieu: {
+    width: pxToPercentage(72),
+    height: pxToPercentage(88),
+    tintColor: theme['color-primary-0'],
+  },
+  iconPhimAnh: {
+    width: pxToPercentage(102),
+    height: pxToPercentage(88), // 82
+    tintColor: theme['color-primary-0'],
+  },
+  iconSoDo: {
+    width: pxToPercentage(120),
+    height: pxToPercentage(88), // 69
+    tintColor: theme['color-primary-0'],
+  },
+  iconDiemDanh: {
+    width: pxToPercentage(88),
+    height: pxToPercentage(88), // 80
+    tintColor: theme['color-primary-0'],
+  },
+  iconDangKyPhatBieu: {
+    width: pxToPercentage(66),
+    height: pxToPercentage(88),
+    tintColor: theme['color-primary-0'],
+  },
+  iconToThaoLuan: {
+    width: pxToPercentage(132.6),
+    height: pxToPercentage(88), // 66
+    tintColor: theme['color-primary-0'],
+  },
+}));

@@ -7,6 +7,9 @@ import { Function } from './function.component';
 import { functionDataFake } from '@src/core/data/function';
 import { userDataFake } from '@src/core/data/user';
 import { FunctionEnum } from '@src/core/utils/constants';
+import { isTablet } from 'react-native-device-info';
+import { FunctionTablet } from './function.component.tablet';
+import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
@@ -65,6 +68,21 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
       routeName,
     });
   };
+
+  const onBackPress = (): void => {
+    props.navigation.goBack(KEY_NAVIGATION_BACK);
+  };
+
+  if (isTablet()) {
+    return (
+      <FunctionTablet
+        user={userDataFake}
+        functions={functionDataFake}
+        onFunctionItemPress={onFunctionItemPress}
+        onBackPress={onBackPress}
+      />
+    );
+  }
 
   return (
     <Function

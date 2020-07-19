@@ -19,8 +19,9 @@ import { Program } from './tabs/program.component';
 import { Notification } from './tabs/notification.component';
 import { PressRelease } from './tabs/pressRelease.component';
 import {
-  ListIconFill,
-  FileTextIconFill,
+  PressReleaseIcon,
+  SoundIcon,
+  MenuIcon,
 } from '@src/assets/icons';
 import { Program as ProgramModel } from '@src/core/models/program/program.model';
 import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
@@ -64,13 +65,13 @@ const ConferenceInfoComponent: React.FunctionComponent<ConferenceInfoProps> = (p
           onSelect={onTabSelect}>
           <Tab
             title='Chương trình'
-            icon={ListIconFill}
+            icon={MenuIcon}
             titleStyle={themedStyle.tabTitle}>
             <Program programs={props.programs} />
           </Tab>
           <Tab
             title='Thông báo'
-            icon={ListIconFill}
+            icon={SoundIcon}
             titleStyle={themedStyle.tabTitle}>
             <Notification
               notifications={props.notifications}
@@ -79,7 +80,7 @@ const ConferenceInfoComponent: React.FunctionComponent<ConferenceInfoProps> = (p
           </Tab>
           <Tab
             title='Thông cáo'
-            icon={FileTextIconFill}
+            icon={PressReleaseIcon}
             titleStyle={themedStyle.tabTitle}>
             <PressRelease
               pressReleases={props.pressReleases}

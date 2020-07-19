@@ -8,6 +8,9 @@ import {
 } from '@src/core/data/notification';
 import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
 import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
+import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
+import { isTablet } from 'react-native-device-info';
+import { ConferenceInfoTablet } from './conferenceInfo.component.tablet';
 
 export const ConferenceInfoContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'ConferenceInfoContainer';
@@ -31,6 +34,23 @@ export const ConferenceInfoContainer: React.FunctionComponent<NavigationInjected
       },
     });
   };
+
+  const onBackPress = (): void => {
+    props.navigation.goBack(KEY_NAVIGATION_BACK);
+  };
+
+  if (isTablet()) {
+    return (
+      <ConferenceInfoTablet
+        programs={programDataFake}
+        notifications={notificationDataFake}
+        pressReleases={pressReleaseDataFake}
+        onNotificationItemPress={onNotificationItemPress}
+        onPressReleaseItemPress={onPressReleaseItemPress}
+        onBackPress={onBackPress}
+      />
+    );
+  }
 
   return (
     <ConferenceInfo

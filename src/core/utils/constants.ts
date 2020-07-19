@@ -26,3 +26,9 @@ export enum SpeechStatusEnum {
   Speaking,
   Finished,
 }
+
+export enum ProgramTabEnum {
+  ChuongTrinh,
+  ThongCao,
+  ThongBao,
+}

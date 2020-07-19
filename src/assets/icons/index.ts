@@ -305,6 +305,30 @@ export const PersonIcon2 = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const MenuIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-menu.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const SoundIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-sound.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const PressReleaseIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-press-release.png'),
+  };
+
+  return Icon(source, style);
+};
+
 
 export {
   Icon,

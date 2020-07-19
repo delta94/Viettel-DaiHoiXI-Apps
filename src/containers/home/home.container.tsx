@@ -30,6 +30,17 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
     });
   };
 
+  const onQRCodePress = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'scanQRCode',
+    });
+  };
+
+  const onSearchPress = (): void => {
+
+  };
+
   if (isTablet()) {
     return (
       <HomeTablet
@@ -39,6 +50,8 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
         onEditProfilePress={onEditProfilePress}
         onLogoutPress={onLogoutPress}
         onMeetingItemPress={onMeetingItemPress}
+        onQRCodePress={onQRCodePress}
+        onSearchPress={onSearchPress}
       />
     );
   }

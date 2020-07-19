@@ -32,6 +32,8 @@ interface ComponentProps {
   onMeetingItemPress: (isExample: boolean) => void;
   onEditProfilePress: () => void;
   onLogoutPress: () => void;
+  onQRCodePress: () => void;
+  onSearchPress: () => void;
 }
 
 export type HomeTabletProps = ThemedComponentProps & ComponentProps;
@@ -61,6 +63,14 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
 
   const onDatePress = (): void => {
 
+  };
+
+  const onQRCodePress = (): void => {
+    props.onQRCodePress();
+  };
+
+  const onSearchPress = (): void => {
+    props.onSearchPress();
   };
 
   const renderMeetings = (): React.ReactElement[] => {
@@ -104,9 +114,9 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
       <View style={themedStyle.viewCard}>
         <ProfileInfoTablet
           user={props.user}
-          onProfilePress={() => { }}
-          onQRCodePress={() => { }}
-          onSearchPress={() => { }}
+          onProfilePress={onEditProfilePress}
+          onQRCodePress={onQRCodePress}
+          onSearchPress={onSearchPress}
         />
         <DateSelector
           dateSelected={new Date()}

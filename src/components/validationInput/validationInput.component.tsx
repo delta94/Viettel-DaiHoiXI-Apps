@@ -93,6 +93,7 @@ const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = 
       status={getStatus()}
       textStyle={themedStyle.textStyle}
       maxLength={256}
+      size={isTablet() ? 'large' : 'large'}
       {...restProps}
       value={value}
       style={[
@@ -100,7 +101,6 @@ const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = 
         style,
       ]}
       onChangeText={onChangeText}
-      size={isTablet() ? 'large' : 'large'}
     />
   );
 };

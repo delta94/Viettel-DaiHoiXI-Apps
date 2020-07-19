@@ -97,6 +97,7 @@ export const BackHeader = withStyles(BackHeaderComponent, (theme: ThemeType) => 
   },
   txtTitle: {
     fontSize: pxToPercentage(58),
+    lineHeight: pxToPercentage(90),
     color: theme['color-custom-100'],
     ...textStyle.proDisplayBold,
   },

@@ -82,7 +82,7 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
               {item.name}
             </Text>
           </Td>
-          <Td alignItems='center' width={250}>
+          <Td alignItems='center' width={200}>
             <TouchableOpacity
               activeOpacity={0.75}
               onPress={() => onMeetingItemPress(item.isExample)}>
@@ -121,10 +121,10 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
             <Th alignItems='center' width={300}>
               {'Thời gian'}
             </Th>
-            <Th>
+            <Th alignItems='center'>
               {'Nội dung'}
             </Th>
-            <Th alignItems='center' width={250}>
+            <Th alignItems='center' width={200}>
               {'Xem'}
             </Th>
           </Thead>

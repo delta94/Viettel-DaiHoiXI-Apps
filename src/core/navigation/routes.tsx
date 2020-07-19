@@ -48,14 +48,8 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
 });
 
 const AppNavigator: NavigationContainer = createStackNavigator({
-  ['home']: {
-    screen: HomeContainer,
-    navigationOptions: isTablet() ? MenuNavigationTabletOptions : HomeNavigationOptions,
-  },
-  ['function']: {
-    screen: FunctionContainer,
-    navigationOptions: isTablet() ? MenuNavigationTabletOptions : HomeNavigationOptions,
-  },
+  ['home']: HomeContainer,
+  ['function']: FunctionContainer,
   ['scanQRCode']: {
     screen: ScanQRCodeContainer,
     navigationOptions: {
@@ -71,7 +65,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['speechList']: SpeechListContainer,
   ['signUpToSpeak']: SignUpToSpeakContainer,
 }, {
-  defaultNavigationOptions: MenuNavigationOptions,
+  defaultNavigationOptions: isTablet() ? MenuNavigationTabletOptions : MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
 });
 

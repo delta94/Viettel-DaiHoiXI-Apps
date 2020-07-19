@@ -68,6 +68,7 @@ export const TopNavigationBarTablet = withStyles(TopNavigationBarTabletComponent
   titleStyle: {
     color: theme['color-primary-2'],
     fontSize: pxToPercentage(42),
+    lineHeight: pxToPercentage(55),
     textAlign: 'center',
     ...textStyle.proDisplayBold,
   },

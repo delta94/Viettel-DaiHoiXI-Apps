@@ -31,8 +31,8 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
   const { themedStyle } = props;
   const [selectedOption, setSelectedOption] = useState<any>(null);
 
-  const onDelegateItemPress = (congressman: UserModel): void => {
-    props.onDelegateItemPress(congressman);
+  const onDelegateItemPress = (delegate: UserModel): void => {
+    props.onDelegateItemPress(delegate);
   };
 
   return (

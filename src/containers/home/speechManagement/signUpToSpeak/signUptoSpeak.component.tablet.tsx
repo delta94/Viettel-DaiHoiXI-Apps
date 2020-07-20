@@ -15,6 +15,7 @@ import { textStyle, ValidationInput, ScrollableAvoidKeyboard } from '@src/compon
 import { StringValidator } from '@src/core/validators';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { CheckboxItemTablet } from './checkBoxItem.component.tablet';
+import { Button } from '@src/components/button/button.component';
 
 interface ComponentProps {
   onBackPress: () => void;
@@ -102,37 +103,34 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
             </View>
           </View>
           {isCreateScreen &&
-            <TouchableOpacity
+            <Button
+              titleStyle={themedStyle.txtSignUp}
+              title='ĐĂNG KÝ'
               onPress={() => { onSigUpPress(); }}
               activeOpacity={0.75}
-              style={[themedStyle.btn, themedStyle.btnRegister]}>
-              <Text style={themedStyle.txtSignUp}>
-                {'ĐĂNG KÝ'}
-              </Text>
-            </TouchableOpacity>}
+              style={[themedStyle.btn, themedStyle.btnRegister]}
+            />
+          }
           {!isCreateScreen &&
             <View style={themedStyle.viewGroupButton}>
-              <TouchableOpacity
-                onPress={() => { onEditPress(); }}
-                activeOpacity={0.75}
-                style={themedStyle.btn}>
-                <Text style={[
+              <Button
+                titleStyle={[
                   themedStyle.txtSignUp,
                   themedStyle.btnEdit,
-                ]}>
-                  {'SỬA THÔNG TIN'}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+                ]}
+                title={'SỬA THÔNG TIN'}
+                onPress={() => { onEditPress(); }}
+                activeOpacity={0.75}
+                style={themedStyle.btn}
+              />
+              <Button
+                titleStyle={themedStyle.txtCancel}
+                title={'HỦY THÔNG TIN'}
                 activeOpacity={0.75}
                 style={[
                   themedStyle.btn,
                   themedStyle.btnCancel,
-                ]}>
-                <Text style={themedStyle.txtCancel}>
-                  {'HỦY THÔNG TIN'}
-                </Text>
-              </TouchableOpacity>
+                ]} />
             </View>}
         </View>
       </View>

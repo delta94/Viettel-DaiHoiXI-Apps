@@ -329,6 +329,14 @@ export const PressReleaseIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const CheckIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-check.png'),
+  };
+  return Icon(source, style);
+};
+
+
 
 export {
   Icon,

@@ -232,6 +232,7 @@ export const DelegateGroupTablet = withStyles(DelegateGroupTabletComponent, (the
     borderWidth: pxToPercentage(2),
     borderColor: theme['color-primary-18'],
     ...textStyle.proDisplayRegular,
+    paddingVertical: 0,
   },
   selectInputTeam: {
     width: pxToPercentage(376),

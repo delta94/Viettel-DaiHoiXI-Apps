@@ -225,6 +225,7 @@ export const DelegateListTablet = withStyles(DelegateListTabletComponent, (theme
     borderWidth: pxToPercentage(2),
     borderColor: theme['color-primary-18'],
     ...textStyle.proDisplayRegular,
+    paddingVertical: 0,
   },
   selectInput: {
     width: pxToPercentage(584),

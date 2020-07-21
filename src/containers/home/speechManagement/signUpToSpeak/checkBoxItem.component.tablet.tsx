@@ -60,7 +60,7 @@ export const CheckboxItemTablet = withStyles(CheckBoxComponent, (theme: ThemeTyp
     paddingHorizontal: pxToPercentage(35),
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: theme['color-primary-50'],
+    backgroundColor: theme['color-primary-31'],
     height: pxToPercentage(86),
   },
   viewCheckbox: {

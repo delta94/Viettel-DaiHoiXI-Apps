@@ -67,7 +67,7 @@ const WeekSelectorComponent: React.FunctionComponent<WeekSelectorProps> = (props
   };
 
   const onNextWeeksPress = (): void => {
-    if (weeks[weeks.length - 1] !== 36) {
+    if (weeks[weeks.length - 1] !== 52) {
       setWeeks(prevState => prevState.map(value => value + props.numWeeks));
     }
   };

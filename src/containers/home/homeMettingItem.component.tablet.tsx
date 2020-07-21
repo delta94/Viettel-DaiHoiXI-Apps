@@ -1,0 +1,142 @@
+import React from 'react';
+import {
+  ListItemProps,
+} from '@kitten/ui';
+import {
+  Text,
+  View,
+  TouchableOpacityProps,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from '@kitten/theme';
+import { WeeklyMeetingItem } from '@src/core/models/meeting/meeting.model';
+import { textStyle } from '@src/components';
+import { pxToPercentage } from '@src/core/utils/utils';
+
+interface ComponentProps extends TouchableOpacityProps {
+  meeting: WeeklyMeetingItem[];
+  isSunday?: boolean;
+  onMeetingItemPress?: (isExample: boolean) => void;
+  day: number;
+  date: string;
+}
+
+export type HomeMeetingItemProps = ThemedComponentProps & ComponentProps & ListItemProps;
+
+const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = (props) => {
+  const { style, themedStyle, meeting, ...restProps } = props;
+
+  const onMeetingItemPress = (isExample: boolean): void => {
+    return props.onMeetingItemPress(isExample);
+  };
+
+  const renderMeetings = (): React.ReactElement[] => {
+    return props.meeting.map((item, index) => {
+      return (
+        <TouchableOpacity
+          onPress={() => { onMeetingItemPress(item.isExample); }}
+          activeOpacity={0.75}
+          {...restProps}
+          style={themedStyle.container}>
+          <View style={themedStyle.viewContent}>
+            <View style={item.isExample ? themedStyle.viewPlaceLineExample : themedStyle.viewPlaceLineDefault} />
+            <View style={themedStyle.viewCongressName}>
+              <Text style={themedStyle.txtColorGray}>
+                {`${item.fromTime} - ${item.toTime}`}
+              </Text>
+              {item.isExample && (
+                <Text style={themedStyle.txtCongressnameExample}>
+                  {item.name}
+                </Text>
+              )}
+              {!item.isExample && (
+                <Text style={themedStyle.txtCongressname}>
+                  {item.name}
+                </Text>
+              )}
+            </View>
+          </View>
+        </TouchableOpacity >
+      );
+    });
+  };
+
+  return (
+    <View style={[
+      themedStyle.container,
+      props.isSunday && themedStyle.viewSunday,
+    ]}>
+      < View style={themedStyle.viewDate}>
+        <Text style={[
+          themedStyle.txtColorGray,
+          themedStyle.txtDate,
+        ]}>
+          {props.date}
+        </Text>
+        <Text style={themedStyle.txtColorGray}>
+          {props.isSunday ? 'Chủ nhật' : `Thứ ${props.day + 1}`}
+        </Text>
+      </View>
+      {props.meeting.length !== 0 && (
+        renderMeetings()
+      )}
+    </View>
+  );
+};
+
+export const HomeMeetingItemTablet = withStyles(HomeMeetingItemComponent, (theme: ThemeType) => ({
+  container: {
+    width: pxToPercentage(294),
+    borderRightWidth: pxToPercentage(2),
+    borderColor: theme['color-primary-18'],
+  },
+  viewSunday: {
+    backgroundColor: theme['color-primary-31'],
+  },
+  viewDate: {
+    alignItems: 'center',
+  },
+  txtColorGray: {
+    color: theme['color-primary-18'],
+    fontSize: pxToPercentage(34),
+    ...textStyle.proDisplayRegular,
+  },
+  txtDate: {
+    fontSize: pxToPercentage(58),
+  },
+  txtCongressnameExample: {
+    color: theme['color-primary-0'],
+    fontSize: pxToPercentage(34),
+    ...textStyle.proDisplayRegular,
+    lineHeight: pxToPercentage(54),
+  },
+  viewContent: {
+    marginVertical: pxToPercentage(30),
+    flexDirection: 'row',
+  },
+  viewPlaceLineDefault: {
+    width: pxToPercentage(10),
+    backgroundColor: theme['color-primary-2'],
+    height: '80%',
+  },
+  viewPlaceLineExample: {
+    width: pxToPercentage(10),
+    backgroundColor: theme['color-primary-0'],
+    height: '70%',
+  },
+  txtCongressname: {
+    lineHeight: pxToPercentage(54),
+    color: theme['color-primary-2'],
+    fontSize: pxToPercentage(34),
+    ...textStyle.proDisplayRegular,
+  },
+  viewCongressName: {
+    marginLeft: pxToPercentage(16),
+    marginRight: pxToPercentage(14),
+    flex: 1,
+  },
+}));

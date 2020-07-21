@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { Home } from './home.component';
 import { HomeTablet } from './home.component.tablet';
-import { meetingDataFake } from '@src/core/data/meeting';
+import { meetingDataFake, weeklyMeetingDatafake } from '@src/core/data/meeting';
 import { userDataFake } from '@src/core/data/user';
 import { isTablet } from 'react-native-device-info';
 
@@ -20,7 +20,10 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
   };
 
   const onEditProfilePress = (): void => {
-
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'delegateDetail',
+    });
   };
 
   const onLogoutPress = (): void => {
@@ -46,7 +49,7 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
       <HomeTablet
         user={userDataFake}
         currentWeek={32}
-        meetings={meetingDataFake}
+        meetings={weeklyMeetingDatafake}
         onEditProfilePress={onEditProfilePress}
         onLogoutPress={onLogoutPress}
         onMeetingItemPress={onMeetingItemPress}

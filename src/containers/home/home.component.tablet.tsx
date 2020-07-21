@@ -3,32 +3,28 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { pxToPercentage } from '@src/core/utils/utils';
-import { MeetingItem } from '@src/core/models/meeting/meeting.model';
+import { pxToPercentage, addDays } from '@src/core/utils/utils';
+import { WeeklyMeeting as WeeklyMeetingModel } from '@src/core/models/meeting/meeting.model';
 import { viewStyle } from '@src/components/viewStyle';
 import { User } from '@src/core/models/user/user.model';
 import { HomeHeader } from '@src/components/header/homeHeader.component';
 import { ProfileInfoTablet } from '@src/components/profileInfo/profileInfo.component.tablet';
-import { Table } from '@src/components/table/table.component';
-import { Thead } from '@src/components/table/thead.component';
-import { Th } from '@src/components/table/th.component';
-import { Tbody } from '@src/components/table/tbody.component';
-import { Tr } from '@src/components/table/tr.component';
-import { Td } from '@src/components/table/td.component';
 import { textStyle } from '@src/components';
 import { SearchIcon } from '@src/assets/icons';
-import { DateSelector } from '@src/components/dateSelector/dateSelector.component';
+import { WeekSelector } from '@src/components/weekSelector/weekSelector.component';
+import { HomeMeetingItemTablet } from './homeMettingItem.component.tablet';
 
 interface ComponentProps {
   user: User;
   currentWeek: number;
-  meetings: MeetingItem[];
+  meetings: WeeklyMeetingModel[];
   onMeetingItemPress: (isExample: boolean) => void;
   onEditProfilePress: () => void;
   onLogoutPress: () => void;
@@ -76,30 +72,13 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
   const renderMeetings = (): React.ReactElement[] => {
     return props.meetings.map((item, index) => {
       return (
-        <Tr key={index}>
-          <Td alignItems='center' width={110}>
-            <Text style={themedStyle.txtTd}>
-              {++index}
-            </Text>
-          </Td>
-          <Td alignItems='center' width={300}>
-            <Text style={themedStyle.txtTd}>
-              {`${item.fromTime} - ${item.toTime}`}
-            </Text>
-          </Td>
-          <Td>
-            <Text style={themedStyle.txtTd}>
-              {item.name}
-            </Text>
-          </Td>
-          <Td alignItems='center' width={200}>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={() => onMeetingItemPress(item.isExample)}>
-              {SearchIcon(themedStyle.iconSearch)}
-            </TouchableOpacity>
-          </Td>
-        </Tr>
+        <HomeMeetingItemTablet
+          onMeetingItemPress={props.onMeetingItemPress}
+          meeting={item.contents}
+          day={item.day}
+          date={item.date}
+          isSunday={index === props.meetings.length - 1 ? true : false}
+        />
       );
     });
   };
@@ -118,30 +97,19 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
           onQRCodePress={onQRCodePress}
           onSearchPress={onSearchPress}
         />
-        <DateSelector
-          dateSelected={new Date()}
-          numDates={4}
-          onDatePress={onDatePress}
+        <WeekSelector
+          weekSelected={props.currentWeek}
+          numWeeks={4}
+          onWeekPress={onDatePress}
         />
-        <Table style={themedStyle.viewTable}>
-          <Thead>
-            <Th alignItems='center' width={110}>
-              {'STT'}
-            </Th>
-            <Th alignItems='center' width={300}>
-              {'Thời gian'}
-            </Th>
-            <Th alignItems='center'>
-              {'Nội dung'}
-            </Th>
-            <Th alignItems='center' width={200}>
-              {'Xem'}
-            </Th>
-          </Thead>
-          <Tbody>
-            {renderMeetings()}
-          </Tbody>
-        </Table>
+        <View style={themedStyle.viewSection}>
+          <ScrollView>
+            <View style={themedStyle.viewContent}>
+              {renderMeetings()}
+            </View>
+          </ScrollView>
+        </View>
+
       </View>
     </View>
   );
@@ -161,16 +129,13 @@ export const HomeTablet = withStyles(HomeTabletComponent, (theme: ThemeType) => 
     backgroundColor: theme['color-custom-100'],
     ...viewStyle.shadow2,
   },
-  viewTable: {
+  viewContent: {
+    flexDirection: 'row',
+  },
+  viewSection: {
     flex: 1,
-    marginTop: pxToPercentage(28),
-  },
-  txtTd: {
-    fontSize: pxToPercentage(34),
-    ...textStyle.proDisplayRegular,
-  },
-  iconSearch: {
-    width: pxToPercentage(54),
-    height: pxToPercentage(54),
+    borderWidth: pxToPercentage(2),
+    marginTop: pxToPercentage(30),
+    borderColor: theme['color-primary-18'],
   },
 }));

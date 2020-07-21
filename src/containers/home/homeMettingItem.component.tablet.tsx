@@ -42,19 +42,21 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
           activeOpacity={0.75}
           {...restProps}
           style={themedStyle.container}>
-          <View style={themedStyle.viewContent}>
-            <View style={item.isExample ? themedStyle.viewPlaceLineExample : themedStyle.viewPlaceLineDefault} />
+          <View style={[
+            themedStyle.viewContent,
+            item.isExample ? themedStyle.viewContentBorderExample : themedStyle.viewContentBorderDefault,
+          ]}>
             <View style={themedStyle.viewCongressName}>
               <Text style={themedStyle.txtColorGray}>
                 {`${item.fromTime} - ${item.toTime}`}
               </Text>
               {item.isExample && (
-                <Text style={themedStyle.txtCongressnameExample}>
+                <Text style={themedStyle.txtCongressNameExample}>
                   {item.name}
                 </Text>
               )}
               {!item.isExample && (
-                <Text style={themedStyle.txtCongressname}>
+                <Text style={themedStyle.txtCongressName}>
                   {item.name}
                 </Text>
               )}
@@ -70,7 +72,7 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
       themedStyle.container,
       props.isSunday && themedStyle.viewSunday,
     ]}>
-      < View style={themedStyle.viewDate}>
+      <View style={themedStyle.viewDate}>
         <Text style={[
           themedStyle.txtColorGray,
           themedStyle.txtDate,
@@ -108,7 +110,7 @@ export const HomeMeetingItemTablet = withStyles(HomeMeetingItemComponent, (theme
   txtDate: {
     fontSize: pxToPercentage(58),
   },
-  txtCongressnameExample: {
+  txtCongressNameExample: {
     color: theme['color-primary-0'],
     fontSize: pxToPercentage(34),
     ...textStyle.proDisplayRegular,
@@ -118,17 +120,15 @@ export const HomeMeetingItemTablet = withStyles(HomeMeetingItemComponent, (theme
     marginVertical: pxToPercentage(30),
     flexDirection: 'row',
   },
-  viewPlaceLineDefault: {
-    width: pxToPercentage(10),
-    backgroundColor: theme['color-primary-2'],
-    height: '80%',
+  viewContentBorderDefault: {
+    borderLeftWidth: pxToPercentage(10),
+    borderColor: theme['color-primary-2'],
   },
-  viewPlaceLineExample: {
-    width: pxToPercentage(10),
-    backgroundColor: theme['color-primary-0'],
-    height: '70%',
+  viewContentBorderExample: {
+    borderLeftWidth: pxToPercentage(10),
+    borderColor: theme['color-primary-0'],
   },
-  txtCongressname: {
+  txtCongressName: {
     lineHeight: pxToPercentage(54),
     color: theme['color-primary-2'],
     fontSize: pxToPercentage(34),

@@ -41,7 +41,7 @@
   "color-basic-900": "#1A2138",
   "color-basic-1000": "#151A30",
   "color-basic-1100": "#101426",
-  "color-custom-100": "rgb(250,250,250)",
+  "color-custom-100": "rgba(255,255,255, 1)",
   "color-custom-200": "rgba(160, 160, 161, 1)",
   "color-custom-300": "rgba(242, 242, 242, 1)",
   "color-custom-400": "rgba(222, 222, 222, 1)",

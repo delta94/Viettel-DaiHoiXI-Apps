@@ -47,7 +47,6 @@ export const Th = withStyles(ThComponent, (theme: ThemeType) => ({
   container: {
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingHorizontal: pxToPercentage(20),
     borderRightWidth: pxToPercentage(2),
     borderColor: theme['color-primary-18'],
   },

@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   View,
-  Text,
-  TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import {
@@ -10,14 +8,12 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { pxToPercentage, addDays } from '@src/core/utils/utils';
+import { pxToPercentage } from '@src/core/utils/utils';
 import { WeeklyMeeting as WeeklyMeetingModel } from '@src/core/models/meeting/meeting.model';
 import { viewStyle } from '@src/components/viewStyle';
 import { User } from '@src/core/models/user/user.model';
 import { HomeHeader } from '@src/components/header/homeHeader.component';
 import { ProfileInfoTablet } from '@src/components/profileInfo/profileInfo.component.tablet';
-import { textStyle } from '@src/components';
-import { SearchIcon } from '@src/assets/icons';
 import { WeekSelector } from '@src/components/weekSelector/weekSelector.component';
 import { HomeMeetingItemTablet } from './homeMettingItem.component.tablet';
 
@@ -73,7 +69,7 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
     return props.meetings.map((item, index) => {
       return (
         <HomeMeetingItemTablet
-          onMeetingItemPress={props.onMeetingItemPress}
+          onMeetingItemPress={onMeetingItemPress}
           meeting={item.contents}
           day={item.day}
           date={item.date}

@@ -321,9 +321,9 @@ export const SoundIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
-export const PressReleaseIcon = (style: StyleProp<ImageStyle>): IconElement => {
+export const CheckIconFill = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
-    imageSource: require('./icon-press-release.png'),
+    imageSource: require('./icon-checkFill.png'),
   };
 
   return Icon(source, style);
@@ -333,6 +333,15 @@ export const CheckIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-check.png'),
   };
+
+  return Icon(source, style);
+};
+
+export const StopSpeechIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-stop.png'),
+  };
+
   return Icon(source, style);
 };
 

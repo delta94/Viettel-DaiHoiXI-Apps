@@ -5,7 +5,7 @@ export const speechDataFake: Speech[] = [
   {
     full_name: 'Võ Thị Dung',
     content: 'Kết luận về thí điểm cơ chế, chính sách đặc thù phát triển thành phố Hồ Chí Minh',
-    status: SpeechStatusEnum.Speaking,
+    status: SpeechStatusEnum.Finished,
   },
   {
     full_name: 'Nguyễn Đức Hải ',

@@ -8,10 +8,11 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { pxToPercentage, isEmpty } from '@src/core/utils/utils';
 
 interface ComponentProps extends ViewProps {
   example?: any;
+  minHeight?: number;
 }
 
 export type TrProps = ThemedComponentProps & ComponentProps;
@@ -25,6 +26,8 @@ const TrComponent: React.FunctionComponent<TrProps> = (props) => {
       style={[
         themedStyle.container,
         style,
+        !isEmpty(props.minHeight)
+        && { minHeight: pxToPercentage(props.minHeight) },
       ]}>
       {props.children}
     </View>

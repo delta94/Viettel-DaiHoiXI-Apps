@@ -16,6 +16,7 @@ import {
 interface ComponentProps extends ViewProps {
   alignItems?: 'flex-start' | 'center' | 'flex-end';
   width?: number;
+  childrenFlex?: boolean;
 }
 
 export type TdProps = ThemedComponentProps & ComponentProps;
@@ -34,7 +35,8 @@ const TdComponent: React.FunctionComponent<TdProps> = (props) => {
           ? { width: pxToPercentage(props.width) }
           : { flex: 1 },
       ]}>
-      <View style={themedStyle.viewChildren}>
+      <View style={[themedStyle.viewChildren,
+      props.childrenFlex && { flex: 1 }]}>
         {props.children}
       </View>
     </View>

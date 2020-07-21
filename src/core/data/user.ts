@@ -2,9 +2,9 @@ import { User } from '../models/user/user.model';
 import { UserDetail } from '../models/user/userDetail.model';
 
 export const userDataFake: User = {
-  avatar: 'https://vcdn-vnexpress.vnecdn.net/2016/05/25/Vo-Thi-Dung-TPHCM-6031-1446118-2504-7878-1464171876.jpg',
-  full_name: 'TĂNG PHƯỚC LỘC',
-  position: 'Ủy viên Ban Thường vụ Đảng ủy cơ quan, Phó Chánh Văn phòng Thành ủy',
+  avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_VoThiDung.jpg',
+  full_name: 'VÕ THỊ DUNG',
+  position: ' Ủy viên Ban thường vụ Thành ủy, Phó Bí thư Thành ủy',
   phone: '0123456789',
   unit: 'Văn phòng thành ủy',
   group: 'ĐẢNG BỘ KHỐI DÂN - CHÍNH - ĐẢNG THÀNH PHỐ',
@@ -13,17 +13,17 @@ export const userDataFake: User = {
 };
 
 export const userDetailDataFake: UserDetail = {
-  avatar: 'https://vcdn-vnexpress.vnecdn.net/2016/05/25/Vo-Thi-Dung-TPHCM-6031-1446118-2504-7878-1464171876.jpg',
+  avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_VoThiDung.jpg',
   full_name: 'VÕ THỊ DUNG',
-  position: 'Phó Bí thư Đoàn Khối Dân - Chính - Đảng TP.HCM',
+  position: ' Ủy viên Ban thường vụ Thành ủy, Phó Bí thư Thành ủy',
   phone: '0123456789',
   organ: 'Văn phòng thành ủy',
   group: 'Đảng bộ khối dân chính thành phố',
-  birthDay: '32-4-1977',
+  birthDay: '02-06-1960',
   delegate_number: '32',
-  nation: 'quảng nam',
-  sex: 'nam',
-  hometown: 'quảng bình',
+  nation: 'Thành Phố Hồ Chí Minh',
+  sex: 'Nữ',
+  hometown: 'Thành Phố Hồ Chí Minh ',
   religion: 'không',
   preparatoryDay: '12/12',
   officialDay: '14/1/2000',

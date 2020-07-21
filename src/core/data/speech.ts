@@ -8,23 +8,23 @@ export const speechDataFake: Speech[] = [
     status: SpeechStatusEnum.Speaking,
   },
   {
-    full_name: 'Nguyễn Văn Hiếu',
-    content: 'Tờ trình về tình hình kinh tế - xã hội thành phố 06 tháng đầu năm, nhiệm vụ, giải pháp trọng tâm 6 tháng cuối năm 2019 và tiếp tục rà soát kết quả thực hiện các chỉ tiêu Nghị quyết Đại hội Đảng bộ thành phố lần thứ X trong lĩnh vực kinh tế - xã hội và 7 chương trình đột phá (kèm dự thảo Báo cáo)',
+    full_name: 'Nguyễn Đức Hải ',
+    content: 'Báo cáo giải trình, tiếp thu, chỉnh lý dự thảo Nghị quyết về phê chuẩn quyết toán ngân sách nhà nước ',
     status: SpeechStatusEnum.Accepted,
   },
   {
-    full_name: 'Nguyễn Hữu Hiệp',
-    content: 'Nghị quyết về thí điểm cơ chế, chính sách đặc thù phát triển thành phố Hồ Chí Minh',
+    full_name: 'Vũ Hồng Thanh',
+    content: 'Báo cáo giải trình, tiếp thu, chỉnh lý dự án Luật Đầu tư theo phương thức đối tác công tư (PPP).',
     status: SpeechStatusEnum.Accepted,
   },
   {
-    full_name: 'Tăng Phước Lộc',
-    content: 'Tờ trình về tình hình kinh tế - xã hội thành phố 06 tháng đầu năm, nhiệm vụ, giải pháp trọng tâm 06 tháng cuối năm 2019 và tiếp tục rà soát kết quả thực hiện các chỉ tiêu Nghị quyết Đại hội Đảng bộ thành phố lần thứ X trong lĩnh vực kinh tế - xã hội và 7 chương trình đột phá (kèm dự thảo Báo cáo)',
+    full_name: 'Phan Xuân Dũng',
+    content: 'Thảo luận ở hội trường về dự án Luật Bảo vệ môi trường (sửa đổi).',
     status: SpeechStatusEnum.Pending,
   },
   {
-    full_name: 'Trần Lưu Quang',
-    content: 'Nghị quyết về thí điểm cơ chế, chính sách đặc thù phát triển thành phố Hồ Chí Minh',
+    full_name: 'Trần Hồng Hà ',
+    content: 'Bộ trưởng Bộ Tài nguyên và Môi trường Trần Hồng Hà giải trình ý kiến của đại biểu Quốc hội.',
     status: SpeechStatusEnum.Pending,
   },
 ];

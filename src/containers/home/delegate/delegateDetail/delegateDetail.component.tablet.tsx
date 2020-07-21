@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ScrollView,
-  SafeAreaView,
   View,
 } from 'react-native';
 import {

@@ -14,7 +14,6 @@ import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { DownloadIcon } from '@src/assets/icons';
 import { BackHeader } from '@src/components/header/backHeader.component';
 
 interface ComponentProps {
@@ -28,7 +27,6 @@ const PressReleaseDetailTabletComponent: React.FunctionComponent<PressReleaseDet
   const { themedStyle, pressRelease } = props;
 
   const onMessagePress = (): void => {
-
   };
 
   const onBackPress = (): void => {
@@ -36,7 +34,6 @@ const PressReleaseDetailTabletComponent: React.FunctionComponent<PressReleaseDet
   };
 
   const onHelpPress = (): void => {
-
   };
 
   return (
@@ -47,7 +44,9 @@ const PressReleaseDetailTabletComponent: React.FunctionComponent<PressReleaseDet
         onMessagePress={onMessagePress}
         onHelpPress={onHelpPress}
       />
-      <ScrollView style={themedStyle.viewCard}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={themedStyle.viewCard}>
         <Text style={themedStyle.txtTitle}>
           {pressRelease.title}
         </Text>
@@ -62,19 +61,14 @@ const PressReleaseDetailTabletComponent: React.FunctionComponent<PressReleaseDet
           <Text style={themedStyle.txtFileTitle}>
             {'Tập tin đính kèm: '}
           </Text>
-          <Text style={themedStyle.txtFileName}>
-            {pressRelease.file}
-          </Text>
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={() => { }}>
+            <Text style={themedStyle.txtFileName}>
+              {pressRelease.file}
+            </Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => { }}
-          style={themedStyle.btnDownload}>
-          {DownloadIcon(themedStyle.iconDownload)}
-          <Text style={themedStyle.txtDownload}>
-            {'Tải về'}
-          </Text>
-        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -90,7 +84,8 @@ export const PressReleaseDetailTablet = withStyles(PressReleaseDetailTabletCompo
   viewCard: {
     flex: 1,
     borderRadius: pxToPercentage(40),
-    padding: pxToPercentage(20),
+    paddingVertical: pxToPercentage(40),
+    paddingHorizontal: pxToPercentage(400),
     backgroundColor: theme['color-custom-100'],
     ...viewStyle.shadow2,
   },
@@ -109,36 +104,19 @@ export const PressReleaseDetailTablet = withStyles(PressReleaseDetailTabletCompo
     color: theme['text-basic-color'],
     ...textStyle.proTextRegular,
   },
-  txtBold: {
-    ...textStyle.proTextBold,
-  },
   viewFile: {
     marginTop: pxToPercentage(30),
     flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   txtFileTitle: {
     fontSize: pxToPercentage(34),
     color: theme['text-basic-color'],
-    ...textStyle.proTextRegularItalic,
+    ...textStyle.proTextRegular,
   },
   txtFileName: {
     fontSize: pxToPercentage(34),
-    color: theme['text-basic-color'],
-    ...textStyle.proTextRegular,
-  },
-  btnDownload: {
-    marginTop: pxToPercentage(20),
-    alignSelf: 'center',
-    alignItems: 'center',
-  },
-  txtDownload: {
-    marginTop: pxToPercentage(2.5),
-    fontSize: pxToPercentage(34),
-    color: theme['text-basic-color'],
-    ...textStyle.proTextRegular,
-  },
-  iconDownload: {
-    width: pxToPercentage(100),
-    height: pxToPercentage(100),
+    color: theme['color-blue-url-100'],
+    ...textStyle.proTextRegularItalic,
   },
 }));

@@ -45,7 +45,9 @@ const NotificationDetailTabletComponent: React.FunctionComponent<NotificationDet
         onMessagePress={onMessagePress}
         onHelpPress={onHelpPress}
       />
-      <ScrollView style={themedStyle.viewCard}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={themedStyle.viewCard}>
         <Text style={themedStyle.txtTitle}>
           {notification.title}
         </Text>
@@ -71,7 +73,8 @@ export const NotificationDetailTablet = withStyles(NotificationDetailTabletCompo
   viewCard: {
     flex: 1,
     borderRadius: pxToPercentage(40),
-    padding: pxToPercentage(20),
+    paddingVertical: pxToPercentage(40),
+    paddingHorizontal: pxToPercentage(400),
     backgroundColor: theme['color-custom-100'],
     ...viewStyle.shadow2,
   },

@@ -3,12 +3,14 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
+import { imageBackgroundSignIn } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import {
   textStyle,
@@ -16,12 +18,9 @@ import {
   ScrollableAvoidKeyboard,
 } from '@src/components';
 import { NumberValidator } from '@src/core/validators';
-import {
-  Button,
-  Layout,
-} from '@kitten/ui';
-import { viewStyle } from '@src/components/viewStyle';
+import { Button } from '@src/components/button/button.component';
 import { ArrowIosBackFill } from '@src/assets/icons';
+import { SwitchSetting } from '@src/components/switch/switchSetting.component';
 
 interface ComponentProps {
   onResendOtpPress: () => void;
@@ -55,51 +54,55 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
   return (
     <ScrollableAvoidKeyboard>
       <View style={themedStyle.container}>
-        <View style={themedStyle.sectionBox}>
-          <View style={themedStyle.viewHeader}>
-            <View style={themedStyle.viewHeaderLeftRight}>
-              <TouchableOpacity
-                activeOpacity={0.75}
-                onPress={onBackPress}>
-                {ArrowIosBackFill(themedStyle.iconBack)}
-              </TouchableOpacity>
+        <ImageBackground
+          source={imageBackgroundSignIn.imageSource}
+          style={themedStyle.bg}>
+          <View style={themedStyle.sectionBox}>
+            <View style={themedStyle.viewHeader}>
+              <View style={themedStyle.viewHeaderLeftRight}>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  onPress={onBackPress}>
+                  {ArrowIosBackFill(themedStyle.iconBack)}
+                </TouchableOpacity>
+              </View>
+              <Text style={themedStyle.txtHeaderTitle}>
+                {'NHẬP MÃ OTP'}
+              </Text>
+              <View style={themedStyle.viewHeaderLeftRight} />
             </View>
-            <Text style={themedStyle.txtHeaderTitle}>
-              {'Nhập mã OTP'}
-            </Text>
-            <View style={themedStyle.viewHeaderLeftRight} />
+            <View style={themedStyle.viewBody}>
+              <Text style={themedStyle.txtOtpNote}>
+                {'Điền vào đoạn mã OTP được gửi đến \nsố +84 0123456789'}
+              </Text>
+              <Text style={themedStyle.txtOtpNote}>
+                {'Thời gian hiệu lực 3:10'}
+              </Text>
+              <ValidationInput
+                style={themedStyle.inputOtp}
+                textStyle={textStyle.regular}
+                placeholder='Mã OTP'
+                validator={NumberValidator}
+                onChangeText={onOtpInputTextChange}
+              />
+              <View style={themedStyle.viewBtn}>
+                <Button
+                  title={'GỬI MÃ LẠI'}
+                  titleStyle={themedStyle.txtBtn}
+                  style={themedStyle.btn}
+                  onPress={onResendOtpButtonPress} />
+                <Button
+                  title={'XÁC NHẬN'}
+                  titleStyle={themedStyle.txtAccept}
+                  style={themedStyle.btnAccept}
+                  onPress={onConfirmButtonPress} />
+              </View>
+            </View>
+            <View style={themedStyle.viewBottom}>
+              <SwitchSetting />
+            </View>
           </View>
-          <View style={themedStyle.viewBody}>
-            <Text style={themedStyle.txtOtpNote}>
-              {'Điền vào đoạn mã OTP được gửi đến số\n+84 0123456789'}
-            </Text>
-            <Text style={themedStyle.txtOtpNote}>
-              {'Thời gian hiệu lực 3:10'}
-            </Text>
-            <ValidationInput
-              style={themedStyle.inputOtp}
-              textStyle={textStyle.regular}
-              placeholder='Mã OTP'
-              validator={NumberValidator}
-              onChangeText={onOtpInputTextChange}
-            />
-            <Layout style={themedStyle.viewBtn}>
-              <Button
-                size={'large'}
-                status='basic'
-                style={themedStyle.btn}
-                onPress={onResendOtpButtonPress}>
-                {'Gửi lại mã'}
-              </Button>
-              <Button
-                size={'large'}
-                style={themedStyle.btnAccept}
-                onPress={onConfirmButtonPress}>
-                {'Xác nhận'}
-              </Button>
-            </Layout>
-          </View>
-        </View>
+        </ImageBackground>
       </View>
     </ScrollableAvoidKeyboard>
   );
@@ -108,16 +111,16 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
 export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme['color-primary-2'],
+  },
+  bg: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingRight: pxToPercentage(200),
   },
   sectionBox: {
-    width: pxToPercentage(900),
-    height: pxToPercentage(1200),
-    backgroundColor: theme['color-custom-100'],
-    borderRadius: pxToPercentage(40),
-    ...viewStyle.shadow1,
+    width: pxToPercentage(950),
+    height: '100%',
+    paddingTop: pxToPercentage(210),
   },
   viewHeader: {
     flexDirection: 'row',
@@ -134,23 +137,25 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
     width: pxToPercentage(100),
   },
   txtHeaderTitle: {
-    fontSize: pxToPercentage(32),
+    fontSize: pxToPercentage(58),
     ...textStyle.proTextSemibold,
+    color: theme['color-primary-2'],
   },
   iconBack: {
     width: pxToPercentage(70),
     height: pxToPercentage(70),
+    tintColor: theme['color-primary-2'],
   },
   txtOtpNote: {
     textAlign: 'center',
     marginTop: pxToPercentage(20),
     marginHorizontal: pxToPercentage(64),
-    fontSize: pxToPercentage(28),
-    color: theme['text-hint-color'],
+    fontSize: pxToPercentage(34),
     ...textStyle.proTextRegular,
   },
   inputOtp: {
-    marginTop: pxToPercentage(15),
+    marginTop: pxToPercentage(34),
+    borderRadius: pxToPercentage(28),
   },
   viewBtn: {
     flexDirection: 'row',
@@ -159,9 +164,21 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   },
   btn: {
     width: '49%',
+    borderRadius: pxToPercentage(28),
+    backgroundColor: theme['color-primary-2'],
   },
   btnAccept: {
     width: '49%',
-    backgroundColor: theme['color-primary-2'],
+    borderRadius: pxToPercentage(28),
+    backgroundColor: theme['color-primary-0'],
+  },
+  txtAccept: {
+    color: theme['color-primary-2'],
+  },
+  txtBtn: {
+    color: theme['color-primary-0'],
+  },
+  viewBottom: {
+    paddingBottom: pxToPercentage(20),
   },
 }));

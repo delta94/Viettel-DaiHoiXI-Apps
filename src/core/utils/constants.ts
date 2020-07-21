@@ -6,6 +6,7 @@ export enum ExampleEnum {
 export enum SignInTabEnum {
   Account,
   PhoneNumber,
+  QRCode,
 }
 
 export enum FunctionEnum {

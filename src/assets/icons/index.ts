@@ -337,6 +337,14 @@ export const CheckIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const PhoneIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-phone.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const StopSpeechIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-stop.png'),
@@ -345,7 +353,13 @@ export const StopSpeechIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const ScanQRIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-scan-qr.png'),
+  };
 
+  return Icon(source, style);
+};
 
 export {
   Icon,

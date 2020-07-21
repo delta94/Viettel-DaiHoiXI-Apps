@@ -19,3 +19,7 @@ export const imageBannerName: ImageSource = {
 export const imageWatch: ImageSource = {
   imageSource: require('./source/image-watch.png'),
 };
+
+export const imageBackgroundSignIn: ImageSource = {
+  imageSource: require('./source/image-bg-sign-in.png'),
+};

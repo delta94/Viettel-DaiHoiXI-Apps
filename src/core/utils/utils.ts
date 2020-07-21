@@ -56,3 +56,7 @@ export const minusDays = function (dateParam: Date, dayCount: number) {
 
   return date;
 };
+
+export const tenMinutesCountdown = function (time: number) {
+  return `${Math.trunc(time / 60) > 9 ? Math.trunc(time / 60) : `0${Math.trunc(time / 60)}`}:${time % 60 < 10 ? `0` + (time % 60) : (time % 60)}`;
+};

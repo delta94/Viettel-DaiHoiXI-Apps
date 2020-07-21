@@ -6,7 +6,7 @@ import { isTablet } from 'react-native-device-info';
 import { Speech } from '@src/core/models/speech/speech.model';
 import { alerts } from '@src/core/utils/alerts';
 import { SpeechStatusEnum } from '@src/core/utils/constants';
-import { DelegateSpeechManagementTablet } from './speechList.component.tablet';
+import { SpeechListTablet } from './speechList.component.tablet';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 
 export const SpeechListContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
@@ -17,7 +17,7 @@ export const SpeechListContainer: React.FunctionComponent<NavigationInjectedProp
     props.navigation.goBack(KEY_NAVIGATION_BACK);
   };
 
-  const OnSpeechInvitationPress = (id: number) => {
+  const onSpeechInvitationPress = (id: number) => {
     // check speeching
     let isSpeeching = false;
     for (let i = 0; i < delegateSpeechList.length; i++) {
@@ -51,8 +51,8 @@ export const SpeechListContainer: React.FunctionComponent<NavigationInjectedProp
 
   if (isTablet()) {
     return (
-      <DelegateSpeechManagementTablet
-        OnSpeechInvitationPress={OnSpeechInvitationPress}
+      <SpeechListTablet
+        onSpeechInvitationPress={onSpeechInvitationPress}
         speechs={delegateSpeechList}
         onBackPress={onBackPress}
       />

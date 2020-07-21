@@ -15,3 +15,7 @@ export const imageNationalEmblem: ImageSource = {
 export const imageBannerName: ImageSource = {
   imageSource: require('./source/image-banner-name.png'),
 };
+
+export const imageWatch: ImageSource = {
+  imageSource: require('./source/image-watch.png'),
+};

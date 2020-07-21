@@ -17,18 +17,18 @@ import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
 import { textStyle } from '@src/components';
-import { DelegateSpeechStatusTablet } from './speechListStatusItem.component.tablet';
+import { SpeechListStatusItemTablet } from './speechListStatusItem.component.tablet';
 import { viewStyle } from '@src/components/viewStyle';
 import { BackHeader } from '@src/components/header/backHeader.component';
 
 interface ComponentProps {
   speechs: Speech[];
-  OnSpeechInvitationPress: (index: number) => void;
+  onSpeechInvitationPress: (index: number) => void;
   onBackPress: () => void;
 }
-export type DelegateRegisterSpeechProps = ThemedComponentProps & ComponentProps;
+export type SpeechListTabletProps = ThemedComponentProps & ComponentProps;
 
-const DelegateRegisterSpeechComponentTablet: React.FunctionComponent<DelegateRegisterSpeechProps> = (props) => {
+const SpeechListTabletComponent: React.FunctionComponent<SpeechListTabletProps> = (props) => {
   const { themedStyle } = props;
 
   const onBackPress = (): void => {
@@ -62,8 +62,8 @@ const DelegateRegisterSpeechComponentTablet: React.FunctionComponent<DelegateReg
               {item.content}
             </Text>
           </Td>
-          <DelegateSpeechStatusTablet
-            OnSpeechInvitationPress={props.OnSpeechInvitationPress}
+          <SpeechListStatusItemTablet
+            onSpeechInvitationPress={props.onSpeechInvitationPress}
             enum={item.status}
             index={index}
           />
@@ -103,7 +103,7 @@ const DelegateRegisterSpeechComponentTablet: React.FunctionComponent<DelegateReg
   );
 };
 
-export const DelegateSpeechManagementTablet = withStyles(DelegateRegisterSpeechComponentTablet, (theme: ThemeType) => ({
+export const SpeechListTablet = withStyles(SpeechListTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(31),

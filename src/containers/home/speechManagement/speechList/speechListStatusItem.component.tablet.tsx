@@ -3,13 +3,17 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { pxToPercentage } from '@src/core/utils/utils';
+import {
+  pxToPercentage,
+  tenMinutesCountdown,
+} from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import {
   RegisterIcon,
@@ -19,19 +23,20 @@ import {
 } from '@src/assets/icons';
 import { SpeechStatusEnum } from '@src/core/utils/constants';
 import { Td } from '@src/components/table/td.component';
+import { imageWatch } from '@src/assets/images';
 
 interface ComponentProps {
   enum?: number;
   index: number;
-  OnSpeechInvitationPress: (index: number) => void;
+  onSpeechInvitationPress: (index: number) => void;
 }
 
-export type DelegateSpeechStatusItemProps = ThemedComponentProps & ComponentProps;
+export type SpeechListStatusItemTabletProps = ThemedComponentProps & ComponentProps;
 
-const DelegateSpeechStatusItemComponent: React.FunctionComponent<DelegateSpeechStatusItemProps> = (props) => {
+const SpeechListStatusItemTabletComponent: React.FunctionComponent<SpeechListStatusItemTabletProps> = (props) => {
   const { themedStyle } = props;
 
-  const [time, setTime] = React.useState<number>(100);
+  const [time, setTime] = React.useState<number>(600);
 
   React.useEffect(() => {
     if (props.enum === SpeechStatusEnum.Speaking) {
@@ -39,7 +44,7 @@ const DelegateSpeechStatusItemComponent: React.FunctionComponent<DelegateSpeechS
         if (time > 0) {
           setTime(time - 1);
         } else {
-          props.OnSpeechInvitationPress(props.index);
+          props.onSpeechInvitationPress(props.index);
           clearInterval(interval);
         }
       }, 1000);
@@ -47,19 +52,21 @@ const DelegateSpeechStatusItemComponent: React.FunctionComponent<DelegateSpeechS
     }
   }), [];
 
-  const OnSpeechInvitationPress = (index: number): void => {
-    props.OnSpeechInvitationPress(index);
+  const onSpeechInvitationPress = (index: number): void => {
+    props.onSpeechInvitationPress(index);
   };
 
   if (props.enum === SpeechStatusEnum.Accepted || props.enum === SpeechStatusEnum.Pending) {
     return (
-      <Td childrenFlex style={themedStyle.viewWaitSpeech}>
+      <Td
+        childrenFlex
+        style={themedStyle.viewWaitSpeech}>
         <TouchableOpacity
-          onPress={() => { OnSpeechInvitationPress(props.index); }}
+          onPress={() => { onSpeechInvitationPress(props.index); }}
           activeOpacity={0.75}
           style={themedStyle.viewItem}>
           {RegisterIcon([themedStyle.icon, themedStyle.iconRegisterSpeech])}
-          <Text style={themedStyle.txtInvitionSpeech}>
+          <Text style={themedStyle.txtInvitationSpeech}>
             {'MỜI PHÁT BIỂU'}
           </Text>
         </TouchableOpacity>
@@ -69,12 +76,13 @@ const DelegateSpeechStatusItemComponent: React.FunctionComponent<DelegateSpeechS
 
   if (props.enum === SpeechStatusEnum.Finished) {
     return (
-      <Td childrenFlex style={themedStyle.viewSpeeched}>
+      <Td childrenFlex style={themedStyle.viewSpoken}>
         <TouchableOpacity
+          disabled={true}
           activeOpacity={0.75}
           style={themedStyle.viewItem}>
           {CheckIconFill([themedStyle.icon, themedStyle.iconCheck])}
-          <Text style={themedStyle.txtSpeeched}>
+          <Text style={themedStyle.txtSpoken}>
             {'ĐÃ PHÁT BIỂU'}
           </Text>
         </TouchableOpacity>
@@ -84,22 +92,21 @@ const DelegateSpeechStatusItemComponent: React.FunctionComponent<DelegateSpeechS
 
   if (props.enum === SpeechStatusEnum.Speaking) {
     return (
-      <Td childrenFlex style={themedStyle.viewSpeeching}>
+      <Td childrenFlex style={themedStyle.viewSpeaking}>
         <TouchableOpacity
-          onPress={() => { OnSpeechInvitationPress(props.index); }}
+          onPress={() => { onSpeechInvitationPress(props.index); }}
           activeOpacity={0.75}
           style={themedStyle.viewItem}>
-          <View style={themedStyle.iconWatch}>
-            {WatchIcon([themedStyle.icon, themedStyle.iconWatch])}
-            <View style={themedStyle.viewTime}>
-              <Text style={themedStyle.txtTime}>
-                {`0${Math.trunc(time / 60)}:${time % 60 < 10 ? `0` + (time % 60) : (time % 60)}`}
-              </Text>
-            </View>
-          </View>
+          <ImageBackground
+            source={imageWatch.imageSource}
+            style={themedStyle.imageWatch}>
+            <Text style={themedStyle.txtTime}>
+              {tenMinutesCountdown(time)}
+            </Text>
+          </ImageBackground>
           {StopSpeechIcon([themedStyle.icon, themedStyle.iconStop])}
           <Text style={themedStyle.txtStopSpeech}>
-            {'ĐANG PHÁT BIỂU'}
+            {'DỪNG PHÁT BIỂU'}
           </Text>
         </TouchableOpacity>
       </Td>
@@ -110,22 +117,27 @@ const DelegateSpeechStatusItemComponent: React.FunctionComponent<DelegateSpeechS
   );
 };
 
-export const DelegateSpeechStatusTablet = withStyles(DelegateSpeechStatusItemComponent, (theme: ThemeType) => ({
-  txtContent: {
-    fontSize: pxToPercentage(36),
-    ...textStyle.proDisplayRegular,
+export const SpeechListStatusItemTablet = withStyles(SpeechListStatusItemTabletComponent, (theme: ThemeType) => ({
+  viewWaitSpeech: {
+    backgroundColor: theme['color-primary-0'],
+  },
+  viewSpeaking: {
+    backgroundColor: theme['color-primary-2'],
+  },
+  viewSpoken: {
+    backgroundColor: theme['color-primary-20'],
   },
   viewItem: {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
     width: '100%',
-    flex: 1,
+    height: '100%',
   },
   icon: {
     height: pxToPercentage(56),
   },
-  iconWatch: {
+  imageWatch: {
     width: pxToPercentage(115),
     height: pxToPercentage(136),
     justifyContent: 'center',
@@ -133,7 +145,6 @@ export const DelegateSpeechStatusTablet = withStyles(DelegateSpeechStatusItemCom
   },
   iconCheck: {
     marginRight: pxToPercentage(31.5),
-    tintColor: theme['color-primary-51'],
     width: pxToPercentage(65),
     height: pxToPercentage(46),
     resizeMode: 'contain',
@@ -150,30 +161,19 @@ export const DelegateSpeechStatusTablet = withStyles(DelegateSpeechStatusItemCom
     resizeMode: 'contain',
     marginLeft: pxToPercentage(40),
   },
-  txtInvitionSpeech: {
+  txtInvitationSpeech: {
     fontSize: pxToPercentage(34),
     color: theme['color-primary-2'],
     ...textStyle.proDisplayRegular,
   },
-  viewWaitSpeech: {
-    backgroundColor: theme['color-primary-0'],
-  },
-  viewSpeeching: {
-    backgroundColor: theme['color-primary-2'],
-  },
-  viewSpeeched: {
-    backgroundColor: theme['color-primary-20'],
-  },
-  viewTime: {
-    position: 'absolute',
-  },
-  txtSpeeched: {
+  txtSpoken: {
     fontSize: pxToPercentage(34),
     ...textStyle.proDisplayRegular,
-    color: theme['color-primary-51'],
+    color: theme['color-primary-18'],
   },
   txtTime: {
-    fontSize: pxToPercentage(32),
+    marginTop: pxToPercentage(10),
+    fontSize: pxToPercentage(30),
     ...textStyle.proDisplayRegular,
   },
   txtStopSpeech: {
@@ -181,5 +181,9 @@ export const DelegateSpeechStatusTablet = withStyles(DelegateSpeechStatusItemCom
     ...textStyle.proDisplayRegular,
     marginLeft: pxToPercentage(20),
     color: theme['color-primary-0'],
+  },
+  txtContent: {
+    fontSize: pxToPercentage(36),
+    ...textStyle.proDisplayRegular,
   },
 }));

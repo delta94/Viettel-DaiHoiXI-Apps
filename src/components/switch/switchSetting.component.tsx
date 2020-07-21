@@ -102,9 +102,9 @@ export const SwitchSetting = withStyles(SwitchSettingComponent, (theme: ThemeTyp
     height: pxToPercentage(70),
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: theme['color-custom-100'],
     borderWidth: pxToPercentage(1),
-    borderColor: 'rgba(172,32,5,1)',
+    borderColor: theme['color-custom-900'],
     borderRadius: pxToPercentage(40),
   },
   viewIcon: {
@@ -115,20 +115,20 @@ export const SwitchSetting = withStyles(SwitchSettingComponent, (theme: ThemeTyp
     height: pxToPercentage(54),
     borderRadius: pxToPercentage(50),
     borderWidth: pxToPercentage(1),
-    borderColor: 'rgba(172,32,5,1)',
+    borderColor: theme['color-custom-900'],
   },
   icon: {
-    tintColor: 'rgba(172,32,5,1)',
+    tintColor: theme['color-custom-900'],
     width: pxToPercentage(26.09),
     height: pxToPercentage(24),
   },
   btnChange: {
-    backgroundColor: 'rgba(172,32,5,1)',
+    backgroundColor: theme['color-custom-900'],
   },
   txtChange: {
-    color: 'white',
+    color: theme['color-custom-100'],
   },
   iconChange: {
-    backgroundColor: 'white',
+    backgroundColor: theme['color-custom-100'],
   },
 }));

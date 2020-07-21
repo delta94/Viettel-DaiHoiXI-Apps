@@ -19,7 +19,7 @@ import {
 } from '@src/components';
 import { NumberValidator } from '@src/core/validators';
 import { Button } from '@src/components/button/button.component';
-import { ArrowIosBackFill } from '@src/assets/icons';
+import { ArrowPrevIcon } from '@src/assets/icons';
 import { SwitchSetting } from '@src/components/switch/switchSetting.component';
 
 interface ComponentProps {
@@ -63,7 +63,7 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
                 <TouchableOpacity
                   activeOpacity={0.75}
                   onPress={onBackPress}>
-                  {ArrowIosBackFill(themedStyle.iconBack)}
+                  {ArrowPrevIcon(themedStyle.iconBack)}
                 </TouchableOpacity>
               </View>
               <Text style={themedStyle.txtHeaderTitle}>

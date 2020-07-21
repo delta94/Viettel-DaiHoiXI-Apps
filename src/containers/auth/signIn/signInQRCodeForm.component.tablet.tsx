@@ -45,7 +45,7 @@ export const SignInQRCodeFormTablet = withStyles(SignInQRCodeFormTabletComponent
   box: {
     width: pxToPercentage(728),
     height: pxToPercentage(676),
-    backgroundColor: 'black',
+    backgroundColor: theme['color-custom-600'],
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -57,7 +57,7 @@ export const SignInQRCodeFormTablet = withStyles(SignInQRCodeFormTabletComponent
     marginTop: pxToPercentage(30),
     fontSize: pxToPercentage(34),
     ...textStyle.proDisplayRegular,
-    color: 'white',
+    color: theme['color-custom-100'],
     textAlign: 'center',
   },
 }));

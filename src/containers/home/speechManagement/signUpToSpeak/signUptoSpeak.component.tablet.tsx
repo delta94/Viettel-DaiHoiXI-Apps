@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   View,
-  Text,
-  TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import {
@@ -11,7 +9,11 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { textStyle, ValidationInput, ScrollableAvoidKeyboard } from '@src/components';
+import {
+  textStyle,
+  ValidationInput,
+  ScrollableAvoidKeyboard,
+} from '@src/components';
 import { StringValidator } from '@src/core/validators';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { CheckboxItemTablet } from './checkBoxItem.component.tablet';
@@ -25,8 +27,11 @@ export type SignUptoSpeakTabletProps = ThemedComponentProps & ComponentProps;
 const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletProps> = (props) => {
   const { themedStyle } = props;
   const [isCreateScreen, setIsCreateScreen] = React.useState<boolean>(true);
-  const [topics, setTopic] = React.useState(
-    [
+  const [topics, setTopic] = React.useState<{
+    text: string;
+    status: boolean;
+  }[]>
+    ([
       { text: 'Kinh tế', status: false },
       { text: 'Quản lý đô thị', status: false },
       { text: 'Giáo dục - Đào tạo', status: false },
@@ -67,6 +72,7 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
     return topics.map((item, index) => {
       return (
         <CheckboxItemTablet
+          key={index}
           onCheckboxPress={onCheckboxPress}
           index={index}
           topic={item}
@@ -94,8 +100,8 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
               <ValidationInput
                 disabled={!isCreateScreen}
                 multiline={true}
-                style={themedStyle.textInput}
-                textStyle={themedStyle.textInputTxt}
+                style={themedStyle.viewTextInput}
+                textStyle={themedStyle.txtInputText}
                 placeholder='Nhập nội dung'
                 validator={StringValidator}
                 onChangeText={() => { }}
@@ -108,7 +114,10 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
               title='ĐĂNG KÝ'
               onPress={() => { onSigUpPress(); }}
               activeOpacity={0.75}
-              style={[themedStyle.btn, themedStyle.btnRegister]}
+              style={[
+                themedStyle.btn,
+                themedStyle.btnRegister,
+              ]}
             />
           }
           {!isCreateScreen &&
@@ -116,12 +125,14 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
               <Button
                 titleStyle={[
                   themedStyle.txtSignUp,
-                  themedStyle.btnEdit,
                 ]}
                 title={'SỬA THÔNG TIN'}
                 onPress={() => { onEditPress(); }}
                 activeOpacity={0.75}
-                style={themedStyle.btn}
+                style={[
+                  themedStyle.btn,
+                  themedStyle.btnEdit,
+                ]}
               />
               <Button
                 titleStyle={themedStyle.txtCancel}
@@ -192,17 +203,18 @@ export const SignUpToSpeakTablet = withStyles(SignUptoSpeakTabletComponent, (the
     flex: 1,
   },
   viewLeft: {
-    width: pxToPercentage(900),
-  },
-  textInput: {
-    backgroundColor: 'white',
+    flex: 1,
   },
   viewRight: {
+    flex: 1,
     marginLeft: pxToPercentage(28),
-    width: pxToPercentage(600),
   },
-  textInputTxt: {
+  viewTextInput: {
+    backgroundColor: 'white',
+  },
+  txtInputText: {
     height: pxToPercentage(595),
+    textAlignVertical: 'top',
     ...textStyle.proTextRegular,
   },
 }));

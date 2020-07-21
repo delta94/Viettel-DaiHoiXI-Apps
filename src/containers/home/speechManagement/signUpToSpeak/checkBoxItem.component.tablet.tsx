@@ -34,15 +34,17 @@ const CheckBoxComponent: React.FunctionComponent<CheckboxTabletProps> = (props) 
       activeOpacity={0.75}
       onPress={() => { onCheckboxPress(props.index); }}
       style={[
-        themedStyle.viewCheckbox, props.topic.status
+        themedStyle.container, props.topic.status
         && themedStyle.viewOncheck,
       ]}>
       <View style={[
-        themedStyle.checkbox,
+        themedStyle.viewCheckbox,
         props.topic.status && themedStyle.checkedbox,
       ]}>
         {props.topic.status && (
-          CheckIcon(themedStyle.icon)
+          <View style={themedStyle.viewIcon}>
+            {CheckIcon(themedStyle.icon)}
+          </View>
         )}
       </View>
       <Text style={themedStyle.txtCheckBox}>
@@ -53,7 +55,15 @@ const CheckBoxComponent: React.FunctionComponent<CheckboxTabletProps> = (props) 
 };
 
 export const CheckboxItemTablet = withStyles(CheckBoxComponent, (theme: ThemeType) => ({
-  checkbox: {
+  container: {
+    marginVertical: pxToPercentage(5),
+    paddingHorizontal: pxToPercentage(35),
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: theme['color-primary-50'],
+    height: pxToPercentage(86),
+  },
+  viewCheckbox: {
     height: pxToPercentage(54),
     width: pxToPercentage(54),
     borderColor: theme['color-primary-2'],
@@ -62,14 +72,6 @@ export const CheckboxItemTablet = withStyles(CheckBoxComponent, (theme: ThemeTyp
     borderRadius: pxToPercentage(8),
     borderWidth: pxToPercentage(1),
   },
-  viewCheckbox: {
-    marginVertical: pxToPercentage(5),
-    paddingHorizontal: pxToPercentage(24),
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme['color-primary-50'],
-    height: pxToPercentage(86),
-  },
   viewOncheck: {
     backgroundColor: theme['color-primary-19'],
   },
@@ -77,12 +79,13 @@ export const CheckboxItemTablet = withStyles(CheckBoxComponent, (theme: ThemeTyp
     backgroundColor: theme['color-primary-2'],
   },
   txtCheckBox: {
-    fontSize: pxToPercentage(36),
+    fontSize: pxToPercentage(34),
     ...textStyle.proDisplayRegular,
-    marginLeft: pxToPercentage(20),
+    marginLeft: pxToPercentage(25),
   },
   icon: {
-    height: pxToPercentage(26),
-    width: pxToPercentage(36),
+    height: pxToPercentage(54),
+    width: pxToPercentage(54),
+    resizeMode: 'contain',
   },
 }));

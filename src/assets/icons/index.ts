@@ -369,6 +369,14 @@ export const ScanQRIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const FlashIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-flash.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

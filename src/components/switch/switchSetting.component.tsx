@@ -23,6 +23,7 @@ import {
   ArrowNextIcon,
   ArrowPrevIcon,
 } from '@src/assets/icons';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   icon?: IconProp;
@@ -87,19 +88,19 @@ export const SwitchSetting = withStyles(SwitchSettingComponent, (theme: ThemeTyp
     height: pxToPercentage(70),
   },
   txt: {
-    fontSize: pxToPercentage(34),
     ...textStyle.proTextRegular,
+    fontSize: isTablet() ? pxToPercentage(30) : pxToPercentage(18),
+    color: theme['color-custom-100'],
   },
   txtTitle: {
-    fontSize: pxToPercentage(30),
+    fontSize: isTablet() ? pxToPercentage(30) : pxToPercentage(16),
     ...textStyle.proTextRegular,
-    marginLeft: pxToPercentage(7),
     color: theme['color-primary-2'],
   },
   btnSwitch: {
     marginLeft: pxToPercentage(20),
-    width: pxToPercentage(194),
-    height: pxToPercentage(70),
+    width: isTablet() ? pxToPercentage(194) : pxToPercentage(120),
+    height: isTablet() ? pxToPercentage(70) : pxToPercentage(48),
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: theme['color-custom-100'],
@@ -108,25 +109,26 @@ export const SwitchSetting = withStyles(SwitchSettingComponent, (theme: ThemeTyp
     borderRadius: pxToPercentage(40),
   },
   viewIcon: {
-    marginLeft: pxToPercentage(10),
+    marginHorizontal: pxToPercentage(8),
     justifyContent: 'center',
     alignItems: 'center',
-    width: pxToPercentage(54),
-    height: pxToPercentage(54),
+    width: isTablet() ? pxToPercentage(54) : pxToPercentage(36),
+    height: isTablet() ? pxToPercentage(54) : pxToPercentage(36),
     borderRadius: pxToPercentage(50),
-    borderWidth: pxToPercentage(1),
     borderColor: theme['color-custom-900'],
+    borderWidth: pxToPercentage(1),
   },
   icon: {
     tintColor: theme['color-custom-900'],
-    width: pxToPercentage(26.09),
-    height: pxToPercentage(24),
+    width: isTablet() ? pxToPercentage(26.09) : pxToPercentage(20),
+    height: isTablet() ? pxToPercentage(24) : pxToPercentage(20),
   },
   btnChange: {
     backgroundColor: theme['color-custom-900'],
   },
   txtChange: {
     color: theme['color-custom-100'],
+    marginLeft: pxToPercentage(6),
   },
   iconChange: {
     backgroundColor: theme['color-custom-100'],

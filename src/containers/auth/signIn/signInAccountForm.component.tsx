@@ -29,7 +29,6 @@ import {
   isEmpty,
   pxToPercentage,
 } from '@src/core/utils/utils';
-import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   /**
@@ -95,14 +94,18 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
       {...restProps}
       style={[themedStyle.container, style]}>
       <ValidationInput
-        textStyle={textStyle.proTextRegular}
+        style={themedStyle.input}
+        textStyle={themedStyle.txtInput}
         placeholder='Tên đăng nhập'
         validator={NameValidator}
         onChangeText={onUsernameInputTextChange}
       />
       <ValidationInput
-        style={themedStyle.inputPassword}
-        textStyle={textStyle.proTextRegular}
+        style={[
+          themedStyle.inputPassword,
+          themedStyle.input,
+        ]}
+        textStyle={themedStyle.txtInput}
         placeholder='Mật khẩu'
         icon={secureTextEntry ? EyeOffIconFill : EyeIconFill}
         onIconPress={onSetSecureTextEntry}
@@ -118,6 +121,13 @@ export const SignInAccountForm = withStyles(SignInAccountFormComponent, (theme: 
   container: {
   },
   inputPassword: {
-    marginTop: isTablet() ? pxToPercentage(15) : pxToPercentage(7.5),
+    marginTop: pxToPercentage(12),
+  },
+  input: {
+    borderRadius: pxToPercentage(16),
+  },
+  txtInput: {
+    ...textStyle.proTextRegular,
+    fontSize: pxToPercentage(18),
   },
 }));

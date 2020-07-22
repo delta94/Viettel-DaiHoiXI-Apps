@@ -27,7 +27,6 @@ import {
   isEmpty,
   pxToPercentage,
 } from '@src/core/utils/utils';
-import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   /**
@@ -84,7 +83,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
       style={[themedStyle.container, style]}>
       <ValidationInput
         style={themedStyle.inputPhoneNumber}
-        textStyle={textStyle.proTextRegular}
+        textStyle={themedStyle.txtInput}
         placeholder='Số điện thoại'
         validator={PhoneNumberValidator}
         onChangeText={onUsernameInputTextChange}
@@ -92,7 +91,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput
           style={themedStyle.inputVerification}
-          textStyle={textStyle.proTextRegular}
+          textStyle={themedStyle.txtInput}
           placeholder='Mã xác nhận'
           validator={NumberValidator}
           onChangeText={onUsernameInputTextChange}
@@ -103,9 +102,10 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
           style={themedStyle.btnCaptcha}>
           <ValidationInput
             disabled
+            style={themedStyle.inputPhoneNumber}
             onIconPress={() => { }}
             icon={RefreshIconOther}
-            textStyle={textStyle.regular}
+            textStyle={themedStyle.txtInput}
             placeholder='ABCD'
             validator={NumberValidator}
             onChangeText={onUsernameInputTextChange}
@@ -122,12 +122,22 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
   viewCaptcha: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: isTablet() ? pxToPercentage(15) : pxToPercentage(7.5),
+    marginTop: pxToPercentage(12.5),
   },
   inputVerification: {
-    width: '63%',
+    width: '55%',
+    borderRadius: pxToPercentage(16),
   },
   btnCaptcha: {
-    width: '35%',
+    borderRadius: pxToPercentage(16),
+    flex: 1,
+    marginLeft: pxToPercentage(12),
+  },
+  inputPhoneNumber: {
+    borderRadius: pxToPercentage(16),
+  },
+  txtInput: {
+    ...textStyle.proTextRegular,
+    fontSize: pxToPercentage(18),
   },
 }));

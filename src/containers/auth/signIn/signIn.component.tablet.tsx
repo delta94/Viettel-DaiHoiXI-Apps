@@ -7,7 +7,6 @@ import {
   ImageProps,
   ViewStyle,
   StyleProp,
-  Dimensions,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -39,10 +38,8 @@ import { SignInTabEnum } from '@src/core/utils/constants';
 import { Button } from '@src/components/button/button.component';
 import { SignInQRCodeFormTablet } from './signInQRCodeForm.component.tablet';
 import { SwitchSetting } from '@src/components/switch/switchSetting.component';
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-
-const { width, height } = Dimensions.get('window');
 
 interface ComponentProps {
   onSignInAccountPress: (formData: SignInAccountFormData) => void;
@@ -155,27 +152,12 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
     );
   };
 
-  const getImageBackgroundStyle = () => {
-    if (width / height > 6483 / 3783) {
-      return {
-        width: widthPercentageToDP(100) - getStatusBarHeight(false),
-        height: (widthPercentageToDP(100) - getStatusBarHeight(false)) * 3783 / 6483,
-      };
-    } else {
-      return {
-        width: (heightPercentageToDP(100) - getStatusBarHeight(false)) * (6483 / 3783),
-        height: heightPercentageToDP(100) - getStatusBarHeight(false),
-      };
-    }
-  };
-
   return (
     <React.Fragment>
       <View style={themedStyle.viewStatusBar} />
       <ImageBackground
-        resizeMode='contain'
         source={imageBackgroundSignIn.imageSource}
-        style={[getImageBackgroundStyle()]}>
+        style={themedStyle.imgBg}>
         <ScrollableAvoidKeyboard
           style={themedStyle.container}
           contentContainerStyle={themedStyle.scrollViewContainer}>
@@ -253,6 +235,10 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
 export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
+  },
+  imgBg: {
+    flex: 1,
+    alignItems: 'flex-end',
   },
   viewStatusBar: {
     height: getStatusBarHeight(false),

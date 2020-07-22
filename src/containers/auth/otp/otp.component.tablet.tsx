@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
-  Dimensions,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -22,10 +21,8 @@ import { NumberValidator } from '@src/core/validators';
 import { Button } from '@src/components/button/button.component';
 import { ArrowPrevIcon } from '@src/assets/icons';
 import { SwitchSetting } from '@src/components/switch/switchSetting.component';
-import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-
-const { width, height } = Dimensions.get('window');
 
 interface ComponentProps {
   onResendOtpPress: () => void;
@@ -56,27 +53,12 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
 
   const { themedStyle } = props;
 
-  const getImageBackgroundStyle = () => {
-    if (width / height > 6483 / 3783) {
-      return {
-        width: widthPercentageToDP(100) - getStatusBarHeight(false),
-        height: (widthPercentageToDP(100) - getStatusBarHeight(false)) * 3783 / 6483,
-      };
-    } else {
-      return {
-        width: (heightPercentageToDP(100) - getStatusBarHeight(false)) * (6483 / 3783),
-        height: heightPercentageToDP(100) - getStatusBarHeight(false),
-      };
-    }
-  };
-
   return (
     <React.Fragment>
       <View style={themedStyle.viewStatusBar} />
       <ImageBackground
-        resizeMode='contain'
         source={imageBackgroundSignIn.imageSource}
-        style={[getImageBackgroundStyle()]}>
+        style={themedStyle.imgBg}>
         <ScrollableAvoidKeyboard
           style={themedStyle.container}
           contentContainerStyle={themedStyle.scrollViewContainer}>
@@ -138,6 +120,10 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   viewStatusBar: {
     height: getStatusBarHeight(false),
     backgroundColor: theme['color-primary-2'],
+  },
+  imgBg: {
+    flex: 1,
+    alignItems: 'flex-end',
   },
   scrollViewContainer: {
     flex: 1,

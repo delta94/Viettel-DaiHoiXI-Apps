@@ -38,28 +38,28 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
     return props.meeting.map((item, index) => {
       return (
         <TouchableOpacity
-          onPress={() => { onMeetingItemPress(item.isExample); }}
+          key={index}
           activeOpacity={0.75}
+          onPress={() => { onMeetingItemPress(item.isExample); }}
           {...restProps}
-          style={themedStyle.container}>
-          <View style={[
-            themedStyle.viewContent,
-            item.isExample ? themedStyle.viewContentBorderExample : themedStyle.viewContentBorderDefault,
-          ]}>
+          style={themedStyle.viewItem}>
+          <View
+            style={[
+              themedStyle.viewContent,
+              item.isExample ? themedStyle.viewContentBorderExample : themedStyle.viewContentBorderDefault,
+            ]}>
             <View style={themedStyle.viewCongressName}>
               <Text style={themedStyle.txtColorGray}>
                 {`${item.fromTime} - ${item.toTime}`}
               </Text>
-              {item.isExample && (
-                <Text style={themedStyle.txtCongressNameExample}>
+              {item.isExample &&
+                (<Text style={themedStyle.txtCongressNameExample}>
                   {item.name}
-                </Text>
-              )}
-              {!item.isExample && (
-                <Text style={themedStyle.txtCongressName}>
+                </Text>)}
+              {!item.isExample &&
+                (<Text style={themedStyle.txtCongressName}>
                   {item.name}
-                </Text>
-              )}
+                </Text>)}
             </View>
           </View>
         </TouchableOpacity >
@@ -68,33 +68,36 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
   };
 
   return (
-    <View style={[
-      themedStyle.container,
-      props.isSunday && themedStyle.viewSunday,
-    ]}>
+    <View
+      style={[
+        themedStyle.container,
+        props.isSunday && themedStyle.viewSunday,
+      ]}>
       <View style={themedStyle.viewDate}>
-        <Text style={[
-          themedStyle.txtColorGray,
-          themedStyle.txtDate,
-        ]}>
+        <Text
+          style={[
+            themedStyle.txtColorGray,
+            themedStyle.txtDate,
+          ]}>
           {props.date}
         </Text>
         <Text style={themedStyle.txtColorGray}>
           {props.isSunday ? 'Chủ nhật' : `Thứ ${props.day + 1}`}
         </Text>
       </View>
-      {props.meeting.length !== 0 && (
-        renderMeetings()
-      )}
+      {props.meeting.length !== 0 && renderMeetings()}
     </View>
   );
 };
 
 export const HomeMeetingItemTablet = withStyles(HomeMeetingItemComponent, (theme: ThemeType) => ({
   container: {
-    width: pxToPercentage(294),
+    flex: 1,
     borderRightWidth: pxToPercentage(2),
     borderColor: theme['color-primary-18'],
+  },
+  viewItem: {
+    flex: 1,
   },
   viewSunday: {
     backgroundColor: theme['color-primary-31'],
@@ -135,8 +138,8 @@ export const HomeMeetingItemTablet = withStyles(HomeMeetingItemComponent, (theme
     ...textStyle.proDisplayRegular,
   },
   viewCongressName: {
-    marginLeft: pxToPercentage(16),
-    marginRight: pxToPercentage(14),
     flex: 1,
+    paddingLeft: pxToPercentage(16),
+    paddingRight: pxToPercentage(14),
   },
 }));

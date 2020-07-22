@@ -99,13 +99,12 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
           onWeekPress={onDatePress}
         />
         <View style={themedStyle.viewSection}>
-          <ScrollView>
+          <ScrollView contentContainerStyle={themedStyle.scrollViewContainer}>
             <View style={themedStyle.viewContent}>
               {renderMeetings()}
             </View>
           </ScrollView>
         </View>
-
       </View>
     </View>
   );
@@ -126,7 +125,11 @@ export const HomeTablet = withStyles(HomeTabletComponent, (theme: ThemeType) => 
     ...viewStyle.shadow2,
   },
   viewContent: {
+    flex: 1,
     flexDirection: 'row',
+  },
+  scrollViewContainer: {
+    flex: 1,
   },
   viewSection: {
     flex: 1,

@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -21,6 +22,10 @@ import { NumberValidator } from '@src/core/validators';
 import { Button } from '@src/components/button/button.component';
 import { ArrowPrevIcon } from '@src/assets/icons';
 import { SwitchSetting } from '@src/components/switch/switchSetting.component';
+import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
+const { width, height } = Dimensions.get('window');
 
 interface ComponentProps {
   onResendOtpPress: () => void;
@@ -51,12 +56,30 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
 
   const { themedStyle } = props;
 
+  const getImageBackgroundStyle = () => {
+    if (width / height > 6483 / 3783) {
+      return {
+        width: widthPercentageToDP(100) - getStatusBarHeight(false),
+        height: (widthPercentageToDP(100) - getStatusBarHeight(false)) * 3783 / 6483,
+      };
+    } else {
+      return {
+        width: (heightPercentageToDP(100) - getStatusBarHeight(false)) * (6483 / 3783),
+        height: heightPercentageToDP(100) - getStatusBarHeight(false),
+      };
+    }
+  };
+
   return (
-    <ScrollableAvoidKeyboard>
-      <View style={themedStyle.container}>
-        <ImageBackground
-          source={imageBackgroundSignIn.imageSource}
-          style={themedStyle.bg}>
+    <React.Fragment>
+      <View style={themedStyle.viewStatusBar} />
+      <ImageBackground
+        resizeMode='contain'
+        source={imageBackgroundSignIn.imageSource}
+        style={[getImageBackgroundStyle()]}>
+        <ScrollableAvoidKeyboard
+          style={themedStyle.container}
+          contentContainerStyle={themedStyle.scrollViewContainer}>
           <View style={themedStyle.sectionBox}>
             <View style={themedStyle.viewHeader}>
               <View style={themedStyle.viewHeaderLeftRight}>
@@ -102,9 +125,9 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
               <SwitchSetting />
             </View>
           </View>
-        </ImageBackground>
-      </View>
-    </ScrollableAvoidKeyboard>
+        </ScrollableAvoidKeyboard>
+      </ImageBackground>
+    </React.Fragment>
   );
 };
 
@@ -112,9 +135,14 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
   },
-  bg: {
+  viewStatusBar: {
+    height: getStatusBarHeight(false),
+    backgroundColor: theme['color-primary-2'],
+  },
+  scrollViewContainer: {
     flex: 1,
     alignItems: 'flex-end',
+    width: widthPercentageToDP(100),
     paddingRight: pxToPercentage(200),
   },
   sectionBox: {
@@ -165,10 +193,12 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   btn: {
     width: '49%',
     borderRadius: pxToPercentage(28),
+    height: pxToPercentage(95),
     backgroundColor: theme['color-primary-2'],
   },
   btnAccept: {
     width: '49%',
+    height: pxToPercentage(95),
     borderRadius: pxToPercentage(28),
     backgroundColor: theme['color-primary-0'],
   },

@@ -15,7 +15,7 @@ import {
 import { ScanQRIcon } from '@src/assets/icons';
 
 interface ComponentProps {
-  a?: number;
+  example?: number;
 }
 
 export type SignInQRCodeFormTabletProps = ComponentProps & ThemedComponentProps;

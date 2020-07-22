@@ -7,6 +7,7 @@ import {
   ImageProps,
   ViewStyle,
   StyleProp,
+  Dimensions,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -38,6 +39,10 @@ import { SignInTabEnum } from '@src/core/utils/constants';
 import { Button } from '@src/components/button/button.component';
 import { SignInQRCodeFormTablet } from './signInQRCodeForm.component.tablet';
 import { SwitchSetting } from '@src/components/switch/switchSetting.component';
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
+const { width, height } = Dimensions.get('window');
 
 interface ComponentProps {
   onSignInAccountPress: (formData: SignInAccountFormData) => void;
@@ -150,12 +155,30 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
     );
   };
 
+  const getImageBackgroundStyle = () => {
+    if (width / height > 6483 / 3783) {
+      return {
+        width: widthPercentageToDP(100) - getStatusBarHeight(false),
+        height: (widthPercentageToDP(100) - getStatusBarHeight(false)) * 3783 / 6483,
+      };
+    } else {
+      return {
+        width: (heightPercentageToDP(100) - getStatusBarHeight(false)) * (6483 / 3783),
+        height: heightPercentageToDP(100) - getStatusBarHeight(false),
+      };
+    }
+  };
+
   return (
-    <ScrollableAvoidKeyboard>
-      <View style={themedStyle.container}>
-        <ImageBackground
-          source={imageBackgroundSignIn.imageSource}
-          style={themedStyle.imgBackground}>
+    <React.Fragment>
+      <View style={themedStyle.viewStatusBar} />
+      <ImageBackground
+        resizeMode='contain'
+        source={imageBackgroundSignIn.imageSource}
+        style={[getImageBackgroundStyle()]}>
+        <ScrollableAvoidKeyboard
+          style={themedStyle.container}
+          contentContainerStyle={themedStyle.scrollViewContainer}>
           <View style={themedStyle.sectionBox}>
             <View style={themedStyle.sectionHeader}>
               <Text style={themedStyle.txtHeaderSubtitle}>
@@ -177,22 +200,22 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
                 style={themedStyle.tabContentContainer}
                 onDataChange={onPhoneNumberFormDataChange}
               />}
-            {isCheckTab(SignInTabEnum.QRCode) &&
-              <SignInQRCodeFormTablet />
-            }
+            {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeFormTablet />}
             {isCheckTab(SignInTabEnum.Account) &&
               <Button
                 title={'ĐĂNG NHẬP'}
                 titleStyle={themedStyle.txtBtnSignIn}
                 style={themedStyle.btnSignIn}
-                onPress={onSignInButtonPress} />
+                onPress={onSignInButtonPress}
+              />
             }
             {isCheckTab(SignInTabEnum.PhoneNumber) &&
               <Button
                 title={'TIẾP THEO'}
                 titleStyle={themedStyle.txtBtnSignIn}
                 style={themedStyle.btnSignIn}
-                onPress={onSignInButtonPress} />
+                onPress={onSignInButtonPress}
+              />
             }
             {isCheckTab(SignInTabEnum.Account) &&
               (<React.Fragment>
@@ -221,9 +244,9 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
               <SwitchSetting />
             </View>
           </View>
-        </ImageBackground>
-      </View>
-    </ScrollableAvoidKeyboard>
+        </ScrollableAvoidKeyboard>
+      </ImageBackground>
+    </React.Fragment>
   );
 };
 
@@ -231,11 +254,20 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
   container: {
     flex: 1,
   },
-  imgBackground: {
+  viewStatusBar: {
+    height: getStatusBarHeight(false),
+    backgroundColor: theme['color-primary-2'],
+  },
+  scrollViewContainer: {
     flex: 1,
     alignItems: 'flex-end',
+    width: widthPercentageToDP(100),
     paddingRight: pxToPercentage(200),
-
+  },
+  viewBottom: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: pxToPercentage(20),
   },
   sectionBox: {
     height: '100%',
@@ -264,6 +296,7 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
     marginHorizontal: pxToPercentage(32),
     backgroundColor: theme['color-primary-0'],
     borderRadius: pxToPercentage(28),
+    height: pxToPercentage(95),
   },
   txtBtnSignIn: {
     fontSize: pxToPercentage(34),
@@ -350,10 +383,5 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
     height: pxToPercentage(53.12),
     width: pxToPercentage(52),
     tintColor: theme['color-primary-2'],
-  },
-  viewBottom: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingBottom: pxToPercentage(20),
   },
 }));

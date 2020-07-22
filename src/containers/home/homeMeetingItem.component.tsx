@@ -37,7 +37,7 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
           <Text
             style={[
               themedStyle.txtDate,
-              meeting.isExample && themedStyle.txtDateOther,
+              !meeting.isExample && themedStyle.txtDateOther,
             ]}>
             {meeting.date}
           </Text>
@@ -50,7 +50,7 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
           <View
             style={[
               themedStyle.viewDot,
-              meeting.isExample && themedStyle.viewDotOther,
+              !meeting.isExample && themedStyle.viewDotOther,
             ]}
           />
         </View>
@@ -59,18 +59,18 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
         <View
           style={[
             themedStyle.viewContent,
-            meeting.isExample && themedStyle.viewContentOther,
+            !meeting.isExample && themedStyle.viewContentOther,
           ]}>
           <View style={themedStyle.viewContentInner}>
             <View
               style={[
                 themedStyle.viewTime,
-                meeting.isExample && themedStyle.viewTimeOther,
+                !meeting.isExample && themedStyle.viewTimeOther,
               ]}>
               <Text
                 style={[
                   themedStyle.txtTime,
-                  meeting.isExample && themedStyle.txtTimeOther,
+                  !meeting.isExample && themedStyle.txtTimeOther,
                 ]}>
                 {`${meeting.fromTime} - ${meeting.toTime}`}
               </Text>
@@ -92,7 +92,7 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
   },
   sectionDate: {
     flexDirection: 'row',
-    width: pxToPercentage(65),
+    width: pxToPercentage(85),
   },
   sectionContent: {
     flex: 1,
@@ -101,7 +101,7 @@ export const HomeMeetingItem = withStyles(HomeMeetingItemComponent, (theme: Them
   viewDate: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: pxToPercentage(40),
+    width: pxToPercentage(60),
   },
   viewTimeline: {
     justifyContent: 'center',

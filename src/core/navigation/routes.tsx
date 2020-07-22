@@ -74,7 +74,7 @@ const createAppRouter = (container: NavigationNavigator<any, NavigationProp<Navi
     ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
     ['app']: container,
-  }, { initialRouteName: 'app' }));
+  }, { initialRouteName: 'splash' }));
 };
 
 export const Router: NavigationContainer = createAppRouter(AppNavigator);

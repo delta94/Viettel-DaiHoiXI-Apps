@@ -79,12 +79,28 @@ export const weeklyMeetingDatafake: WeeklyMeeting[] = [
   {
     date: '23/7',
     day: 4,
-    contents: [],
+    contents: [
+      {
+        name: 'Họp thường trực Thành uỷ',
+        fromTime: '08:00',
+        toTime: '09:00',
+        date: '22/7',
+        isExample: false,
+      },
+    ],
   },
   {
     day: 5,
     date: '24/7',
-    contents: [],
+    contents: [
+      {
+        name: 'Kết luận của ủy ban thường vụ về kết quả kỳ họp thứ 9, việc chuẩn bị kỳ họp thứ 10',
+        fromTime: '15:00',
+        toTime: '17:00',
+        date: '24/7',
+        isExample: true,
+      },
+    ],
   },
   {
     date: '25/7',
@@ -97,13 +113,6 @@ export const weeklyMeetingDatafake: WeeklyMeeting[] = [
         date: '25/7',
         isExample: true,
       },
-      {
-        name: 'Hội nghị lần thứ 31 Ban chấp hành Đảng bộ TP.Hồ Chí Minh',
-        fromTime: '08:00',
-        toTime: '17:00',
-        date: '25/7',
-        isExample: false,
-      },
     ],
   },
   {
@@ -111,6 +120,5 @@ export const weeklyMeetingDatafake: WeeklyMeeting[] = [
     day: 7,
     contents: [],
   },
-
 ];
 

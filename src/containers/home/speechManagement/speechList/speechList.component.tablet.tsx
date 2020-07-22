@@ -75,7 +75,7 @@ const SpeechListTabletComponent: React.FunctionComponent<SpeechListTabletProps> 
   return (
     <View style={themedStyle.container}>
       <BackHeader
-        title={'TỔ THẢO LUẬN'}
+        title={'ĐĂNG KÝ PHÁT BIỂU'}
         onBackPress={onBackPress}
         onMessagePress={onMessagePress}
         onHelpPress={onHelpPress}

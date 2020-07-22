@@ -33,7 +33,7 @@ export const delegateListDataFake2: User[] = [
     delegate_number: 28,
   },
   {
-    avatar: 'https://lh3.googleusercontent.com/proxy/JkYqNK34LOc350vSadeKoRxnMzwN48vb3rWADs_yyDZ1Pp7EEpGI7hGYJFJWSYJmTZcCLA2D2vwQBRSchMNxziWuGoPJNUNWZ0CjvQfEs9B4CiLTQKswk5lFIPYqmFGO-g7KcbqdXZBFfDgAPtPcCFssCkOSnD4fhg9V78KcbXv2wIEQEplKtU06vlwnbHxiTt4FlQvbky8WbPn46EWkYksJAFXD',
+    avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_HuynhThanhHai.jpg',
     full_name: 'HUỲNH THANH HẢI',
     position: 'Phó Trưởng ban chuyên trách biên soạn lịch sử Đảng bộ TP.HCM',
     phone: '0123456789',

@@ -43,6 +43,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.SoDoChoNgoi: {
+        routeName = 'seatingChart';
 
         break;
       }

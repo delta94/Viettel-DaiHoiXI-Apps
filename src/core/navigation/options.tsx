@@ -29,6 +29,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'attendance': 'Điểm danh',
   'scanQRCode': 'Mã QR Code của tôi',
   'chatContainer': 'Chat',
+  'seatingChart': 'Sơ đồ chỗ ngồi',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

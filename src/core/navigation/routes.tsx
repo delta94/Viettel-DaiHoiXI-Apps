@@ -33,6 +33,7 @@ import { DelegateGroupContainer } from '@src/containers/home/delegate/delegateGr
 import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/signUpToSpeak/signUpToSpeak.container';
 import { AttendanceContainer } from '@src/containers/home/attendance/attendance.container';
 import { ChatContainer } from '@src/containers/chat/chat.container';
+import { SeatingChartContainer } from '@src/containers/home/seatMap/seatingChart.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -66,6 +67,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['signUpToSpeak']: SignUpToSpeakContainer,
   ['attendance']: AttendanceContainer,
   ['chat']: ChatContainer,
+  ['seatingChart']: SeatingChartContainer,
 }, {
   defaultNavigationOptions: isTablet() ? MenuNavigationTabletOptions : MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

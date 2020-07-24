@@ -28,6 +28,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'signUpToSpeak': 'Đăng ký phát biểu',
   'attendance': 'Điểm danh',
   'scanQRCode': 'Mã QR Code của tôi',
+  'chatContainer': 'Chat',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

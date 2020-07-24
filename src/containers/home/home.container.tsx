@@ -40,6 +40,13 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
     });
   };
 
+  const onEmailPress = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'chat',
+    });
+  };
+
   const onSearchPress = (): void => {
 
   };
@@ -55,6 +62,7 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
         onMeetingItemPress={onMeetingItemPress}
         onQRCodePress={onQRCodePress}
         onSearchPress={onSearchPress}
+        onEmailPress={onEmailPress}
       />
     );
   }

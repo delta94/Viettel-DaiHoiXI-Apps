@@ -1,0 +1,221 @@
+import React from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import {
+  ThemedComponentProps,
+  ThemeType,
+  withStyles,
+} from '@kitten/theme';
+import { pxToPercentage } from '@src/core/utils/utils';
+import {
+  PersonIcon,
+  CameraIcon,
+} from '@src/assets/icons';
+import { ChatDetail } from '@src/core/models/chat/chatDetail';
+import { UserIdEnum } from '@src/core/utils/constants';
+import { isTablet } from 'react-native-device-info';
+
+interface ComponentProps {
+  chatDetails: ChatDetail[];
+  onSendMessagePress: (message: string) => void;
+
+}
+
+export type ChatDetaillScreenProps = ThemedComponentProps & ComponentProps;
+
+const ChatDetailScreenComponent: React.FunctionComponent<ChatDetaillScreenProps> = (props) => {
+  const { themedStyle } = props;
+  const flatListRef = React.useRef(null);
+  const [messageInput, setMessageInut] = React.useState<string>();
+
+  const onSendMessagePress = (message: string): void => {
+    if (message) {
+      setMessageInut('');
+      return props.onSendMessagePress(message);
+    }
+  };
+
+  const onGetKeyboardVerticalOffset = (): number => {
+    if (Platform.OS === 'android') {
+      return -500;
+    } else {
+      return isTablet() ? pxToPercentage(15) : 0;
+    }
+  };
+
+  const renderItem = ({ item }) => (
+    <View style={[
+      themedStyle.viewMessageItem,
+      item.id === UserIdEnum.UserID && themedStyle.viewMyMessageItem,
+    ]}>
+      <View style={[
+        themedStyle.viewIcon,
+        item.id === UserIdEnum.UserID && themedStyle.viewMyMessageViewIcon,
+      ]}>
+        {PersonIcon([
+          themedStyle.iconHeader,
+          item.id === UserIdEnum.UserID && themedStyle.viewMyMessageIcon,
+        ])}
+      </View>
+      <View style={[
+        themedStyle.viewMessageContent,
+        item.id === UserIdEnum.UserID && themedStyle.viewMyMessageContent]}>
+        <Text style={themedStyle.txtMessage}>
+          {item.content}
+        </Text>
+        <Text style={themedStyle.txtTime}>
+          {item.time}
+        </Text>
+      </View>
+    </View>
+  );
+
+  return (
+    <KeyboardAvoidingView style={themedStyle.container}
+      behavior={'padding'}
+      keyboardVerticalOffset={onGetKeyboardVerticalOffset()}>
+      <FlatList
+        ref={flatListRef}
+        onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
+        onLayout={() => flatListRef.current.scrollToEnd({ animated: true })}
+        style={themedStyle.viewChatDetail}
+        showsVerticalScrollIndicator={false}
+        data={props.chatDetails}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
+      <View style={themedStyle.viewChatInput}>
+        {CameraIcon(themedStyle.iconCamera)}
+        <View style={themedStyle.viewInput}>
+          <TextInput
+            returnKeyType={'send'}
+            onSubmitEditing={() => {
+              onSendMessagePress(messageInput);
+            }}
+            value={messageInput}
+            onChangeText={(message) => { setMessageInut(message); }}
+            placeholderTextColor={themedStyle.placeholderColor}
+            style={themedStyle.input}
+            placeholder={'Nhắn tin'}>
+          </TextInput>
+          <TouchableOpacity
+            style={themedStyle.btnSend}
+            onPress={() => {
+              onSendMessagePress(messageInput);
+            }}>
+            <Text style={themedStyle.txtBtnSend}>
+              {'GỬI'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
+  );
+};
+
+export const ChatDetailScreen = withStyles(ChatDetailScreenComponent, (theme: ThemeType) => ({
+  container: {
+    flex: 1,
+    paddingHorizontal: pxToPercentage(28),
+  },
+  viewChatDetail: {
+    flex: 1,
+  },
+  viewChatInput: {
+    height: pxToPercentage(120),
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  viewMessageItem: {
+    marginTop: pxToPercentage(40),
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+  },
+  viewMyMessageItem: {
+    alignSelf: 'flex-end',
+    flexDirection: 'row-reverse',
+  },
+  viewMessageContent: {
+    backgroundColor: theme['color-primary-20'],
+    maxWidth: '60%',
+    minWidth: '15%',
+    marginHorizontal: pxToPercentage(19),
+    borderRadius: pxToPercentage(40),
+    paddingHorizontal: pxToPercentage(36),
+    paddingVertical: pxToPercentage(18),
+  },
+  viewMyMessageContent: {
+    backgroundColor: theme['color-primary-0'],
+  },
+  viewMyMessageIcon: {
+    tintColor: theme['color-primary-18'],
+  },
+  viewMyMessageViewIcon: {
+    backgroundColor: theme['color-primary-20'],
+  },
+  txtTime: {
+    textAlign: 'right',
+    fontSize: pxToPercentage(30),
+    color: theme['color-primary-18'],
+  },
+  txtMessage: {
+    fontSize: pxToPercentage(34),
+    marginHorizontal: pxToPercentage(20),
+  },
+  iconHeader: {
+    height: pxToPercentage(51.08),
+    width: pxToPercentage(51),
+    tintColor: theme['color-custom-100'],
+  },
+  iconCamera: {
+    width: pxToPercentage(102),
+    height: pxToPercentage(78),
+  },
+  viewIcon: {
+    height: pxToPercentage(80),
+    width: pxToPercentage(80),
+    borderRadius: pxToPercentage(28),
+    backgroundColor: theme['color-primary-2'],
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input: {
+    flex: 1,
+    height: pxToPercentage(80),
+    fontSize: pxToPercentage(34),
+    paddingLeft: pxToPercentage(20),
+  },
+  viewInput: {
+    flex: 1,
+    borderWidth: pxToPercentage(1),
+    borderColor: theme['color-primary-18'],
+    borderRadius: pxToPercentage(30),
+    marginLeft: pxToPercentage(32),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  placeholderColor: {
+    color: theme['color-primary-18'],
+  },
+  btnSend: {
+    width: pxToPercentage(142),
+    height: pxToPercentage(68),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme['color-primary-0'],
+    borderRadius: pxToPercentage(24),
+    marginRight: pxToPercentage(6),
+  },
+  txtBtnSend: {
+    fontSize: pxToPercentage(34),
+    color: theme['color-primary-2'],
+  },
+}));

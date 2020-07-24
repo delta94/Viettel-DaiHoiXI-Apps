@@ -38,8 +38,12 @@ export enum AttendanceTabEnum {
   Hall,
   Group,
 }
+
 export enum NoNameTabEnum {
   HinhAnh,
   PhimAnh,
 }
 
+export enum UserIdEnum {
+  UserID = 1,
+}

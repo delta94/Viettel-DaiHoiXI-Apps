@@ -26,6 +26,7 @@ interface ComponentProps {
   onLogoutPress: () => void;
   onQRCodePress: () => void;
   onSearchPress: () => void;
+  onEmailPress: () => void;
 }
 
 export type HomeTabletProps = ThemedComponentProps & ComponentProps;
@@ -42,7 +43,7 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
   };
 
   const onMessagePress = (): void => {
-
+    props.onEmailPress();
   };
 
   const onLogoutPress = (): void => {

@@ -32,6 +32,7 @@ import { SpeechListContainer } from '@src/containers/home/speechManagement/speec
 import { DelegateGroupContainer } from '@src/containers/home/delegate/delegateGroup/delegateGroup.container';
 import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/signUpToSpeak/signUpToSpeak.container';
 import { AttendanceContainer } from '@src/containers/home/attendance/attendance.container';
+import { ChatContainer } from '@src/containers/chat/chat.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -64,6 +65,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['speechList']: SpeechListContainer,
   ['signUpToSpeak']: SignUpToSpeakContainer,
   ['attendance']: AttendanceContainer,
+  ['chat']: ChatContainer,
 }, {
   defaultNavigationOptions: isTablet() ? MenuNavigationTabletOptions : MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
@@ -71,7 +73,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
 
 const createAppRouter = (container: NavigationNavigator<any, NavigationProp<NavigationState>>): NavigationContainer => {
   return createAppContainer(createSwitchNavigator({
-    ['splash']: SplashContainer,
+    ['splash']: container,
     ['auth']: AuthNavigator,
     ['app']: container,
   }, { initialRouteName: 'splash' }));

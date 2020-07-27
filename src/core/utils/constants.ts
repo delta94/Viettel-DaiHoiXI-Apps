@@ -33,3 +33,8 @@ export enum ProgramTabEnum {
   ThongCao,
   ThongBao,
 }
+
+export enum AttendanceTabEnum {
+  Hall,
+  Group,
+}

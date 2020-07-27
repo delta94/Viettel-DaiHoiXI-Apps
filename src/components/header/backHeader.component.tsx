@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -18,10 +19,13 @@ import {
 import { textStyle } from '../textStyle';
 
 interface ComponentProps {
-  title: string;
+  title?: string;
+  titleTab?: { title: string, type: number }[];
   onBackPress: () => void;
   onMessagePress: () => void;
   onHelpPress: () => void;
+  onTabPress?: (type: number) => void;
+  selectedTab?: number;
 }
 
 export type BackHeaderProps = ThemedComponentProps & ComponentProps;
@@ -41,6 +45,33 @@ const BackHeaderComponent: React.FunctionComponent<BackHeaderProps> = (props) =>
     props.onHelpPress();
   };
 
+  const onTabPress = (type: number): void => {
+    props.onTabPress(type);
+  };
+
+  const renderBtnTab = (): React.ReactElement[] => {
+    return props.titleTab.map((item, index) => {
+      return (
+        <TouchableOpacity
+          activeOpacity={0.75}
+          style={[
+            themedStyle.btnTab,
+            props.selectedTab === item.type && themedStyle.btnSelected,
+          ]}
+          onPress={() => onTabPress(item.type)}
+        >
+          <Text
+            style={[
+              themedStyle.txtTab,
+              props.selectedTab === item.type && themedStyle.txtSelected,
+            ]}>
+            {item.title}
+          </Text>
+        </TouchableOpacity>
+      );
+    });
+  };
+
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewLeft}>
@@ -52,9 +83,15 @@ const BackHeaderComponent: React.FunctionComponent<BackHeaderProps> = (props) =>
         />
       </View>
       <View style={themedStyle.viewCenter}>
-        <Text style={themedStyle.txtTitle}>
-          {props.title}
-        </Text>
+
+        {props.title
+          ? <Text style={themedStyle.txtTitle}>
+            {props.title}
+          </Text>
+          : <View style={themedStyle.viewBtnTab}>
+            {renderBtnTab()}
+          </View>
+        }
       </View>
       <View style={themedStyle.viewRight}>
         <Button
@@ -115,5 +152,30 @@ export const BackHeader = withStyles(BackHeaderComponent, (theme: ThemeType) => 
   iconMessage: {
     height: pxToPercentage(54),
     width: pxToPercentage(57.7),
+  },
+  viewBtnTab: {
+    height: pxToPercentage(80),
+    borderRadius: pxToPercentage(28),
+    borderWidth: pxToPercentage(2),
+    borderColor: theme['color-primary-19'],
+    flexDirection: 'row',
+  },
+  btnTab: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: pxToPercentage(80),
+    width: pxToPercentage(560),
+  },
+  btnSelected: {
+    backgroundColor: theme['color-primary-19'],
+    borderRadius: pxToPercentage(28),
+  },
+  txtTab: {
+    fontSize: pxToPercentage(30),
+    ...textStyle.proDisplayBold,
+    color: theme['color-primary-19'],
+  },
+  txtSelected: {
+    color: theme['color-primary-2'],
   },
 }));

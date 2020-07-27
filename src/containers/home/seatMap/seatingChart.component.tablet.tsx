@@ -14,6 +14,7 @@ import Pdf from 'react-native-pdf';
 
 interface ComponentProps {
   onBackPress: () => void;
+  source: object;
 }
 
 export type SeatMapTabletProps = ThemedComponentProps & ComponentProps;
@@ -32,8 +33,6 @@ const SeatMapTabletComponent: React.FunctionComponent<SeatMapTabletProps> = (pro
 
   };
 
-  // const source = { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true };
-  const source = require('@src/assets/file/seatingChart.pdf');
   return (
     <View style={themedStyle.container}>
       <BackHeader
@@ -44,7 +43,7 @@ const SeatMapTabletComponent: React.FunctionComponent<SeatMapTabletProps> = (pro
       />
       <View style={themedStyle.viewCard}>
         <Pdf
-          source={source}
+          source={props.source}
           style={themedStyle.pdf}
         />
       </View>
@@ -52,7 +51,7 @@ const SeatMapTabletComponent: React.FunctionComponent<SeatMapTabletProps> = (pro
   );
 };
 
-export const SeatMapTablet = withStyles(SeatMapTabletComponent, (theme: ThemeType) => ({
+export const SeatingChartTablet = withStyles(SeatMapTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(31),

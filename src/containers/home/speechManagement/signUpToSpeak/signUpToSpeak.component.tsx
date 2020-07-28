@@ -42,9 +42,21 @@ const SignUpToSpeakComponent: React.FunctionComponent<SignUpToSpeakProps> = (pro
     setIsCreateScreen(true);
   };
 
+  const renderTopicRegister = (): React.ReactElement[] => {
+    return selectedOption.map((item, index) => {
+      return (
+        <Text
+          key={index}
+          style={themedStyle.txtContent}>
+          {item.text}
+        </Text>
+      );
+    });
+  };
+
   if (!isCreateScreen) {
     return (
-      <ScrollableAvoidKeyboard style={themedStyle.container}>
+      <View style={themedStyle.container}>
         <View style={themedStyle.viewBox}>
           <View style={themedStyle.viewSpeech}>
             <View style={themedStyle.viewHeader}>
@@ -59,9 +71,7 @@ const SignUpToSpeakComponent: React.FunctionComponent<SignUpToSpeakProps> = (pro
             </View>
             <Hr />
             <View style={themedStyle.viewBody}>
-              <Text style={themedStyle.txtContent}>
-                {'Nghị quyết về thí điểm cơ chế, chính sách đặc thù phát triển thành phố Hồ Chí Minh'}
-              </Text>
+              {renderTopicRegister()}
             </View>
           </View>
           <View style={themedStyle.viewBtns}>
@@ -77,51 +87,43 @@ const SignUpToSpeakComponent: React.FunctionComponent<SignUpToSpeakProps> = (pro
             </Button>
           </View>
         </View>
-        <SafeAreaView />
-      </ScrollableAvoidKeyboard>
+      </View>
     );
   }
 
   return (
-    <ScrollableAvoidKeyboard style={themedStyle.container}>
+    <View style={themedStyle.container}>
       <View style={themedStyle.viewBox}>
-        <Select
-          data={[
-            { text: 'Kinh tế' },
-            { text: 'Quản lý đô thị' },
-            { text: 'Giáo dục - Đào tạo' },
-            { text: 'Khoa học công nghệ' },
-            { text: 'Quốc phòng - An ninh' },
-            { text: 'Văn hoá - Xã hội' },
-          ]}
-          placeholder='Chọn chủ đề'
-          size={'large'}
-          label={'Chủ đề'}
-          multiSelect={true}
-          keyExtractor={(item) => item.text}
-          selectedOption={selectedOption}
-          textStyle={themedStyle.txtSelectInput}
-          labelStyle={themedStyle.txtLabel}
-          onSelect={setSelectedOption}>
-        </Select>
-        <ValidationInput
-          label={'Nội dung'}
-          multiline={true}
-          labelStyle={themedStyle.txtLabel}
-          style={themedStyle.textInput}
-          textStyle={themedStyle.textInputTxt}
-          placeholder='Nhập nội dung'
-          validator={StringValidator}
-          onChangeText={() => { }}
-        />
-        <Button
-          style={themedStyle.btnSignUp}
-          onPress={onSignUpPress}>
-          {'Đăng ký'}
-        </Button>
+        <View style={themedStyle.viewHeader}>
+          <Select
+            data={[
+              { text: 'Kinh tế' },
+              { text: 'Quản lý đô thị' },
+              { text: 'Giáo dục - Đào tạo' },
+              { text: 'Khoa học công nghệ' },
+              { text: 'Quốc phòng - An ninh' },
+              { text: 'Văn hoá - Xã hội' },
+            ]}
+            placeholder='Chọn chủ đề'
+            size={'large'}
+            label={'Chủ đề'}
+            multiSelect={true}
+            keyExtractor={(item) => item.text}
+            selectedOption={selectedOption}
+            textStyle={themedStyle.txtSelectInput}
+            labelStyle={themedStyle.txtLabel}
+            onSelect={setSelectedOption}
+            style={themedStyle.select}>
+          </Select>
+          <Button
+            style={themedStyle.btnSignUp}
+            onPress={onSignUpPress}>
+            {'Đăng ký'}
+          </Button>
+        </View>
       </View>
       <SafeAreaView />
-    </ScrollableAvoidKeyboard>
+    </View>
   );
 };
 
@@ -133,33 +135,22 @@ export const SignUpToSpeak = withStyles(SignUpToSpeakComponent, (theme: ThemeTyp
   },
   viewBox: {
     flex: 1,
-    padding: pxToPercentage(8),
+    borderRadius: pxToPercentage(12.5),
     backgroundColor: theme['color-custom-100'],
-    borderRadius: pxToPercentage(5),
     ...viewStyle.shadow2,
+    padding: pxToPercentage(8),
   },
   txtSelectInput: {
     fontSize: pxToPercentage(14),
     padding: 0,
     ...textStyle.proTextRegular,
   },
-  textInput: {
-    marginTop: pxToPercentage(8),
-  },
-  textInputTxt: {
-    height: pxToPercentage(300),
-    ...textStyle.proTextRegular,
-  },
-  txtLabel: {
-    fontSize: pxToPercentage(14),
-    color: theme['text-basic-color'],
-  },
   viewBtns: {
     flexDirection: 'row',
-    marginTop: pxToPercentage(8),
+    marginTop: pxToPercentage(20),
   },
   btnSignUp: {
-    marginTop: pxToPercentage(4),
+    marginTop: pxToPercentage(20),
     backgroundColor: theme['color-primary-2'],
   },
   btnEdit: {
@@ -213,6 +204,11 @@ export const SignUpToSpeak = withStyles(SignUpToSpeakComponent, (theme: ThemeTyp
     ...textStyle.proTextRegular,
   },
   txtBold: {
+    ...textStyle.proTextBold,
+  },
+  txtLabel: {
+    fontSize: pxToPercentage(14),
+    color: 'black',
     ...textStyle.proTextBold,
   },
 }));

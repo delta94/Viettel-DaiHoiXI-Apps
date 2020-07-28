@@ -35,22 +35,6 @@ const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) =>
 
   const renderButtons = (): React.ReactElement => {
     switch (speech.status) {
-      case SpeechStatusEnum.Pending: {
-        return (
-          <React.Fragment>
-            <Button
-              onPress={() => { }}
-              style={themedStyle.btnError}>
-              {'Từ chối'}
-            </Button>
-            <Button
-              onPress={() => { }}
-              style={themedStyle.btnSuccess}>
-              {'Duyệt'}
-            </Button>
-          </React.Fragment>
-        );
-      }
       case SpeechStatusEnum.Accepted: {
         return (
           <Button
@@ -66,6 +50,16 @@ const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) =>
             onPress={() => { }}
             style={themedStyle.btnError}>
             {'Dừng phát biểu'}
+          </Button>
+        );
+      }
+      case SpeechStatusEnum.Finished: {
+        return (
+          <Button
+            textStyle={themedStyle.txtFinished}
+            onPress={() => { }}
+            style={themedStyle.btnFinished}>
+            {'Đã phát biểu'}
           </Button>
         );
       }
@@ -128,7 +122,7 @@ const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) =>
 
 export const SpeechItem = withStyles(SpeechItemComponent, (theme: ThemeType) => ({
   container: {
-    marginTop: pxToPercentage(8),
+    marginVertical: pxToPercentage(8),
     borderRadius: pxToPercentage(5),
     justifyContent: 'center',
     backgroundColor: theme['color-custom-100'],
@@ -201,6 +195,13 @@ export const SpeechItem = withStyles(SpeechItemComponent, (theme: ThemeType) => 
     flex: 1,
     marginLeft: pxToPercentage(4),
     backgroundColor: theme['color-primary-17'],
+  },
+  btnFinished: {
+    backgroundColor: theme['color-primary-20'],
+    flex: 1,
+  },
+  txtFinished: {
+    color: theme['color-primary-18'],
   },
 }));
 

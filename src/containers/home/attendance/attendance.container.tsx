@@ -22,4 +22,11 @@ export const AttendanceContainer: React.FunctionComponent<NavigationInjectedProp
       />
     );
   }
+  return (
+    <AttendanceTablet
+        onBackPress={onBackPress}
+        hallAttendance={hallAttendanceDataFake}
+        groupAttendance={groupAttendanceDataFake}
+      />
+  );
 };

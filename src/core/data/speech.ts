@@ -20,11 +20,11 @@ export const speechDataFake: Speech[] = [
   {
     full_name: 'Phan Xuân Dũng',
     content: 'Thảo luận ở hội trường về dự án Luật Bảo vệ môi trường (sửa đổi).',
-    status: SpeechStatusEnum.Pending,
+    status: SpeechStatusEnum.Accepted,
   },
   {
     full_name: 'Trần Hồng Hà ',
     content: 'Bộ trưởng Bộ Tài nguyên và Môi trường Trần Hồng Hà giải trình ý kiến của đại biểu Quốc hội.',
-    status: SpeechStatusEnum.Pending,
+    status: SpeechStatusEnum.Accepted,
   },
 ];

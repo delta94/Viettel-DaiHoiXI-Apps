@@ -15,24 +15,25 @@ import { CheckIcon } from '@src/assets/icons';
 
 interface ComponentProps {
   topic: any;
-  onCheckboxPress: (id: number) => void;
+  onCheckboxPress: (id: number, chunkNumber: number) => void;
   isCreateScreen: boolean;
   index: number;
+  chunkNumber: number;
 }
 export type CheckboxTabletProps = ThemedComponentProps & ComponentProps;
 
 const CheckBoxComponent: React.FunctionComponent<CheckboxTabletProps> = (props) => {
   const { themedStyle } = props;
 
-  const onCheckboxPress = (id: number) => {
-    return props.onCheckboxPress(id);
+  const onCheckboxPress = (id: number, chunkNumber: number) => {
+    return props.onCheckboxPress(id, chunkNumber);
   };
 
   return (
     <TouchableOpacity
       disabled={!props.isCreateScreen}
       activeOpacity={0.75}
-      onPress={() => { onCheckboxPress(props.index); }}
+      onPress={() => { onCheckboxPress(props.index, props.chunkNumber); }}
       style={[
         themedStyle.container, props.topic.status
         && themedStyle.viewOncheck,
@@ -56,12 +57,12 @@ const CheckBoxComponent: React.FunctionComponent<CheckboxTabletProps> = (props) 
 
 export const CheckboxItemTablet = withStyles(CheckBoxComponent, (theme: ThemeType) => ({
   container: {
-    marginVertical: pxToPercentage(5),
+    marginTop: pxToPercentage(4),
     paddingHorizontal: pxToPercentage(35),
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: theme['color-primary-31'],
-    height: pxToPercentage(86),
+    height: pxToPercentage(94),
   },
   viewCheckbox: {
     height: pxToPercentage(54),

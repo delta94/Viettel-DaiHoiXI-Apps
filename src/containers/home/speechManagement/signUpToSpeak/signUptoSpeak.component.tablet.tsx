@@ -1,20 +1,18 @@
 import React from 'react';
 import {
   View,
-  ScrollView,
+  Text,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { pxToPercentage, chunk } from '@src/core/utils/utils';
 import {
   textStyle,
-  ValidationInput,
   ScrollableAvoidKeyboard,
 } from '@src/components';
-import { StringValidator } from '@src/core/validators';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { CheckboxItemTablet } from './checkBoxItem.component.tablet';
 import { Button } from '@src/components/button/button.component';
@@ -27,7 +25,7 @@ export type SignUptoSpeakTabletProps = ThemedComponentProps & ComponentProps;
 const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletProps> = (props) => {
   const { themedStyle } = props;
   const [isCreateScreen, setIsCreateScreen] = React.useState<boolean>(true);
-  const [topics, setTopic] = React.useState<{
+  const [data, setData] = React.useState<{
     text: string;
     status: boolean;
   }[]>
@@ -38,9 +36,18 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
       { text: 'Khoa học công nghệ', status: false },
       { text: 'Quốc phòng - An ninh', status: false },
       { text: 'Văn hoá - Xã hội', status: false },
-      { text: 'Văn hoá - Xã hội', status: false },
-      { text: 'Văn hoá - Xã hội', status: false },
+      { text: 'Du lịch', status: false },
+      { text: 'Du lịch', status: false },
+      { text: 'Đối ngoại', status: false },
+      { text: 'Ngoại giao', status: false },
+      { text: 'Xây dựng', status: false },
+      { text: 'Giáo dục', status: false },
     ]);
+
+  const [chunkTopic, setChunkTopic] = React.useState<{
+    text: string;
+    status: boolean;
+  }[][]>(chunk(data, 6));
 
   const onMessagePress = (): void => {
 
@@ -62,13 +69,24 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
     setIsCreateScreen(true);
   };
 
-  const onCheckboxPress = (id: number) => {
-    setTopic(topics.map((item, index) => index === id ?
-      { ...item, status: !item.status }
-      : item));
+  const onCheckboxPress = (id: number, chunkNumber: number) => {
+    setChunkTopic([...chunkTopic.map((item, index) => {
+      if (index === chunkNumber) {
+        return [...item.map((value, e) => {
+          if (e === id) {
+            return {
+              ...value, status: !value.status,
+            };
+          }
+          return value;
+        })];
+      }
+      return item;
+    })]);
+
   };
 
-  const renderCheckBox = (): React.ReactElement[] => {
+  const renderChunk = (topics: { text: string; status: boolean; }[], chunkNumber: number): React.ReactElement[] => {
     return topics.map((item, index) => {
       return (
         <CheckboxItemTablet
@@ -77,7 +95,18 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
           index={index}
           topic={item}
           isCreateScreen={isCreateScreen}
+          chunkNumber={chunkNumber}
         />
+      );
+    });
+  };
+
+  const renderCheckBox = (): React.ReactElement[] => {
+    return chunkTopic.map((item, index) => {
+      return (
+        <View style={themedStyle.viewBoxGroup}>
+          {renderChunk(item, index)}
+        </View>
       );
     });
   };
@@ -91,22 +120,15 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
         onHelpPress={onHelpPress}
       />
       <View style={themedStyle.viewCard}>
-        <View style={themedStyle.viewSection}>
+        <View style={[
+          themedStyle.viewSection,
+          data.length < 7 && themedStyle.viewOneBox,
+        ]}>
+          <Text style={themedStyle.txtTitle}>
+            {'Chủ đề'}
+          </Text>
           <View style={themedStyle.viewCardContent}>
-            <ScrollView style={themedStyle.viewLeft}>
-              {renderCheckBox()}
-            </ScrollView>
-            <View style={themedStyle.viewRight}>
-              <ValidationInput
-                disabled={!isCreateScreen}
-                multiline={true}
-                style={themedStyle.viewTextInput}
-                textStyle={themedStyle.txtInputText}
-                placeholder='Nhập nội dung'
-                validator={StringValidator}
-                onChangeText={() => { }}
-              />
-            </View>
+            {renderCheckBox()}
           </View>
           {isCreateScreen &&
             <Button
@@ -165,7 +187,11 @@ export const SignUpToSpeakTablet = withStyles(SignUptoSpeakTabletComponent, (the
     justifyContent: 'center',
   },
   viewSection: {
-    width: pxToPercentage(1700), // w 900
+    width: pxToPercentage(1800), // w 900
+    height: pxToPercentage(778),
+  },
+  viewOneBox: {
+    width: pxToPercentage(900), // w 900
     height: pxToPercentage(778),
   },
   txtSignUp: {
@@ -187,10 +213,10 @@ export const SignUpToSpeakTablet = withStyles(SignUptoSpeakTabletComponent, (the
   btnCancel: {
     marginLeft: pxToPercentage(28),
     backgroundColor: theme['color-primary-18'],
-    width: pxToPercentage(836),
+    flex: 1,
   },
   btnEdit: {
-    width: pxToPercentage(836),
+    flex: 1,
   },
   txtCancel: {
     ...textStyle.proDisplayRegular,
@@ -202,19 +228,13 @@ export const SignUpToSpeakTablet = withStyles(SignUptoSpeakTabletComponent, (the
     flexDirection: 'row',
     flex: 1,
   },
-  viewLeft: {
+  viewBoxGroup: {
     flex: 1,
+    marginRight: pxToPercentage(20),
   },
-  viewRight: {
-    flex: 1,
-    marginLeft: pxToPercentage(28),
-  },
-  viewTextInput: {
-    backgroundColor: 'white',
-  },
-  txtInputText: {
-    height: pxToPercentage(595),
-    textAlignVertical: 'top',
-    ...textStyle.proTextRegular,
+  txtTitle: {
+    fontSize: pxToPercentage(34),
+    ...textStyle.proDisplayRegular,
+    marginBottom: pxToPercentage(22),
   },
 }));

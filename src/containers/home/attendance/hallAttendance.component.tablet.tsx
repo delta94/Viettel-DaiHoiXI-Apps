@@ -12,7 +12,10 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { PieChart } from 'react-native-charts-wrapper';
 import { textStyle } from '@src/components';
-import { HallAttendance, HallAttendanceContent } from '@src/core/models/attendance/hallAttendance/hallAttendance.model';
+import {
+  HallAttendance,
+  HallAttendanceContent,
+} from '@src/core/models/attendance/hallAttendance/hallAttendance.model';
 
 interface ComponentProps {
   attendances: HallAttendance[];
@@ -154,8 +157,8 @@ export const HallAttendanceTablet = withStyles(HallAttendanceTabletComponent, (t
     paddingTop: pxToPercentage(22),
   },
   chart: {
-    width: pxToPercentage(500),
-    height: pxToPercentage(500),
+    width: pxToPercentage(360),
+    height: pxToPercentage(360),
     justifyContent: 'center',
   },
   viewRight: {

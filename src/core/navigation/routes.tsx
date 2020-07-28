@@ -31,6 +31,7 @@ import { DelegateDetailContainer } from '@src/containers/home/delegate/delegateD
 import { SpeechListContainer } from '@src/containers/home/speechManagement/speechList/speechList.container';
 import { DelegateGroupContainer } from '@src/containers/home/delegate/delegateGroup/delegateGroup.container';
 import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/signUpToSpeak/signUpToSpeak.container';
+import { AttendanceContainer } from '@src/containers/home/attendance/attendance.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -64,6 +65,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['delegateDetail']: DelegateDetailContainer,
   ['speechList']: SpeechListContainer,
   ['signUpToSpeak']: SignUpToSpeakContainer,
+  ['attendance']: AttendanceContainer,
 }, {
   defaultNavigationOptions: isTablet() ? MenuNavigationTabletOptions : MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

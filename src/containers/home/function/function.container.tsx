@@ -46,6 +46,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.DiemDanh: {
+        routeName = 'attendance';
 
         break;
       }

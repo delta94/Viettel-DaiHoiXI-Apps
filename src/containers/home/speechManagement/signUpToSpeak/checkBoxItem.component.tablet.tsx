@@ -12,13 +12,14 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import { CheckIcon } from '@src/assets/icons';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
   topic: any;
   onCheckboxPress: (id: number, chunkNumber: number) => void;
   isCreateScreen: boolean;
   index: number;
-  chunkNumber: number;
+  chunkNumber?: number;
 }
 export type CheckboxTabletProps = ThemedComponentProps & ComponentProps;
 
@@ -58,19 +59,19 @@ const CheckBoxComponent: React.FunctionComponent<CheckboxTabletProps> = (props) 
 export const CheckboxItemTablet = withStyles(CheckBoxComponent, (theme: ThemeType) => ({
   container: {
     marginTop: pxToPercentage(4),
-    paddingHorizontal: pxToPercentage(35),
+    paddingHorizontal: isTablet() ? pxToPercentage(35) : pxToPercentage(8),
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: theme['color-primary-31'],
-    height: pxToPercentage(94),
+    height: isTablet() ? pxToPercentage(94) : pxToPercentage(48),
   },
   viewCheckbox: {
-    height: pxToPercentage(54),
-    width: pxToPercentage(54),
+    height: isTablet() ? pxToPercentage(54) : pxToPercentage(30),
+    width: isTablet() ? pxToPercentage(54) : pxToPercentage(30),
     borderColor: theme['color-primary-2'],
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: pxToPercentage(8),
+    borderRadius: isTablet() ? pxToPercentage(8) : pxToPercentage(4),
     borderWidth: pxToPercentage(1),
   },
   viewOncheck: {
@@ -80,13 +81,13 @@ export const CheckboxItemTablet = withStyles(CheckBoxComponent, (theme: ThemeTyp
     backgroundColor: theme['color-primary-2'],
   },
   txtCheckBox: {
-    fontSize: pxToPercentage(34),
+    fontSize: isTablet() ? pxToPercentage(34) : pxToPercentage(14),
     ...textStyle.proDisplayRegular,
-    marginLeft: pxToPercentage(25),
+    marginLeft: isTablet() ? pxToPercentage(25) : pxToPercentage(10),
   },
   icon: {
-    height: pxToPercentage(54),
-    width: pxToPercentage(54),
+    height: isTablet() ? pxToPercentage(54) : pxToPercentage(26),
+    width: isTablet() ? pxToPercentage(54) : pxToPercentage(26),
     resizeMode: 'contain',
   },
 }));

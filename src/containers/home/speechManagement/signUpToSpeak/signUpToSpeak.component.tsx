@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import {
   View,
-  Text,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import {
   Button,
-  Select,
 } from '@kitten/ui';
 import {
   ThemedComponentProps,
@@ -15,24 +14,37 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import {
-  ValidationInput,
-  textStyle,
-  ScrollableAvoidKeyboard,
-} from '@src/components';
-import { StringValidator } from '@src/core/validators';
-import { Hr } from '@src/components/hr/hr.component';
+import { textStyle } from '@src/components';
+import { CheckboxItemTablet } from './checkBoxItem.component.tablet';
 
 interface ComponentProps {
   example?: any;
+}
+
+interface TopicDataState {
+  text: string;
+  status: boolean;
 }
 
 export type SignUpToSpeakProps = ComponentProps & ThemedComponentProps;
 
 const SignUpToSpeakComponent: React.FunctionComponent<SignUpToSpeakProps> = (props) => {
   const { themedStyle } = props;
-  const [selectedOption, setSelectedOption] = useState<any>([]);
   const [isCreateScreen, setIsCreateScreen] = useState<boolean>(true);
+  const [data, setData] = React.useState<TopicDataState[]>
+    ([
+      { text: 'Kinh tế', status: false },
+      { text: 'Quản lý đô thị', status: false },
+      { text: 'Giáo dục - Đào tạo', status: false },
+      { text: 'Khoa học công nghệ', status: false },
+      { text: 'Quốc phòng - An ninh', status: false },
+      { text: 'Văn hoá - Xã hội', status: false },
+      { text: 'Du lịch', status: false },
+      { text: 'Du lịch', status: false },
+      { text: 'Đối ngoại', status: false },
+      { text: 'Ngoại giao', status: false },
+      { text: 'Xây dựng', status: false },
+    ]);
 
   const onSignUpPress = (): void => {
     setIsCreateScreen(false);
@@ -42,39 +54,41 @@ const SignUpToSpeakComponent: React.FunctionComponent<SignUpToSpeakProps> = (pro
     setIsCreateScreen(true);
   };
 
-  const renderTopicRegister = (): React.ReactElement[] => {
-    return selectedOption.map((item, index) => {
+  const onCheckboxPress = (id: number) => {
+    setData(data.map((item, index) => index === id ?
+      { ...item, status: !item.status }
+      : item));
+  };
+
+  const renderCheckBoxList = (): React.ReactElement[] => {
+    return data.map((item, index) => {
       return (
-        <Text
+        <CheckboxItemTablet
           key={index}
-          style={themedStyle.txtContent}>
-          {item.text}
-        </Text>
+          onCheckboxPress={onCheckboxPress}
+          index={index}
+          topic={item}
+          isCreateScreen={isCreateScreen}
+        />
       );
     });
   };
 
-  if (!isCreateScreen) {
-    return (
-      <View style={themedStyle.container}>
-        <View style={themedStyle.viewBox}>
-          <View style={themedStyle.viewSpeech}>
-            <View style={themedStyle.viewHeader}>
-              <Text style={themedStyle.txtTitle}>
-                {'Chủ đề'}
-              </Text>
-              <View style={themedStyle.viewIndex}>
-                <Text style={themedStyle.txtIndex}>
-                  {'Chờ phê duyệt'}
-                </Text>
-              </View>
-            </View>
-            <Hr />
-            <View style={themedStyle.viewBody}>
-              {renderTopicRegister()}
-            </View>
-          </View>
-          <View style={themedStyle.viewBtns}>
+  return (
+    <View style={themedStyle.container}>
+      <View style={themedStyle.viewBox}>
+        <View style={themedStyle.viewGroupCheckBox}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {renderCheckBoxList()}
+          </ScrollView>
+        </View>
+        {isCreateScreen
+          ? <Button
+            style={themedStyle.btnSignUp}
+            onPress={onSignUpPress}>
+            {'Đăng ký'}
+          </Button>
+          : <View style={themedStyle.viewBtns}>
             <Button
               style={themedStyle.btnEdit}
               onPress={onEditPress}>
@@ -85,42 +99,7 @@ const SignUpToSpeakComponent: React.FunctionComponent<SignUpToSpeakProps> = (pro
               onPress={() => { }}>
               {'Huỷ đăng ký'}
             </Button>
-          </View>
-        </View>
-      </View>
-    );
-  }
-
-  return (
-    <View style={themedStyle.container}>
-      <View style={themedStyle.viewBox}>
-        <View style={themedStyle.viewHeader}>
-          <Select
-            data={[
-              { text: 'Kinh tế' },
-              { text: 'Quản lý đô thị' },
-              { text: 'Giáo dục - Đào tạo' },
-              { text: 'Khoa học công nghệ' },
-              { text: 'Quốc phòng - An ninh' },
-              { text: 'Văn hoá - Xã hội' },
-            ]}
-            placeholder='Chọn chủ đề'
-            size={'large'}
-            label={'Chủ đề'}
-            multiSelect={true}
-            keyExtractor={(item) => item.text}
-            selectedOption={selectedOption}
-            textStyle={themedStyle.txtSelectInput}
-            labelStyle={themedStyle.txtLabel}
-            onSelect={setSelectedOption}
-            style={themedStyle.select}>
-          </Select>
-          <Button
-            style={themedStyle.btnSignUp}
-            onPress={onSignUpPress}>
-            {'Đăng ký'}
-          </Button>
-        </View>
+          </View>}
       </View>
       <SafeAreaView />
     </View>
@@ -140,6 +119,9 @@ export const SignUpToSpeak = withStyles(SignUpToSpeakComponent, (theme: ThemeTyp
     ...viewStyle.shadow2,
     padding: pxToPercentage(8),
   },
+  viewGroupCheckBox: {
+    flex: 1,
+  },
   txtSelectInput: {
     fontSize: pxToPercentage(14),
     padding: 0,
@@ -152,27 +134,25 @@ export const SignUpToSpeak = withStyles(SignUpToSpeakComponent, (theme: ThemeTyp
   btnSignUp: {
     marginTop: pxToPercentage(20),
     backgroundColor: theme['color-primary-2'],
+    height: pxToPercentage(48),
   },
   btnEdit: {
     flex: 1,
     marginRight: pxToPercentage(4),
+    height: pxToPercentage(48),
     backgroundColor: theme['color-custom-700'],
   },
   btnCancel: {
     flex: 1,
     marginLeft: pxToPercentage(4),
+    height: pxToPercentage(48),
     backgroundColor: theme['color-primary-2'],
   },
-  //
   viewSpeech: {
     borderRadius: pxToPercentage(5),
     justifyContent: 'center',
     backgroundColor: theme['color-custom-100'],
     ...viewStyle.shadow2,
-  },
-  viewHeader: {
-    justifyContent: 'center',
-    padding: pxToPercentage(8),
   },
   viewBody: {
     padding: pxToPercentage(8),
@@ -210,5 +190,8 @@ export const SignUpToSpeak = withStyles(SignUpToSpeakComponent, (theme: ThemeTyp
     fontSize: pxToPercentage(14),
     color: 'black',
     ...textStyle.proTextBold,
+  },
+  scrollView: {
+    flex: 1,
   },
 }));

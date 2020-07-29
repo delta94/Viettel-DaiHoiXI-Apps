@@ -20,15 +20,17 @@ import { Button } from '@src/components/button/button.component';
 interface ComponentProps {
   onBackPress: () => void;
 }
+
+interface TopicDataState {
+  text: string;
+  status: boolean;
+}
 export type SignUptoSpeakTabletProps = ThemedComponentProps & ComponentProps;
 
 const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletProps> = (props) => {
   const { themedStyle } = props;
   const [isCreateScreen, setIsCreateScreen] = React.useState<boolean>(true);
-  const [data, setData] = React.useState<{
-    text: string;
-    status: boolean;
-  }[]>
+  const [data, setData] = React.useState<TopicDataState[]>
     ([
       { text: 'Kinh tế', status: false },
       { text: 'Quản lý đô thị', status: false },
@@ -44,10 +46,7 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
       { text: 'Giáo dục', status: false },
     ]);
 
-  const [chunkTopic, setChunkTopic] = React.useState<{
-    text: string;
-    status: boolean;
-  }[][]>(chunk(data, 6));
+  const [chunkTopic, setChunkTopic] = React.useState<TopicDataState[][]>(chunk(data, 6));
 
   const onMessagePress = (): void => {
 

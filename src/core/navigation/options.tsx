@@ -32,6 +32,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'seatingChart': 'Sơ đồ chỗ ngồi',
   'signInQRCode' : 'Quét mã',
   'galleryVideo' : 'Phim ảnh, hình ảnh triển lãm ',
+  'gallery': 'Trển Lãm',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

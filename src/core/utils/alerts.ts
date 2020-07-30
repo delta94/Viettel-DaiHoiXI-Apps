@@ -42,7 +42,7 @@ const confirm = (params: AlertParams) => {
 
 const alert = (params: AlertParams) => {
   Alert.alert(
-    params.title || I18n.t('common.txtAlertTitle'),
+    params.title,
     params.message,
     [
       {

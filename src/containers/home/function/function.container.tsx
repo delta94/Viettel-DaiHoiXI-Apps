@@ -10,6 +10,7 @@ import { FunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
 import { FunctionTablet } from './function.component.tablet';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
+import { alerts } from '@src/core/utils/alerts';
 
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
@@ -46,7 +47,11 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.DiemDanh: {
-        routeName = 'attendance';
+        if (isTablet()) {
+          routeName = 'attendance';
+        } else {
+          alerts.alert({ message: 'Chức năng này đang được phát triển trên điện thoại' });
+        }
 
         break;
       }

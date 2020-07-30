@@ -42,13 +42,14 @@ const HallAttendanceTabletComponent: React.FunctionComponent<HallAttendanceTable
               processColor('rgba(149, 138, 131,1)'),
               processColor('rgba(245,231,198,1)'),
             ],
-            valueTextSize: pxToPercentage(32),
+            valueTextSize: pxToPercentage(28),
             valueTextColor: processColor('white'),
-            valueFormatter: '#.#\'%\'',
+            valueFormatter: '#\'%\'',
           },
         },
       ],
     };
+
     return data;
   };
 
@@ -58,18 +59,16 @@ const HallAttendanceTabletComponent: React.FunctionComponent<HallAttendanceTable
 
   const renderTitle = (color?: string, title?: string | number): React.ReactElement => {
     return (
-      <View style={[
-        themedStyle.viewTitle,
-        !title && { backgroundColor: 'white' },
-      ]}>
-        {color &&
-          <View style={[themedStyle.viewCircle, { backgroundColor: color }]} />
-        }
+      <View
+        style={[
+          themedStyle.viewTitle,
+          !title && { backgroundColor: 'white' },
+        ]}>
+        {color && <View style={[themedStyle.viewCircle, { backgroundColor: color }]} />}
         {title &&
-          <Text style={themedStyle.txtTitle}>
+          (<Text style={themedStyle.txtTitle}>
             {title}
-          </Text>
-        }
+          </Text>)}
       </View>
     );
   };
@@ -89,10 +88,11 @@ const HallAttendanceTabletComponent: React.FunctionComponent<HallAttendanceTable
 
   const renderData = (value: string | number, isTitle?: boolean): React.ReactElement => {
     return (
-      <View style={[
-        themedStyle.containerData,
-        isTitle && { backgroundColor: 'white' },
-      ]}>
+      <View
+        style={[
+          themedStyle.containerData,
+          isTitle && { backgroundColor: 'white' },
+        ]}>
         <Text style={themedStyle.txtData}>
           {value}
         </Text>
@@ -141,7 +141,7 @@ const HallAttendanceTabletComponent: React.FunctionComponent<HallAttendanceTable
         </View>
         {renderSection()}
       </View>
-    </View >
+    </View>
   );
 };
 
@@ -157,8 +157,8 @@ export const HallAttendanceTablet = withStyles(HallAttendanceTabletComponent, (t
     paddingTop: pxToPercentage(22),
   },
   chart: {
-    width: pxToPercentage(360),
-    height: pxToPercentage(360),
+    width: pxToPercentage(475),
+    height: pxToPercentage(475),
     justifyContent: 'center',
   },
   viewRight: {

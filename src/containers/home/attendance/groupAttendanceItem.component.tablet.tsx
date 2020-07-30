@@ -23,16 +23,19 @@ const GroupAttendanceItemTabletComponent: React.FunctionComponent<GroupAttendanc
 
   const getPercent = (value1: number, value2: number) => {
     const percent = value1 / (value1 + value2);
+
     return Math.round(percent * 100);
   };
 
   const renderDescription = (title: string, value: number, isAbsent?: boolean) => {
     return (
       <View style={themedStyle.viewBlock}>
-        <View style={[
-          themedStyle.viewCircle,
-          isAbsent && themedStyle.viewCircleAbsent,
-        ]} />
+        <View
+          style={[
+            themedStyle.viewCircle,
+            isAbsent && themedStyle.viewCircleAbsent,
+          ]}
+        />
         <Text style={themedStyle.txt}>
           {`${title}: ${value}`}
         </Text>
@@ -71,7 +74,8 @@ const GroupAttendanceItemTabletComponent: React.FunctionComponent<GroupAttendanc
               style={[
                 themedStyle.viewPresentPercent,
                 { width: `${getPercent(attendance.present, attendance.absent)}%` },
-              ]} />
+              ]}
+            />
           </View>
         </View>
       </View>

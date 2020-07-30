@@ -30,6 +30,7 @@
 		3FFB3A2736444C75A2944D41 /* SFProText-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE1B92537F204CE6BB1C10E2 /* SFProText-LightItalic.ttf */; };
 		525F18284CA7487D9A561197 /* SFProDisplay-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085225CBBB604747A3D6091B /* SFProDisplay-Thin.ttf */; };
 		5F6690409BB6428FAADF62D9 /* SF-Pro-Rounded-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76261F58528C42AFB1A2B7B7 /* SF-Pro-Rounded-Semibold.ttf */; };
+		5FB0051724D2BBEA00DE7A06 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB0051624D2BBEA00DE7A06 /* Empty.swift */; };
 		60CAE37663884040B93F91AC /* SF-Pro-Rounded-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E0F7E1DD5724124997A921B /* SF-Pro-Rounded-Bold.ttf */; };
 		630997D9793D412DB06F5829 /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51D3B2F2EEAE4AF2ACFC98EF /* SFProDisplay-Bold.ttf */; };
 		66152BC477584125AAFB3744 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D8297EBC352416993335A01 /* SFProDisplay-Medium.ttf */; };
@@ -112,6 +113,8 @@
 		5BC98519157A1771DC63A9D2 /* libPods-DaiHoiXI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DaiHoiXI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1ACD57A9AEB234B34569C8 /* Pods-DaiHoiXI-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaiHoiXI-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-DaiHoiXI-tvOSTests/Pods-DaiHoiXI-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5FAF658E24A39F2700919E76 /* libCocoaAsyncSocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCocoaAsyncSocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FB0051524D2BBE900DE7A06 /* DaiHoiXI-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DaiHoiXI-Bridging-Header.h"; sourceTree = "<group>"; };
+		5FB0051624D2BBEA00DE7A06 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		76261F58528C42AFB1A2B7B7 /* SF-Pro-Rounded-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Rounded-Semibold.ttf"; path = "../src/assets/fonts/SF-Pro-Rounded-Semibold.ttf"; sourceTree = "<group>"; };
 		767C073CED4446A19D27EC36 /* SFProDisplay-HeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProDisplay-HeavyItalic.ttf"; path = "../src/assets/fonts/SFProDisplay-HeavyItalic.ttf"; sourceTree = "<group>"; };
 		7E0F7E1DD5724124997A921B /* SF-Pro-Rounded-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Rounded-Bold.ttf"; path = "../src/assets/fonts/SF-Pro-Rounded-Bold.ttf"; sourceTree = "<group>"; };
@@ -285,6 +288,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5FB0051624D2BBEA00DE7A06 /* Empty.swift */,
 				13B07FAE1A68108700A75B9A /* DaiHoiXI */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* DaiHoiXITests */,
@@ -292,6 +296,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				FB8D5D27A7A9C5861AC432F7 /* Pods */,
 				419FDE1FBA714581B53FC335 /* Resources */,
+				5FB0051524D2BBE900DE7A06 /* DaiHoiXI-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -419,7 +424,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = CH3EWM6K7J;
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1160;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -699,6 +704,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				5FB0051724D2BBEA00DE7A06 /* Empty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,6 +757,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F7091991AB627B15449AA83A /* Pods-DaiHoiXI-DaiHoiXITests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -774,6 +781,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D9E45977A42E9BD733947F17 /* Pods-DaiHoiXI-DaiHoiXITests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = DaiHoiXITests/Info.plist;
@@ -890,6 +898,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DaiHoiXI;
 				PROVISIONING_PROFILE_SPECIFIER = "IMT Developer";
+				SWIFT_OBJC_BRIDGING_HEADER = "DaiHoiXI-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -951,6 +960,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DaiHoiXI;
 				PROVISIONING_PROFILE_SPECIFIER = "IMT Developer";
+				SWIFT_OBJC_BRIDGING_HEADER = "DaiHoiXI-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

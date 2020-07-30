@@ -48,7 +48,8 @@ const GroupAttendanceTabletComponent: React.FunctionComponent<GroupAttendanceTab
       return (
         <GroupAttendanceItemTablet
           key={index}
-          attendance={item} />
+          attendance={item}
+        />
       );
     });
   };

@@ -69,16 +69,16 @@ const AttendanceTabletComponent: React.FunctionComponent<AttendanceTabletProps> 
           themedStyle.btnTab,
           selectedTab === type && themedStyle.btnSelected,
         ]}
-        onPress={() => setSelectedTab(type)}
-      >
+        onPress={() => setSelectedTab(type)}>
         {icon([
           iconStyle,
           selectedTab === type && themedStyle.iconSelected,
         ])}
-        <Text style={[
-          themedStyle.txtTab,
-          selectedTab === type && themedStyle.txtTabSelected,
-        ]}>
+        <Text
+          style={[
+            themedStyle.txtTab,
+            selectedTab === type && themedStyle.txtTabSelected,
+          ]}>
           {title}
         </Text>
       </TouchableOpacity>
@@ -104,10 +104,8 @@ const AttendanceTabletComponent: React.FunctionComponent<AttendanceTabletProps> 
             numDates={3}
             onDatePress={onDatePress}
           />
-          {isHallTab() &&
-            <HallAttendanceTablet attendances={props.hallAttendance} />}
-          {!isHallTab() &&
-            <GroupAttendanceTablet groupAttendance={props.groupAttendance} />}
+          {isHallTab() && <HallAttendanceTablet attendances={props.hallAttendance} />}
+          {!isHallTab() && <GroupAttendanceTablet groupAttendance={props.groupAttendance} />}
         </View>
       </View>
     </View>
@@ -117,7 +115,7 @@ const AttendanceTabletComponent: React.FunctionComponent<AttendanceTabletProps> 
 export const AttendanceTablet = withStyles(AttendanceTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    paddingHorizontal: pxToPercentage(28),
+    paddingHorizontal: pxToPercentage(31),
     paddingBottom: pxToPercentage(31),
     backgroundColor: theme['color-primary-2'],
   },

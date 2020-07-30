@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  SafeAreaView,
   FlatList,
 } from 'react-native';
 import {
@@ -51,7 +50,6 @@ const SpeechListComponent: React.FunctionComponent<SpeechListProps> = (props) =>
           }}
         />
       </View>
-      <SafeAreaView />
     </View>
   );
 };
@@ -60,6 +58,7 @@ export const SpeechList = withStyles(SpeechListComponent, (theme: ThemeType) => 
   container: {
     flex: 1,
     padding: pxToPercentage(8),
+    paddingBottom: pxToPercentage(20),
     backgroundColor: theme['color-primary-11'],
   },
   flatListContainer: {

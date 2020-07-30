@@ -39,10 +39,11 @@ const CheckBoxComponent: React.FunctionComponent<CheckboxTabletProps> = (props) 
         themedStyle.container, props.topic.status
         && themedStyle.viewOncheck,
       ]}>
-      <View style={[
-        themedStyle.viewCheckbox,
-        props.topic.status && themedStyle.checkedbox,
-      ]}>
+      <View
+        style={[
+          themedStyle.viewCheckbox,
+          props.topic.status && themedStyle.checkedbox,
+        ]}>
         {props.topic.status && (
           <View style={themedStyle.viewIcon}>
             {CheckIcon(themedStyle.icon)}

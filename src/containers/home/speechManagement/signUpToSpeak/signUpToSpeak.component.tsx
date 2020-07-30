@@ -101,7 +101,6 @@ const SignUpToSpeakComponent: React.FunctionComponent<SignUpToSpeakProps> = (pro
             </Button>
           </View>}
       </View>
-      <SafeAreaView />
     </View>
   );
 };
@@ -110,6 +109,7 @@ export const SignUpToSpeak = withStyles(SignUpToSpeakComponent, (theme: ThemeTyp
   container: {
     flex: 1,
     padding: pxToPercentage(8),
+    paddingBottom: pxToPercentage(20),
     backgroundColor: theme['color-custom-100'],
   },
   viewBox: {

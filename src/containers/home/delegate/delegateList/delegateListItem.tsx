@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,7 @@ import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { DelegateList as DelegateListModel } from '@src/core/models/delegate/delegateList.model';
 import { viewStyle } from '@src/components/viewStyle';
+import { ArrowIosBackFill } from '@src/assets/icons';
 
 interface ComponentProps {
   delegateList: DelegateListModel;
@@ -26,6 +27,7 @@ export type DelegateListItemProps = ThemedComponentProps & ComponentProps;
 
 const DelegateListItemComponent: React.FunctionComponent<DelegateListItemProps> = (props) => {
   const { themedStyle } = props;
+  const [isShowDelegates, setIsShowDelegates] = useState<boolean>(true);
 
   const onDelegateItemPress = (delegate: UserModel): void => {
     props.onDelegateItemPress(delegate);
@@ -109,13 +111,17 @@ const DelegateListItemComponent: React.FunctionComponent<DelegateListItemProps> 
 
   return (
     <View style={themedStyle.container}>
-      <View style={themedStyle.sectionGroup}>
+      <TouchableOpacity
+        activeOpacity={0.75}
+        onPress={() => setIsShowDelegates(!isShowDelegates)}
+        style={themedStyle.sectionGroup}>
         <Text style={themedStyle.txtGroup}>
           {props.delegateList.group}
         </Text>
-      </View>
+        {ArrowIosBackFill(isShowDelegates ? themedStyle.iconArrowUp : themedStyle.iconArrowDown)}
+      </TouchableOpacity>
       <View style={themedStyle.sectionItem}>
-        {onRenderDelegate()}
+        {isShowDelegates && onRenderDelegate()}
       </View>
     </View>
   );
@@ -161,6 +167,22 @@ export const DelegateListItem = withStyles(DelegateListItemComponent, (theme: Th
   },
   viewRow: {
     flexDirection: 'row',
+  },
+  iconArrowUp: {
+    position: 'absolute',
+    right: pxToPercentage(6),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    tintColor: theme['color-custom-100'],
+    transform: [{ rotate: '90deg' }],
+  },
+  iconArrowDown: {
+    position: 'absolute',
+    right: pxToPercentage(6),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    tintColor: theme['color-custom-100'],
+    transform: [{ rotate: '270deg' }],
   },
   txtInfo: {
     fontSize: pxToPercentage(13),

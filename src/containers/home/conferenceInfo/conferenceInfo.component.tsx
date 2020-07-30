@@ -89,7 +89,6 @@ const ConferenceInfoComponent: React.FunctionComponent<ConferenceInfoProps> = (p
           </Tab>
         </TabView>
       </View>
-      <SafeAreaView />
     </View>
   );
 };
@@ -98,6 +97,7 @@ export const ConferenceInfo = withStyles(ConferenceInfoComponent, (theme: ThemeT
   container: {
     flex: 1,
     padding: pxToPercentage(8),
+    paddingBottom: pxToPercentage(20),
     backgroundColor: theme['color-primary-11'],
   },
   viewContent: {

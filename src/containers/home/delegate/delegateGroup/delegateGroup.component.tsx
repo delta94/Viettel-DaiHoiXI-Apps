@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   FlatList,
-  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -48,12 +47,13 @@ const DelegateGroupComponent: React.FunctionComponent<DelegateGroupProps> = (pro
           selectedOption={selectedOption}
           keyExtractor={(item) => item.text}
           placeholder='Chọn tổ'
+          placeholderStyle={themedStyle.selectOptionPhd}
           size={'large'}
+          controlStyle={themedStyle.selectOption}
           onSelect={setSelectedOption}>
         </Select>
         <ValidationInput
-          style={themedStyle.textInput}
-          textStyle={textStyle.proTextRegular}
+          style={themedStyle.inputSearch}
           placeholder='Nhập họ tên đại biểu'
           validator={StringValidator}
           onChangeText={() => { }}
@@ -73,7 +73,6 @@ const DelegateGroupComponent: React.FunctionComponent<DelegateGroupProps> = (pro
           );
         }}
       />
-      <SafeAreaView />
     </View>
   );
 };
@@ -86,9 +85,28 @@ export const DelegateGroup = withStyles(DelegateGroupComponent, (theme: ThemeTyp
   viewSearch: {
     padding: pxToPercentage(8),
   },
+  inputSearch: {
+    fontSize: pxToPercentage(15),
+    marginTop: pxToPercentage(7.5),
+    borderRadius: pxToPercentage(5),
+  },
+  selectOption: {
+    height: pxToPercentage(48),
+    borderRadius: pxToPercentage(5),
+    borderColor: theme['color-primary-18'],
+  },
+  selectOptionPhd: {
+    color: theme['color-primary-18'],
+  },
   flatListContainer: {
     paddingVertical: pxToPercentage(4),
     paddingHorizontal: pxToPercentage(8),
+    paddingBottom: pxToPercentage(20),
+  },
+  txtSelectOption: {
+    padding: 0,
+    fontSize: pxToPercentage(15),
+    ...textStyle.proDisplayRegular,
   },
   txtSelectInput: {
     fontSize: pxToPercentage(14),

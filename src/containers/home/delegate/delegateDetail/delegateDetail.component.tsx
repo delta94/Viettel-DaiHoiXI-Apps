@@ -30,7 +30,6 @@ const DelegateDetailComponent: React.FunctionComponent<DelegateDetailProps> = (p
         <ProfileInfoV3 user={props.delegateDetail} />
         <DelegateDetailContent user={props.delegateDetail} />
       </ScrollView>
-      <SafeAreaView />
     </React.Fragment>
   );
 };
@@ -42,5 +41,6 @@ export const DelegateDetail = withStyles(DelegateDetailComponent, (theme: ThemeT
   },
   scrollViewContainer: {
     padding: pxToPercentage(8),
+    paddingBottom: pxToPercentage(20),
   },
 }));

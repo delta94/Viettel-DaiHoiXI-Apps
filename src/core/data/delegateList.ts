@@ -24,7 +24,7 @@ export const delegateListDataFake2: User[] = [
   },
   {
     avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_TranLuuQuang.jpg',
-    full_name: 'TRẦN LƯU QUAN',
+    full_name: 'TRẦN LƯU QUANG',
     position: 'Ủy viên Trung ương Đảng, Phó Bí thư Thường trực Thành ủy',
     phone: '0123456789',
     unit: 'Văn phòng thành ủy',
@@ -90,7 +90,7 @@ export const delegateListDataFake: DelegateList[] = [
       },
       {
         avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_TranLuuQuang.jpg',
-        full_name: 'TRẦN LƯU QUAN',
+        full_name: 'TRẦN LƯU QUANG',
         position: 'Ủy viên Trung ương Đảng, Phó Bí thư Thường trực Thành ủy',
         phone: '0123456789',
         unit: 'Văn phòng thành ủy',

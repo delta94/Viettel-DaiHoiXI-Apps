@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   FlatList,
-  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -39,7 +38,7 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
     <View style={themedStyle.container}>
       <View style={themedStyle.viewSearch}>
         <ValidationInput
-          textStyle={textStyle.proTextRegular}
+          style={themedStyle.inputSearch}
           placeholder='Nhập họ tên đại biểu'
           validator={StringValidator}
           onChangeText={() => { }}
@@ -50,11 +49,13 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
             { text: 'Đảng Bộ Khối Dân Chủ Đảng' },
             { text: 'Đảng Bộ Quận 1' },
           ]}
-          textStyle={themedStyle.txtSelectInput}
+          textStyle={themedStyle.txtSelectOption}
           keyExtractor={(item) => item.text}
           selectedOption={selectedOption}
           placeholder='Chọn đoàn đại biểu'
+          placeholderStyle={themedStyle.selectOptionPhd}
           size={'large'}
+          controlStyle={themedStyle.selectOption}
           onSelect={setSelectedOption}>
         </Select>
       </View>
@@ -72,7 +73,6 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
           );
         }}
       />
-      <SafeAreaView />
     </View>
   );
 };
@@ -85,11 +85,25 @@ export const DelegateList = withStyles(DelegateListComponent, (theme: ThemeType)
   viewSearch: {
     padding: pxToPercentage(8),
   },
-  flatListContainer: {
+  inputSearch: {
+    fontSize: pxToPercentage(15),
+    borderRadius: pxToPercentage(5),
   },
-  txtSelectInput: {
-    fontSize: pxToPercentage(14),
+  selectOption: {
+    marginTop: pxToPercentage(7.5),
+    height: pxToPercentage(48),
+    borderRadius: pxToPercentage(5),
+    borderColor: theme['color-primary-18'],
+  },
+  selectOptionPhd: {
+    color: theme['color-primary-18'],
+  },
+  flatListContainer: {
+    paddingBottom: pxToPercentage(20),
+  },
+  txtSelectOption: {
     padding: 0,
-    ...textStyle.proTextRegular,
+    fontSize: pxToPercentage(15),
+    ...textStyle.proDisplayRegular,
   },
 }));

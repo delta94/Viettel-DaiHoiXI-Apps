@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   View,
-  SafeAreaView,
   FlatList,
   TouchableOpacity,
 } from 'react-native';
@@ -64,7 +63,6 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
           }}
         />
       </View>
-      <SafeAreaView />
     </View>
   );
 };
@@ -73,6 +71,7 @@ export const Function = withStyles(FunctionComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     padding: pxToPercentage(8),
+    paddingBottom: pxToPercentage(20),
   },
   viewList: {
     flex: 1,

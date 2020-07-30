@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   ScrollView,
-  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -83,7 +82,7 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
           </ScrollView>
         </View>
       </View>
-      <SafeAreaView />
+      {/* <SafeAreaView /> */}
     </React.Fragment>
   );
 };
@@ -92,7 +91,7 @@ export const Home = withStyles(HomeComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(8),
-    paddingBottom: pxToPercentage(8),
+    paddingBottom: pxToPercentage(20),
     backgroundColor: theme['color-primary-11'],
   },
   viewCard: {

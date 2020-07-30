@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  SafeAreaView,
   FlatList,
 } from 'react-native';
 import {
@@ -46,6 +45,7 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
       time: `${date.getHours()}:${date.getMinutes()}`,
     }]);
   };
+
   const onHelpPress = (): void => {
 
   };
@@ -62,7 +62,7 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
     <ChatListItem
       chatList={item}
       onChatListItemPress={onChatListItemPress}
-      isRead={index === isRead ? true : false}
+      isRead={index === isRead}
       index={index}
     />
   );
@@ -85,7 +85,7 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
   };
 
   return (
-    <SafeAreaView style={themedStyle.container}>
+    <View style={themedStyle.container}>
       <BackHeader
         title={'CHAT'}
         onBackPress={onBackPress}
@@ -107,7 +107,7 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
           />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

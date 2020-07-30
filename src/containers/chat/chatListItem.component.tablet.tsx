@@ -31,10 +31,11 @@ const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props
   };
 
   return (
-    <TouchableOpacity style={[
-      themedStyle.container,
-      props.isRead && themedStyle.read,
-    ]}
+    <TouchableOpacity
+      style={[
+        themedStyle.container,
+        props.isRead && themedStyle.read,
+      ]}
       onPress={() => { onChatListItemPress(props.index); }}
       activeOpacity={0.75}>
       <View style={themedStyle.viewSection}>
@@ -46,7 +47,9 @@ const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props
             {props.chatList.name}
           </Text>
           <View style={themedStyle.viewLastMessage}>
-            <Text style={themedStyle.txtName}>
+            <Text
+              numberOfLines={1}
+              style={themedStyle.txtLastMessage}>
               {props.chatList.lastMessage}
             </Text>
             {props.chatList.notify > 0 &&
@@ -103,14 +106,20 @@ export const ChatListItem = withStyles(ChatListItemComponent, (theme: ThemeType)
     flexDirection: 'row',
     marginTop: pxToPercentage(14),
   },
+  txtLastMessage: {
+    flex: 1,
+    fontSize: pxToPercentage(34),
+    marginRight: pxToPercentage(5),
+    ...textStyle.proDisplayRegular,
+  },
   viewBadge: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
     height: pxToPercentage(48),
     width: pxToPercentage(48),
     backgroundColor: theme['color-primary-2'],
     borderRadius: pxToPercentage(24),
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'flex-end',
   },
   txtBadge: {
     fontSize: pxToPercentage(30),

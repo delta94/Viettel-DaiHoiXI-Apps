@@ -19,13 +19,12 @@ import {
   CameraIcon,
 } from '@src/assets/icons';
 import { ChatDetail } from '@src/core/models/chat/chatDetail';
-import { UserIdEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
+import { textStyle } from '@src/components';
 
 interface ComponentProps {
   chatDetails: ChatDetail[];
   onSendMessagePress: (message: string) => void;
-
 }
 
 export type ChatDetaillScreenProps = ThemedComponentProps & ComponentProps;
@@ -46,27 +45,31 @@ const ChatDetailScreenComponent: React.FunctionComponent<ChatDetaillScreenProps>
     if (Platform.OS === 'android') {
       return -500;
     } else {
-      return isTablet() ? pxToPercentage(15) : 0;
+      return isTablet() ? pxToPercentage(300) : 0;
     }
   };
 
   const renderItem = ({ item }) => (
-    <View style={[
-      themedStyle.viewMessageItem,
-      item.id === UserIdEnum.UserID && themedStyle.viewMyMessageItem,
-    ]}>
-      <View style={[
-        themedStyle.viewIcon,
-        item.id === UserIdEnum.UserID && themedStyle.viewMyMessageViewIcon,
+    <View
+      style={[
+        themedStyle.viewMessageItem,
+        item.id === 1 && themedStyle.viewMyMessageItem,
       ]}>
+      <View
+        style={[
+          themedStyle.viewIcon,
+          item.id === 1 && themedStyle.viewMyMessageViewIcon,
+        ]}>
         {PersonIcon([
           themedStyle.iconHeader,
-          item.id === UserIdEnum.UserID && themedStyle.viewMyMessageIcon,
+          item.id === 1 && themedStyle.viewMyMessageIcon,
         ])}
       </View>
-      <View style={[
-        themedStyle.viewMessageContent,
-        item.id === UserIdEnum.UserID && themedStyle.viewMyMessageContent]}>
+      <View
+        style={[
+          themedStyle.viewMessageContent,
+          item.id === 1 && themedStyle.viewMyMessageContent,
+        ]}>
         <Text style={themedStyle.txtMessage}>
           {item.content}
         </Text>
@@ -78,7 +81,8 @@ const ChatDetailScreenComponent: React.FunctionComponent<ChatDetaillScreenProps>
   );
 
   return (
-    <KeyboardAvoidingView style={themedStyle.container}
+    <KeyboardAvoidingView
+      style={themedStyle.container}
       behavior={'padding'}
       keyboardVerticalOffset={onGetKeyboardVerticalOffset()}>
       <FlatList
@@ -100,7 +104,7 @@ const ChatDetailScreenComponent: React.FunctionComponent<ChatDetaillScreenProps>
               onSendMessagePress(messageInput);
             }}
             value={messageInput}
-            onChangeText={(message) => { setMessageInut(message); }}
+            onChangeText={setMessageInut}
             placeholderTextColor={themedStyle.placeholderColor}
             style={themedStyle.input}
             placeholder={'Nhắn tin'}>
@@ -136,7 +140,6 @@ export const ChatDetailScreen = withStyles(ChatDetailScreenComponent, (theme: Th
   viewMessageItem: {
     marginTop: pxToPercentage(40),
     flexDirection: 'row',
-    alignSelf: 'flex-start',
     alignItems: 'center',
   },
   viewMyMessageItem: {
@@ -146,10 +149,9 @@ export const ChatDetailScreen = withStyles(ChatDetailScreenComponent, (theme: Th
   viewMessageContent: {
     backgroundColor: theme['color-primary-20'],
     maxWidth: '60%',
-    minWidth: '15%',
     marginHorizontal: pxToPercentage(19),
     borderRadius: pxToPercentage(40),
-    paddingHorizontal: pxToPercentage(36),
+    paddingHorizontal: pxToPercentage(30),
     paddingVertical: pxToPercentage(18),
   },
   viewMyMessageContent: {
@@ -165,10 +167,11 @@ export const ChatDetailScreen = withStyles(ChatDetailScreenComponent, (theme: Th
     textAlign: 'right',
     fontSize: pxToPercentage(30),
     color: theme['color-primary-18'],
+    ...textStyle.proDisplayRegular,
   },
   txtMessage: {
     fontSize: pxToPercentage(34),
-    marginHorizontal: pxToPercentage(20),
+    ...textStyle.proDisplayRegular,
   },
   iconHeader: {
     height: pxToPercentage(51.08),
@@ -180,18 +183,19 @@ export const ChatDetailScreen = withStyles(ChatDetailScreenComponent, (theme: Th
     height: pxToPercentage(78),
   },
   viewIcon: {
+    justifyContent: 'center',
+    alignItems: 'center',
     height: pxToPercentage(80),
     width: pxToPercentage(80),
     borderRadius: pxToPercentage(28),
     backgroundColor: theme['color-primary-2'],
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   input: {
     flex: 1,
     height: pxToPercentage(80),
     fontSize: pxToPercentage(34),
     paddingLeft: pxToPercentage(20),
+    ...textStyle.proDisplayRegular,
   },
   viewInput: {
     flex: 1,
@@ -217,5 +221,6 @@ export const ChatDetailScreen = withStyles(ChatDetailScreenComponent, (theme: Th
   txtBtnSend: {
     fontSize: pxToPercentage(34),
     color: theme['color-primary-2'],
+    ...textStyle.proDisplayBold,
   },
 }));

@@ -18,14 +18,19 @@ import {
 } from '@src/assets/icons';
 import { textStyle } from '../textStyle';
 
+interface Tab {
+  title: string;
+  type: number;
+}
+
 interface ComponentProps {
   title?: string;
-  titleTab?: { title: string, type: number }[];
+  tabs?: Tab[];
   onBackPress: () => void;
   onMessagePress: () => void;
   onHelpPress: () => void;
   onTabPress?: (type: number) => void;
-  selectedTab?: number;
+  tabSelected?: number;
 }
 
 export type BackHeaderProps = ThemedComponentProps & ComponentProps;
@@ -49,21 +54,25 @@ const BackHeaderComponent: React.FunctionComponent<BackHeaderProps> = (props) =>
     props.onTabPress(type);
   };
 
-  const renderBtnTab = (): React.ReactElement[] => {
-    return props.titleTab.map((item, index) => {
+  const hasTabs = (): boolean => {
+    return props.tabs && props.tabs.length !== 0;
+  };
+
+  const renderBtnTabs = (): React.ReactElement[] => {
+    return props.tabs.map((item, index) => {
       return (
         <TouchableOpacity
+          key={index}
           activeOpacity={0.75}
           style={[
             themedStyle.btnTab,
-            props.selectedTab === item.type && themedStyle.btnSelected,
+            props.tabSelected === item.type && themedStyle.btnSelected,
           ]}
-          onPress={() => onTabPress(item.type)}
-        >
+          onPress={() => onTabPress(item.type)}>
           <Text
             style={[
               themedStyle.txtTab,
-              props.selectedTab === item.type && themedStyle.txtSelected,
+              props.tabSelected === item.type && themedStyle.txtSelected,
             ]}>
             {item.title}
           </Text>
@@ -83,15 +92,13 @@ const BackHeaderComponent: React.FunctionComponent<BackHeaderProps> = (props) =>
         />
       </View>
       <View style={themedStyle.viewCenter}>
-
-        {props.title
-          ? <Text style={themedStyle.txtTitle}>
+        {!hasTabs()
+          ? (<Text style={themedStyle.txtTitle}>
             {props.title}
-          </Text>
-          : <View style={themedStyle.viewBtnTab}>
-            {renderBtnTab()}
-          </View>
-        }
+          </Text>)
+          : (<View style={themedStyle.viewBtnTab}>
+            {renderBtnTabs()}
+          </View>)}
       </View>
       <View style={themedStyle.viewRight}>
         <Button

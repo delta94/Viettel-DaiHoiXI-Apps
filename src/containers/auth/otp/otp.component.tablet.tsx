@@ -85,7 +85,6 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
               </Text>
               <ValidationInput
                 style={themedStyle.inputOtp}
-                textStyle={textStyle.regular}
                 placeholder='Mã OTP'
                 validator={NumberValidator}
                 onChangeText={onOtpInputTextChange}
@@ -169,7 +168,6 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   },
   inputOtp: {
     marginTop: pxToPercentage(34),
-    borderRadius: pxToPercentage(28),
   },
   viewBtn: {
     flexDirection: 'row',

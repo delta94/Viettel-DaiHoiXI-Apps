@@ -173,34 +173,16 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
               {renderTabBtn(SignInTabEnum.QRCode, 'Mã QR', QRCodeIconOther)}
             </View>
             {isCheckTab(SignInTabEnum.Account) &&
-              <SignInAccountFormTablet
-                style={themedStyle.tabContentContainer}
-                onDataChange={onAccountFormDataChange}
-              />}
-            {isCheckTab(SignInTabEnum.PhoneNumber) &&
-              <SignInPhoneNumberFormTablet
-                style={themedStyle.tabContentContainer}
-                onDataChange={onPhoneNumberFormDataChange}
-              />}
-            {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeFormTablet />}
-            {isCheckTab(SignInTabEnum.Account) &&
-              <Button
-                title={'ĐĂNG NHẬP'}
-                titleStyle={themedStyle.txtBtnSignIn}
-                style={themedStyle.btnSignIn}
-                onPress={onSignInButtonPress}
-              />
-            }
-            {isCheckTab(SignInTabEnum.PhoneNumber) &&
-              <Button
-                title={'TIẾP THEO'}
-                titleStyle={themedStyle.txtBtnSignIn}
-                style={themedStyle.btnSignIn}
-                onPress={onSignInButtonPress}
-              />
-            }
-            {isCheckTab(SignInTabEnum.Account) &&
               (<React.Fragment>
+                <SignInAccountFormTablet
+                  style={themedStyle.sectionForm}
+                  onDataChange={onAccountFormDataChange}
+                />
+                <Button
+                  title={'ĐĂNG NHẬP'}
+                  style={themedStyle.btnSignIn}
+                  onPress={onSignInButtonPress}
+                />
                 <TouchableOpacity
                   activeOpacity={0.75}
                   style={themedStyle.btnForgotPassword}
@@ -219,10 +201,22 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
                 </TouchableOpacity>
               </React.Fragment>)}
             {isCheckTab(SignInTabEnum.PhoneNumber) &&
-              (<Text style={themedStyle.txtOtpNote}>
-                {'Chúng tôi sẽ gửi một SMS chưa mã OTP\n đến số điện thoại này'}
-              </Text>)}
-            <View style={themedStyle.viewBottom}>
+              (<React.Fragment>
+                <SignInPhoneNumberFormTablet
+                  style={themedStyle.sectionForm}
+                  onDataChange={onPhoneNumberFormDataChange}
+                />
+                <Button
+                  title={'TIẾP THEO'}
+                  style={themedStyle.btnSignIn}
+                  onPress={onSignInButtonPress}
+                />
+                <Text style={themedStyle.txtOtpNote}>
+                  {'Chúng tôi sẽ gửi một SMS chưa mã OTP\n đến số điện thoại này'}
+                </Text>
+              </React.Fragment>)}
+            {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeFormTablet />}
+            <View style={themedStyle.viewFooter}>
               <SwitchSetting />
             </View>
           </View>
@@ -250,53 +244,38 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
     width: widthPercentageToDP(100),
     paddingRight: pxToPercentage(200),
   },
-  viewBottom: {
+  viewFooter: {
     flex: 1,
     justifyContent: 'flex-end',
     paddingBottom: pxToPercentage(20),
   },
   sectionBox: {
     height: '100%',
-    width: pxToPercentage(860),
   },
   sectionHeader: {
     marginTop: pxToPercentage(120),
   },
-  sectionTab: {
-    flex: 1,
-    borderBottomLeftRadius: pxToPercentage(40),
-    borderBottomRightRadius: pxToPercentage(40),
-  },
-  tabContentContainer: {
-    marginVertical: pxToPercentage(32),
-    paddingHorizontal: pxToPercentage(32),
+  sectionForm: {
   },
   txtHeaderSubtitle: {
+    textAlign: 'center',
     fontSize: pxToPercentage(70),
     marginTop: pxToPercentage(7),
     color: theme['color-primary-2'],
-    textAlign: 'center',
-    ...textStyle.proTextRegular,
+    ...textStyle.proDisplayBold,
   },
   btnSignIn: {
-    marginHorizontal: pxToPercentage(32),
-    backgroundColor: theme['color-primary-0'],
-    borderRadius: pxToPercentage(28),
-    height: pxToPercentage(95),
-  },
-  txtBtnSignIn: {
-    fontSize: pxToPercentage(34),
-    ...textStyle.proDisplayBold,
-    color: theme['color-primary-2'],
+    marginTop: pxToPercentage(40),
   },
   btnForgotPassword: {
     alignSelf: 'center',
-    marginVertical: pxToPercentage(24),
+    marginBottom: pxToPercentage(24),
+    marginTop: pxToPercentage(40),
   },
   txtBtnForgotPassword: {
     fontSize: pxToPercentage(34),
     color: theme['color-primary-2'],
-    ...textStyle.proTextSemibold,
+    ...textStyle.proDisplayBold,
   },
   btnRecognize: {
     justifyContent: 'center',
@@ -308,14 +287,13 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
     marginTop: pxToPercentage(20),
     fontSize: pxToPercentage(34),
     color: theme['color-primary-2'],
-    ...textStyle.proTextSemibold,
+    ...textStyle.proDisplayBold,
   },
   txtOtpNote: {
     textAlign: 'center',
-    marginTop: pxToPercentage(54),
-    marginHorizontal: pxToPercentage(64),
-    fontSize: pxToPercentage(28),
-    ...textStyle.proTextRegular,
+    marginTop: pxToPercentage(40),
+    fontSize: pxToPercentage(34),
+    ...textStyle.proDisplayRegular,
   },
   iconFingerprint: {
     height: pxToPercentage(80),
@@ -328,18 +306,16 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
     tintColor: theme['color-primary-2'],
   },
   btnTab: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     height: pxToPercentage(140),
-    flex: 1,
-    borderTopRightRadius: pxToPercentage(32),
-    borderBottomRightRadius: pxToPercentage(32),
+    borderRadius: pxToPercentage(30),
     borderColor: theme['color-primary-2'],
     borderRightWidth: pxToPercentage(2),
   },
   btnTabSelected: {
     backgroundColor: theme['color-primary-2'],
-    borderRadius: pxToPercentage(32),
   },
   btnTabNoBorder: {
     borderRightWidth: 0,
@@ -357,7 +333,7 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
   },
   viewTab: {
     width: pxToPercentage(860),
-    height: pxToPercentage(140),
+    height: pxToPercentage(144),
     marginVertical: pxToPercentage(48),
     flexDirection: 'row',
     justifyContent: 'center',

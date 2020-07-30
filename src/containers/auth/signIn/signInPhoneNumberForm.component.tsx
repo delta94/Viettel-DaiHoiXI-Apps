@@ -12,10 +12,7 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import {
-  textStyle,
-  ValidationInput,
-} from '@src/components';
+import { ValidationInput } from '@src/components';
 import { RefreshIconOther } from '@src/assets/icons';
 import {
   PhoneNumberValidator,
@@ -29,10 +26,6 @@ import {
 } from '@src/core/utils/utils';
 
 interface ComponentProps {
-  /**
-   * Will emit changes depending on validation:
-   * Will be called with form value if it is valid, otherwise will be called with undefined
-   */
   onDataChange: (value: SignInPhoneNumberFormData | undefined) => void;
 }
 
@@ -82,8 +75,6 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
       {...restProps}
       style={[themedStyle.container, style]}>
       <ValidationInput
-        style={themedStyle.inputPhoneNumber}
-        textStyle={themedStyle.txtInput}
         placeholder='Số điện thoại'
         validator={PhoneNumberValidator}
         onChangeText={onUsernameInputTextChange}
@@ -91,7 +82,6 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput
           style={themedStyle.inputVerification}
-          textStyle={themedStyle.txtInput}
           placeholder='Mã xác nhận'
           validator={NumberValidator}
           onChangeText={onUsernameInputTextChange}
@@ -101,15 +91,12 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
           onPress={() => { }}
           style={themedStyle.btnCaptcha}>
           <ValidationInput
-            disabled
-            style={themedStyle.inputPhoneNumber}
-            onIconPress={() => { }}
-            icon={RefreshIconOther}
-            textStyle={themedStyle.txtInput}
+            editable={false}
             placeholder='ABCD'
             validator={NumberValidator}
             onChangeText={onUsernameInputTextChange}
           />
+          {RefreshIconOther(themedStyle.iconRefresh)}
         </TouchableOpacity>
       </View>
     </View>
@@ -122,22 +109,20 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
   viewCaptcha: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: pxToPercentage(12.5),
+    marginTop: pxToPercentage(7.5),
   },
   inputVerification: {
-    width: '55%',
-    borderRadius: pxToPercentage(16),
+    width: '60%',
   },
   btnCaptcha: {
-    borderRadius: pxToPercentage(16),
     flex: 1,
-    marginLeft: pxToPercentage(12),
+    justifyContent: 'center',
+    marginLeft: pxToPercentage(15),
   },
-  inputPhoneNumber: {
-    borderRadius: pxToPercentage(16),
-  },
-  txtInput: {
-    ...textStyle.proTextRegular,
-    fontSize: pxToPercentage(18),
+  iconRefresh: {
+    position: 'absolute',
+    right: pxToPercentage(10),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
   },
 }));

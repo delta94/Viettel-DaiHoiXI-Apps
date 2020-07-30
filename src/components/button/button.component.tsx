@@ -21,6 +21,7 @@ import {
 import { textStyle } from '../textStyle';
 import { IconElement } from '@src/assets/icons/icon.component';
 import { viewStyle } from '../viewStyle';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps extends TouchableOpacityProps {
   title?: string;
@@ -71,14 +72,14 @@ export const Button = withStyles(ButtonComponent, (theme: ThemeType) => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height: pxToPercentage(80),
-    paddingHorizontal: pxToPercentage(24),
-    borderRadius: pxToPercentage(28),
+    height: isTablet() ? pxToPercentage(100) : pxToPercentage(48),
+    paddingHorizontal: isTablet() ? pxToPercentage(24) : pxToPercentage(15),
+    borderRadius: isTablet() ? pxToPercentage(28) : pxToPercentage(16),
     backgroundColor: theme['color-primary-0'],
     ...viewStyle.shadow2,
   },
   txtTitle: {
-    fontSize: pxToPercentage(34),
+    fontSize: isTablet() ? pxToPercentage(34) : pxToPercentage(18),
     color: theme['color-primary-2'],
     ...textStyle.proDisplayBold,
   },

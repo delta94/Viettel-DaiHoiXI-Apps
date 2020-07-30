@@ -12,10 +12,7 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import {
-  textStyle,
-  ValidationInput,
-} from '@src/components';
+import { ValidationInput } from '@src/components';
 import { RefreshIconOther } from '@src/assets/icons';
 import {
   PhoneNumberValidator,
@@ -27,13 +24,8 @@ import {
   isEmpty,
   pxToPercentage,
 } from '@src/core/utils/utils';
-import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
-  /**
-   * Will emit changes depending on validation:
-   * Will be called with form value if it is valid, otherwise will be called with undefined
-   */
   onDataChange: (value: SignInPhoneNumberFormData | undefined) => void;
 }
 
@@ -83,16 +75,13 @@ const SignInPhoneNumberFormTabletComponent: React.FunctionComponent<SignInPhoneN
       {...restProps}
       style={[themedStyle.container, style]}>
       <ValidationInput
-        style={themedStyle.input}
-        textStyle={textStyle.proTextRegular}
         placeholder='Số điện thoại'
         validator={PhoneNumberValidator}
         onChangeText={onUsernameInputTextChange}
       />
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput
-          style={[themedStyle.inputVerification, themedStyle.input]}
-          textStyle={textStyle.proTextRegular}
+          style={themedStyle.inputVerification}
           placeholder='Mã xác nhận'
           validator={NumberValidator}
           onChangeText={onUsernameInputTextChange}
@@ -102,15 +91,12 @@ const SignInPhoneNumberFormTabletComponent: React.FunctionComponent<SignInPhoneN
           onPress={() => { }}
           style={themedStyle.btnCaptcha}>
           <ValidationInput
-            disabled
-            style={themedStyle.input}
-            onIconPress={() => { }}
-            icon={RefreshIconOther}
-            textStyle={textStyle.regular}
+            editable={false}
             placeholder='ABCD'
             validator={NumberValidator}
             onChangeText={onUsernameInputTextChange}
           />
+          {RefreshIconOther(themedStyle.iconRefresh)}
         </TouchableOpacity>
       </View>
     </View>
@@ -126,12 +112,17 @@ export const SignInPhoneNumberFormTablet = withStyles(SignInPhoneNumberFormTable
     marginTop: pxToPercentage(15),
   },
   inputVerification: {
-    width: '63%',
+    flex: 1,
   },
   btnCaptcha: {
+    justifyContent: 'center',
     width: '35%',
+    marginLeft: pxToPercentage(30),
   },
-  input: {
-    borderRadius: pxToPercentage(28),
+  iconRefresh: {
+    position: 'absolute',
+    right: pxToPercentage(20),
+    width: pxToPercentage(40),
+    height: pxToPercentage(40),
   },
 }));

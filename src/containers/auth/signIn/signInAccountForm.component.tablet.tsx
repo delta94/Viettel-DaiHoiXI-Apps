@@ -11,14 +11,7 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import {
-  textStyle,
-  ValidationInput,
-} from '@src/components';
-import {
-  EyeOffIconFill,
-  EyeIconFill,
-} from '@src/assets/icons';
+import { ValidationInput } from '@src/components';
 import {
   PasswordValidator,
   NameValidator,
@@ -31,10 +24,6 @@ import {
 } from '@src/core/utils/utils';
 
 interface ComponentProps {
-  /**
-   * Will emit changes depending on validation:
-   * Will be called with form value if it is valid, otherwise will be called with undefined
-   */
   onDataChange: (value: SignInAccountFormData | undefined) => void;
 }
 
@@ -45,7 +34,6 @@ const SignInAccountFormTabletComponent: React.FunctionComponent<SignInAccountFor
     username: undefined,
     password: undefined,
   });
-  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
 
   let prevState = usePrevious(formData);
 
@@ -79,10 +67,6 @@ const SignInAccountFormTabletComponent: React.FunctionComponent<SignInAccountFor
     setFormData({ ...formData, password });
   };
 
-  const onSetSecureTextEntry = (): void => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
   const isValid = (value: SignInAccountFormData): boolean => {
     return !isEmpty(value.username) && !isEmpty(value.password);
   };
@@ -94,19 +78,14 @@ const SignInAccountFormTabletComponent: React.FunctionComponent<SignInAccountFor
       {...restProps}
       style={[themedStyle.container, style]}>
       <ValidationInput
-        style={themedStyle.inputUserName}
-        textStyle={textStyle.proTextRegular}
         placeholder='Tên đăng nhập'
         validator={NameValidator}
         onChangeText={onUsernameInputTextChange}
       />
       <ValidationInput
         style={themedStyle.inputPassword}
-        textStyle={textStyle.proTextRegular}
         placeholder='Mật khẩu'
-        icon={secureTextEntry ? EyeOffIconFill : EyeIconFill}
-        onIconPress={onSetSecureTextEntry}
-        secureTextEntry={secureTextEntry}
+        secureTextEntry={true}
         validator={PasswordValidator}
         onChangeText={onPasswordInputTextChange}
       />
@@ -119,9 +98,5 @@ export const SignInAccountFormTablet = withStyles(SignInAccountFormTabletCompone
   },
   inputPassword: {
     marginTop: pxToPercentage(15),
-    borderRadius: pxToPercentage(28),
-  },
-  inputUserName: {
-    borderRadius: pxToPercentage(28),
   },
 }));

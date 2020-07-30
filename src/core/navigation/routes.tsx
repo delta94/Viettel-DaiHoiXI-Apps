@@ -49,7 +49,10 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
 });
 
 const AppNavigator: NavigationContainer = createStackNavigator({
-  ['home']: HomeContainer,
+  ['home']: {
+    screen: HomeContainer,
+    navigationOptions: !isTablet() ? HomeNavigationOptions : MenuNavigationTabletOptions,
+  },
   ['function']: FunctionContainer,
   ['scanQRCode']: {
     screen: ScanQRCodeContainer,

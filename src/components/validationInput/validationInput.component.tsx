@@ -8,21 +8,17 @@ import {
   withStyles,
 } from '@kitten/theme';
 import {
-  Input,
-  InputProps,
-} from '@kitten/ui';
+  TextInput,
+  TextInputProps,
+} from 'react-native';
 import { usePrevious } from '@src/core/utils/hookHelper';
 import { textStyle } from '..';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { isTablet } from 'react-native-device-info';
 
-interface ComponentProps extends InputProps {
+interface ComponentProps extends TextInputProps {
   validator: (value: string) => boolean;
   formatter?: (value: string, stateValue: string) => string;
-  /**
-   * Will emit changes depending on validation:
-   * Will be called with input value if it is valid, otherwise will be called with undefined
-   */
   onChangeText?: (value: string | undefined) => void;
 }
 
@@ -77,29 +73,19 @@ const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = 
     return validator(valueParam);
   };
 
-  const getStatus = (): string | undefined => {
-    if (value && value.length) {
-      return isValid(value) ? 'success' : 'danger';
-    }
-
-    return undefined;
-  };
-
   const { style, themedStyle, ...restProps } = props;
 
   return (
-    <Input
+    <TextInput
       autoCapitalize='none'
-      status={getStatus()}
-      textStyle={themedStyle.textStyle}
       maxLength={256}
-      size={isTablet() ? 'large' : 'large'}
       {...restProps}
       value={value}
       style={[
-        themedStyle.container,
+        isTablet() ? themedStyle.containerTablet : themedStyle.container,
         style,
       ]}
+      placeholderTextColor={themedStyle.phd.color}
       onChangeText={onChangeText}
     />
   );
@@ -107,10 +93,28 @@ const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = 
 
 export const ValidationInput = withStyles(ValidationInputComponent, (theme: ThemeType) => ({
   container: {
+    fontSize: pxToPercentage(18),
+    height: pxToPercentage(48),
+    paddingHorizontal: pxToPercentage(15),
+    borderRadius: pxToPercentage(16),
+    color: theme['color-custom-600'],
+    borderWidth: pxToPercentage(1),
+    borderColor: theme['color-primary-18'],
+    backgroundColor: theme['color-primary-12'],
+    ...textStyle.proDisplayRegular,
   },
-  textStyle: {
-    fontSize: isTablet() ? pxToPercentage(28) : pxToPercentage(18),
-    padding: 0,
-    ...textStyle.regular,
+  containerTablet: {
+    fontSize: pxToPercentage(34),
+    height: pxToPercentage(100),
+    paddingHorizontal: pxToPercentage(24),
+    borderRadius: pxToPercentage(28),
+    color: theme['color-custom-600'],
+    borderWidth: pxToPercentage(2),
+    borderColor: theme['color-primary-18'],
+    backgroundColor: theme['color-primary-12'],
+    ...textStyle.proDisplayRegular,
+  },
+  phd: {
+    color: theme['color-primary-18'],
   },
 }));

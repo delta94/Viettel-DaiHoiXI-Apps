@@ -14,7 +14,7 @@ import {
 } from '@src/components';
 import { ScanQRIcon, FlashIcon } from '@src/assets/icons';
 
-export type SignInQRCodeFormProps =  ThemedComponentProps;
+export type SignInQRCodeFormProps = ThemedComponentProps;
 
 const SignInQRCodeFormComponent: React.FunctionComponent<SignInQRCodeFormProps> = (props) => {
 
@@ -40,14 +40,14 @@ export const SignInQRCodeForm = withStyles(SignInQRCodeFormComponent, (theme: Th
     alignItems: 'center',
   },
   box: {
-    width: pxToPercentage(351),
-    height: pxToPercentage(394),
+    width: pxToPercentage(300),
+    height: pxToPercentage(350),
     backgroundColor: theme['color-custom-600'],
     alignItems: 'center',
   },
   iconScanQR: {
-    width: pxToPercentage(262),
-    height: pxToPercentage(262),
+    width: pxToPercentage(230),
+    height: pxToPercentage(230),
     marginVertical: pxToPercentage(20),
   },
   txt: {

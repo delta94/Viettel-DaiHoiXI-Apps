@@ -37,7 +37,8 @@ import { IconElement } from '@src/assets/icons/icon.component';
 import { SignInTabEnum } from '@src/core/utils/constants';
 import { Button } from '@src/components/button/button.component';
 import { SwitchSetting } from '@src/components/switch/switchSetting.component';
-import { SignInQRCodeForm } from './sigInQRcodeForm.component';
+import { SignInQRCodeForm } from './signInQRcodeForm.component';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface ComponentProps {
   onSignInAccountPress: (formData: SignInAccountFormData) => void;
@@ -123,7 +124,6 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
     }
   };
 
-
   const renderRecognizeIcon = (): IconElement => {
     return true ? FingerprintIconOther(themedStyle.iconFingerprint) : FaceIDIconOther(themedStyle.iconFaceID);
   };
@@ -132,10 +132,11 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
     return (
       <TouchableOpacity
         activeOpacity={0.75}
-        style={[getBtnStyle(selectedTabIndex),
-        selectedTabIndex === SignInTabEnum.Account && themedStyle.btnAccount,
-        selectedTabIndex === SignInTabEnum.PhoneNumber && themedStyle.btnPhoneTab,
-        selectedTabIndex === SignInTabEnum.QRCode && themedStyle.btnQRcodeTab,
+        style={[
+          getBtnStyle(selectedTabIndex),
+          selectedTabIndex === SignInTabEnum.Account && themedStyle.btnAccount,
+          selectedTabIndex === SignInTabEnum.PhoneNumber && themedStyle.btnPhoneTab,
+          selectedTabIndex === SignInTabEnum.QRCode && themedStyle.btnQRcodeTab,
         ]}
         onPress={() => onTabSelect(selectedTabIndex)}>
         {icon([
@@ -155,6 +156,7 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
 
   return (
     <ScrollableAvoidKeyboard>
+      <View style={themedStyle.viewStatusBar} />
       <ImageBackground
         resizeMode='stretch'
         source={imageBackGroundSignInPhone.imageSource}
@@ -173,14 +175,13 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
           {renderTabBtn(SignInTabEnum.QRCode, 'Mã\nQR', QRCodeIconOther)}
         </View>
         {isCheckTab(SignInTabEnum.Account) &&
-          <View>
+          (<React.Fragment>
             <SignInAccountForm
-              style={themedStyle.tabContentContainer}
+              style={themedStyle.sectionForm}
               onDataChange={onAccountFormDataChange}
             />
             <Button
               title={'ĐĂNG NHẬP'}
-              titleStyle={themedStyle.txtBtnSignIn}
               style={themedStyle.btnSignIn}
               onPress={onSignInButtonPress} />
             <React.Fragment>
@@ -201,26 +202,24 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
                 </Text>
               </TouchableOpacity>
             </React.Fragment>
-          </View>
-        }
+          </React.Fragment>)}
         {isCheckTab(SignInTabEnum.PhoneNumber) &&
-          <View>
+          (<React.Fragment>
             <SignInPhoneNumberForm
-              style={themedStyle.tabContentContainer}
+              style={themedStyle.sectionForm}
               onDataChange={onPhoneNumberFormDataChange}
             />
             <Button
               title={'TIẾP THEO'}
-              titleStyle={themedStyle.txtBtnSignIn}
               style={themedStyle.btnSignIn}
-              onPress={onSignInButtonPress} />
+              onPress={onSignInButtonPress}
+            />
             <Text style={themedStyle.txtOtpNote}>
-              {'Điền đoạn mã OTP đã được gửi đến\nsố +84 941219915\nThời gian hiệu lực 3:10'}
+              {'Chúng tôi sẽ gửi một SMS chứa mã OTP đến số điện thoại này'}
             </Text>
-          </View>}
-        {isCheckTab(SignInTabEnum.QRCode) &&
-          <SignInQRCodeForm />}
-        <View style={themedStyle.viewFotter}>
+          </React.Fragment>)}
+        {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeForm />}
+        <View style={themedStyle.viewFooter}>
           <SwitchSetting />
         </View>
       </ImageBackground>
@@ -231,48 +230,44 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
 export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    paddingHorizontal: pxToPercentage(16),
     backgroundColor: theme['color-custom-100'],
+  },
+  viewStatusBar: {
+    height: getStatusBarHeight(false),
+    backgroundColor: theme['color-primary-2'],
   },
   sectionHeader: {
     justifyContent: 'flex-end',
-    marginTop: pxToPercentage(160),
-    marginRight: pxToPercentage(13.5),
+    marginTop: pxToPercentage(150),
   },
-  tabContentContainer: {
-    marginVertical: pxToPercentage(16),
-    paddingHorizontal: pxToPercentage(16),
+  sectionForm: {
+    marginTop: pxToPercentage(4),
   },
   txtHeaderTitle: {
-    fontSize: pxToPercentage(27.5),
+    fontSize: pxToPercentage(32),
     color: theme['color-primary-2'],
-    ...textStyle.proTextRegular,
+    ...textStyle.proDisplayBold,
     textAlign: 'right',
   },
   txtHeaderSubtitle: {
-    fontSize: pxToPercentage(17.5),
+    fontSize: pxToPercentage(24),
     marginTop: pxToPercentage(7),
     color: theme['color-primary-2'],
-    ...textStyle.proTextRegular,
+    ...textStyle.proDisplayBold,
     textAlign: 'right',
   },
   btnSignIn: {
-    marginHorizontal: pxToPercentage(16),
-    backgroundColor: theme['color-primary-0'],
-    height: pxToPercentage(48),
-    borderRadius: pxToPercentage(16),
+    marginTop: pxToPercentage(20),
   },
   btnForgotPassword: {
     alignSelf: 'center',
     marginVertical: pxToPercentage(12),
   },
-  txtBtnSignIn: {
-    fontSize: pxToPercentage(18),
-    ...textStyle.proDisplayRegular,
-  },
   txtBtnForgotPassword: {
     fontSize: pxToPercentage(18),
     color: theme['color-primary-2'],
-    ...textStyle.proTextRegular,
+    ...textStyle.proDisplayBold,
   },
   btnRecognize: {
     justifyContent: 'center',
@@ -284,14 +279,13 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     marginTop: pxToPercentage(10),
     fontSize: pxToPercentage(18),
     color: theme['color-primary-2'],
-    ...textStyle.proTextRegular,
+    ...textStyle.proDisplayBold,
   },
   txtOtpNote: {
     textAlign: 'center',
     marginTop: pxToPercentage(11),
-    marginHorizontal: pxToPercentage(42),
-    fontSize: pxToPercentage(16),
-    ...textStyle.proTextRegular,
+    fontSize: pxToPercentage(18),
+    ...textStyle.proDisplayRegular,
   },
   iconFingerprint: {
     height: pxToPercentage(47.91),
@@ -304,8 +298,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     tintColor: theme['color-primary-2'],
   },
   viewTab: {
-    height: pxToPercentage(48),
-    marginHorizontal: pxToPercentage(12),
+    height: pxToPercentage(50),
     marginVertical: pxToPercentage(14),
     flexDirection: 'row',
     borderRadius: pxToPercentage(16),
@@ -317,33 +310,35 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     width: pxToPercentage(27),
     tintColor: theme['color-primary-2'],
   },
+  txtBtnTab: {
+    textAlign: 'center',
+    fontSize: pxToPercentage(16),
+    color: theme['color-primary-2'],
+    marginLeft: pxToPercentage(5),
+    ...textStyle.proDisplayBold,
+  },
   txtBtnTabSelected: {
+    textAlign: 'center',
     color: theme['color-custom-100'],
   },
   iconSelected: {
     tintColor: theme['color-custom-100'],
   },
-  btnTabSelected: {
-    backgroundColor: theme['color-primary-2'],
-    borderRadius: pxToPercentage(16),
-  },
-  txtBtnTab: {
-    fontSize: pxToPercentage(17),
-    color: theme['color-primary-2'],
-    marginLeft: pxToPercentage(8),
-  },
   btnTab: {
     justifyContent: 'center',
     alignItems: 'center',
     height: pxToPercentage(48),
-    borderTopRightRadius: pxToPercentage(16),
-    borderBottomRightRadius: pxToPercentage(16),
+    borderRadius: pxToPercentage(15),
     borderColor: theme['color-primary-2'],
     borderRightWidth: pxToPercentage(1),
     flexDirection: 'row',
   },
+  btnTabSelected: {
+    backgroundColor: theme['color-primary-2'],
+    borderRadius: pxToPercentage(15),
+  },
   btnAccount: {
-    width: pxToPercentage(138),
+    width: pxToPercentage(130),
   },
   btnPhoneTab: {
     width: pxToPercentage(114),
@@ -354,7 +349,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   btnTabNoBorder: {
     borderRightWidth: 0,
   },
-  viewFotter: {
+  viewFooter: {
     flex: 1,
     justifyContent: 'flex-end',
     paddingBottom: pxToPercentage(20),

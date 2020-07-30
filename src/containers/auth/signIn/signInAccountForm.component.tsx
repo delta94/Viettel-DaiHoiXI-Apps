@@ -11,14 +11,7 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import {
-  textStyle,
-  ValidationInput,
-} from '@src/components';
-import {
-  EyeOffIconFill,
-  EyeIconFill,
-} from '@src/assets/icons';
+import { ValidationInput } from '@src/components';
 import {
   PasswordValidator,
   NameValidator,
@@ -31,10 +24,6 @@ import {
 } from '@src/core/utils/utils';
 
 interface ComponentProps {
-  /**
-   * Will emit changes depending on validation:
-   * Will be called with form value if it is valid, otherwise will be called with undefined
-   */
   onDataChange: (value: SignInAccountFormData | undefined) => void;
 }
 
@@ -45,7 +34,6 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
     username: undefined,
     password: undefined,
   });
-  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
 
   let prevState = usePrevious(formData);
 
@@ -79,10 +67,6 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
     setFormData({ ...formData, password });
   };
 
-  const onSetSecureTextEntry = (): void => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
   const isValid = (value: SignInAccountFormData): boolean => {
     return !isEmpty(value.username) && !isEmpty(value.password);
   };
@@ -94,22 +78,14 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
       {...restProps}
       style={[themedStyle.container, style]}>
       <ValidationInput
-        style={themedStyle.input}
-        textStyle={themedStyle.txtInput}
         placeholder='Tên đăng nhập'
         validator={NameValidator}
         onChangeText={onUsernameInputTextChange}
       />
       <ValidationInput
-        style={[
-          themedStyle.inputPassword,
-          themedStyle.input,
-        ]}
-        textStyle={themedStyle.txtInput}
+        style={themedStyle.inputPassword}
         placeholder='Mật khẩu'
-        icon={secureTextEntry ? EyeOffIconFill : EyeIconFill}
-        onIconPress={onSetSecureTextEntry}
-        secureTextEntry={secureTextEntry}
+        secureTextEntry={true}
         validator={PasswordValidator}
         onChangeText={onPasswordInputTextChange}
       />
@@ -121,13 +97,6 @@ export const SignInAccountForm = withStyles(SignInAccountFormComponent, (theme: 
   container: {
   },
   inputPassword: {
-    marginTop: pxToPercentage(12),
-  },
-  input: {
-    borderRadius: pxToPercentage(16),
-  },
-  txtInput: {
-    ...textStyle.proTextRegular,
-    fontSize: pxToPercentage(18),
+    marginTop: pxToPercentage(7.5),
   },
 }));

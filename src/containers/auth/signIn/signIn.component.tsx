@@ -7,6 +7,7 @@ import {
   ImageBackground,
   StyleProp,
   ImageProps,
+  ScrollView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -167,79 +168,81 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
   };
 
   return (
-    <ScrollableAvoidKeyboard>
+    <ScrollableAvoidKeyboard style={themedStyle.scrollView}>
       <View style={themedStyle.viewStatusBar} />
-      <ImageBackground
-        resizeMode='stretch'
-        source={imageBackGroundSignInPhone.imageSource}
-        style={themedStyle.container}>
-        <View style={themedStyle.sectionHeader}>
-          <Text style={themedStyle.txtHeaderTitle}>
-            {'ĐẠI HỘI XI'}
-          </Text>
-          <Text style={themedStyle.txtHeaderSubtitle}>
-            {'ĐẢNG BỘ THÀNH PHỐ\n HỒ CHÍ MINH'}
-          </Text>
-        </View>
-        {props.isPrivateIntenet &&
-          <View style={themedStyle.viewTab}>
-            {renderTabBtn(SignInTabEnum.Account, 'Tài khoản', PersonIcon2)}
-            {renderTabBtn(SignInTabEnum.QRCode, 'Mã QR', QRCodeIconOther)}
-          </View>}
-        {isCheckTab(SignInTabEnum.Account) &&
-          (<React.Fragment>
-            <SignInAccountForm
-              style={themedStyle.sectionForm}
-              onDataChange={onAccountFormDataChange}
-            />
-            <Button
-              title={'ĐĂNG NHẬP'}
-              style={themedStyle.btnSignIn}
-              onPress={onSignInButtonPress} />
-            <React.Fragment>
-              <TouchableOpacity
-                activeOpacity={0.75}
-                style={themedStyle.btnForgotPassword}
-                onPress={onForgotPasswordButtonPress}>
-                <Text style={themedStyle.txtBtnForgotPassword}>
-                  {'Quên mật khẩu?'}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.75}
-                style={themedStyle.btnRecognize}>
-                {renderRecognizeIcon()}
-                <Text style={themedStyle.txtBtnRecognize}>
-                  {'Đăng nhập bằng vân tay'}
-                </Text>
-              </TouchableOpacity>
-            </React.Fragment>
-          </React.Fragment>)}
-        {isCheckTab(SignInTabEnum.PhoneNumber) &&
-          (<React.Fragment>
-            <View style={themedStyle.viewTabPhoneLogin}>
-            </View>
-            <SignInPhoneNumberForm
-              style={themedStyle.sectionForm}
-              onDataChange={onPhoneNumberFormDataChange}
-            />
-            <Button
-              title={'TIẾP THEO'}
-              style={themedStyle.btnSignIn}
-              onPress={onSignInButtonPress}
-            />
-            <Text style={themedStyle.txtOtpNote}>
-              {'Chúng tôi sẽ gửi một SMS chứa mã OTP đến số điện thoại này'}
+      <ScrollView contentContainerStyle={themedStyle.scrollView}>
+        <ImageBackground
+          resizeMode='stretch'
+          source={imageBackGroundSignInPhone.imageSource}
+          style={themedStyle.container}>
+          <View style={themedStyle.sectionHeader}>
+            <Text style={themedStyle.txtHeaderTitle}>
+              {'ĐẠI HỘI XI'}
             </Text>
-          </React.Fragment>)}
-        {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeForm />}
-        <View style={themedStyle.viewFooter}>
-          <SwitchSetting
-            isPrivateIntenet={props.isPrivateIntenet}
-            onSwichInternetPress={onSwichInternetPress}
-          />
-        </View>
-      </ImageBackground>
+            <Text style={themedStyle.txtHeaderSubtitle}>
+              {'ĐẢNG BỘ THÀNH PHỐ\n HỒ CHÍ MINH'}
+            </Text>
+          </View>
+          {props.isPrivateIntenet &&
+            <View style={themedStyle.viewTab}>
+              {renderTabBtn(SignInTabEnum.Account, 'Tài khoản', PersonIcon2)}
+              {renderTabBtn(SignInTabEnum.QRCode, 'Mã QR', QRCodeIconOther)}
+            </View>}
+          {isCheckTab(SignInTabEnum.Account) &&
+            (<React.Fragment>
+              <SignInAccountForm
+                style={themedStyle.sectionForm}
+                onDataChange={onAccountFormDataChange}
+              />
+              <Button
+                title={'ĐĂNG NHẬP'}
+                style={themedStyle.btnSignIn}
+                onPress={onSignInButtonPress} />
+              <React.Fragment>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  style={themedStyle.btnForgotPassword}
+                  onPress={onForgotPasswordButtonPress}>
+                  <Text style={themedStyle.txtBtnForgotPassword}>
+                    {'Quên mật khẩu?'}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  style={themedStyle.btnRecognize}>
+                  {renderRecognizeIcon()}
+                  <Text style={themedStyle.txtBtnRecognize}>
+                    {'Đăng nhập bằng vân tay'}
+                  </Text>
+                </TouchableOpacity>
+              </React.Fragment>
+            </React.Fragment>)}
+          {isCheckTab(SignInTabEnum.PhoneNumber) &&
+            (<React.Fragment>
+              <View style={themedStyle.viewTabPhoneLogin}>
+              </View>
+              <SignInPhoneNumberForm
+                style={themedStyle.sectionForm}
+                onDataChange={onPhoneNumberFormDataChange}
+              />
+              <Button
+                title={'TIẾP THEO'}
+                style={themedStyle.btnSignIn}
+                onPress={onSignInButtonPress}
+              />
+              <Text style={themedStyle.txtOtpNote}>
+                {'Chúng tôi sẽ gửi một SMS chứa mã OTP đến số điện thoại này'}
+              </Text>
+            </React.Fragment>)}
+          {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeForm />}
+          <View style={themedStyle.viewFooter}>
+            <SwitchSetting
+              isPrivateIntenet={props.isPrivateIntenet}
+              onSwichInternetPress={onSwichInternetPress}
+            />
+          </View>
+        </ImageBackground>
+      </ScrollView>
     </ScrollableAvoidKeyboard>
   );
 };
@@ -376,5 +379,8 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     flex: 1,
     justifyContent: 'flex-end',
     paddingBottom: pxToPercentage(20),
+  },
+  scrollView: {
+    flex: 1,
   },
 }));

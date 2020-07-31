@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ImageBackground, Dimensions,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -12,31 +11,31 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import { viewStyle } from '@src/components/viewStyle';
-import { Button } from '@src/components/button/button.component';
-import { FlashIcon } from '@src/assets/icons';
+import {
+  FlashIcon,
+  OnFlashIcon,
+} from '@src/assets/icons';
 import { textStyle } from '@src/components';
-import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
 import { isTablet } from 'react-native-device-info';
+import { RNCamera as Camera } from 'react-native-camera';
 
 interface ComponentProps {
-  onBackPress: () => void;
   onQRCodeScanSucces: () => void;
 }
 
-export type OtpTabletProps = ComponentProps & ThemedComponentProps;
+export type SigInQRCodeProps = ComponentProps & ThemedComponentProps;
 
-const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
-  const [otp, setOtp] = useState<string | undefined>(undefined);
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
+const SigInQRCodeComponent: React.FunctionComponent<SigInQRCodeProps> = (props) => {
+  const [isOnFlash, setIsOnFlash] = useState<boolean>(false);
 
   const { themedStyle } = props;
 
-  const onSuccess = e => {
-    return props.onQRCodeScanSucces();
+  const onQRCodeScanSucces = (e: object) => {
+    props.onQRCodeScanSucces();
+  };
+
+  const onFlashPress = () => {
+    setIsOnFlash(!isOnFlash);
   };
 
   const renderMarker = (): React.ReactElement => {
@@ -57,7 +56,6 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
             {'+'}
           </Text>
         </View>
-
         <View style={[
           themedStyle.viewMarkerColumn,
           themedStyle.viewBottomColumn,
@@ -78,52 +76,62 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
   return (
     <View style={themedStyle.container}>
       <QRCodeScanner
+        reactivate={true}
+        reactivateTimeout={3000}
+        cameraProps={{ flashMode: isOnFlash ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off }}
         containerStyle={themedStyle.cameraContainer}
         customMarker={renderMarker()}
         showMarker={true}
-        topViewStyle={{ flex: 0 }}
+        topViewStyle={themedStyle.viewTopCamera}
         cameraStyle={isTablet() ? themedStyle.cameraTablet : themedStyle.camera}
-        onRead={onSuccess}
-        bottomViewStyle={themedStyle.bottomStyle}
-        bottomContent={
-          <TouchableOpacity style={themedStyle.btnFlash}
-            activeOpacity={0.75}>
-            <Text style={themedStyle.txt}>
-              {'Quét mã QR từ cán bộ điểm danh\nđể đăng nhập '}
-            </Text>
-            {FlashIcon(themedStyle.icon)}
-          </TouchableOpacity>
-        }
+        onRead={onQRCodeScanSucces}
       />
+      <View style={themedStyle.viewbottom}>
+        <Text style={themedStyle.txt}>
+          {'Quét mã QR từ cán bộ điểm danh\nđể đăng nhập '}
+        </Text>
+        <TouchableOpacity
+          style={themedStyle.btnFlash}
+          activeOpacity={0.75}
+          onPress={onFlashPress}>
+          {isOnFlash ? OnFlashIcon(themedStyle.icon) : FlashIcon(themedStyle.icon)}
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
-export const SigInQRCode = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
+export const SigInQRCode = withStyles(SigInQRCodeComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     backgroundColor: theme['color-primary-11'],
-  },
-  bottomStyle: {
     justifyContent: 'flex-end',
-    marginBottom: pxToPercentage(40),
+    alignItems: 'center',
+  },
+  viewTopCamera: {
+    flex: 0,
+  },
+  viewbottom: {
+    position: isTablet() ? 'absolute' : 'relative',
   },
   btnFlash: {
     alignItems: 'center',
+    paddingBottom: pxToPercentage(20),
   },
   cameraContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   txt: {
-    fontSize: pxToPercentage(18),
+    fontSize: isTablet() ? pxToPercentage(64) : pxToPercentage(18),
     color: theme['color-custom-100'],
     textAlign: 'center',
     ...textStyle.proDisplayRegular,
+    marginTop: pxToPercentage(10),
   },
   icon: {
-    height: pxToPercentage(24),
-    width: pxToPercentage(22),
+    height: isTablet() ? pxToPercentage(54) : pxToPercentage(24),
+    width: isTablet() ? pxToPercentage(54) : pxToPercentage(24),
     marginTop: pxToPercentage(5),
   },
   camera: {
@@ -133,8 +141,8 @@ export const SigInQRCode = withStyles(OtpTabletComponent, (theme: ThemeType) => 
     minWidth: '100%',
   },
   viewMarker: {
-    height: isTablet() ? pxToPercentage(452) : pxToPercentage(250),
-    width: isTablet() ? pxToPercentage(452) : pxToPercentage(250),
+    height: isTablet() ? pxToPercentage(600) : pxToPercentage(250),
+    width: isTablet() ? pxToPercentage(600) : pxToPercentage(250),
   },
   viewMarkerColumn: {
     flex: 1,
@@ -172,5 +180,6 @@ export const SigInQRCode = withStyles(OtpTabletComponent, (theme: ThemeType) => 
   centerMark: {
     fontSize: isTablet() ? pxToPercentage(64) : pxToPercentage(28),
     color: theme['color-custom-100'],
+    ...textStyle.proRoundedLight,
   },
 }));

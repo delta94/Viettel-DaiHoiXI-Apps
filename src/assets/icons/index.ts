@@ -377,6 +377,14 @@ export const FlashIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const OnFlashIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-onflash.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const HallIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-hall.png'),

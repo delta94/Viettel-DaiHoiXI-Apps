@@ -3,6 +3,7 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
+  View,
 } from 'react-native';
 import { Layout } from '@kitten/ui';
 import {
@@ -15,6 +16,7 @@ import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import { DateList } from '../dateList.component';
 import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
+import { AttachmentIcon } from '@src/assets/icons';
 
 interface ComponentProps {
   pressReleases: PressReleaseModel[];
@@ -41,14 +43,21 @@ const PressReleaseComponent: React.FunctionComponent<PressReleaseProps> = (props
         contentContainerStyle={themedStyle.scrollViewContainer}
         renderItem={({ item, index }) => {
           return (
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={() => onPressReleaseItemPress(item)}
-              style={themedStyle.btnItem}>
-              <Text style={themedStyle.txtTitle}>
-                {item.title}
-              </Text>
-            </TouchableOpacity>
+            <View style={themedStyle.btnItem}>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                onPress={() => onPressReleaseItemPress(item)}>
+                <Text style={themedStyle.txtTitle}>
+                  {item.title}
+                </Text>
+              </TouchableOpacity>
+              <View style={themedStyle.viewAttachment}>
+                {AttachmentIcon(themedStyle.icon)}
+                <Text style={themedStyle.txtAttachment}>
+                  {'Tập tin đính kèm'}
+                </Text>
+              </View>
+            </View>
           );
         }}
       />
@@ -79,5 +88,17 @@ export const PressRelease = withStyles(PressReleaseComponent, (theme: ThemeType)
     lineHeight: pxToPercentage(25),
     color: theme['text-basic-color'],
     ...textStyle.proTextRegular,
+  },
+  viewAttachment: {
+    flexDirection: 'row',
+  },
+  icon: {
+    height: pxToPercentage(20),
+    width: pxToPercentage(20),
+  },
+  txtAttachment: {
+    fontSize: pxToPercentage(14),
+    ...textStyle.proDisplayRegular,
+    marginLeft: pxToPercentage(10),
   },
 }));

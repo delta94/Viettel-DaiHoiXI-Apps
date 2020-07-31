@@ -3,6 +3,7 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
+  View,
 } from 'react-native';
 import { Layout } from '@kitten/ui';
 import {
@@ -15,6 +16,7 @@ import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import { DateList } from '../dateList.component';
 import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
+import { AttachmentIcon } from '@src/assets/icons';
 
 interface ComponentProps {
   notifications: NotificationModel[];
@@ -42,14 +44,22 @@ const NotificationComponent: React.FunctionComponent<NotificationProps> = (props
         contentContainerStyle={themedStyle.scrollViewContainer}
         renderItem={({ item, index }) => {
           return (
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={() => onNotificationItemPress(item)}
-              style={themedStyle.btnItem}>
-              <Text style={themedStyle.txtTitle}>
-                {item.title}
-              </Text>
-            </TouchableOpacity>
+            <View style={themedStyle.btnItem}>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                onPress={() => onNotificationItemPress(item)}
+              >
+                <Text style={themedStyle.txtTitle}>
+                  {item.title}
+                </Text>
+              </TouchableOpacity>
+              <View style={themedStyle.viewAttachment}>
+                {AttachmentIcon(themedStyle.icon)}
+                <Text style={themedStyle.txtAttachment}>
+                  {'Tập tin đính kèm'}
+                </Text>
+              </View>
+            </View>
           );
         }}
       />
@@ -83,5 +93,17 @@ export const Notification = withStyles(NotificationComponent, (theme: ThemeType)
     lineHeight: pxToPercentage(25),
     color: theme['text-basic-color'],
     ...textStyle.proTextRegular,
+  },
+  viewAttachment: {
+    flexDirection: 'row',
+  },
+  icon: {
+    height: pxToPercentage(20),
+    width: pxToPercentage(20),
+  },
+  txtAttachment: {
+    fontSize: pxToPercentage(14),
+    ...textStyle.proDisplayRegular,
+    marginLeft: pxToPercentage(10),
   },
 }));

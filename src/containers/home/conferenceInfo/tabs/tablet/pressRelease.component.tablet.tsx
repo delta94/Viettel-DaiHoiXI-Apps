@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -17,7 +18,7 @@ import { Th } from '@src/components/table/th.component';
 import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
-import { SearchIcon } from '@src/assets/icons';
+import { SearchIcon, AttachmentIcon } from '@src/assets/icons';
 
 interface ComponentProps {
   pressReleases: PressReleaseModel[];
@@ -46,6 +47,12 @@ const PressReleaseTabletComponent: React.FunctionComponent<PressReleaseTabletPro
             <Text style={themedStyle.txtInfo}>
               {item.title}
             </Text>
+            <View style={themedStyle.viewAttachment}>
+              {AttachmentIcon(themedStyle.iconAttachment)}
+              <Text style={themedStyle.txtAttachment}>
+                {'Tập tin đín kèm'}
+              </Text>
+            </View>
           </Td>
           <Td alignItems='center' width={200}>
             <TouchableOpacity
@@ -91,5 +98,18 @@ export const PressReleaseTablet = withStyles(PressReleaseTabletComponent, (theme
   iconSearch: {
     width: pxToPercentage(54),
     height: pxToPercentage(54),
+  },
+  iconAttachment: {
+    height: pxToPercentage(40),
+    width: pxToPercentage(40),
+  },
+  viewAttachment: {
+    flexDirection: 'row',
+    marginTop: pxToPercentage(8),
+  },
+  txtAttachment: {
+    fontSize: pxToPercentage(28),
+    ...textStyle.proDisplayRegular,
+    marginLeft: pxToPercentage(10),
   },
 }));

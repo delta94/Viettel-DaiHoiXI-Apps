@@ -23,8 +23,8 @@ import {
 } from '@src/assets/icons';
 import { textStyle } from '@src/components';
 import { DateSelector } from '@src/components/dateSelector/dateSelector.component';
-import { HallAttendanceTablet } from './hallAttendance.component.tablet';
-import { GroupAttendanceTablet } from './groupAttendance.component.tablet';
+import { HallAttendanceTablet } from './tabs/tablet/hallAttendance.component.tablet';
+import { GroupAttendanceTablet } from './tabs/tablet/groupAttendance.component.tablet';
 import { HallAttendance } from '@src/core/models/attendance/hallAttendance/hallAttendance.model';
 import { GroupAttendance } from '@src/core/models/attendance/groupAttendance/groupAttendance.model';
 

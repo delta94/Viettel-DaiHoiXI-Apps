@@ -48,12 +48,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.DiemDanh: {
-        if (isTablet()) {
-          routeName = 'attendance';
-        } else {
-          alerts.alert({ message: 'Chức năng này đang được phát triển trên điện thoại' });
-        }
-
+        routeName = 'attendance';
         break;
       }
       case FunctionEnum.DangKyPhatBieu: {

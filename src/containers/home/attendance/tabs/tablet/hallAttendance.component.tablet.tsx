@@ -109,8 +109,8 @@ const HallAttendanceTabletComponent: React.FunctionComponent<HallAttendanceTable
           touchEnabled={false}
           chartBackgroundColor={processColor('white')}
           chartDescription={{ text: '' }}
-          centerText={`${getAllPeople(item.attendance)}\n${item.section}`}
           styledCenterText={{
+            text: `${getAllPeople(item.attendance)}\n${item.section}`,
             color: processColor('rgba(172,32,5,1)'),
             size: pxToPercentage(40),
           }}
@@ -157,8 +157,8 @@ export const HallAttendanceTablet = withStyles(HallAttendanceTabletComponent, (t
     paddingTop: pxToPercentage(22),
   },
   chart: {
-    width: pxToPercentage(475),
-    height: pxToPercentage(475),
+    width: pxToPercentage(430),
+    height: pxToPercentage(430),
     justifyContent: 'center',
   },
   viewRight: {

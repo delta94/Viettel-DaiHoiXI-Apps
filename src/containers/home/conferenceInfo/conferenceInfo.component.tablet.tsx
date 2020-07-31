@@ -28,6 +28,7 @@ import { DateSelector } from '@src/components/dateSelector/dateSelector.componen
 import { ProgramTablet } from './tabs/tablet/program.component.tablet';
 import { PressReleaseTablet } from './tabs/tablet/pressRelease.component.tablet';
 import { NotificationTablet } from './tabs/tablet/notification.component.tablet';
+import { DateListTablet } from './tabs/tablet/dateList.component.tablet';
 
 interface ComponentProps {
   programs: ProgramModel[];
@@ -44,6 +45,13 @@ type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 
 const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTabletProps> = (props) => {
   const [selectedTab, setSelectedTab] = useState<number>(ProgramTabEnum.ChuongTrinh);
+
+  const dateDataFake: string[] = [
+    '08/10/2020',
+    '09/10/2020',
+    '10/10/2020',
+
+  ];
 
   const onNotificationItemPress = (notification: NotificationModel): void => {
     props.onNotificationItemPress(notification);
@@ -127,10 +135,11 @@ const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTable
           {renderTabBtn(ProgramTabEnum.ThongCao, 'Thông cáo', PressReleaseIcon)}
         </View>
         <View style={themedStyle.viewCard}>
-          <DateSelector
+          <DateListTablet
             dateSelected={new Date()}
-            numDates={4}
+            numDates={2}
             onDatePress={onDatePress}
+            dateList = {dateDataFake}
           />
           {selectedTab === ProgramTabEnum.ChuongTrinh &&
             (<ProgramTablet

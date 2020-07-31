@@ -2,6 +2,9 @@ import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 import { SeatingChartTablet } from './seatingChart.component.tablet';
+import { isTablet } from 'react-native-device-info';
+import { View } from 'react-native';
+import { SeatingChart } from './seatingChart.component';
 
 export const SeatingChartContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'seatingChatContainer';
@@ -14,9 +17,13 @@ export const SeatingChartContainer: React.FunctionComponent<NavigationInjectedPr
   const source = require('@src/assets/file/seatingChart.pdf');
 
   return (
-    <SeatingChartTablet
-      onBackPress={onBackPress}
-      source={source}
-    />
+    isTablet()
+      ? <SeatingChartTablet
+        onBackPress={onBackPress}
+        source={source}
+      />
+      : <SeatingChart
+        source={source}
+      />
   );
 };

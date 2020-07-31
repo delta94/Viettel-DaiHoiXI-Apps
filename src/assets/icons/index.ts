@@ -385,6 +385,14 @@ export const OnFlashIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const GalleryVideoIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-gallery-video.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const HallIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-hall.png'),

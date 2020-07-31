@@ -39,7 +39,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.PhimAnhHinhAnh: {
-
+        routeName = 'galleryVideo';
         break;
       }
       case FunctionEnum.SoDoChoNgoi: {

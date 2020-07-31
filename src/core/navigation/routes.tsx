@@ -35,6 +35,7 @@ import { AttendanceContainer } from '@src/containers/home/attendance/attendance.
 import { ChatContainer } from '@src/containers/chat/chat.container';
 import { SeatingChartContainer } from '@src/containers/home/seatMap/seatingChart.container';
 import { SignInQRcodeContainer } from '@src/containers/auth/signInQRcode/sigInQRcode.container';
+import { GalleryVideoContainer } from '@src/containers/home/gallery/galleryVideo/galleryVideo.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -73,6 +74,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['attendance']: AttendanceContainer,
   ['chat']: ChatContainer,
   ['seatingChart']: SeatingChartContainer,
+  ['galleryVideo']: GalleryVideoContainer,
 }, {
   defaultNavigationOptions: isTablet() ? MenuNavigationTabletOptions : MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

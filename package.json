@@ -43,6 +43,7 @@
     "react-native-screens": "^2.0.0-alpha.13",
     "react-native-status-bar-height": "^2.4.0",
     "react-native-svg": "^12.1.0",
+    "react-native-swiper": "^1.6.0",
     "react-native-ui-kitten": "^4.2.0",
     "react-native-video": "^4.4.5",
     "react-navigation": "^4.0.10",

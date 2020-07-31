@@ -10,15 +10,16 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { BackHeader } from '@src/components/header/backHeader.component';
-import { PhotoGalleryTablet } from './tablet/photoGallery.component.tablet';
+import { PhotoGalleryTablet } from './tabs/tablet/photoGallery.component.tablet';
+import { PhotoGallery } from '@src/core/models/photoGallery/photoGallery.model';
 
 
 interface ComponentProps {
   onBackPress: () => void;
+  imgDataFake: PhotoGallery[];
 }
 
 export type GalleryTabletProps = ComponentProps & ThemedComponentProps;
-
 
 const GalleryTabletComponent: React.FunctionComponent<GalleryTabletProps> = (props) => {
 
@@ -45,7 +46,7 @@ const GalleryTabletComponent: React.FunctionComponent<GalleryTabletProps> = (pro
         onHelpPress={onHelpPress}
       />
       <View style={themedStyle.viewCard}>
-        <PhotoGalleryTablet />
+        <PhotoGalleryTablet imgDataFake={props.imgDataFake}/>
       </View>
     </View>
   );

@@ -24,12 +24,11 @@ interface ComponentProps {
   onClosePress: () => void;
   onPrevImageModal: () => void;
   onNextImageModal: () => void;
-
 }
 
-export type PhotoGalleryModalProps = ThemedComponentProps & ComponentProps;
+export type PhotoGalleryModalTabletProps = ThemedComponentProps & ComponentProps;
 
-const PhotoGalleryModalComponent: React.FunctionComponent<PhotoGalleryModalProps> = (props) => {
+const PhotoGalleryModalTabletComponent: React.FunctionComponent<PhotoGalleryModalTabletProps> = (props) => {
   const onClosePress = (): void => {
     props.onClosePress();
   };
@@ -94,7 +93,7 @@ const PhotoGalleryModalComponent: React.FunctionComponent<PhotoGalleryModalProps
   );
 };
 
-export const PhotoGalleryModal = withStyles(PhotoGalleryModalComponent, (theme: ThemeType) => ({
+export const PhotoGalleryModalTablet = withStyles(PhotoGalleryModalTabletComponent, (theme: ThemeType) => ({
   container: {
     margin: 0,
     justifyContent: 'flex-end',

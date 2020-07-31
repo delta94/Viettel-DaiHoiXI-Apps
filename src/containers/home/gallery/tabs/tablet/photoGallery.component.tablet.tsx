@@ -17,49 +17,37 @@ import {
   ArrowPrevIcon,
 } from '@src/assets/icons';
 import { textStyle } from '@src/components';
-import {
-  imageGallery1,
-  imageGallery2,
-  imageGallery3,
-  imageGallery4,
-  imageGallery5,
-  imageGallery6,
-  imageGallery7,
-  imageGallery8,
-  ImageSource,
-} from '@src/assets/images';
-import { PhotoGalleryModal } from './photoGalleryModal.component.tablet';
+import { RemoteImage } from '@src/assets/images';
+import { PhotoGalleryModalTablet } from './photoGalleryModal.component.tablet';
+import { PhotoGallery } from '@src/core/models/photoGallery/photoGallery.model';
 
 interface ComponentProps {
-  a?: number;
+  imgDataFake: PhotoGallery[];
 }
 
 export type PhotoGalleryTabletProps = ComponentProps & ThemedComponentProps;
 
 const PhotoGalleryTabletComponent: React.FunctionComponent<PhotoGalleryTabletProps> = (props) => {
-  const [selectedTab, setSelectedTab] = useState<number>(0);
-  const [selectedPhoto, setSelectedPhoto] = useState<ImageSource>(imageGallery1);
-  const [isVisible, setIsVisible] = useState(false);
-  const [tabState, settabState] = useState(0);
+  const [selectedPhoto, setSelectedPhoto] = useState<RemoteImage>(props.imgDataFake[0].uri);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [tabState, settabState] = useState<number>(0);
   const tabDataFake = [
     'Thành phố 40 năm xây dựng',
     'Lãnh đạo và đồng hành',
     'Hình ảnh tư liệu Đại hội Đảng bộ lần X',
     'Tab 1', 'Tab 2', 'Tab 3', 'Tab 4',
   ];
-  const imgDataFake = [
-    imageGallery1, imageGallery2, imageGallery3, imageGallery4,
-    imageGallery5, imageGallery6, imageGallery7, imageGallery8,
-  ];
+  const [selectedTab, setSelectedTab] = useState<string>(tabDataFake[0]);
+  const imgDataFake = props.imgDataFake.map((item, index) => item.uri);
 
   const getTabStyle = (index: number) => {
     const style = [themedStyle.btnTab];
 
-    if (selectedTab === index) {
+    if (selectedTab === tabDataFake[index]) {
       style.push(themedStyle.btnTabSelected);
     }
 
-    if (selectedTab === index + 1 || selectedTab === tabState + 1 || index === tabState + 2) {
+    if (selectedTab === tabDataFake[index + 1] || index === tabState + 2) {
       style.push(themedStyle.btnTabNoBorder);
     }
 
@@ -72,12 +60,12 @@ const PhotoGalleryTabletComponent: React.FunctionComponent<PhotoGalleryTabletPro
         <TouchableOpacity
           activeOpacity={0.75}
           style={getTabStyle(item)}
-          onPress={() => setSelectedTab(item)}>
+          onPress={() => setSelectedTab(tabDataFake[index])}>
           <Text
             numberOfLines={2}
             style={[
               themedStyle.txtTab,
-              selectedTab === item && themedStyle.txtTabSelected,
+              selectedTab === tabDataFake[index] && themedStyle.txtTabSelected,
             ]}>
             {tabDataFake[item]}
           </Text>
@@ -86,7 +74,7 @@ const PhotoGalleryTabletComponent: React.FunctionComponent<PhotoGalleryTabletPro
     });
   };
 
-  const onImageItemPress = (image: ImageSource) => {
+  const onImageItemPress = (image: RemoteImage) => {
     setSelectedPhoto(image);
     setIsVisible(true);
   };
@@ -161,8 +149,9 @@ const PhotoGalleryTabletComponent: React.FunctionComponent<PhotoGalleryTabletPro
           data={imgDataFake}
           numColumns={4}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <TouchableOpacity
+              key={index}
               activeOpacity={0.75}
               style={themedStyle.btnImage}
               onPress={() => onImageItemPress(item)}
@@ -174,7 +163,7 @@ const PhotoGalleryTabletComponent: React.FunctionComponent<PhotoGalleryTabletPro
             </TouchableOpacity>
           )}
         />
-        <PhotoGalleryModal
+        <PhotoGalleryModalTablet
           isVisible={isVisible}
           onClosePress={onClosePress}
           image={selectedPhoto}
@@ -216,6 +205,7 @@ export const PhotoGalleryTablet = withStyles(PhotoGalleryTabletComponent, (theme
   btnTabSelected: {
     borderRadius: pxToPercentage(28),
     backgroundColor: theme['color-primary-2'],
+    borderRightWidth: 0,
   },
   txtTab: {
     fontSize: pxToPercentage(34),

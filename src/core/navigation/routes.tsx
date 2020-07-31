@@ -31,15 +31,12 @@ import { DelegateDetailContainer } from '@src/containers/home/delegate/delegateD
 import { SpeechListContainer } from '@src/containers/home/speechManagement/speechList/speechList.container';
 import { DelegateGroupContainer } from '@src/containers/home/delegate/delegateGroup/delegateGroup.container';
 import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/signUpToSpeak/signUpToSpeak.container';
-<<<<<<< HEAD
 import { AttendanceContainer } from '@src/containers/home/attendance/attendance.container';
 import { ChatContainer } from '@src/containers/chat/chat.container';
 import { SeatingChartContainer } from '@src/containers/home/seatMap/seatingChart.container';
 import { SignInQRcodeContainer } from '@src/containers/auth/signInQRcode/sigInQRcode.container';
 import { GalleryVideoContainer } from '@src/containers/home/gallery/galleryVideo/galleryVideo.container';
-=======
 import { GalleryContainer } from '@src/containers/home/gallery/gallery.container';
->>>>>>> + create ui for tab photos gallery
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({

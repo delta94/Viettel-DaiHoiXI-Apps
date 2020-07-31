@@ -43,3 +43,8 @@ export enum NoNameTabEnum {
   HinhAnh,
   PhimAnh,
 }
+
+export enum DocumentRequestEnum {
+  OnlyMe,
+  EveryOne,
+}

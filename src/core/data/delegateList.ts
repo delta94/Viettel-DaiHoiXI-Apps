@@ -104,7 +104,7 @@ export const delegateListDataFake: DelegateList[] = [
     group: 'ĐẢNG BỘ QUẬN 1',
     delegates: [
       {
-        avatar: 'https://lh3.googleusercontent.com/proxy/JkYqNK34LOc350vSadeKoRxnMzwN48vb3rWADs_yyDZ1Pp7EEpGI7hGYJFJWSYJmTZcCLA2D2vwQBRSchMNxziWuGoPJNUNWZ0CjvQfEs9B4CiLTQKswk5lFIPYqmFGO-g7KcbqdXZBFfDgAPtPcCFssCkOSnD4fhg9V78KcbXv2wIEQEplKtU06vlwnbHxiTt4FlQvbky8WbPn46EWkYksJAFXD',
+        avatar: 'https://lh3.googleusercontent.com/proxy/2JboAWPR6r0m8f7bTokk9lweDSQlUioDuGXpS3WnCOfnXU3r1LvjTp_zViB_kIUrIBfWXPEPV5IcKOrKWZzT2zvxhlwzf5_AuNpDNWe-P935bQDIwWJg5-60_MPG979WSsVTOxn3Xe8gE32r16e0NffEGgnqbtROSpXV3guO8_595Pf4DuZFwKfJ_Dbf8ZZLW-oh-B3gtVRpaL08zggHwwGkd1rS',
         full_name: 'HUỲNH THANH HẢI',
         position: 'Phó Trưởng ban chuyên trách biên soạn lịch sử Đảng bộ TP.HCM',
         phone: '0123456789',

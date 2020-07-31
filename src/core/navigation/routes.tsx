@@ -38,6 +38,7 @@ import { SignInQRcodeContainer } from '@src/containers/auth/signInQRcode/sigInQR
 import { GalleryVideoContainer } from '@src/containers/home/gallery/galleryVideo/galleryVideo.container';
 import { GalleryContainer } from '@src/containers/home/gallery/gallery.container';
 
+import { DocumentContainer } from '@src/containers/home/documentlist/documentlist.container';
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
   ['signIn']: SignInContainer,
@@ -77,6 +78,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['seatingChart']: SeatingChartContainer,
   ['galleryVideo']: GalleryVideoContainer,
   ['gallery']: GalleryContainer,
+  ['documentList']: DocumentContainer,
 }, {
   defaultNavigationOptions: isTablet() ? MenuNavigationTabletOptions : MenuNavigationOptions,
   transitionConfig: () => StackViewTransitionConfigs.NoAnimation,

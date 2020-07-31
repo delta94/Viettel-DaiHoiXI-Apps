@@ -35,7 +35,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
         break;
       }
       case FunctionEnum.TaiLieu: {
-
+        routeName = 'documentList';
         break;
       }
       case FunctionEnum.PhimAnhHinhAnh: {

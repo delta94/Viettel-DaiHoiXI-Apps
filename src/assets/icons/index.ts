@@ -232,10 +232,24 @@ export const LogoutIconOther = (style: StyleProp<ImageStyle>): IconElement => {
 
   return Icon(source, style);
 };
+export const PencilIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-pencil.png'),
+  };
+
+  return Icon(source, style);
+};
 
 export const MessageIconOther = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./other/icon-message.png'),
+  };
+
+  return Icon(source, style);
+};
+export const MessageIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-message2.png'),
   };
 
   return Icon(source, style);
@@ -276,6 +290,13 @@ export const QuestionIcon = (style: StyleProp<ImageStyle>): IconElement => {
 export const ArrowPrevIcon = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./icon-arrow-prev.png'),
+  };
+
+  return Icon(source, style);
+};
+export const NightModeIcon = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./icon-night-mode.png'),
   };
 
   return Icon(source, style);

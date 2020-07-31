@@ -34,6 +34,7 @@ import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/si
 import { AttendanceContainer } from '@src/containers/home/attendance/attendance.container';
 import { ChatContainer } from '@src/containers/chat/chat.container';
 import { SeatingChartContainer } from '@src/containers/home/seatMap/seatingChart.container';
+import { SignInQRcodeContainer } from '@src/containers/auth/signInQRcode/sigInQRcode.container';
 
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
@@ -41,8 +42,12 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
   ['forgotPassword']: ExampleContainer,
   ['otp']: {
     screen: OtpContainer,
-    navigationOptions: !isTablet() && MenuNavigationOptions,
   },
+  ['signInQRCode']: {
+    screen: SignInQRcodeContainer,
+    navigationOptions: !isTablet() ? MenuNavigationOptions : HomeNavigationOptions,
+  },
+
 }, {
   defaultNavigationOptions: {
     header: null,

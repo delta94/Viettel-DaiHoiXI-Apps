@@ -34,6 +34,7 @@ export const OtpContainer: React.FunctionComponent<NavigationInjectedProps> = (p
     <Otp
       onResendOtpPress={onResendOtpPress}
       onConfirmPress={onConfirmPress}
+      onBackPress={onBackPress}
     />
   );
 };

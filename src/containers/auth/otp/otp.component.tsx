@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
+  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
+import { imageBackGroundSignInPhone } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import {
   textStyle,
@@ -15,15 +18,16 @@ import {
   ScrollableAvoidKeyboard,
 } from '@src/components';
 import { NumberValidator } from '@src/core/validators';
-import {
-  Button,
-  Layout,
-} from '@kitten/ui';
-import { isTablet } from 'react-native-device-info';
+import { Button } from '@src/components/button/button.component';
+import { ArrowPrevIcon } from '@src/assets/icons';
+import { SwitchSetting } from '@src/components/switch/switchSetting.component';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface ComponentProps {
   onResendOtpPress: () => void;
   onConfirmPress: (otp: string) => void;
+  onBackPress: () => void;
 }
 
 export type OtpProps = ComponentProps & ThemedComponentProps;
@@ -43,39 +47,66 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
     setOtp(otpParam);
   };
 
+  const onBackPress = (): void => {
+    props.onBackPress();
+  };
+
   const { themedStyle } = props;
 
   return (
     <ScrollableAvoidKeyboard>
-      <View style={themedStyle.container}>
-        <Text style={themedStyle.txtOtpNote}>
-          {'Điền vào đoạn mã OTP được gửi đến số\n+84 0123456789'}
-        </Text>
-        <Text style={themedStyle.txtOtpNote}>
-          {'Thời gian hiệu lực 3:10'}
-        </Text>
-        <ValidationInput
-          style={themedStyle.inputOtp}
-          placeholder='Mã OTP'
-          validator={NumberValidator}
-          onChangeText={onOtpInputTextChange}
-        />
-        <Layout style={themedStyle.viewBtn}>
-          <Button
-            size={isTablet() ? 'giant' : 'large'}
-            status='basic'
-            style={themedStyle.btn}
-            onPress={onResendOtpButtonPress}>
-            {'Gửi lại mã'}
-          </Button>
-          <Button
-            size={isTablet() ? 'giant' : 'large'}
-            style={themedStyle.btnAccept}
-            onPress={onConfirmButtonPress}>
-            {'Xác nhận'}
-          </Button>
-        </Layout>
-      </View>
+      <View style={themedStyle.viewStatusBar} />
+      <ImageBackground
+        resizeMode='stretch'
+        source={imageBackGroundSignInPhone.imageSource}
+        style={themedStyle.container}>
+        <View style={themedStyle.sectionHeader}>
+          <Text style={themedStyle.txtHeaderTitle}>
+            {'ĐẠI HỘI XI'}
+          </Text>
+          <Text style={themedStyle.txtHeaderSubtitle}>
+            {'ĐẢNG BỘ THÀNH PHỐ\n HỒ CHÍ MINH'}
+          </Text>
+        </View>
+        <View style={themedStyle.viewHeader}>
+          <View style={themedStyle.viewHeaderLeftRight}>
+            <TouchableOpacity
+              activeOpacity={0.75}
+              onPress={onBackPress}>
+              {ArrowPrevIcon(themedStyle.iconBack)}
+            </TouchableOpacity>
+          </View>
+          <Text style={themedStyle.txtHeaderTitle}>
+            {'NHẬP MÃ OTP'}
+          </Text>
+          <View style={themedStyle.viewHeaderLeftRight} />
+        </View>
+        <View style={themedStyle.viewBody}>
+          <Text style={themedStyle.txtOtpNote}>
+            {'Điền vào đoạn mã OTP được gửi đến\nsố +84 941219915'}
+            {'\nThời gian hiệu lực 3:10'}
+          </Text>
+
+          <ValidationInput
+            style={themedStyle.inputOtp}
+            placeholder='Mã OTP'
+            validator={NumberValidator}
+            onChangeText={onOtpInputTextChange}
+          />
+          <View style={themedStyle.viewBtn}>
+            <Button
+              title={'GỬI MÃ LẠI'}
+              titleStyle={themedStyle.txtBtn}
+              style={themedStyle.btn}
+              onPress={onResendOtpButtonPress} />
+            <Button
+              title={'XÁC NHẬN'}
+              titleStyle={themedStyle.txtAccept}
+              style={themedStyle.btnAccept}
+              onPress={onConfirmButtonPress} />
+          </View>
+        </View>
+      </ImageBackground>
     </ScrollableAvoidKeyboard>
   );
 };
@@ -83,19 +114,60 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
 export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    paddingHorizontal: pxToPercentage(16),
+    paddingHorizontal: pxToPercentage(12),
     backgroundColor: theme['color-custom-100'],
+  },
+  viewStatusBar: {
+    height: getStatusBarHeight(false),
+    backgroundColor: theme['color-primary-2'],
+  },
+  sectionHeader: {
+    justifyContent: 'flex-end',
+    marginTop: pxToPercentage(150),
+  },
+  txtHeaderTitle: {
+    fontSize: pxToPercentage(32),
+    color: theme['color-primary-2'],
+    ...textStyle.proDisplayBold,
+    textAlign: 'right',
+  },
+  txtHeaderSubtitle: {
+    fontSize: pxToPercentage(24),
+    marginTop: pxToPercentage(7),
+    color: theme['color-primary-2'],
+    ...textStyle.proDisplayBold,
+    textAlign: 'right',
+  },
+  btnSignIn: {
+    marginTop: pxToPercentage(20),
+  },
+  imgBg: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  scrollViewContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+  viewHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: pxToPercentage(1),
+  },
+  viewBody: {
+    flex: 1,
+  },
+  iconBack: {
+    width: pxToPercentage(32),
+    height: pxToPercentage(30),
+    tintColor: theme['color-primary-2'],
   },
   txtOtpNote: {
     textAlign: 'center',
-    marginTop: pxToPercentage(10),
-    marginHorizontal: pxToPercentage(32),
-    fontSize: pxToPercentage(14),
-    color: theme['text-hint-color'],
-    ...textStyle.regular,
-  },
-  inputOtp: {
-    marginTop: pxToPercentage(7.5),
+    marginTop: pxToPercentage(11),
+    fontSize: pxToPercentage(18),
+    ...textStyle.proDisplayRegular,
   },
   viewBtn: {
     flexDirection: 'row',
@@ -104,9 +176,30 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
   },
   btn: {
     width: '49%',
+    borderRadius: pxToPercentage(28),
+    height: pxToPercentage(48),
+    backgroundColor: theme['color-primary-2'],
   },
   btnAccept: {
     width: '49%',
-    backgroundColor: theme['color-primary-2'],
+    height: pxToPercentage(48),
+    borderRadius: pxToPercentage(16),
+    backgroundColor: theme['color-primary-0'],
+  },
+  txtAccept: {
+    fontSize: pxToPercentage(18),
+    color: theme['color-primary-2'],
+    ...textStyle.proDisplayBold,
+  },
+  txtBtn: {
+    color: theme['color-primary-0'],
+    ...textStyle.proDisplayBold,
+    fontSize: pxToPercentage(18),
+  },
+  viewBottom: {
+    paddingBottom: pxToPercentage(20),
+  },
+  inputOtp: {
+    marginTop: pxToPercentage(9),
   },
 }));

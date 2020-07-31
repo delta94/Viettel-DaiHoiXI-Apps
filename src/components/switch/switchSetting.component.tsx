@@ -29,6 +29,8 @@ interface ComponentProps {
   icon?: IconProp;
   iconStyle?: StyleProp<ImageStyle>;
   titleStyle?: StyleProp<TextStyle>;
+  isPrivateIntenet: boolean;
+  onSwichInternetPress: () => void;
 }
 
 export type SwitchSettingProps = ComponentProps & ThemedComponentProps & ViewProps;
@@ -37,10 +39,9 @@ type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 
 const SwitchSettingComponent: React.FunctionComponent<SwitchSettingProps> = (props) => {
   const { themedStyle, style, titleStyle, iconStyle, ...restProps } = props;
-  const [state, setState] = useState(true);
 
-  const onButtonPress = (): void => {
-    setState(!state);
+  const onSwichInternetPress = (): void => {
+    return props.onSwichInternetPress();
   };
 
   return (
@@ -52,10 +53,10 @@ const SwitchSettingComponent: React.FunctionComponent<SwitchSettingProps> = (pro
         activeOpacity={0.75}
         style={[
           themedStyle.btnSwitch,
-          !state && themedStyle.btnChange,
+          !props.isPrivateIntenet && themedStyle.btnChange,
         ]}
-        onPress={onButtonPress}>
-        {state &&
+        onPress={onSwichInternetPress}>
+        {props.isPrivateIntenet &&
           (<React.Fragment>
             <View style={themedStyle.viewIcon}>
               {ArrowNextIcon(themedStyle.icon)}
@@ -64,7 +65,7 @@ const SwitchSettingComponent: React.FunctionComponent<SwitchSettingProps> = (pro
               {'Nội bộ'}
             </Text>
           </React.Fragment>)}
-        {!state &&
+        {!props.isPrivateIntenet &&
           (<React.Fragment>
             <Text style={[themedStyle.txtBtn, themedStyle.txtChange]}>
               {'Internet'}

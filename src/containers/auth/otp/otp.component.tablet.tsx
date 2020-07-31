@@ -103,7 +103,6 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
               </View>
             </View>
             <View style={themedStyle.viewBottom}>
-              <SwitchSetting />
             </View>
           </View>
         </ScrollableAvoidKeyboard>

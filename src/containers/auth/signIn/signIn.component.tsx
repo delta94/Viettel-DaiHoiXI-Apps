@@ -44,6 +44,9 @@ interface ComponentProps {
   onSignInAccountPress: (formData: SignInAccountFormData) => void;
   onSignInPhoneNumberPress: (formData: SignInPhoneNumberFormData) => void;
   onForgotPasswordPress: () => void;
+  isPrivateIntenet: boolean;
+  onSwichInternetPress: () => void;
+  onSigInQRCodePress: () => void;
 }
 
 export type SignInProps = ThemedComponentProps & ComponentProps;
@@ -85,8 +88,17 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
     props.onForgotPasswordPress();
   };
 
+  const onSwichInternetPress = () => {
+    onTabSelect(!props.isPrivateIntenet ? SignInTabEnum.Account : SignInTabEnum.PhoneNumber);
+    return props.onSwichInternetPress();
+  };
+
   const onTabSelect = (selectedTabIndex: number) => {
-    setState({ ...state, selectedTabIndex });
+    if (selectedTabIndex === SignInTabEnum.QRCode) {
+      return props.onSigInQRCodePress();
+    } else {
+      setState({ ...state, selectedTabIndex });
+    }
   };
 
   const onAccountFormDataChange = (accountFormData: SignInAccountFormData | undefined) => {
@@ -169,11 +181,11 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
             {'ĐẢNG BỘ THÀNH PHỐ\n HỒ CHÍ MINH'}
           </Text>
         </View>
-        <View style={themedStyle.viewTab}>
-          {renderTabBtn(SignInTabEnum.Account, 'Tài khoản', PersonIcon2)}
-          {renderTabBtn(SignInTabEnum.PhoneNumber, 'Số điện\nthoại', PhoneIcon)}
-          {renderTabBtn(SignInTabEnum.QRCode, 'Mã\nQR', QRCodeIconOther)}
-        </View>
+        {props.isPrivateIntenet &&
+          <View style={themedStyle.viewTab}>
+            {renderTabBtn(SignInTabEnum.Account, 'Tài khoản', PersonIcon2)}
+            {renderTabBtn(SignInTabEnum.QRCode, 'Mã QR', QRCodeIconOther)}
+          </View>}
         {isCheckTab(SignInTabEnum.Account) &&
           (<React.Fragment>
             <SignInAccountForm
@@ -205,6 +217,8 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
           </React.Fragment>)}
         {isCheckTab(SignInTabEnum.PhoneNumber) &&
           (<React.Fragment>
+            <View style={themedStyle.viewTabPhoneLogin}>
+            </View>
             <SignInPhoneNumberForm
               style={themedStyle.sectionForm}
               onDataChange={onPhoneNumberFormDataChange}
@@ -220,7 +234,10 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
           </React.Fragment>)}
         {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeForm />}
         <View style={themedStyle.viewFooter}>
-          <SwitchSetting />
+          <SwitchSetting
+            isPrivateIntenet={props.isPrivateIntenet}
+            onSwichInternetPress={onSwichInternetPress}
+          />
         </View>
       </ImageBackground>
     </ScrollableAvoidKeyboard>
@@ -305,6 +322,12 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     borderWidth: pxToPercentage(1),
     borderColor: theme['color-primary-2'],
   },
+  viewTabPhoneLogin: {
+    height: pxToPercentage(50),
+    marginVertical: pxToPercentage(14),
+    flexDirection: 'row',
+    borderRadius: pxToPercentage(16),
+  },
   iconMenu: {
     height: pxToPercentage(28),
     width: pxToPercentage(27),
@@ -338,10 +361,10 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     borderRadius: pxToPercentage(15),
   },
   btnAccount: {
-    width: pxToPercentage(130),
+    flex: 1,
   },
   btnPhoneTab: {
-    width: pxToPercentage(114),
+    flex: 1,
   },
   btnQRcodeTab: {
     flex: 1,

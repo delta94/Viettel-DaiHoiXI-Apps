@@ -1,6 +1,5 @@
 import React, {
   useState,
-  useEffect,
 } from 'react';
 import {
   ThemedComponentProps,
@@ -16,14 +15,11 @@ import {
 } from 'react-native';
 import {
   pxToPercentage,
-  addDays,
-  minusDays,
 } from '@src/core/utils/utils';
 import {
   ArrowPrevIcon,
   ArrowNextIcon,
 } from '@src/assets/icons';
-import { ddMMyyyyFormatter } from '@src/core/formatters';
 import { textStyle } from '@src/components';
 
 interface ComponentProps {
@@ -39,7 +35,6 @@ const DateSelectorTabletComponent: React.FunctionComponent<DateSelectorTabletPro
   const { themedStyle } = props;
   const [dates, setDates] = useState<Date[]>([]);
   const [dateSelected, setDateSelected] = useState<number>(0);
-  0;
 
   const onDatePress = (date: number): void => {
     setDateSelected(date);
@@ -86,9 +81,15 @@ const DateSelectorTabletComponent: React.FunctionComponent<DateSelectorTabletPro
 
   return (
     <View style={themedStyle.container}>
+      <TouchableOpacity style={themedStyle.btnPrevChangeDates}>
+        {ArrowPrevIcon(themedStyle.iconBtnChangeDates)}
+      </TouchableOpacity>
       <View style={themedStyle.viewDates}>
         {renderBtnDates()}
       </View>
+      <TouchableOpacity style={themedStyle.btnNextChangeDates}>
+        {ArrowNextIcon(themedStyle.iconBtnChangeDates)}
+      </TouchableOpacity>
     </View>
   );
 };

@@ -24,7 +24,6 @@ import { Notification as NotificationModel } from '@src/core/models/notification
 import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProgramTabEnum } from '@src/core/utils/constants';
-import { DateSelector } from '@src/components/dateSelector/dateSelector.component';
 import { ProgramTablet } from './tabs/tablet/program.component.tablet';
 import { PressReleaseTablet } from './tabs/tablet/pressRelease.component.tablet';
 import { NotificationTablet } from './tabs/tablet/notification.component.tablet';
@@ -139,7 +138,7 @@ const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTable
             dateSelected={new Date()}
             numDates={2}
             onDatePress={onDatePress}
-            dateList = {dateDataFake}
+            dateList={dateDataFake}
           />
           {selectedTab === ProgramTabEnum.ChuongTrinh &&
             (<ProgramTablet

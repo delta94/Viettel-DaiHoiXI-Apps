@@ -18,10 +18,9 @@ import { Th } from '@src/components/table/th.component';
 import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
-import { SearchIcon } from '@src/assets/icons';
+import { SearchIcon, ArrowForwardIcon } from '@src/assets/icons';
 import { ModalDocument } from './modalDocument.component.tablet';
-// import Modal from 'react-native-modal';
-
+import { ArrowIosBackFill } from '@src/assets/icons';
 interface ComponentProps {
   documents: DocumentSectionModel[];
 }
@@ -31,6 +30,8 @@ export type ProgramTabletProps = ComponentProps & ThemedComponentProps;
 const ProgramTabletComponent: React.FunctionComponent<ProgramTabletProps> = (props) => {
   const { themedStyle } = props;
   const [isVisibleDocument, setIsVisibleDocument] = React.useState<boolean>(false);
+  const [isShowDocument, setIsShowDocument] = React.useState<boolean>(true);
+
   const onDocumentPress = () => {
     setIsVisibleDocument(true);
   };
@@ -45,9 +46,12 @@ const ProgramTabletComponent: React.FunctionComponent<ProgramTabletProps> = (pro
         <React.Fragment key={index}>
           <Tr style={themedStyle.td}>
             <Td>
-              <Text style={themedStyle.txtTitle}>
-                {item.title}
-              </Text>
+              <TouchableOpacity style={themedStyle.viewTitle}>
+                <Text style={themedStyle.txtTitle}>
+                  {item.title}
+                </Text>
+                {ArrowIosBackFill(isShowDocument ? themedStyle.iconArrowUp : themedStyle.iconArrowDown)}
+              </TouchableOpacity>
             </Td>
           </Tr>
           {item.documents.map((itemChild, indexChild) => {
@@ -153,8 +157,28 @@ export const DocumentTablet = withStyles(ProgramTabletComponent, (theme: ThemeTy
     fontSize: pxToPercentage(34),
     ...textStyle.proDisplayRegular,
   },
+  iconArrowUp: {
+    position: 'absolute',
+    right: pxToPercentage(6),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    tintColor: theme['color-custom-100'],
+    transform: [{ rotate: '90deg' }],
+  },
+  iconArrowDown: {
+    position: 'absolute',
+    right: pxToPercentage(6),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    tintColor: theme['color-custom-100'],
+    transform: [{ rotate: '270deg' }],
+  },
   iconSearch: {
     width: pxToPercentage(54),
     height: pxToPercentage(54),
+  },
+  viewTitle: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 }));

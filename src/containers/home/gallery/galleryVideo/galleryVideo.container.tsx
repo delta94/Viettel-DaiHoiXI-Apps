@@ -3,7 +3,8 @@ import { NavigationInjectedProps } from 'react-navigation';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 import { GalleryVideoTablet } from './galleryVideo.component.tablet';
 import { galleryDataFake } from '@src/core/data/videos';
-import { isEmpty } from '@src/core/utils/utils';
+import { isTablet } from 'react-native-device-info';
+import { GalleryVideo } from './galleryVideo.component';
 
 export const GalleryVideoContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'GalleryVideoContainer';
@@ -19,9 +20,20 @@ export const GalleryVideoContainer: React.FunctionComponent<NavigationInjectedPr
     setUrl(urlVideo);
   };
 
+  if (isTablet()) {
+    return (
+      <GalleryVideoTablet
+        onBackPress={onBackPress}
+        gallery={galleryDataFake}
+        onVideosItemPress={onVideosItemPress}
+        videoSelected={selectedVideo}
+        url={url}
+      />
+    );
+  }
+
   return (
-    <GalleryVideoTablet
-      onBackPress={onBackPress}
+    <GalleryVideo
       gallery={galleryDataFake}
       onVideosItemPress={onVideosItemPress}
       videoSelected={selectedVideo}

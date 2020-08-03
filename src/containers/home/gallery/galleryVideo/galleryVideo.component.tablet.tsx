@@ -15,7 +15,6 @@ import { viewStyle } from '@src/components/viewStyle';
 import { GalleryVideoItem } from './galleryVideoItem.component.tablet';
 import { Videos as VideosModel } from '@src/core/models/gallery/videos.model';
 
-
 interface ComponentProps {
   onBackPress: () => void;
   onVideosItemPress: (id: number, url: string) => void;
@@ -52,7 +51,7 @@ const GalleryVideoTabletComponent: React.FunctionComponent<GalleryVideoTabletPro
       />
       <View style={themedStyle.viewCard}>
         <Video
-        resizeMode= 'stretch'
+          resizeMode='stretch'
           controls={true}
           style={themedStyle.videoView}
           source={{ uri: props.url }}

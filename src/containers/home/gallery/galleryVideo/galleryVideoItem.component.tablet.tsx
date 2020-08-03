@@ -22,6 +22,7 @@ import {
   UpIcon,
   DownIcon,
 } from '@src/assets/icons';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps extends TouchableOpacityProps {
   videos: VideosModel;
@@ -97,10 +98,11 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
 export const GalleryVideoItem = withStyles(HomeMeetingItemComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    marginTop: pxToPercentage(8),
   },
   viewVideoHeader: {
     flex: 1,
-    minHeight: pxToPercentage(128),
+    minHeight: isTablet() ? pxToPercentage(128) : pxToPercentage(50),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -110,22 +112,23 @@ export const GalleryVideoItem = withStyles(HomeMeetingItemComponent, (theme: The
   viewTopic: {
   },
   viewTopicName: {
-    width: pxToPercentage(400),
+    width: '65%',
   },
   txtHeader: {
     color: 'white',
     ...textStyle.proDisplayBold,
-    fontSize: pxToPercentage(34),
+    fontSize: isTablet() ? pxToPercentage(34) : pxToPercentage(14),
     textAlign: 'justify',
-    lineHeight: pxToPercentage(54),
+    lineHeight: isTablet() ? pxToPercentage(54) : pxToPercentage(24),
   },
   viewVideosList: {
-    minHeight: pxToPercentage(120),
+    minHeight: isTablet() ? pxToPercentage(120) : pxToPercentage(40),
     flexDirection: 'row',
-    backgroundColor: theme['color-primary-12'],
+    backgroundColor: isTablet() ? theme['color-primary-12'] : theme['color-custom-300'],
     alignItems: 'center',
     paddingHorizontal: pxToPercentage(18),
-    borderTopWidth: pxToPercentage(2),
+    marginTop: isTablet() ? 0 : pxToPercentage(4),
+    borderTopWidth: isTablet() ? pxToPercentage(2) : 0,
   },
   viewSelectedVideo: {
     backgroundColor: theme['color-primary-19'],
@@ -133,16 +136,16 @@ export const GalleryVideoItem = withStyles(HomeMeetingItemComponent, (theme: The
   iconVideo: {
     height: pxToPercentage(52),
     width: pxToPercentage(52),
-    marginRight: pxToPercentage(17),
+    marginRight: isTablet() ? pxToPercentage(17) : pxToPercentage(8),
   },
   txtVideoName: {
-    fontSize: pxToPercentage(34),
+    fontSize: isTablet() ? pxToPercentage(34) : pxToPercentage(14),
     ...textStyle.proDisplayBold,
     color: theme['color-primary-2'],
   },
   iconCollapse: {
-    height: pxToPercentage(60),
-    width: pxToPercentage(60),
+    height: isTablet() ? pxToPercentage(60) : pxToPercentage(20),
+    width: isTablet() ? pxToPercentage(60) : pxToPercentage(20),
     tintColor: theme['color-primary-12'],
   },
 }));

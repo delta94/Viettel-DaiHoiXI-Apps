@@ -31,6 +31,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'chatContainer': 'Chat',
   'seatingChart': 'Sơ đồ chỗ ngồi',
   'signInQRCode' : 'Quét mã',
+  'galleryVideo' : 'Phim ảnh, hình ảnh triển lãm ',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

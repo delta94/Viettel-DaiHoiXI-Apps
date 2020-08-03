@@ -70,17 +70,20 @@ const AttendanceComponent: React.FunctionComponent<AttendanceProps> = (props) =>
 export const Attendance = withStyles(AttendanceComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
+    padding: pxToPercentage(8),
+    paddingBottom: pxToPercentage(10),
     backgroundColor: theme['color-primary-11'],
   },
   viewContent: {
     flex: 1,
+    borderTopLeftRadius: pxToPercentage(12.5),
+    borderTopRightRadius: pxToPercentage(12.5),
     backgroundColor: theme['color-custom-100'],
-    ...viewStyle.shadow2,
+    overflow: 'hidden',
   },
   tabView: {
     flex: 1,
     backgroundColor: theme['color-primary-11'],
-    borderRadius: pxToPercentage(12.5),
   },
   tabBar: {
     backgroundColor: theme['color-custom-100'],
@@ -91,5 +94,7 @@ export const Attendance = withStyles(AttendanceComponent, (theme: ThemeType) => 
   tabTitle: {
     fontWeight: '500',
     ...textStyle.proTextRegular,
+    fontSize: pxToPercentage(13),
+    paddingVertical: pxToPercentage(3),
   },
 }));

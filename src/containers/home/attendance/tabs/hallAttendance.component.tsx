@@ -131,9 +131,6 @@ const HallAttendanceComponent: React.FunctionComponent<HallAttendanceProps> = (p
   return (
     <View style={themedStyle.container}>
       <DateList />
-      <View style={themedStyle.viewChart}>
-        {renderChart()}
-      </View>
       <View style={themedStyle.viewDescription}>
         <View style={themedStyle.containerTitle}>
           {renderTitle()}
@@ -142,6 +139,9 @@ const HallAttendanceComponent: React.FunctionComponent<HallAttendanceProps> = (p
           {renderTitle('rgba(149, 138, 131,1)', 'Vắng không lý do')}
         </View>
         {renderSection()}
+      </View>
+      <View style={themedStyle.viewChart}>
+        {renderChart()}
       </View>
     </View>
   );
@@ -166,10 +166,15 @@ export const HallAttendance = withStyles(HallAttendanceComponent, (theme: ThemeT
     flex: 1,
     flexDirection: 'row',
     paddingBottom: pxToPercentage(10),
-    paddingHorizontal: pxToPercentage(8),
+    paddingHorizontal: pxToPercentage(5),
+    borderTopWidth: pxToPercentage(3),
+    borderBottomWidth: pxToPercentage(3),
+    borderColor: theme['color-primary-11'],
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   containerTitle: {
-    flex: 1,
+    width: pxToPercentage(180),
   },
   viewTitle: {
     flex: 1,

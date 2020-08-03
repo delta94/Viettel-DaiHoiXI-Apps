@@ -66,7 +66,7 @@ const GroupAttendanceItemComponent: React.FunctionComponent<GroupAttendanceItemP
               {`${getPercent(attendance.present, attendance.absent)}%`}
             </Text>
             <Text style={themedStyle.txtAbsent}>
-              {`${getPercent(attendance.absent, attendance.present)}%`}
+              {`${100 - getPercent(attendance.present, attendance.absent)}%`}
             </Text>
           </View>
           <View style={themedStyle.viewPercent}>
@@ -94,23 +94,22 @@ const GroupAttendanceItemComponent: React.FunctionComponent<GroupAttendanceItemP
 
 export const GroupAttendanceItem = withStyles(GroupAttendanceItemComponent, (theme: ThemeType) => ({
   container: {
-    backgroundColor: theme['color-primary-22'],
+    backgroundColor: theme['color-custom-100'],
     paddingTop: pxToPercentage(5),
     paddingHorizontal: pxToPercentage(10),
-    marginBottom: pxToPercentage(5),
+    marginBottom: pxToPercentage(3),
   },
   txt: {
     fontSize: pxToPercentage(14),
   },
   viewTop: {
     flexDirection: 'row',
-    height: pxToPercentage(40),
+    height: pxToPercentage(30),
   },
   viewTopLeft: {
     width: pxToPercentage(80),
     flexDirection: 'row',
     alignItems: 'flex-end',
-    paddingBottom: pxToPercentage(3),
   },
   icon: {
     width: pxToPercentage(34.16),
@@ -123,6 +122,7 @@ export const GroupAttendanceItem = withStyles(GroupAttendanceItemComponent, (the
   viewTopRight: {
     flex: 1,
     justifyContent: 'center',
+    paddingBottom: pxToPercentage(2),
   },
   viewPercent: {
     height: pxToPercentage(10),
@@ -149,14 +149,13 @@ export const GroupAttendanceItem = withStyles(GroupAttendanceItemComponent, (the
     flex: 1,
   },
   viewBottom: {
-    height: pxToPercentage(60),
     paddingVertical: pxToPercentage(10),
   },
   viewDescription: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
   },
   viewBlock: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: pxToPercentage(5),

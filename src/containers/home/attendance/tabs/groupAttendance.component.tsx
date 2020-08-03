@@ -14,6 +14,9 @@ import { GroupAttendanceContent } from '@src/core/models/attendance/groupAttenda
 import { ScrollView } from 'react-native-gesture-handler';
 import { GroupAttendanceItem } from './groupAttendanceItem.component';
 import { DateList } from '../../conferenceInfo/dateList.component';
+import { TabView, Tab, Layout } from 'react-native-ui-kitten/ui';
+import { viewStyle } from '@src/components/viewStyle';
+import { textStyle } from '@src/components/textStyle';
 
 interface ComponentProps {
   groupAttendance: GroupAttendanceModel[];
@@ -22,20 +25,24 @@ interface ComponentProps {
 export type GroupAttendanceProps = ThemedComponentProps & ComponentProps;
 
 const GroupAttendanceComponent: React.FunctionComponent<GroupAttendanceProps> = (props) => {
+  const [selectedTabIndex, setSelectedTabIndex] = React.useState<number>(0);
+
+  const onTabSelect = (selectedTabIndexParam: number) => {
+    setSelectedTabIndex(selectedTabIndexParam);
+  };
   const { themedStyle } = props;
 
-  const renderSection = (): React.ReactElement[] => {
+  const renderSection = (section: string): React.ReactElement[] => {
     return props.groupAttendance.map((item, index) => {
-      return (
-        <View
-          key={index}
-          style={themedStyle.viewSection}>
-          <View style={themedStyle.viewTitle}>
-            <Text style={themedStyle.txtTitle}>{item.section}</Text>
+      if (section === item.section) {
+        return (
+          <View
+            key={index}
+            style={themedStyle.viewSection}>
+            {renderRow(item.attendance)}
           </View>
-          {renderRow(item.attendance)}
-        </View>
-      );
+        );
+      }
     });
   };
 
@@ -53,9 +60,30 @@ const GroupAttendanceComponent: React.FunctionComponent<GroupAttendanceProps> = 
   return (
     <View style={themedStyle.container}>
       <DateList />
-      <ScrollView>
-        {renderSection()}
-      </ScrollView>
+
+      <View style={themedStyle.viewContent}>
+        <TabView
+          style={themedStyle.tabView}
+          tabBarStyle={themedStyle.tabBar}
+          indicatorStyle={themedStyle.tabViewIndicator}
+          selectedIndex={selectedTabIndex}
+          onSelect={onTabSelect}>
+          <Tab
+            title='SÁNG'
+            titleStyle={themedStyle.tabTitle}>
+            <React.Fragment>
+              {renderSection('SÁNG')}
+            </React.Fragment>
+          </Tab>
+          <Tab
+            title='CHIỀU'
+            titleStyle={themedStyle.tabTitle}>
+            <React.Fragment>
+              {renderSection('CHIỀU')}
+            </React.Fragment>
+          </Tab>
+        </TabView>
+      </View>
     </View >
   );
 };
@@ -67,7 +95,6 @@ export const GroupAttendance = withStyles(GroupAttendanceComponent, (theme: Them
   },
   viewSection: {
     flex: 1,
-    marginTop: pxToPercentage(5),
   },
   viewTitle: {
     backgroundColor: theme['color-primary-2'],
@@ -78,5 +105,26 @@ export const GroupAttendance = withStyles(GroupAttendanceComponent, (theme: Them
   txtTitle: {
     color: theme['color-custom-100'],
     fontSize: pxToPercentage(14),
+  },
+  viewContent: {
+    flex: 1,
+    borderTopWidth: pxToPercentage(4),
+    borderColor: theme['color-primary-11'],
+  },
+  tabView: {
+    flex: 1,
+    backgroundColor: theme['color-primary-11'],
+  },
+  tabBar: {
+    backgroundColor: theme['color-custom-100'],
+  },
+  tabViewIndicator: {
+    backgroundColor: theme['color-primary-2'],
+  },
+  tabTitle: {
+    fontWeight: '500',
+    ...textStyle.proTextRegular,
+    fontSize: pxToPercentage(12),
+    paddingVertical: pxToPercentage(5),
   },
 }));

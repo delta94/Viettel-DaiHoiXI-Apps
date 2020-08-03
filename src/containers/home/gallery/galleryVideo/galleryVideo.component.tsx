@@ -11,7 +11,7 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import Video from 'react-native-video';
 import { viewStyle } from '@src/components/viewStyle';
-import { GalleryVideoItem } from './galleryVideoItem.component.tablet';
+import { GalleryVideoItem } from './tablet/galleryVideoItem.component.tablet';
 import { Videos as VideosModel } from '@src/core/models/galleryVideo/videos.model';
 
 interface ComponentProps {

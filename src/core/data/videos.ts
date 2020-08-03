@@ -1,6 +1,6 @@
-import { Videos } from '../models/gallery/videos.model';
+import { Videos } from '../models/galleryVideo/videos.model';
 
-export const galleryDataFake: Videos[] = [
+export const galleryVideoDataFake: Videos[] = [
   {
     topic: 'Lãnh đạo và đồng hành',
     videos: [
@@ -31,8 +31,8 @@ export const galleryDataFake: Videos[] = [
       },
       {
         id: 5,
-        name: 'Tập 1_Sợi chỉ đỏ',
-        url: 'http://demo.etv.quochoi.vn/Portals/0/VOD/HINH DAI BIEU NGUYEN THANH XUAN.mp4',
+        name: 'PHÁT BIỂU CỦA CHỦ TỊCH QUỐC HỘI NGUYỄN THỊ KIM NGÂN TẠI LỄ HƯỞNG ỨNG NGÀY PHÁP LUẬT VIỆT NAM',
+        url: 'http://demo.etv.quochoi.vn/Portals/0/VOD/Le Thuong/PHAT BIEU CUA CTQH NGUYEN THI KIM NGAN TAI LE KY NIEM NGAY PHAP LUAT VIET NAM.mp4',
       },
     ],
   },
@@ -41,13 +41,13 @@ export const galleryDataFake: Videos[] = [
     videos: [
       {
         id: 6,
-        name: 'Tập 1_Sợi chỉ đỏ',
-        url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+        name: ' ĐẠI BIỂU NGUYỄN THANH XUÂN CHẤT VẤN VỀ VIỆC TRIỂN KHAI NGHỊ QUYẾT 120',
+        url: 'http://demo.etv.quochoi.vn/Portals/0/VOD/HINH DAI BIEU NGUYEN THANH XUAN.mp4',
       },
       {
         id: 7,
-        name: 'Tập 1_Sợi chỉ đỏ',
-        url: 'http://demo.etv.quochoi.vn/Portals/0/VOD/HINH DAI BIEU NGUYEN THANH XUAN.mp4',
+        name: 'Đại biểu Nguyễn Thanh Hiền chất vấn về an toàn hồ đập',
+        url: 'http://demo.etv.quochoi.vn/Portals/0/VOD/LE PHUONG/HINH DAI BIEU NGUYEN THANH HIEN.mp4',
       },
     ],
   },

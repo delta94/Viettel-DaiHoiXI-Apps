@@ -16,7 +16,7 @@ import {
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { } from 'react-native-gesture-handler';
-import { Videos as VideosModel } from '@src/core/models/gallery/videos.model';
+import { Videos as VideosModel } from '@src/core/models/galleryVideo/videos.model';
 import {
   GalleryVideoIcon,
   UpIcon,
@@ -98,21 +98,21 @@ const HomeMeetingItemComponent: React.FunctionComponent<HomeMeetingItemProps> = 
 export const GalleryVideoItem = withStyles(HomeMeetingItemComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    marginTop: pxToPercentage(8),
+    borderBottomWidth: pxToPercentage(5),
+    borderColor: theme['color-custom-100'],
   },
   viewVideoHeader: {
     flex: 1,
-    minHeight: isTablet() ? pxToPercentage(128) : pxToPercentage(50),
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: pxToPercentage(20),
+    paddingVertical: pxToPercentage(20),
     backgroundColor: theme['color-primary-2'],
   },
   viewTopic: {
   },
   viewTopicName: {
-    width: '65%',
+    flex: 1,
   },
   txtHeader: {
     color: 'white',
@@ -122,13 +122,15 @@ export const GalleryVideoItem = withStyles(HomeMeetingItemComponent, (theme: The
     lineHeight: isTablet() ? pxToPercentage(54) : pxToPercentage(24),
   },
   viewVideosList: {
-    minHeight: isTablet() ? pxToPercentage(120) : pxToPercentage(40),
+    flex: 1,
     flexDirection: 'row',
     backgroundColor: isTablet() ? theme['color-primary-12'] : theme['color-custom-300'],
     alignItems: 'center',
+    paddingVertical: pxToPercentage(34),
     paddingHorizontal: pxToPercentage(18),
     marginTop: isTablet() ? 0 : pxToPercentage(4),
     borderTopWidth: isTablet() ? pxToPercentage(2) : 0,
+    borderColor: theme['color-primary-2'],
   },
   viewSelectedVideo: {
     backgroundColor: theme['color-primary-19'],
@@ -142,6 +144,7 @@ export const GalleryVideoItem = withStyles(HomeMeetingItemComponent, (theme: The
     fontSize: isTablet() ? pxToPercentage(34) : pxToPercentage(14),
     ...textStyle.proDisplayBold,
     color: theme['color-primary-2'],
+    flex: 1,
   },
   iconCollapse: {
     height: isTablet() ? pxToPercentage(60) : pxToPercentage(20),

@@ -13,7 +13,7 @@ import Video from 'react-native-video';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { viewStyle } from '@src/components/viewStyle';
 import { GalleryVideoItem } from './galleryVideoItem.component.tablet';
-import { Videos as VideosModel } from '@src/core/models/gallery/videos.model';
+import { Videos as VideosModel } from '@src/core/models/galleryVideo/videos.model';
 
 interface ComponentProps {
   onBackPress: () => void;

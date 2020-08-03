@@ -120,13 +120,13 @@ export const PhotoGalleryModal = withStyles(PhotoGalleryModalComponent, (theme: 
     tintColor: theme['color-custom-100'],
   },
   viewDot: {
-    backgroundColor: 'rgba(255,255,255,.3)',
+    backgroundColor: theme['color-basic-control-transparent-400'],
     width: pxToPercentage(12),
     height: pxToPercentage(12),
     borderRadius: pxToPercentage(6),
     marginLeft: pxToPercentage(6),
   },
   viewActiveDot: {
-    backgroundColor: '#fff',
+    backgroundColor: theme['color-custom-100'],
   },
 }));

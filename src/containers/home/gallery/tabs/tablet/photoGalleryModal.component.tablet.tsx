@@ -46,8 +46,8 @@ const PhotoGalleryModalTabletComponent: React.FunctionComponent<PhotoGalleryModa
   return (
     <Modal
       isVisible={props.isVisible}
-      animationIn='slideInUp'
-      animationOut='slideOutDown'
+      animationIn='fadeIn'
+      animationOut='fadeOut'
       onBackdropPress={onClosePress}
       backdropOpacity={0.5}
       onSwipeComplete={onClosePress}
@@ -56,37 +56,31 @@ const PhotoGalleryModalTabletComponent: React.FunctionComponent<PhotoGalleryModa
       backdropTransitionOutTiming={1}
       style={themedStyle.container}>
       <View style={themedStyle.viewBox}>
-        <View style={themedStyle.viewTop}>
+        <TouchableOpacity
+          activeOpacity={0.75}
+          style={themedStyle.btnClose}
+          onPress={() => onClosePress()}>
+          {CloseIconOutline(themedStyle.iconClose)}
+        </TouchableOpacity>
+        <View style={themedStyle.viewBody}>
           <TouchableOpacity
             activeOpacity={0.75}
-            onPress={() => onClosePress()}
-          >
-            {CloseIconOutline(themedStyle.iconClose)}
+            onPress={() => onPrevImageModal()}
+            style={themedStyle.btnChange}>
+            {ArrowPrevIcon(themedStyle.iconArrow)}
           </TouchableOpacity>
-        </View>
-        <View style={themedStyle.viewBody}>
-          <View style={themedStyle.viewLeft}>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={() => onPrevImageModal()}
-              style={themedStyle.btnChange}>
-              {ArrowPrevIcon(themedStyle.iconArrow)}
-            </TouchableOpacity>
-          </View>
-          <View style={themedStyle.viewCenter}>
+          <View style={themedStyle.viewImg}>
             <Image
               source={props.image.imageSource}
               style={themedStyle.img}
             />
           </View>
-          <View style={themedStyle.viewRight}>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={() => onNextImageModal()}
-              style={themedStyle.btnChange}>
-              {ArrowNextIcon(themedStyle.iconArrow)}
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={() => onNextImageModal()}
+            style={themedStyle.btnChange}>
+            {ArrowNextIcon(themedStyle.iconArrow)}
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -101,27 +95,13 @@ export const PhotoGalleryModalTablet = withStyles(PhotoGalleryModalTabletCompone
   viewBox: {
     flex: 1,
   },
-  viewTop: {
-    height: pxToPercentage(200),
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    paddingRight: pxToPercentage(120),
-  },
   viewBody: {
     flex: 1,
     flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: pxToPercentage(100),
   },
-  viewLeft: {
-    width: pxToPercentage(302),
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-  },
-  viewRight: {
-    width: pxToPercentage(302),
-    justifyContent: 'center',
-    paddingLeft: pxToPercentage(50),
-  },
-  viewCenter: {
+  viewImg: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
@@ -131,14 +111,16 @@ export const PhotoGalleryModalTablet = withStyles(PhotoGalleryModalTabletCompone
     height: pxToPercentage(1148),
   },
   btnChange: {
-    width: pxToPercentage(150),
-    height: pxToPercentage(150),
-    justifyContent: 'center',
   },
   iconArrow: {
     width: pxToPercentage(100),
     height: pxToPercentage(93),
     tintColor: theme['color-custom-100'],
+  },
+  btnClose: {
+    alignSelf: 'flex-end',
+    marginRight: pxToPercentage(100),
+    marginTop: pxToPercentage(50),
   },
   iconClose: {
     width: pxToPercentage(150),

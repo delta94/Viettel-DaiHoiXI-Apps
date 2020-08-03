@@ -154,8 +154,7 @@ const PhotoGalleryTabletComponent: React.FunctionComponent<PhotoGalleryTabletPro
               key={index}
               activeOpacity={0.75}
               style={themedStyle.btnImage}
-              onPress={() => onImageItemPress(item)}
-            >
+              onPress={() => onImageItemPress(item)}>
               <Image
                 source={item.imageSource}
                 style={themedStyle.img}

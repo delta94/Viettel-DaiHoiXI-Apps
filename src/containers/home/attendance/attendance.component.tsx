@@ -12,7 +12,6 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import {
   PeopleIconOther,

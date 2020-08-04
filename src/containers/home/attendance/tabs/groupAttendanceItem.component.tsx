@@ -151,11 +151,7 @@ export const GroupAttendanceItem = withStyles(GroupAttendanceItemComponent, (the
   viewBottom: {
     paddingVertical: pxToPercentage(10),
   },
-  viewDescription: {
-    // flexDirection: 'row',
-  },
   viewBlock: {
-    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: pxToPercentage(5),

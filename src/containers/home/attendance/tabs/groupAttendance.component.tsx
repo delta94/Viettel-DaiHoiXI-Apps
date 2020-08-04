@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  Text,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -11,11 +10,12 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { GroupAttendance as GroupAttendanceModel } from '@src/core/models/attendance/groupAttendance/groupAttendance.model';
 import { GroupAttendanceContent } from '@src/core/models/attendance/groupAttendance/groupAttendance.model';
-import { ScrollView } from 'react-native-gesture-handler';
 import { GroupAttendanceItem } from './groupAttendanceItem.component';
 import { DateList } from '../../conferenceInfo/dateList.component';
-import { TabView, Tab, Layout } from 'react-native-ui-kitten/ui';
-import { viewStyle } from '@src/components/viewStyle';
+import {
+  TabView,
+  Tab,
+} from 'react-native-ui-kitten/ui';
 import { textStyle } from '@src/components/textStyle';
 
 interface ComponentProps {
@@ -60,7 +60,6 @@ const GroupAttendanceComponent: React.FunctionComponent<GroupAttendanceProps> = 
   return (
     <View style={themedStyle.container}>
       <DateList />
-
       <View style={themedStyle.viewContent}>
         <TabView
           style={themedStyle.tabView}

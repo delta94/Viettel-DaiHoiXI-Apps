@@ -2,9 +2,9 @@ import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 import { isTablet } from 'react-native-device-info';
-import { DocumentTablet } from './tabs/tablet/document.component.tablet';
 import { documentDataFake } from '@src/core/data/document';
 import { DocumentListTablet } from './tabs/tablet/documentlist.component.tablet';
+import { DocumentList } from './phone/documentlist.component';
 
 export const DocumentContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'DocumentListContainer';
@@ -22,8 +22,8 @@ export const DocumentContainer: React.FunctionComponent<NavigationInjectedProps>
     );
   }
   return (
-    <DocumentListTablet
-      documents={documentDataFake}
+    <DocumentList
+      documentSections={documentDataFake}
       onBackPress={onBackPress}
     />
   );

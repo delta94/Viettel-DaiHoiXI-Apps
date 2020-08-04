@@ -12,7 +12,6 @@ import {
   withStyles,
 } from '@kitten/theme';
 import {
-  CloseIconOutline,
   ArrowPrevIcon,
   ArrowNextIcon,
   NightModeIcon,
@@ -53,12 +52,6 @@ const ModalDocumentComponent: React.FunctionComponent<ModalDocumentProps> = (pro
       backdropTransitionInTiming={1}
       backdropTransitionOutTiming={1}
       style={themedStyle.viewModal}>
-      <TouchableOpacity
-        activeOpacity={0.75}
-        style={themedStyle.bntClose}
-        onPress={onClosePress}>
-        {CloseIconOutline(themedStyle.iconClose)}
-      </TouchableOpacity>
       <View style={themedStyle.viewBox}>
         <TouchableOpacity
           activeOpacity={0.75}>
@@ -106,7 +99,7 @@ const ModalDocumentComponent: React.FunctionComponent<ModalDocumentProps> = (pro
   );
 };
 
-export const ModalTabletDocument = withStyles(ModalDocumentComponent, (theme: ThemeType) => ({
+export const ModalDocument = withStyles(ModalDocumentComponent, (theme: ThemeType) => ({
   viewModal: {
     alignItems: 'center',
   },
@@ -115,99 +108,89 @@ export const ModalTabletDocument = withStyles(ModalDocumentComponent, (theme: Th
     flexDirection: 'row',
   },
   viewDoc: {
-    width: pxToPercentage(1556),
-    height: pxToPercentage(1148),
+    width: pxToPercentage(300),
+    height: pxToPercentage(450),
     backgroundColor: theme['color-primary-20'],
   },
   viewDocHeader: {
     flexDirection: 'row',
-    height: pxToPercentage(100),
-    backgroundColor: theme['color-primary-24'],
+    height: pxToPercentage(30),
+    backgroundColor: theme['color-primary-21'],
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  iconClose: {
-    tintColor: theme['color-primary-3'],
-    width: pxToPercentage(172),
-    height: pxToPercentage(192),
   },
   iconArrow: {
     tintColor: theme['color-primary-12'],
     alignItems: 'center',
-    width: pxToPercentage(100),
-    height: pxToPercentage(93),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
   },
   iconArrowPrev: {
-    marginRight: pxToPercentage(60),
+    marginRight: pxToPercentage(10),
   },
   iconArrowNext: {
-    marginLeft: pxToPercentage(60),
-  },
-  bntClose: {
-    position: 'absolute',
-    top: -50,
-    right: 0,
+    marginLeft: pxToPercentage(10),
   },
   viewDocLeft: {
     flexDirection: 'row',
-    width: pxToPercentage(298),
-    height: pxToPercentage(60),
+    width: pxToPercentage(150),
+    height: pxToPercentage(20),
     alignItems: 'center',
   },
   viewDocCenter: {
     flexDirection: 'row',
-    width: pxToPercentage(187),
-    height: pxToPercentage(60),
+    width: pxToPercentage(60),
+    height: pxToPercentage(20),
     alignItems: 'center',
   },
   viewDocRight: {
     flexDirection: 'row',
-    width: pxToPercentage(250),
-    height: pxToPercentage(60),
+    width: pxToPercentage(85),
+    height: pxToPercentage(20),
     alignItems: 'center',
   },
   iconNightMode: {
     tintColor: theme['color-primary-3'],
-    width: pxToPercentage(50),
-    height: pxToPercentage(50),
-    marginLeft: pxToPercentage(40),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    marginLeft: pxToPercentage(10),
   },
   txtNightMode: {
     color: theme['color-primary-12'],
-    fontSize: pxToPercentage(34),
+    fontSize: pxToPercentage(12),
     ...textStyle.proDisplayRegular,
-    marginLeft: pxToPercentage(15),
+    marginLeft: pxToPercentage(5),
   },
   iconPencil: {
     tintColor: theme['color-primary-3'],
-    width: pxToPercentage(50),
-    height: pxToPercentage(50),
-    marginLeft: pxToPercentage(40),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
   },
   txtPencil: {
     color: theme['color-primary-12'],
-    fontSize: pxToPercentage(34),
+    fontSize: pxToPercentage(12),
     ...textStyle.proDisplayRegular,
-    marginLeft: pxToPercentage(21),
+    marginRight: pxToPercentage(5),
+
   },
   iconMessage: {
     tintColor: theme['color-primary-3'],
-    width: pxToPercentage(52),
-    height: pxToPercentage(52),
-    marginLeft: pxToPercentage(40),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    marginLeft: pxToPercentage(15),
   },
   txtMessage: {
     color: theme['color-primary-12'],
-    fontSize: pxToPercentage(34),
+    fontSize: pxToPercentage(12),
     ...textStyle.proDisplayRegular,
-    marginLeft: pxToPercentage(18),
+    marginLeft: pxToPercentage(5),
   },
   viewDocImage: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   image: {
-    width: pxToPercentage(710),
-    height: pxToPercentage(1035),
+    width: pxToPercentage(210),
+    height: pxToPercentage(420),
   },
 }));

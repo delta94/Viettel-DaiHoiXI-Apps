@@ -5,7 +5,7 @@ import {
   TextInput,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -16,7 +16,6 @@ import {
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
-import React from 'react';
 import { ProgramTabEnum, DocumentRequestEnum } from '@src/core/utils/constants';
 
 interface ComponentProps {
@@ -34,8 +33,6 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
   const { themedStyle } = props;
 
   const [selectedBtn, setSelectedBtn] = useState<number>(DocumentRequestEnum.OnlyMe);
-
-  const [isSelectedBtn2, setIsSelectedBtn2] = useState<boolean>();
 
   const [selectedChoice, setSelectedChoice] = useState<number>(ProgramTabEnum.ChuongTrinh);
 
@@ -86,7 +83,7 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
             />
           </View>
           <View style={themedStyle.viewDocCenter}>
-            <Text style={themedStyle.txtDocCenter}>
+            <Text style={themedStyle.txtDocCenterFist}>
               {'Ai có thể xem tài liệu?'}
             </Text>
             <View style={themedStyle.viewChoice}>
@@ -103,7 +100,7 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
             </View>
           </View>
           <View style={themedStyle.viewDocBottom}>
-          <TouchableOpacity style={themedStyle.btnBottomLeft}>
+            <TouchableOpacity style={themedStyle.btnBottomLeft}>
               <Text>
                 {'Đồng ý'}
               </Text>
@@ -122,111 +119,120 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
   );
 };
 
-export const ModalDocumentTabletRequest = withStyles(ModalDocumentRequestComponent, (theme: ThemeType) => ({
+export const ModalDocumentRequest = withStyles(ModalDocumentRequestComponent, (theme: ThemeType) => ({
   viewModal: {
     alignItems: 'center',
+    flex: 1,
   },
   viewBox: {
-    width: pxToPercentage(1396),
-    height: pxToPercentage(850),
+    width: pxToPercentage(350),
+    height: pxToPercentage(400),
     backgroundColor: theme['color-primary-20'],
   },
   viewIcon: {
     alignItems: 'flex-end',
   },
   iconClose: {
-    tintColor: theme['color-primary-24'],
-    width: pxToPercentage(80),
-    height: pxToPercentage(80),
-    marginTop: pxToPercentage(10),
-    marginLeft: pxToPercentage(10),
+    tintColor: theme['color-primary-21'],
+    width: pxToPercentage(30),
+    height: pxToPercentage(30),
+    marginTop: pxToPercentage(5),
+    marginLeft: pxToPercentage(5),
   },
   viewDoc: {
     flexDirection: 'column',
+    flex: 1,
   },
   viewDocTop: {
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
   },
   txtDocTop: {
-    fontSize: pxToPercentage(58),
+    fontSize: pxToPercentage(20),
     ...textStyle.proDisplayRegular,
   },
   txtInputTop: {
-    width: pxToPercentage(1042),
-    height: pxToPercentage(240),
+    width: pxToPercentage(300),
+    height: pxToPercentage(80),
     borderWidth: pxToPercentage(1),
-    fontSize: pxToPercentage(34),
+    fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
-    borderRadius: pxToPercentage(32),
-    paddingLeft: pxToPercentage(10),
-    marginTop: pxToPercentage(40),
+    borderRadius: pxToPercentage(10),
+    paddingLeft: pxToPercentage(5),
+    marginTop: pxToPercentage(15),
   },
   viewDocCenter: {
-    marginLeft: pxToPercentage(177),
+    marginLeft: pxToPercentage(60),
     marginTop: pxToPercentage(42),
-    fontSize: pxToPercentage(34),
+    fontSize: pxToPercentage(15),
     ...textStyle.proDisplayRegular,
+    flex: 1,
   },
   btnChoice: {
-    width: pxToPercentage(40),
-    height: pxToPercentage(40),
-    borderRadius: pxToPercentage(25),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    borderRadius: pxToPercentage(10),
     borderColor: theme['color-primary-2'],
-
     borderWidth: pxToPercentage(1),
-    marginBottom: pxToPercentage(20),
+    marginBottom: pxToPercentage(5),
   },
   btnChoiceSelected: {
-    width: pxToPercentage(45),
-    height: pxToPercentage(45),
-    borderRadius: pxToPercentage(20),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    borderRadius: pxToPercentage(10),
     borderColor: theme['color-primary-2'],
-    borderWidth: pxToPercentage(5),
-    marginBottom: pxToPercentage(20),
+    borderWidth: pxToPercentage(3),
+    marginBottom: pxToPercentage(10),
+  },
+  txtDocCenterFist: {
+    marginLeft: pxToPercentage(10),
+    marginBottom: pxToPercentage(10),
+    fontSize: pxToPercentage(14),
+    ...textStyle.proDisplayRegular,
   },
   txtDocCenter: {
-    marginLeft: pxToPercentage(20),
-    fontSize: pxToPercentage(34),
+    marginLeft: pxToPercentage(10),
+    fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
   },
   viewDocBottom: {
-    marginLeft: pxToPercentage(177),
-    marginRight: pxToPercentage(177),
-    marginTop: pxToPercentage(52),
+    margin: pxToPercentage(20),
+    marginTop: pxToPercentage(25),
     flexDirection: 'row',
     justifyContent: 'space-between',
+    flex: 1,
   },
   btnBottomLeft: {
-    width: pxToPercentage(420),
-    height: pxToPercentage(90),
+    width: pxToPercentage(140),
+    height: pxToPercentage(30),
     backgroundColor: theme['color-primary-7'],
-    borderRadius: pxToPercentage(32),
+    borderRadius: pxToPercentage(15),
     alignItems: 'center',
     justifyContent: 'center',
   },
   txtTextBottom: {
-    fontSize: pxToPercentage(34),
+    fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
   },
   viewChoice: {
     flexDirection: 'row',
   },
   btnBottomRight: {
-    width: pxToPercentage(420),
-    height: pxToPercentage(90),
+    width: pxToPercentage(140),
+    height: pxToPercentage(30),
     backgroundColor: theme['color-primary-18'],
-    borderRadius: pxToPercentage(32),
+    borderRadius: pxToPercentage(15),
     alignItems: 'center',
     justifyContent: 'center',
   },
   txtBtnSelected: {
-    fontSize: pxToPercentage(34),
+    fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
     color: theme['color-primary-2'],
   },
   txtSelected: {
-    fontSize: pxToPercentage(34),
+    fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
     color: theme['color-primary-0'],
   },

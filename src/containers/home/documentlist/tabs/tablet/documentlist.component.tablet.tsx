@@ -18,7 +18,7 @@ import { DocumentSection as DocumentSectionModel } from '@src/core/models/docume
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProgramTabEnum } from '@src/core/utils/constants';
 import { DocumentTablet } from './document.component.tablet';
-import { ModalDocumentRequest } from './modalDocumentRequest.tablet.component';
+import { ModalDocumentTabletRequest } from './modalDocumentRequest.tablet.component';
 
 interface ComponentProps {
   documents: DocumentSectionModel[];
@@ -94,24 +94,28 @@ const DocumentListTabletComponent: React.FunctionComponent<DocumentListTabletPro
           <View style={themedStyle.viewTopRight}>
             <TextInput
               style={themedStyle.txtInput}
-              placeholder='Nhập trích yếu/số văn bản'
+              placeholder={'Nhập trích yếu/số văn bản'}
             />
             <TouchableOpacity style={themedStyle.btnTimKiem}>
-              <Text style={themedStyle.txtTimKiem}>TÌM KIẾM</Text>
+              <Text style={themedStyle.txtTimKiem}>
+                {'TÌM KIẾM'}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.75}
               onPress={onDocumentRequestPress}
               style={themedStyle.btnYeuCau}>
-              <Text style={themedStyle.txtYeuCau}>YÊU CẦU TÀI LIỆU</Text>
+              <Text style={themedStyle.txtYeuCau}>
+                {'YÊU CẦU TÀI LIỆU'}
+              </Text>
             </TouchableOpacity>
           </View>
           <DocumentTablet
-            documents={props.documents}
+            documentSections={props.documents}
           />
         </View>
       </View>
-      <ModalDocumentRequest
+      <ModalDocumentTabletRequest
         isVisible={isVisibleDocumentRequest}
         onClosePress={onClosePress} />
     </View>

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -19,15 +18,16 @@ import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
 import { SearchIcon, ArrowForwardIcon } from '@src/assets/icons';
-import { ModalDocument } from './modalDocument.component.tablet';
+import { ModalTabletDocument } from './modalDocument.component.tablet';
 import { ArrowIosBackFill } from '@src/assets/icons';
+import { DocumentItemTablet } from './documentItem.tablet.component';
 interface ComponentProps {
-  documents: DocumentSectionModel[];
+  documentSections: DocumentSectionModel[];
 }
 
-export type ProgramTabletProps = ComponentProps & ThemedComponentProps;
+export type DocumentTabletProps = ComponentProps & ThemedComponentProps;
 
-const ProgramTabletComponent: React.FunctionComponent<ProgramTabletProps> = (props) => {
+const DocumentTabletComponent: React.FunctionComponent<DocumentTabletProps> = (props) => {
   const { themedStyle } = props;
   const [isVisibleDocument, setIsVisibleDocument] = React.useState<boolean>(false);
   const [isShowDocument, setIsShowDocument] = React.useState<boolean>(true);
@@ -39,63 +39,14 @@ const ProgramTabletComponent: React.FunctionComponent<ProgramTabletProps> = (pro
     setIsVisibleDocument(false);
   };
 
-  const renderDocument = (): React.ReactElement[] => {
+  const renderDocumentTablet = (): React.ReactElement[] => {
 
-    return props.documents.map((item, index) => {
+    return props.documentSections.map((item, index) => {
       return (
         <React.Fragment key={index}>
-          <Tr style={themedStyle.td}>
-            <Td>
-              <TouchableOpacity style={themedStyle.viewTitle}>
-                <Text style={themedStyle.txtTitle}>
-                  {item.title}
-                </Text>
-                {ArrowIosBackFill(isShowDocument ? themedStyle.iconArrowUp : themedStyle.iconArrowDown)}
-              </TouchableOpacity>
-            </Td>
-          </Tr>
-          {item.documents.map((itemChild, indexChild) => {
-            return (
-              <Tr key={indexChild}>
-                <Td alignItems='center' width={110}                >
-                  <Text style={themedStyle.txtInfo}>
-                    {itemChild.id}
-                  </Text>
-                </Td>
-                <Td alignItems='center' width={295}>
-                  <Text style={themedStyle.txtInfo}>
-                    {itemChild.documentNumber}
-                  </Text>
-                </Td>
-                <Td alignItems='center' width={250}>
-                  <Text style={themedStyle.txtInfo}>
-                    {itemChild.date}
-                  </Text>
-                </Td>
-                <Td alignItems='center' width={250}>
-                  <Text style={themedStyle.txtInfo}>
-                    {itemChild.department || '-'}
-                  </Text>
-                </Td>
-                <Td alignItems='center'>
-                  <Text style={themedStyle.txtInfo}>
-                    {itemChild.title}
-                  </Text>
-                </Td>
-                <Td alignItems='center' width={130}>
-                  <TouchableOpacity
-                    activeOpacity={0.75}
-                    onPress={onDocumentPress}>
-                    {SearchIcon(themedStyle.iconSearch)}
-                  </TouchableOpacity>
-                </Td>
-              </Tr>
-            );
-          })}
-          <ModalDocument
-            isVisible={isVisibleDocument}
-            onClosePress={onClosePress}
-          />
+          <DocumentItemTablet
+            documentSection={item}>
+          </DocumentItemTablet>
         </React.Fragment>
       );
     });
@@ -124,13 +75,13 @@ const ProgramTabletComponent: React.FunctionComponent<ProgramTabletProps> = (pro
         </Th>
       </Thead>
       <Tbody>
-        {renderDocument()}
+        {renderDocumentTablet()}
       </Tbody>
     </Table>
   );
 };
 
-export const DocumentTablet = withStyles(ProgramTabletComponent, (theme: ThemeType) => ({
+export const DocumentTablet = withStyles(DocumentTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     marginTop: pxToPercentage(28),

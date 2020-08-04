@@ -15,7 +15,6 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import {
-  ArrowPrevIcon,
   PersonIconOther2,
 } from '@src/assets/icons';
 import { ChatDetail as ChatDetailModel } from '@src/core/models/chat/chatDetail';
@@ -27,7 +26,6 @@ import { viewStyle } from '@src/components/viewStyle';
 
 interface ComponentProps {
   chatDetails: ChatDetailModel[];
-  onPressBack: () => void;
 }
 
 export type ChatDetailProps = ThemedComponentProps & ComponentProps;
@@ -79,24 +77,12 @@ const ChatDetailComponent: React.FunctionComponent<ChatDetailProps> = (props) =>
     </View>
   );
 
-  const onPressBack = () => {
-    props.onPressBack();
-  };
-
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewCard}>
         <View style={themedStyle.viewHeader}>
-          <View style={themedStyle.viewLeft}>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={onPressBack}
-              style={themedStyle.viewIconBack}>
-              {ArrowPrevIcon(themedStyle.iconBack)}
-            </TouchableOpacity>
-            <View style={themedStyle.viewIcon}>
-              {PersonIconOther2(themedStyle.iconPerson)}
-            </View>
+          <View style={themedStyle.viewIcon}>
+            {PersonIconOther2(themedStyle.iconPerson)}
           </View>
           <Text style={themedStyle.txtHeader}>
             {'Tổ phục vụ'}
@@ -164,6 +150,7 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
   viewHeader: {
     backgroundColor: theme['color-primary-22'],
     flexDirection: 'row',
+    justifyContent: 'center',
     height: pxToPercentage(75),
     alignItems: 'center',
   },
@@ -176,7 +163,6 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
     ...textStyle.proDisplayBold,
     color: theme['color-primary-23'],
     textAlign: 'center',
-    flex: 1,
   },
   viewIcon: {
     height: pxToPercentage(75),
@@ -189,12 +175,6 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
     width: pxToPercentage(40),
     height: pxToPercentage(40),
     borderRadius: pxToPercentage(50),
-  },
-  viewIconBack: {
-    height: pxToPercentage(75),
-    width: pxToPercentage(58),
-    justifyContent: 'center',
-    left: 20,
   },
   iconBack: {
     width: pxToPercentage(20),

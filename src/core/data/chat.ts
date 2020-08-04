@@ -24,22 +24,17 @@ export const chatListDataFake: ChatList[] = [
 
 export const ChatDetailDataFake: ChatDetail[] = [
   {
-    content: 'Xin chào!! Tôi cần hỗ trợ tìm vị trí chỗ ngồi trong hội trường',
+    content: 'Xin chào! Tôi cần hỗ trợ tìm vị trí chỗ ngồi trong hội trường',
     time: '07:45',
     id: 1,
   },
   {
-    content: 'Vâng ạ! em sẽ đến chỗ anh ngay',
+    content: 'Vâng ạ! Em sẽ đến chỗ anh ngay',
     time: '07:45',
     id: 2,
   },
   {
-    content: 'Ok! cảm ơn em',
-    time: '07:45',
-    id: 1,
-  },
-  {
-    content: 'ahihi',
+    content: 'Ok! Cảm ơn em',
     time: '07:45',
     id: 1,
   },

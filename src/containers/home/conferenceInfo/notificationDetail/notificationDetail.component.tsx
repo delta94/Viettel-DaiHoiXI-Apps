@@ -31,15 +31,8 @@ const NotificationDetailComponent: React.FunctionComponent<NotificationDetailPro
           <Text style={themedStyle.txtTitle}>
             {notification.title}
           </Text>
-          <Text
-            style={[
-              themedStyle.txtDescription,
-              themedStyle.txtBold,
-            ]}>
-            {'Nội dung: '}
-            <Text style={themedStyle.txtDescription}>
-              {notification.description}
-            </Text>
+          <Text style={themedStyle.txtDescription}>
+            {notification.description}
           </Text>
         </View>
       </SafeAreaView>
@@ -76,8 +69,5 @@ export const NotificationDetail = withStyles(NotificationDetailComponent, (theme
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.proTextRegular,
-  },
-  txtBold: {
-    ...textStyle.proTextBold,
   },
 }));

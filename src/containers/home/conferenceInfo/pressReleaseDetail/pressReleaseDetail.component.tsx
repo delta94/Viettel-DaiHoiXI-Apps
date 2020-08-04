@@ -33,15 +33,8 @@ const PressReleaseDetailComponent: React.FunctionComponent<PressReleaseDetailPro
           <Text style={themedStyle.txtTitle}>
             {pressRelease.title}
           </Text>
-          <Text
-            style={[
-              themedStyle.txtDescription,
-              themedStyle.txtBold,
-            ]}>
-            {'Nội dung: '}
-            <Text style={themedStyle.txtDescription}>
-              {pressRelease.description}
-            </Text>
+          <Text style={themedStyle.txtDescription}>
+            {pressRelease.description}
           </Text>
           <View style={themedStyle.viewFile}>
             <Text style={themedStyle.txtFileTitle}>
@@ -95,9 +88,6 @@ export const PressReleaseDetail = withStyles(PressReleaseDetailComponent, (theme
     fontSize: pxToPercentage(14),
     color: theme['text-basic-color'],
     ...textStyle.proTextRegular,
-  },
-  txtBold: {
-    ...textStyle.proTextBold,
   },
   viewFile: {
     marginTop: pxToPercentage(30),

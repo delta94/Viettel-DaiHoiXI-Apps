@@ -16,7 +16,10 @@ import {
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
-import { ProgramTabEnum, DocumentRequestEnum } from '@src/core/utils/constants';
+import {
+  ProgramTabEnum,
+  DocumentRequestEnum,
+} from '@src/core/utils/constants';
 
 interface ComponentProps {
   isVisible: boolean;

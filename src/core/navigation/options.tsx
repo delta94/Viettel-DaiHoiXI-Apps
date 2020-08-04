@@ -33,6 +33,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'signInQRCode' : 'Quét mã',
   'galleryVideo' : 'Phim ảnh, hình ảnh triển lãm ',
   'gallery': 'Trển Lãm',
+  'documentList': 'Tài liệu',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

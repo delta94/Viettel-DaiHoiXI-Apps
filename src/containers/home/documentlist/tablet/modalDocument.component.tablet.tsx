@@ -46,7 +46,7 @@ const ModalDocumentComponent: React.FunctionComponent<ModalDocumentProps> = (pro
       animationIn='slideInUp'
       animationOut='slideOutDown'
       onBackdropPress={onClosePress}
-      backdropColor={'rgb(156, 156, 156)'}
+      backdropColor={'rgba(0, 0, 0, 0.6)'}
       swipeDirection={['down']}
       onSwipeComplete={onClosePress}
       onBackButtonPress={onClosePress}
@@ -90,7 +90,7 @@ const ModalDocumentComponent: React.FunctionComponent<ModalDocumentProps> = (pro
           </View>
           <View style={themedStyle.viewDocImage}>
             <Image
-              style={themedStyle.image}
+              style={themedStyle.imgDocument}
               source={imageDocument.imageSource}>
             </Image>
           </View>
@@ -145,7 +145,7 @@ export const ModalTabletDocument = withStyles(ModalDocumentComponent, (theme: Th
   },
   bntClose: {
     position: 'absolute',
-    top: -50,
+    top: pxToPercentage(-100),
     right: 0,
   },
   viewDocLeft: {
@@ -206,7 +206,7 @@ export const ModalTabletDocument = withStyles(ModalDocumentComponent, (theme: Th
     alignItems: 'center',
     justifyContent: 'center',
   },
-  image: {
+  imgDocument: {
     width: pxToPercentage(710),
     height: pxToPercentage(1035),
   },

@@ -17,7 +17,10 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import React from 'react';
-import { ProgramTabEnum, DocumentRequestEnum } from '@src/core/utils/constants';
+import {
+  ProgramTabEnum,
+  DocumentRequestEnum,
+} from '@src/core/utils/constants';
 
 interface ComponentProps {
   isVisible: boolean;
@@ -32,10 +35,6 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
   };
 
   const { themedStyle } = props;
-
-  const [selectedBtn, setSelectedBtn] = useState<number>(DocumentRequestEnum.OnlyMe);
-
-  const [isSelectedBtn2, setIsSelectedBtn2] = useState<boolean>();
 
   const [selectedChoice, setSelectedChoice] = useState<number>(ProgramTabEnum.ChuongTrinh);
 
@@ -103,7 +102,7 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
             </View>
           </View>
           <View style={themedStyle.viewDocBottom}>
-          <TouchableOpacity style={themedStyle.btnBottomLeft}>
+            <TouchableOpacity style={themedStyle.btnBottomLeft}>
               <Text>
                 {'Đồng ý'}
               </Text>
@@ -173,7 +172,6 @@ export const ModalDocumentTabletRequest = withStyles(ModalDocumentRequestCompone
     height: pxToPercentage(40),
     borderRadius: pxToPercentage(25),
     borderColor: theme['color-primary-2'],
-
     borderWidth: pxToPercentage(1),
     marginBottom: pxToPercentage(20),
   },
@@ -205,10 +203,6 @@ export const ModalDocumentTabletRequest = withStyles(ModalDocumentRequestCompone
     alignItems: 'center',
     justifyContent: 'center',
   },
-  txtTextBottom: {
-    fontSize: pxToPercentage(34),
-    ...textStyle.proDisplayRegular,
-  },
   viewChoice: {
     flexDirection: 'row',
   },
@@ -219,15 +213,5 @@ export const ModalDocumentTabletRequest = withStyles(ModalDocumentRequestCompone
     borderRadius: pxToPercentage(32),
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  txtBtnSelected: {
-    fontSize: pxToPercentage(34),
-    ...textStyle.proDisplayRegular,
-    color: theme['color-primary-2'],
-  },
-  txtSelected: {
-    fontSize: pxToPercentage(34),
-    ...textStyle.proDisplayRegular,
-    color: theme['color-primary-0'],
   },
 }));

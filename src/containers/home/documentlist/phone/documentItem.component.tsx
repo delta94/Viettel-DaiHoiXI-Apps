@@ -97,7 +97,16 @@ const DocumentItemComponent: React.FunctionComponent<DocumentItemProps> = (props
         <Text style={themedStyle.txtTitle}>
           {props.documentSection.title}
         </Text>
-        {ArrowIosBackFill(isShowDocument ? themedStyle.iconArrowUp : themedStyle.iconArrowDown)}
+        {ArrowIosBackFill(isShowDocument
+          ? [
+            themedStyle.iconArrow,
+            themedStyle.iconArrowUp,
+          ]
+          : [
+            themedStyle.iconArrow,
+            themedStyle.iconArrowDown,
+          ],
+        )}
       </TouchableOpacity>
       {isShowDocument && renderDocumentItem()}
     </ScrollView>
@@ -115,18 +124,6 @@ export const DocumentItem = withStyles(DocumentItemComponent, (theme: ThemeType)
     ...textStyle.proDisplayRegular,
     padding: pxToPercentage(5),
   },
-  td: {
-    borderRightWidth: pxToPercentage(0),
-    backgroundColor: theme['color-primary-2'],
-  },
-  viewModal: {
-    width: pxToPercentage(1556),
-    height: pxToPercentage(1148),
-    backgroundColor: theme['color-primary-0'],
-  },
-  modal: {
-    alignItems: 'center',
-  },
   txtTitle: {
     color: theme['color-primary-3'],
     fontSize: pxToPercentage(14),
@@ -137,20 +134,17 @@ export const DocumentItem = withStyles(DocumentItemComponent, (theme: ThemeType)
     ...textStyle.proDisplayRegular,
     fontWeight: 'bold',
   },
-  iconArrowUp: {
+  iconArrow: {
     position: 'absolute',
     right: pxToPercentage(6),
     width: pxToPercentage(20),
     height: pxToPercentage(20),
     tintColor: theme['color-custom-100'],
+  },
+  iconArrowUp: {
     transform: [{ rotate: '90deg' }],
   },
   iconArrowDown: {
-    position: 'absolute',
-    right: pxToPercentage(6),
-    width: pxToPercentage(20),
-    height: pxToPercentage(20),
-    tintColor: theme['color-custom-100'],
     transform: [{ rotate: '270deg' }],
   },
   viewTitle: {

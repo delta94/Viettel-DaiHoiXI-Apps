@@ -12,13 +12,10 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import { DocumentSection as DocumentSectionModel } from '@src/core/models/document/document.model';
-import { Table } from '@src/components/table/table.component';
-import { Thead } from '@src/components/table/thead.component';
-import { Th } from '@src/components/table/th.component';
 import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
-import { SearchIcon, ArrowForwardIcon } from '@src/assets/icons';
+import { SearchIcon } from '@src/assets/icons';
 import { ModalTabletDocument } from './modalDocument.component.tablet';
 import { ArrowIosBackFill } from '@src/assets/icons';
 interface ComponentProps {
@@ -89,7 +86,7 @@ const DocumentItemTabletComponent: React.FunctionComponent<DocumentItemTabletPro
 
   return (
     <Tbody>
-      <Tr style={themedStyle.td}>
+      <Tr style={themedStyle.viewTr}>
         <Td>
           <TouchableOpacity
             onPress={() => setIsShowDocument(!isShowDocument)}
@@ -118,17 +115,23 @@ export const DocumentItemTablet = withStyles(DocumentItemTabletComponent, (theme
     ...textStyle.proDisplayRegular,
     paddingLeft: pxToPercentage(20),
   },
-  td: {
+  viewTr: {
     borderRightWidth: pxToPercentage(0),
     backgroundColor: theme['color-primary-2'],
+  },
+
+  viewTop: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'flex-end',
+  },
+  viewTitle: {
+    flex: 1,
   },
   viewModal: {
     width: pxToPercentage(1556),
     height: pxToPercentage(1148),
     backgroundColor: theme['color-primary-0'],
-  },
-  modal: {
-    alignItems: 'center',
   },
   txtTitle: {
     color: theme['color-primary-3'],
@@ -150,13 +153,5 @@ export const DocumentItemTablet = withStyles(DocumentItemTabletComponent, (theme
   iconSearch: {
     width: pxToPercentage(54),
     height: pxToPercentage(54),
-  },
-  viewTop: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'flex-end',
-  },
-  viewTitle: {
-    flex: 1,
   },
 }));

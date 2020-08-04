@@ -24,14 +24,14 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
   const { themedStyle } = props;
   const [isRead, setIsRead] = React.useState<number>(0);
 
-  const onChatListItemPress = (index: number): void => {
-    setIsRead(index);
+  const onPressChatDetailPress = (): void => {
+    props.onPressChatDetailPress();
   };
 
   const renderChatListItem = ({ item, index }) => (
     <ChatListItem
       chatList={item}
-      onChatListItemPress={onChatListItemPress}
+      onPressChatDetailPress={onPressChatDetailPress}
       index={index}
     />
   );

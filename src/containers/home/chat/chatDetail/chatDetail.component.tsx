@@ -17,6 +17,7 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import {
   PersonIcon,
   CameraIcon,
+  ArrowPrevIcon,
   PersonIconOther2,
 } from '@src/assets/icons';
 import { ChatDetail as ChatDetailModel } from '@src/core/models/chat/chatDetail';
@@ -28,6 +29,7 @@ import { viewStyle } from '@src/components/viewStyle';
 
 interface ComponentProps {
   chatDetails: ChatDetailModel[];
+  onPressBack: () => void;
 }
 
 export type ChatDetailProps = ThemedComponentProps & ComponentProps;
@@ -79,9 +81,19 @@ const ChatDetailComponent: React.FunctionComponent<ChatDetailProps> = (props) =>
     </View>
   );
 
+  const onPressBack = () => {
+    props.onPressBack();
+  };
+
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewHeader}>
+        <TouchableOpacity
+          activeOpacity={0.75}
+          onPress={onPressBack}
+          style={themedStyle.viewIconBack}>
+          {ArrowPrevIcon(themedStyle.iconBack)}
+        </TouchableOpacity>
         <View style={themedStyle.viewIcon}>
           {PersonIconOther2(themedStyle.iconPerson)}
         </View>
@@ -104,20 +116,20 @@ const ChatDetailComponent: React.FunctionComponent<ChatDetailProps> = (props) =>
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
           />
-          <View style={themedStyle.viewInput}>
-            <TextInput
-              returnKeyType={'send'}
-              onSubmitEditing={() => {
-                onSendMessagePress(messageInput);
-              }}
-              value={messageInput}
-              onChangeText={setMessageInput}
-              placeholderTextColor={themedStyle.placeholderColor}
-              style={themedStyle.input}
-              placeholder={'Nhắn tin...'}>
-            </TextInput>
-          </View>
         </KeyboardAvoidingView>
+      </View>
+      <View style={themedStyle.viewInput}>
+        <TextInput
+          returnKeyType={'send'}
+          onSubmitEditing={() => {
+            onSendMessagePress(messageInput);
+          }}
+          value={messageInput}
+          onChangeText={setMessageInput}
+          placeholderTextColor={themedStyle.placeholderColor}
+          style={themedStyle.input}
+          placeholder={'Nhắn tin...'}>
+        </TextInput>
       </View>
     </View>
   );
@@ -145,6 +157,7 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
   viewIcon: {
     height: pxToPercentage(75),
     width: pxToPercentage(58),
+    borderRadius: pxToPercentage(50),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -153,9 +166,20 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
     height: pxToPercentage(40),
     borderRadius: pxToPercentage(50),
   },
+  viewIconBack: {
+    height: pxToPercentage(75),
+    width: pxToPercentage(58),
+    justifyContent: 'center',
+    left: 20,
+    position: 'absolute',
+  },
+  iconBack: {
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+  },
   viewChatList: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    // flexDirection: 'column',
+    // justifyContent: 'space-between',
   },
   viewContainer: {
     backgroundColor: theme['color-custom-100'],
@@ -196,6 +220,8 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
     paddingVertical: pxToPercentage(10),
     ...viewStyle.shadow3,
   },
+  viewChatDetail: {
+  },
   input: {
     width: pxToPercentage(350),
     height: pxToPercentage(40),
@@ -209,8 +235,8 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
     alignSelf: 'center',
   },
   viewInput: {
-    position: 'absolute',
     borderColor: theme['color-primary-18'],
+    paddingBottom: pxToPercentage(7),
   },
 }));
 

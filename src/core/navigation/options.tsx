@@ -34,6 +34,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'galleryVideo' : 'Phim ảnh, hình ảnh triển lãm ',
   'gallery': 'Trển Lãm',
   'documentList': 'Tài liệu',
+  'chatDetailContainer': 'Chat',
 };
 
 export type TopNavigationElement = React.ReactElement<any>;

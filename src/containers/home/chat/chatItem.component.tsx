@@ -13,12 +13,11 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { ChatList } from '@src/core/models/chat/chat.model';
 import { PersonIconOther2 } from '@src/assets/icons';
 import { textStyle } from '@src/components';
-import { ChatDetailScreen } from './chatDetail/chatDetail.component';
 
 interface ComponentProps {
   chatList: ChatList;
   index: number;
-  onChatListItemPress: (index: number) => void;
+  onPressChatDetailPress: () => void;
 }
 
 export type ChatListItemProps = ThemedComponentProps & ComponentProps;
@@ -27,14 +26,14 @@ const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props
   const { themedStyle } = props;
 
 
-  const onChatListItemPress = (index: number): void => {
-    return props.onChatListItemPress(index);
+  const onPressChatDetailPress = (): void => {
+    return props.onPressChatDetailPress();
   };
 
   return (
     <TouchableOpacity
       style={themedStyle.container}
-      onPress={() => { onChatListItemPress(props.index); }}
+      onPress={() => { onPressChatDetailPress(); }}
       activeOpacity={0.75}>
       <View style={themedStyle.viewSection}>
         <View style={themedStyle.viewIcon}>
@@ -49,7 +48,6 @@ const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props
               {props.chatList.time}
             </Text>
           </View>
-
           <View style={themedStyle.viewLastMessage}>
             <Text
               numberOfLines={1}

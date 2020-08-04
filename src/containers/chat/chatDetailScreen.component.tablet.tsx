@@ -32,11 +32,11 @@ export type ChatDetaillScreenProps = ThemedComponentProps & ComponentProps;
 const ChatDetailScreenComponent: React.FunctionComponent<ChatDetaillScreenProps> = (props) => {
   const { themedStyle } = props;
   const flatListRef = React.useRef(null);
-  const [messageInput, setMessageInut] = React.useState<string>();
+  const [messageInput, setMessageInput] = React.useState<string>();
 
   const onSendMessagePress = (message: string): void => {
     if (message) {
-      setMessageInut('');
+      setMessageInput('');
       return props.onSendMessagePress(message);
     }
   };
@@ -104,7 +104,7 @@ const ChatDetailScreenComponent: React.FunctionComponent<ChatDetaillScreenProps>
               onSendMessagePress(messageInput);
             }}
             value={messageInput}
-            onChangeText={setMessageInut}
+            onChangeText={setMessageInput}
             placeholderTextColor={themedStyle.placeholderColor}
             style={themedStyle.input}
             placeholder={'Nhắn tin'}>

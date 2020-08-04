@@ -32,16 +32,24 @@ import { SpeechListContainer } from '@src/containers/home/speechManagement/speec
 import { DelegateGroupContainer } from '@src/containers/home/delegate/delegateGroup/delegateGroup.container';
 import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/signUpToSpeak/signUpToSpeak.container';
 import { AttendanceContainer } from '@src/containers/home/attendance/attendance.container';
+<<<<<<< HEAD
 import { ChatContainer } from '@src/containers/chat/chat.container';
 import { SeatingChartContainer } from '@src/containers/home/seatMap/seatingChart.container';
 import { SignInQRcodeContainer } from '@src/containers/auth/signInQRcode/sigInQRcode.container';
 import { GalleryVideoContainer } from '@src/containers/home/gallery/galleryVideo/galleryVideo.container';
 import { GalleryContainer } from '@src/containers/home/gallery/gallery.container';
+=======
+import { ChatContainer } from '@src/containers/home/chat/chat.container';
+import { ChatDetailContainer } from '@src/containers/home/chat/chatDetail/chatDetail.container';
+import { Chat } from '@src/containers/home/chat/chat.component';
+// import { ChatContainer } from '@src/containers/chat/chat.container';
+>>>>>>> [WIP] implement UI phone chat
 
 import { DocumentContainer } from '@src/containers/home/documentlist/documentlist.container';
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
-  ['signIn']: SignInContainer,
+  // ['chat']: ChatContainer,
+  ['chatdetail']: ChatDetailContainer,
   ['forgotPassword']: ExampleContainer,
   ['otp']: {
     screen: OtpContainer,

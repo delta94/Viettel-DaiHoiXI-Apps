@@ -177,6 +177,14 @@ export const PersonIconOther = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const PersonIconOther2 = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-person-2.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const SeatMapIconOther = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./other/icon-seat-map.png'),

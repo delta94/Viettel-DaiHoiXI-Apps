@@ -89,6 +89,7 @@ const DocumentItemTabletComponent: React.FunctionComponent<DocumentItemTabletPro
       <Tr style={themedStyle.viewTr}>
         <Td>
           <TouchableOpacity
+            activeOpacity={0.75}
             onPress={() => setIsShowDocument(!isShowDocument)}
             style={themedStyle.viewTop}>
             <View style={themedStyle.viewTitle}>
@@ -113,13 +114,11 @@ export const DocumentItemTablet = withStyles(DocumentItemTabletComponent, (theme
   txtInfo: {
     fontSize: pxToPercentage(34),
     ...textStyle.proDisplayRegular,
-    paddingLeft: pxToPercentage(20),
   },
   viewTr: {
     borderRightWidth: pxToPercentage(0),
     backgroundColor: theme['color-primary-2'],
   },
-
   viewTop: {
     flexDirection: 'row',
     width: '100%',
@@ -134,7 +133,7 @@ export const DocumentItemTablet = withStyles(DocumentItemTabletComponent, (theme
     backgroundColor: theme['color-primary-0'],
   },
   txtTitle: {
-    color: theme['color-primary-3'],
+    color: theme['color-primary-12'],
     fontSize: pxToPercentage(34),
     ...textStyle.proDisplayRegular,
   },

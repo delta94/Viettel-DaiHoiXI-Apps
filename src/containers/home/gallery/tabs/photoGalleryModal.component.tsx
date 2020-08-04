@@ -3,6 +3,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -59,6 +60,7 @@ const PhotoGalleryModalComponent: React.FunctionComponent<PhotoGalleryModalProps
 
   return (
     <Modal
+      backdropColor={'rgb(156, 156, 156)'}
       isVisible={props.isVisible}
       animationIn='slideInUp'
       animationOut='slideOutDown'
@@ -75,7 +77,9 @@ const PhotoGalleryModalComponent: React.FunctionComponent<PhotoGalleryModalProps
             activeOpacity={0.75}
             onPress={() => onClosePress()}
           >
-            {CloseIconOutline(themedStyle.iconClose)}
+            <SafeAreaView>
+              {CloseIconOutline(themedStyle.iconClose)}
+            </SafeAreaView>
           </TouchableOpacity>
         </View>
         <Swiper
@@ -83,7 +87,7 @@ const PhotoGalleryModalComponent: React.FunctionComponent<PhotoGalleryModalProps
           index={props.imageIndex}
           dot={renderDot(false)}
           activeDot={renderDot(true)}
-          paginationStyle={{bottom: pxToPercentage(150)}}>
+          paginationStyle={{ bottom: pxToPercentage(150) }}>
           {renderImage()}
         </Swiper>
       </View>

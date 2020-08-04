@@ -71,6 +71,8 @@ export const ChatListItem = withStyles(ChatListItemComponent, (theme: ThemeType)
     width: pxToPercentage(359),
     height: pxToPercentage(73),
     borderRadius: pxToPercentage(10),
+    borderBottomWidth: pxToPercentage(1),
+    borderColor: theme['color-primary-2'],
   },
   viewSection: {
     flexDirection: 'row',

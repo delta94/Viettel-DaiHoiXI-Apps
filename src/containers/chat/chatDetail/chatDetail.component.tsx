@@ -153,6 +153,8 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
     justifyContent: 'center',
     height: pxToPercentage(75),
     alignItems: 'center',
+    borderBottomWidth: pxToPercentage(1),
+    borderColor: theme['color-primary-2'],
   },
   viewLeft: {
     position: 'absolute',

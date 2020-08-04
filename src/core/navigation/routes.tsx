@@ -36,16 +36,14 @@ import { SeatingChartContainer } from '@src/containers/home/seatMap/seatingChart
 import { SignInQRcodeContainer } from '@src/containers/auth/signInQRcode/sigInQRcode.container';
 import { GalleryVideoContainer } from '@src/containers/home/gallery/galleryVideo/galleryVideo.container';
 import { GalleryContainer } from '@src/containers/home/gallery/gallery.container';
-import { ChatContainer } from '@src/containers/home/chat/chat.container';
-import { ChatDetailContainer } from '@src/containers/home/chat/chatDetail/chatDetail.container';
-import { Chat } from '@src/containers/home/chat/chat.component';
 // import { ChatContainer } from '@src/containers/chat/chat.container';
+import { ChatContainer } from '@src/containers/chat/chat.container';
+import { ChatDetailContainer } from '@src/containers/chat/chatDetail/chatDetail.container';
 
 import { DocumentContainer } from '@src/containers/home/documentlist/documentlist.container';
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
-  // ['chat']: ChatContainer,
-  ['chatdetail']: ChatDetailContainer,
+  ['signIn']: SignInContainer,
   ['forgotPassword']: ExampleContainer,
   ['otp']: {
     screen: OtpContainer,
@@ -91,7 +89,7 @@ const AppNavigator: NavigationContainer = createStackNavigator({
 
 const createAppRouter = (container: NavigationNavigator<any, NavigationProp<NavigationState>>): NavigationContainer => {
   return createAppContainer(createSwitchNavigator({
-    ['splash']: container,
+    ['splash']: SplashContainer,
     ['auth']: AuthNavigator,
     ['app']: container,
   }, { initialRouteName: 'splash' }));

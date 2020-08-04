@@ -13,7 +13,6 @@ import { ChatList } from '@src/core/models/chat/chat.model';
 import { ChatListItem } from './chatItem.component';
 
 interface ComponentProps {
-  example?: any;
   chatLists: ChatList[];
   onPressChatDetailPress: () => void;
 }
@@ -22,7 +21,6 @@ export type ChatProps = ThemedComponentProps & ComponentProps;
 
 const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
   const { themedStyle } = props;
-  const [isRead, setIsRead] = React.useState<number>(0);
 
   const onPressChatDetailPress = (): void => {
     props.onPressChatDetailPress();
@@ -53,7 +51,6 @@ export const Chat = withStyles(ChatComponent, (theme: ThemeType) => ({
     flex: 1,
     backgroundColor: theme['color-primary-20'],
     padding: pxToPercentage(8),
-    marginTop: pxToPercentage(20),
   },
   viewChatList: {
     backgroundColor: theme['color-custom-100'],

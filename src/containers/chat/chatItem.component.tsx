@@ -25,7 +25,6 @@ export type ChatListItemProps = ThemedComponentProps & ComponentProps;
 const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props) => {
   const { themedStyle } = props;
 
-
   const onPressChatDetailPress = (): void => {
     return props.onPressChatDetailPress();
   };

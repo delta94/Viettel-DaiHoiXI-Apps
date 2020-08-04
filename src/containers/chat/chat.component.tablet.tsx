@@ -111,7 +111,7 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
   );
 };
 
-export const Chat = withStyles(ChatComponent, (theme: ThemeType) => ({
+export const ChatTablet = withStyles(ChatComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(31),

@@ -34,32 +34,30 @@ const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props
       style={themedStyle.container}
       onPress={() => { onPressChatDetailPress(); }}
       activeOpacity={0.75}>
-      <View style={themedStyle.viewSection}>
-        <View style={themedStyle.viewIcon}>
-          {PersonIconOther2(themedStyle.iconPerson)}
+      <View style={themedStyle.viewIcon}>
+        {PersonIconOther2(themedStyle.iconPerson)}
+      </View>
+      <View style={themedStyle.viewContent}>
+        <View style={themedStyle.viewHeader}>
+          <Text style={themedStyle.txtName}>
+            {props.chatList.name}
+          </Text>
+          <Text style={themedStyle.txtTime}>
+            {props.chatList.time}
+          </Text>
         </View>
-        <View style={themedStyle.viewContent}>
-          <View style={themedStyle.viewHeader}>
-            <Text style={themedStyle.txtName}>
-              {props.chatList.name}
-            </Text>
-            <Text style={themedStyle.txtTime}>
-              {props.chatList.time}
-            </Text>
-          </View>
-          <View style={themedStyle.viewLastMessage}>
-            <Text
-              numberOfLines={1}
-              style={themedStyle.txtLastMessage}>
-              {props.chatList.lastMessage}
-            </Text>
-            {props.chatList.notify > 0 &&
-              <View style={themedStyle.viewBadge} >
-                <Text style={themedStyle.txtBadge}>
-                  {props.chatList.notify}
-                </Text>
-              </View>}
-          </View>
+        <View style={themedStyle.viewLastMessage}>
+          <Text
+            numberOfLines={1}
+            style={themedStyle.txtLastMessage}>
+            {props.chatList.lastMessage}
+          </Text>
+          {props.chatList.notify > 0 &&
+            <View style={themedStyle.viewBadge} >
+              <Text style={themedStyle.txtBadge}>
+                {props.chatList.notify}
+              </Text>
+            </View>}
         </View>
       </View>
     </TouchableOpacity>
@@ -68,25 +66,29 @@ const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props
 
 export const ChatListItem = withStyles(ChatListItemComponent, (theme: ThemeType) => ({
   container: {
+    flexDirection: 'row',
     width: pxToPercentage(359),
-    height: pxToPercentage(73),
+    height: pxToPercentage(75),
     borderRadius: pxToPercentage(10),
     borderBottomWidth: pxToPercentage(1),
     borderColor: theme['color-primary-2'],
   },
-  viewSection: {
-    flexDirection: 'row',
-  },
   viewIcon: {
     height: pxToPercentage(75),
-    width: pxToPercentage(58),
+    width: pxToPercentage(60),
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+  },
+  viewContent: {
+    flex: 1,
+    height: pxToPercentage(75),
+    justifyContent: 'center',
+    paddingHorizontal: pxToPercentage(10),
   },
   iconPerson: {
-    width: pxToPercentage(40),
-    height: pxToPercentage(40),
-    borderRadius: pxToPercentage(50),
+    width: pxToPercentage(50),
+    height: pxToPercentage(50),
+    borderRadius: pxToPercentage(25),
   },
   read: {
     color: theme['color-primary-0'],
@@ -97,12 +99,6 @@ export const ChatListItem = withStyles(ChatListItemComponent, (theme: ThemeType)
     fontSize: pxToPercentage(16),
     ...textStyle.proDisplayBold,
     color: theme['color-primary-2'],
-  },
-  viewContent: {
-    marginLeft: pxToPercentage(10),
-    width: pxToPercentage(280),
-    height: pxToPercentage(54),
-    alignSelf: 'center',
   },
   viewHeader: {
     flexDirection: 'row',
@@ -120,19 +116,21 @@ export const ChatListItem = withStyles(ChatListItemComponent, (theme: ThemeType)
   },
   txtLastMessage: {
     fontSize: pxToPercentage(14),
-    marginRight: pxToPercentage(5),
+    marginRight: pxToPercentage(30),
     ...textStyle.proDisplayRegular,
   },
   viewBadge: {
+    position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    height: pxToPercentage(25),
-    width: pxToPercentage(25),
+    right: 0,
+    height: pxToPercentage(20),
+    width: pxToPercentage(20),
     backgroundColor: theme['color-primary-2'],
-    borderRadius: pxToPercentage(25),
+    borderRadius: pxToPercentage(10),
   },
   txtBadge: {
-    fontSize: pxToPercentage(14),
+    fontSize: pxToPercentage(12),
     ...textStyle.proDisplayRegular,
     color: theme['color-custom-100'],
   },

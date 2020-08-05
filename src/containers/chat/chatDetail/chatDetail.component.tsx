@@ -40,7 +40,7 @@ const ChatDetailComponent: React.FunctionComponent<ChatDetailProps> = (props) =>
     if (Platform.OS === 'android') {
       return -500;
     } else {
-      return isTablet() ? pxToPercentage(300) : 0;
+      return isTablet() ? pxToPercentage(300) : pxToPercentage(100);
     }
   };
 
@@ -81,9 +81,7 @@ const ChatDetailComponent: React.FunctionComponent<ChatDetailProps> = (props) =>
     <View style={themedStyle.container}>
       <View style={themedStyle.viewCard}>
         <View style={themedStyle.viewHeader}>
-          <View style={themedStyle.viewIcon}>
-            {PersonIconOther2(themedStyle.iconPerson)}
-          </View>
+          {PersonIconOther2(themedStyle.iconPerson)}
           <Text style={themedStyle.txtHeader}>
             {'Tổ phục vụ'}
           </Text>
@@ -138,45 +136,40 @@ export const ChatDetail = withStyles(ChatDetailComponent, (theme: ThemeType) => 
     flex: 1,
     backgroundColor: theme['color-primary-20'],
     padding: pxToPercentage(8),
-    ...viewStyle.shadow2,
+    paddingBottom: pxToPercentage(20),
   },
   viewCard: {
     flex: 1,
     backgroundColor: theme['color-custom-100'],
-    borderTopLeftRadius: pxToPercentage(15),
-    borderTopRightRadius: pxToPercentage(15),
-    overflow: 'hidden',
+    borderRadius: pxToPercentage(10),
+    ...viewStyle.shadow2,
   },
   viewHeader: {
-    backgroundColor: theme['color-primary-22'],
     flexDirection: 'row',
     justifyContent: 'center',
-    height: pxToPercentage(75),
     alignItems: 'center',
+    height: pxToPercentage(60),
+    borderTopLeftRadius: pxToPercentage(10),
+    borderTopRightRadius: pxToPercentage(10),
     borderBottomWidth: pxToPercentage(1),
     borderColor: theme['color-primary-2'],
+    backgroundColor: theme['color-primary-22'],
   },
   viewLeft: {
     position: 'absolute',
     flexDirection: 'row',
   },
   txtHeader: {
+    marginLeft: pxToPercentage(7.5),
     fontSize: pxToPercentage(16),
     ...textStyle.proDisplayBold,
     color: theme['color-primary-23'],
     textAlign: 'center',
   },
-  viewIcon: {
-    height: pxToPercentage(75),
-    width: pxToPercentage(58),
-    borderRadius: pxToPercentage(50),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   iconPerson: {
     width: pxToPercentage(40),
     height: pxToPercentage(40),
-    borderRadius: pxToPercentage(50),
+    borderRadius: pxToPercentage(25),
   },
   iconBack: {
     width: pxToPercentage(20),

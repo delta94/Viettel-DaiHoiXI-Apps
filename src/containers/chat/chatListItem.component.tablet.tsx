@@ -21,9 +21,9 @@ interface ComponentProps {
   onChatListItemPress: (index: number) => void;
 }
 
-export type ChatListItemProps = ThemedComponentProps & ComponentProps;
+export type ChatListItemTabletProps = ThemedComponentProps & ComponentProps;
 
-const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props) => {
+const ChatListItemTabletComponent: React.FunctionComponent<ChatListItemTabletProps> = (props) => {
   const { themedStyle } = props;
 
   const onChatListItemPress = (index: number): void => {
@@ -65,7 +65,7 @@ const ChatListItemComponent: React.FunctionComponent<ChatListItemProps> = (props
   );
 };
 
-export const ChatListItem = withStyles(ChatListItemComponent, (theme: ThemeType) => ({
+export const ChatListItemTablet = withStyles(ChatListItemTabletComponent, (theme: ThemeType) => ({
   container: {
     height: pxToPercentage(164),
     justifyContent: 'center',

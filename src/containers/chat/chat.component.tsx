@@ -10,7 +10,8 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { ChatList } from '@src/core/models/chat/chat.model';
-import { ChatListItem } from './chatItem.component';
+import { ChatListItem } from './chatListItem.component';
+import { viewStyle } from '@src/components/viewStyle';
 
 interface ComponentProps {
   chatLists: ChatList[];
@@ -51,10 +52,12 @@ export const Chat = withStyles(ChatComponent, (theme: ThemeType) => ({
     flex: 1,
     backgroundColor: theme['color-primary-20'],
     padding: pxToPercentage(8),
+    paddingBottom: pxToPercentage(20),
   },
   viewChatList: {
+    flex: 1,
     backgroundColor: theme['color-custom-100'],
     borderRadius: pxToPercentage(10),
-    flex: 1,
+    ...viewStyle.shadow2,
   },
 }));

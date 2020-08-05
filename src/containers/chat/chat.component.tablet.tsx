@@ -13,12 +13,12 @@ import { BackHeader } from '@src/components/header/backHeader.component';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { ChatList } from '@src/core/models/chat/chat.model';
-import { ChatListItem } from './chatListItem.component.tablet';
+import { ChatListItemTablet } from './chatListItem.component.tablet';
 import { textStyle } from '@src/components';
 import { PersonIcon } from '@src/assets/icons';
 import { ChatDetail } from '@src/core/models/chat/chatDetail';
 import { ChatDetailDataFake } from '@src/core/data/chat';
-import { ChatDetailScreen } from './chatDetailScreen.component.tablet';
+import { ChatDetailTablet } from './chatDetail/chatDetail.component.tablet';
 
 interface ComponentProps {
   example?: any;
@@ -26,9 +26,9 @@ interface ComponentProps {
   onBackPress: () => void;
 }
 
-export type ChatProps = ThemedComponentProps & ComponentProps;
+export type ChatTabletProps = ThemedComponentProps & ComponentProps;
 
-const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
+const ChatTabletComponent: React.FunctionComponent<ChatTabletProps> = (props) => {
   const { themedStyle } = props;
   const [isRead, setIsRead] = React.useState<number>(0);
   const [chatDetail, setChatDetail] = React.useState<ChatDetail[]>(ChatDetailDataFake);
@@ -59,7 +59,7 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
   };
 
   const renderChatListItem = ({ item, index }) => (
-    <ChatListItem
+    <ChatListItemTablet
       chatList={item}
       onChatListItemPress={onChatListItemPress}
       isRead={index === isRead}
@@ -101,7 +101,7 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
         </View>
         <View style={themedStyle.viewChatDetail}>
           {renderChatHeader()}
-          <ChatDetailScreen
+          <ChatDetailTablet
             onSendMessagePress={onSendMessagePress}
             chatDetails={chatDetail}
           />
@@ -111,7 +111,7 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
   );
 };
 
-export const ChatTablet = withStyles(ChatComponent, (theme: ThemeType) => ({
+export const ChatTablet = withStyles(ChatTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(31),

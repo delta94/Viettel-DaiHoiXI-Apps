@@ -68,8 +68,10 @@ export const SeatingChartTablet = withStyles(SeatingChartTabletComponent, (theme
     ...viewStyle.shadow2,
   },
   pdf: {
+    width: '100%',
+    height: '100%',
     backgroundColor: theme['color-custom-100'],
-    width: pxToPercentage(1640),
-    height: pxToPercentage(902),
+    // width: pxToPercentage(1640),
+    // height: pxToPercentage(902),
   },
 }));

@@ -27,9 +27,9 @@ interface ComponentProps {
   onSendMessagePress: (message: string) => void;
 }
 
-export type ChatDetaillScreenProps = ThemedComponentProps & ComponentProps;
+export type ChatDetaillTabletProps = ThemedComponentProps & ComponentProps;
 
-const ChatDetailScreenComponent: React.FunctionComponent<ChatDetaillScreenProps> = (props) => {
+const ChatDetailTabletComponent: React.FunctionComponent<ChatDetaillTabletProps> = (props) => {
   const { themedStyle } = props;
   const flatListRef = React.useRef(null);
   const [messageInput, setMessageInput] = React.useState<string>();
@@ -124,7 +124,7 @@ const ChatDetailScreenComponent: React.FunctionComponent<ChatDetaillScreenProps>
   );
 };
 
-export const ChatDetailScreen = withStyles(ChatDetailScreenComponent, (theme: ThemeType) => ({
+export const ChatDetailTablet = withStyles(ChatDetailTabletComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(28),

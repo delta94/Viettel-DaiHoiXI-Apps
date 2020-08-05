@@ -6,7 +6,7 @@ import {
 } from './types';
 import { Session } from '@src/core/models/session/session.model';
 
-export const onSetSession = (payload: Session, username: string, password: string, token: string): SessionSetAction => ({
+export const onSetSession = (payload: Session): SessionSetAction => ({
   type: SET_SESSION,
   payload,
 });

@@ -31,8 +31,14 @@ export type SignInAccountFormTabletProps = ThemedComponentProps & ViewProps & Co
 
 const SignInAccountFormTabletComponent: React.FunctionComponent<SignInAccountFormTabletProps> = (props) => {
   const [formData, setFormData] = useState<SignInAccountFormData>({
-    username: undefined,
+    userName: undefined,
     password: undefined,
+    deviceCode: undefined,
+    imei: undefined,
+    ipAddress: undefined,
+    macAddress: undefined,
+    osType: undefined,
+    osVersion: undefined,
   });
 
   let prevState = usePrevious(formData);
@@ -59,8 +65,8 @@ const SignInAccountFormTabletComponent: React.FunctionComponent<SignInAccountFor
     }
   });
 
-  const onUsernameInputTextChange = (username: string) => {
-    setFormData({ ...formData, username });
+  const onUsernameInputTextChange = (userName: string) => {
+    setFormData({ ...formData, userName });
   };
 
   const onPasswordInputTextChange = (password: string) => {
@@ -68,7 +74,7 @@ const SignInAccountFormTabletComponent: React.FunctionComponent<SignInAccountFor
   };
 
   const isValid = (value: SignInAccountFormData): boolean => {
-    return !isEmpty(value.username) && !isEmpty(value.password);
+    return !isEmpty(value.userName) && !isEmpty(value.password);
   };
 
   const { style, themedStyle, theme, ...restProps } = props;

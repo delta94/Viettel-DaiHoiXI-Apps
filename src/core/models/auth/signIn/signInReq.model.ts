@@ -1,6 +1,10 @@
 export class SignInReq {
-  email: string;
+  userName: string;
   password: string;
-  device_token: string;
-  device_type: number;
+  osType: string;
+  osVersion: string;
+  deviceCode: string;
+  imei: string;
+  ipAddress: string;
+  macAddress: string;
 }

@@ -31,11 +31,17 @@ export type SignInAccountFormProps = ThemedComponentProps & ViewProps & Componen
 
 const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps> = (props) => {
   const [formData, setFormData] = useState<SignInAccountFormData>({
-    username: undefined,
+    userName: undefined,
     password: undefined,
+    deviceCode: undefined,
+    imei: undefined,
+    ipAddress: undefined,
+    macAddress: undefined,
+    osType: undefined,
+    osVersion: undefined,
   });
 
-  let prevState = usePrevious(formData);
+  let prevState: SignInAccountFormData = usePrevious(formData);
 
   if (!prevState) {
     prevState = { ...formData };
@@ -59,8 +65,8 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
     }
   });
 
-  const onUsernameInputTextChange = (username: string) => {
-    setFormData({ ...formData, username });
+  const onUsernameInputTextChange = (userName: string) => {
+    setFormData({ ...formData, userName });
   };
 
   const onPasswordInputTextChange = (password: string) => {
@@ -68,7 +74,7 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
   };
 
   const isValid = (value: SignInAccountFormData): boolean => {
-    return !isEmpty(value.username) && !isEmpty(value.password);
+    return !isEmpty(value.userName) && !isEmpty(value.password);
   };
 
   const { style, themedStyle, theme, ...restProps } = props;
@@ -78,16 +84,20 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
       {...restProps}
       style={[themedStyle.container, style]}>
       <ValidationInput
+        value={formData.userName}
         placeholder='Tên đăng nhập'
         validator={NameValidator}
         onChangeText={onUsernameInputTextChange}
+        maxLength={50}
       />
       <ValidationInput
+        value={formData.password}
         style={themedStyle.inputPassword}
         placeholder='Mật khẩu'
         secureTextEntry={true}
         validator={PasswordValidator}
         onChangeText={onPasswordInputTextChange}
+        maxLength={50}
       />
     </View>
   );

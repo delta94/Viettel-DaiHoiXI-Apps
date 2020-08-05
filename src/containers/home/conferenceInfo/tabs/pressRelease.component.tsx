@@ -17,6 +17,7 @@ import { textStyle } from '@src/components';
 import { DateList } from '../dateList.component';
 import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
 import { AttachmentIcon } from '@src/assets/icons';
+import { AttachmentModal } from '../attachmentModel.component';
 
 interface ComponentProps {
   pressReleases: PressReleaseModel[];
@@ -27,9 +28,14 @@ export type PressReleaseProps = ComponentProps & ThemedComponentProps;
 
 const PressReleaseComponent: React.FunctionComponent<PressReleaseProps> = (props) => {
   const { themedStyle } = props;
+  const [isShowModal, setIsShowModal] = React.useState<boolean>(false);
 
   const onPressReleaseItemPress = (pressRelease: PressReleaseModel): void => {
-    props.onPressReleaseItemPress(pressRelease);
+    return props.onPressReleaseItemPress(pressRelease);
+  };
+
+  const onAttachMentIconPress = () => {
+    setIsShowModal(!isShowModal);
   };
 
   return (
@@ -51,15 +57,22 @@ const PressReleaseComponent: React.FunctionComponent<PressReleaseProps> = (props
                   {item.title}
                 </Text>
               </TouchableOpacity>
-              <View style={themedStyle.viewAttachment}>
+              <TouchableOpacity
+                onPress={onAttachMentIconPress}
+                activeOpacity={0.75}
+                style={themedStyle.viewAttachment}>
                 {AttachmentIcon(themedStyle.icon)}
                 <Text style={themedStyle.txtAttachment}>
                   {'Tập tin đính kèm'}
                 </Text>
-              </View>
+              </TouchableOpacity>
             </View>
           );
         }}
+      />
+      <AttachmentModal
+      isVisible={isShowModal}
+      onClosePress={onAttachMentIconPress}
       />
     </Layout>
   );

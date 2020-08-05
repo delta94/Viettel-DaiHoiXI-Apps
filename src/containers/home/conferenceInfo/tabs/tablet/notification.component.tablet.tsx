@@ -16,8 +16,9 @@ import { Th } from '@src/components/table/th.component';
 import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
-import { SearchIcon } from '@src/assets/icons';
+import { SearchIcon, AttachmentIcon } from '@src/assets/icons';
 import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
+import { AttachmentModal } from '../../attachmentModel.component';
 
 interface ComponentProps {
   notifications: NotificationModel[];
@@ -28,7 +29,11 @@ export type PressReleaseTabletProps = ComponentProps & ThemedComponentProps;
 
 const PressReleaseTabletComponent: React.FunctionComponent<PressReleaseTabletProps> = (props) => {
   const { themedStyle } = props;
+  const [isShowModal, setIsShowModal] = React.useState<boolean>(false);
 
+  const onAttachMentIconPress = () => {
+    setIsShowModal(!isShowModal);
+  };
   const onNotificationItemPress = (notification: NotificationModel): void => {
     props.onNotificationItemPress(notification);
   };
@@ -46,6 +51,15 @@ const PressReleaseTabletComponent: React.FunctionComponent<PressReleaseTabletPro
             <Text style={themedStyle.txtInfo}>
               {item.title}
             </Text>
+            <TouchableOpacity
+              activeOpacity={0.75}
+              onPress={onAttachMentIconPress}
+              style={themedStyle.viewAttachment}>
+              {AttachmentIcon(themedStyle.iconAttachment)}
+              <Text style={themedStyle.txtAttachment}>
+                {'Tập tin đín kèm'}
+              </Text>
+            </TouchableOpacity>
           </Td>
           <Td alignItems='center' width={200}>
             <TouchableOpacity
@@ -75,6 +89,10 @@ const PressReleaseTabletComponent: React.FunctionComponent<PressReleaseTabletPro
       <Tbody>
         {renderNotifications()}
       </Tbody>
+      <AttachmentModal
+        isVisible={isShowModal}
+        onClosePress={onAttachMentIconPress}
+      />
     </Table>
   );
 };
@@ -91,5 +109,18 @@ export const NotificationTablet = withStyles(PressReleaseTabletComponent, (theme
   iconSearch: {
     width: pxToPercentage(54),
     height: pxToPercentage(54),
+  },
+  iconAttachment: {
+    height: pxToPercentage(40),
+    width: pxToPercentage(40),
+  },
+  viewAttachment: {
+    flexDirection: 'row',
+    marginTop: pxToPercentage(8),
+  },
+  txtAttachment: {
+    fontSize: pxToPercentage(28),
+    ...textStyle.proDisplayRegular,
+    marginLeft: pxToPercentage(10),
   },
 }));

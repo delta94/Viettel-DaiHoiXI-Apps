@@ -17,6 +17,7 @@ import { textStyle } from '@src/components';
 import { DateList } from '../dateList.component';
 import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
 import { AttachmentIcon } from '@src/assets/icons';
+import { AttachmentModal } from '../attachmentModel.component';
 
 interface ComponentProps {
   notifications: NotificationModel[];
@@ -27,10 +28,16 @@ export type NotificationProps = ComponentProps & ThemedComponentProps;
 
 const NotificationComponent: React.FunctionComponent<NotificationProps> = (props) => {
   const { themedStyle } = props;
+  const [isShowModal, setIsShowModal] = React.useState<boolean>(false);
 
   const onNotificationItemPress = (notification: NotificationModel): void => {
     props.onNotificationItemPress(notification);
   };
+
+  const onAttachMentIconPress = () => {
+    setIsShowModal(!isShowModal);
+  };
+
 
   return (
     <Layout style={themedStyle.container}>
@@ -53,15 +60,22 @@ const NotificationComponent: React.FunctionComponent<NotificationProps> = (props
                   {item.title}
                 </Text>
               </TouchableOpacity>
-              <View style={themedStyle.viewAttachment}>
+              <TouchableOpacity
+                onPress={onAttachMentIconPress}
+                activeOpacity={0.75}
+                style={themedStyle.viewAttachment}>
                 {AttachmentIcon(themedStyle.icon)}
                 <Text style={themedStyle.txtAttachment}>
                   {'Tập tin đính kèm'}
                 </Text>
-              </View>
+              </TouchableOpacity>
             </View>
           );
         }}
+      />
+      <AttachmentModal
+        isVisible={isShowModal}
+        onClosePress={onAttachMentIconPress}
       />
     </Layout>
   );

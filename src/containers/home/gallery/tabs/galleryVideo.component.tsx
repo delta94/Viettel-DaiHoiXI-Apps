@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   FlatList,
@@ -29,30 +29,28 @@ const GalleryVideoComponent: React.FunctionComponent<GalleryVideoProps> = (props
 
   return (
     <View style={themedStyle.container}>
-      <View style={themedStyle.viewCard}>
-        <Video
-          resizeMode='stretch'
-          controls={true}
-          style={themedStyle.videoView}
-          source={{ uri: props.url }}
-        />
-        <FlatList
-          data={props.gallery}
-          extraData={props.gallery}
-          contentContainerStyle={themedStyle.flatListContainer}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => {
-            return (
-              <GalleryVideoItem
-                videos={item}
-                isFirstTopic={index === 0 ? true : false}
-                onVideosItemPress={props.onVideosItemPress}
-                videoSelected={props.videoSelected}
-              />
-            );
-          }}
-        />
-      </View>
+      <Video
+        resizeMode='stretch'
+        controls={true}
+        style={themedStyle.videoView}
+        source={{ uri: props.url }}
+      />
+      <FlatList
+        data={props.gallery}
+        extraData={props.gallery}
+        contentContainerStyle={themedStyle.flatListContainer}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => {
+          return (
+            <GalleryVideoItem
+              videos={item}
+              isFirstTopic={index === 0 ? true : false}
+              onVideosItemPress={props.onVideosItemPress}
+              videoSelected={props.videoSelected}
+            />
+          );
+        }}
+      />
     </View>
   );
 };
@@ -60,12 +58,6 @@ const GalleryVideoComponent: React.FunctionComponent<GalleryVideoProps> = (props
 export const GalleryVideo = withStyles(GalleryVideoComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    padding: pxToPercentage(8),
-    backgroundColor: theme['color-custom-100'],
-  },
-  viewCard: {
-    flex: 1,
-    borderRadius: pxToPercentage(12.5),
     backgroundColor: theme['color-custom-100'],
     ...viewStyle.shadow2,
     padding: pxToPercentage(8),

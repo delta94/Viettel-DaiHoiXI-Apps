@@ -39,7 +39,7 @@ export enum AttendanceTabEnum {
   Group,
 }
 
-export enum NoNameTabEnum {
+export enum GalleryTabEnum {
   HinhAnh,
   PhimAnh,
 }

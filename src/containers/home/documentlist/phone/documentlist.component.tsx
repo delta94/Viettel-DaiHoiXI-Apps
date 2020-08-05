@@ -47,34 +47,36 @@ const DocumentListComponent: React.FunctionComponent<DocumentListProps> = (props
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewCard}>
-        <ValidationInput
-          style={themedStyle.viewInput}
-          textStyle={textStyle.proTextRegular}
-          placeholder={'Nhập trích yếu/số văn bản'}
-          validator={StringValidator}
-          onChangeText={() => { }}
-        />
-        <TouchableOpacity style={themedStyle.btnTimKiem}>
-          <Text style={themedStyle.txtTimKiem}>
-            {'TÌM KIẾM'}
-          </Text>
-        </TouchableOpacity>
-        <View>
-          <Select
-            data={[
-              { text: '7 chương trình đột phá' },
-              { text: 'Về tăng cường xây dựng chỉnh đốn Đảng; ngăn chặn đẩy lùi sự suy thoái về tư tưởng chính trị, đạo đức, lối sống, những biểu hiện "tự diễn biến", "tự chuyển hóa" trong nội bộ' },
-              { text: 'Công tác kết nạp đảng viên và tình hình đảng viên ra khỏi Đảng' },
-              { text: 'Nhiệm vụ kinh tế - xã hội' },
-              { text: 'Danh sách tổ' },
-            ]}
-            textStyle={themedStyle.txtSelectInput}
-            keyExtractor={(item) => item.text}
-            selectedOption={selectedOption}
-            placeholder={'Chọn nội dung tài liệu'}
-            size={'large'}
-            onSelect={setSelectedOption}>
-          </Select>
+        <View style={themedStyle.viewTopGroup}>
+          <ValidationInput
+            style={themedStyle.viewInput}
+            placeholder={'Nhập trích yếu/số văn bản'}
+            validator={StringValidator}
+            onChangeText={() => { }}
+          />
+          <TouchableOpacity style={themedStyle.btnTimKiem}
+          activeOpacity={0.75}>
+            <Text style={themedStyle.txtTimKiem}>
+              {'TÌM KIẾM'}
+            </Text>
+          </TouchableOpacity>
+          <View style={themedStyle.viewSelect}>
+            <Select
+              data={[
+                { text: '7 chương trình đột phá' },
+                { text: 'Về tăng cường xây dựng chỉnh đốn Đảng; ngăn chặn đẩy lùi sự suy thoái về tư tưởng chính trị' },
+                { text: 'Công tác kết nạp đảng viên và tình hình đảng viên ra khỏi Đảng' },
+                { text: 'Nhiệm vụ kinh tế - xã hội' },
+                { text: 'Danh sách tổ' },
+              ]}
+              textStyle={themedStyle.txtSelectInput}
+              keyExtractor={(item) => item.text}
+              selectedOption={selectedOption}
+              placeholder={'Chọn nội dung tài liệu'}
+              size={'large'}
+              onSelect={setSelectedOption}>
+            </Select>
+          </View>
         </View>
         <Document
           documentSections={props.documentSections}
@@ -101,11 +103,10 @@ export const DocumentList = withStyles(DocumentListComponent, (theme: ThemeType)
   container: {
     flex: 1,
     backgroundColor: theme['color-primary-2'],
+    marginTop: pxToPercentage(8),
   },
   viewCard: {
     flex: 1,
-    borderRadius: pxToPercentage(15),
-    padding: pxToPercentage(20),
     backgroundColor: theme['color-custom-100'],
     ...viewStyle.shadow2,
   },
@@ -114,16 +115,23 @@ export const DocumentList = withStyles(DocumentListComponent, (theme: ThemeType)
     alignItems: 'center',
     marginBottom: pxToPercentage(10),
   },
+  viewSelect: {
+    marginTop: pxToPercentage(8),
+  },
+  viewTopGroup: {
+    paddingHorizontal: pxToPercentage(8),
+  },
   viewInput: {
-    height: pxToPercentage(40),
-    marginBottom: pxToPercentage(10),
+    height: pxToPercentage(48),
+    borderRadius: pxToPercentage(5),
+    fontSize: pxToPercentage(14),
   },
   btnTimKiem: {
-    height: pxToPercentage(40),
+    marginTop: pxToPercentage(8),
+    height: pxToPercentage(48),
     backgroundColor: theme['color-primary-0'],
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: pxToPercentage(5),
     borderRadius: pxToPercentage(10),
   },
   txtTimKiem: {
@@ -131,12 +139,10 @@ export const DocumentList = withStyles(DocumentListComponent, (theme: ThemeType)
     color: theme['color-primary-2'],
   },
   btnYeuCau: {
-    height: pxToPercentage(40),
+    height: pxToPercentage(48),
     backgroundColor: theme['color-primary-2'],
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: pxToPercentage(5),
-    borderRadius: pxToPercentage(10),
   },
   txtYeuCau: {
     fontSize: pxToPercentage(14),

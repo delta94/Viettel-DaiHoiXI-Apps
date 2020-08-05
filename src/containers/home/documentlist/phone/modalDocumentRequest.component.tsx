@@ -104,14 +104,14 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
           </View>
           <View style={themedStyle.viewDocBottom}>
             <TouchableOpacity style={themedStyle.btnBottomLeft}>
-              <Text>
-                {'Đồng ý'}
+              <Text style={themedStyle.txtSendRequest }>
+                {'Gửi yêu cầu'}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={onClosePress}
               style={themedStyle.btnBottomRight}>
-              <Text>
+              <Text style={themedStyle.txtCloseRequest}>
                 {'Đóng'}
               </Text>
             </TouchableOpacity>
@@ -129,7 +129,7 @@ export const ModalDocumentRequest = withStyles(ModalDocumentRequestComponent, (t
   },
   viewBox: {
     width: pxToPercentage(350),
-    height: pxToPercentage(400),
+    height: pxToPercentage(380),
     backgroundColor: theme['color-primary-20'],
   },
   viewIcon: {
@@ -178,7 +178,7 @@ export const ModalDocumentRequest = withStyles(ModalDocumentRequestComponent, (t
     borderRadius: pxToPercentage(10),
     borderColor: theme['color-primary-2'],
     borderWidth: pxToPercentage(1),
-    marginBottom: pxToPercentage(5),
+    marginBottom: pxToPercentage(10),
   },
   btnChoiceSelected: {
     width: pxToPercentage(20),
@@ -186,10 +186,8 @@ export const ModalDocumentRequest = withStyles(ModalDocumentRequestComponent, (t
     borderRadius: pxToPercentage(10),
     borderColor: theme['color-primary-2'],
     borderWidth: pxToPercentage(3),
-    marginBottom: pxToPercentage(10),
   },
   txtDocCenterFist: {
-    marginLeft: pxToPercentage(10),
     marginBottom: pxToPercentage(10),
     fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
@@ -204,11 +202,10 @@ export const ModalDocumentRequest = withStyles(ModalDocumentRequestComponent, (t
     marginTop: pxToPercentage(25),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flex: 1,
   },
   btnBottomLeft: {
     width: pxToPercentage(140),
-    height: pxToPercentage(30),
+    height: pxToPercentage(40),
     backgroundColor: theme['color-primary-7'],
     borderRadius: pxToPercentage(15),
     alignItems: 'center',
@@ -223,7 +220,7 @@ export const ModalDocumentRequest = withStyles(ModalDocumentRequestComponent, (t
   },
   btnBottomRight: {
     width: pxToPercentage(140),
-    height: pxToPercentage(30),
+    height: pxToPercentage(40),
     backgroundColor: theme['color-primary-18'],
     borderRadius: pxToPercentage(15),
     alignItems: 'center',
@@ -238,5 +235,15 @@ export const ModalDocumentRequest = withStyles(ModalDocumentRequestComponent, (t
     fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
     color: theme['color-primary-0'],
+  },
+  txtSendRequest: {
+    fontSize: pxToPercentage(14),
+    color: theme['color-primary-2'],
+    ...textStyle.proDisplayBold,
+  },
+  txtCloseRequest: {
+    fontSize: pxToPercentage(14),
+    color: theme['color-primary-12'],
+    ...textStyle.proDisplayBold,
   },
 }));

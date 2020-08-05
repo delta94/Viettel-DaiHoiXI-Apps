@@ -21,7 +21,6 @@ const DocumentTabletComponent: React.FunctionComponent<DocumentTabletProps> = (p
   const { themedStyle } = props;
 
   const renderDocumentTablet = (): React.ReactElement[] => {
-
     return props.documentSections.map((item, index) => {
       return (
         <React.Fragment key={index}>
@@ -43,10 +42,10 @@ const DocumentTabletComponent: React.FunctionComponent<DocumentTabletProps> = (p
           {'Số văn bản'}
         </Th>
         <Th alignItems='center' width={250}>
-          {'Ngày ban hành'}
+          {'Ngày\nban hành'}
         </Th>
         <Th alignItems='center' width={250}>
-          {'Cơ quan ban hành'}
+          {'Cơ quan\nban hành'}
         </Th>
         <Th alignItems='center'>
           {'Trích yếu'}

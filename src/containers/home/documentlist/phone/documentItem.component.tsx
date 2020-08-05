@@ -15,6 +15,7 @@ import { DocumentSection as DocumentSectionModel } from '@src/core/models/docume
 import { ArrowIosBackFill } from '@src/assets/icons';
 import React from 'react';
 import { ModalDocument } from './modalDocument.component';
+import { Hr } from '@src/components/hr/hr.component';
 
 interface ComponentProps {
   documentSection: DocumentSectionModel;
@@ -37,47 +38,45 @@ const DocumentItemComponent: React.FunctionComponent<DocumentItemProps> = (props
   const renderDocumentItem = (): React.ReactElement[] => {
     return props.documentSection.documents.map((item, index) => {
       return (
-        <View>
-          <View>
-            <Text style={themedStyle.txtInfo}>
-              <Text style={themedStyle.txtContent}>
-                {'STT: '}
-              </Text>
-              {item.id}
+        <View style={themedStyle.viewContent}>
+          <Text style={themedStyle.txtInfo}>
+            <Text style={themedStyle.txtContent}>
+              {'STT: '}
             </Text>
-            <Text style={themedStyle.txtInfo}>
-              <Text style={themedStyle.txtContent}>
-                {'Số văn bản: '}
-              </Text>
-              {item.documentNumber}
+            {item.id}
+          </Text>
+          <Text style={themedStyle.txtInfo}>
+            <Text style={themedStyle.txtContent}>
+              {'Số văn bản: '}
             </Text>
-            <Text style={themedStyle.txtInfo}>
-              <Text style={themedStyle.txtContent}>
-                {'Ngày ban hành: '}
-              </Text>
-              {item.date}
+            {item.documentNumber}
+          </Text>
+          <Text style={themedStyle.txtInfo}>
+            <Text style={themedStyle.txtContent}>
+              {'Ngày ban hành: '}
             </Text>
-            <Text style={themedStyle.txtInfo}>
-              <Text style={themedStyle.txtContent}>
-                {'Cơ quan ban hành: '}
-              </Text>
-              {item.department || '-'}
+            {item.date}
+          </Text>
+          <Text style={themedStyle.txtInfo}>
+            <Text style={themedStyle.txtContent}>
+              {'Cơ quan ban hành: '}
             </Text>
-            <Text style={themedStyle.txtInfo}>
-              <Text style={themedStyle.txtContent}>
-                {'Trích yếu: '}
-              </Text>
-              {item.title || '-'}
+            {item.department || '-'}
+          </Text>
+          <Text style={themedStyle.txtInfo}>
+            <Text style={themedStyle.txtContent}>
+              {'Trích yếu: '}
             </Text>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={onDocumentPress}>
-              <Text style={themedStyle.txtXemChiTiet}>
-                {'Xem chi tiết'}
-              </Text>
-            </TouchableOpacity>
-            <View style={themedStyle.viewBottom}></View>
-          </View>
+            {item.title || '-'}
+          </Text>
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={onDocumentPress}>
+            <Text style={themedStyle.txtXemChiTiet}>
+              {'Xem chi tiết'}
+            </Text>
+          </TouchableOpacity>
+          <Hr style={themedStyle.viewHr} />
           <ModalDocument
             isVisible={isVisibleDocument}
             onClosePress={onClosePress}
@@ -92,10 +91,11 @@ const DocumentItemComponent: React.FunctionComponent<DocumentItemProps> = (props
       showsVerticalScrollIndicator={false}
       style={themedStyle.container}>
       <TouchableOpacity
+        activeOpacity={0.75}
         onPress={() => setIsShowDocument(!isShowDocument)}
         style={themedStyle.viewTitle}>
         <Text style={themedStyle.txtTitle}>
-          {props.documentSection.title}
+          {props.documentSection.title.toUpperCase()}
         </Text>
         {ArrowIosBackFill(isShowDocument
           ? [
@@ -116,16 +116,16 @@ const DocumentItemComponent: React.FunctionComponent<DocumentItemProps> = (props
 export const DocumentItem = withStyles(DocumentItemComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    marginTop: pxToPercentage(10),
+    marginTop: pxToPercentage(6),
   },
   txtInfo: {
     flexDirection: 'row',
     fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
-    padding: pxToPercentage(5),
+    paddingVertical: pxToPercentage(4),
   },
   txtTitle: {
-    color: theme['color-primary-3'],
+    color: theme['color-primary-12'],
     fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
   },
@@ -133,6 +133,9 @@ export const DocumentItem = withStyles(DocumentItemComponent, (theme: ThemeType)
     fontSize: pxToPercentage(15),
     ...textStyle.proDisplayRegular,
     fontWeight: 'bold',
+  },
+  viewContent: {
+    paddingHorizontal: pxToPercentage(8),
   },
   iconArrow: {
     position: 'absolute',
@@ -148,19 +151,19 @@ export const DocumentItem = withStyles(DocumentItemComponent, (theme: ThemeType)
     transform: [{ rotate: '270deg' }],
   },
   viewTitle: {
-    alignItems: 'center',
+    paddingVertical: pxToPercentage(10),
     justifyContent: 'center',
-    flexDirection: 'row',
-    height: pxToPercentage(30),
     backgroundColor: theme['color-primary-2'],
+    paddingHorizontal: pxToPercentage(8),
   },
   txtXemChiTiet: {
     color: theme['color-primary-2'],
     fontSize: pxToPercentage(14),
-    ...textStyle.proDisplayRegular,
+    ...textStyle.proDisplayRegularItalic,
+    textAlign: 'right',
   },
-  viewBottom: {
-    height: pxToPercentage(1),
-    backgroundColor: theme['color-primary-21'],
+  viewHr: {
+    marginVertical: pxToPercentage(10),
+    backgroundColor: theme['color-primary-2'],
   },
 }));

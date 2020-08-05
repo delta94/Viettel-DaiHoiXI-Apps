@@ -67,7 +67,8 @@ const DocumentListTabletComponent: React.FunctionComponent<DocumentListTabletPro
           style={[
             themedStyle.txtBtnTab,
             selectedTab === type && themedStyle.txtBtnTabSelected,
-          ]}>
+          ]}
+          numberOfLines={5}>
           {title}
         </Text>
       </TouchableOpacity>
@@ -159,8 +160,8 @@ export const DocumentListTablet = withStyles(DocumentListTabletComponent, (theme
     borderTopRightRadius: pxToPercentage(32),
     borderWidth: pxToPercentage(1),
     borderColor: theme['color-primary-2'],
-    minHeight: pxToPercentage(125),
     borderBottomWidth: pxToPercentage(0),
+    paddingVertical: pxToPercentage(10),
     flex: 1,
   },
   btnTabSelected: {
@@ -186,17 +187,18 @@ export const DocumentListTablet = withStyles(DocumentListTabletComponent, (theme
     borderWidth: pxToPercentage(1),
     width: pxToPercentage(512),
     height: pxToPercentage(80),
-    borderRadius: pxToPercentage(32),
+    borderRadius: pxToPercentage(28),
     paddingLeft: pxToPercentage(22),
   },
   btnTimKiem: {
     width: pxToPercentage(355),
     height: pxToPercentage(80),
     backgroundColor: theme['color-primary-0'],
-    borderRadius: pxToPercentage(32),
+    borderRadius: pxToPercentage(28),
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: pxToPercentage(28),
+    ...viewStyle.shadow2,
   },
   txtTimKiem: {
     fontSize: pxToPercentage(34),
@@ -206,10 +208,11 @@ export const DocumentListTablet = withStyles(DocumentListTabletComponent, (theme
     width: pxToPercentage(355),
     height: pxToPercentage(80),
     backgroundColor: theme['color-primary-2'],
-    borderRadius: pxToPercentage(32),
+    borderRadius: pxToPercentage(28),
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: pxToPercentage(261),
+    ...viewStyle.shadow2,
   },
   txtYeuCau: {
     fontSize: pxToPercentage(34),

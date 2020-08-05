@@ -85,7 +85,7 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
             />
           </View>
           <View style={themedStyle.viewDocCenter}>
-            <Text style={themedStyle.txtDocCenter}>
+            <Text style={themedStyle.txtChoise}>
               {'Ai có thể xem tài liệu?'}
             </Text>
             <View style={themedStyle.viewChoice}>
@@ -103,15 +103,15 @@ const ModalDocumentRequestComponent: React.FunctionComponent<ModalDocumentReques
           </View>
           <View style={themedStyle.viewDocBottom}>
             <TouchableOpacity style={themedStyle.btnBottomLeft}>
-              <Text>
-                {'Đồng ý'}
+              <Text style= {themedStyle.txtSendrequest}>
+                {'GỬI YÊU CẦU'}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={onClosePress}
               style={themedStyle.btnBottomRight}>
-              <Text>
-                {'Đóng'}
+              <Text style={themedStyle.txtCloseRequest}>
+                {'ĐÓNG'}
               </Text>
             </TouchableOpacity>
           </View>
@@ -168,23 +168,21 @@ export const ModalDocumentTabletRequest = withStyles(ModalDocumentRequestCompone
     ...textStyle.proDisplayRegular,
   },
   btnChoice: {
-    width: pxToPercentage(40),
-    height: pxToPercentage(40),
-    borderRadius: pxToPercentage(25),
+    width: pxToPercentage(54),
+    height: pxToPercentage(54),
+    borderRadius: pxToPercentage(27),
     borderColor: theme['color-primary-2'],
-    borderWidth: pxToPercentage(1),
-    marginBottom: pxToPercentage(20),
+    borderWidth: pxToPercentage(2),
   },
   btnChoiceSelected: {
-    width: pxToPercentage(45),
-    height: pxToPercentage(45),
-    borderRadius: pxToPercentage(20),
-    borderColor: theme['color-primary-2'],
-    borderWidth: pxToPercentage(5),
-    marginBottom: pxToPercentage(20),
+    borderWidth: pxToPercentage(8),
   },
   txtDocCenter: {
+    fontSize: pxToPercentage(34),
+    ...textStyle.proDisplayRegular,
     marginLeft: pxToPercentage(20),
+  },
+  txtChoise: {
     fontSize: pxToPercentage(34),
     ...textStyle.proDisplayRegular,
   },
@@ -205,6 +203,7 @@ export const ModalDocumentTabletRequest = withStyles(ModalDocumentRequestCompone
   },
   viewChoice: {
     flexDirection: 'row',
+    marginTop: pxToPercentage(10),
   },
   btnBottomRight: {
     width: pxToPercentage(420),
@@ -213,5 +212,15 @@ export const ModalDocumentTabletRequest = withStyles(ModalDocumentRequestCompone
     borderRadius: pxToPercentage(32),
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  txtSendrequest: {
+    fontSize: pxToPercentage(34),
+    ...textStyle.proDisplayBold,
+    color: theme['color-primary-2'],
+  },
+  txtCloseRequest: {
+    fontSize: pxToPercentage(34),
+    ...textStyle.proDisplayBold,
+    color: theme['color-primary-12'],
   },
 }));

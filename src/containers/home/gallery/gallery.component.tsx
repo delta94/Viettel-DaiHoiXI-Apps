@@ -19,13 +19,17 @@ import {
   PressReleaseIcon,
   PhotoGalleryIcon,
 } from '@src/assets/icons';
-import { Program as ProgramModel } from '@src/core/models/program/program.model';
 import { PhotoGallery } from './tabs/photoGallery.component';
 import { PhotoGallery as PhotoGalleryModel } from '@src/core/models/photoGallery/photoGallery.model';
+import { GalleryVideo } from './tabs/galleryVideo.component';
+import { Videos as VideosModel } from '@src/core/models/galleryVideo/videos.model';
 
 interface ComponentProps {
-  programs: ProgramModel[];
   imgDataFake: PhotoGalleryModel[];
+  onVideosItemPress: (id: number, url: string) => void;
+  gallery: VideosModel[];
+  videoSelected: number;
+  url: string;
 }
 
 export type GalleryProps = ComponentProps & ThemedComponentProps;
@@ -35,6 +39,10 @@ const GalleryComponent: React.FunctionComponent<GalleryProps> = (props) => {
 
   const onTabSelect = (selectedTabIndexParam: number) => {
     setSelectedTabIndex(selectedTabIndexParam);
+  };
+
+  const onVideosItemPress = (id: number, url: string) => {
+    props.onVideosItemPress(id, url);
   };
 
   const { themedStyle } = props;
@@ -60,7 +68,12 @@ const GalleryComponent: React.FunctionComponent<GalleryProps> = (props) => {
             title='Phim ảnh'
             icon={PressReleaseIcon}
             titleStyle={themedStyle.tabTitle}>
-            <View/>
+            <GalleryVideo
+              gallery={props.gallery}
+              onVideosItemPress={onVideosItemPress}
+              videoSelected={props.videoSelected}
+              url={props.url}
+            />
           </Tab>
         </TabView>
       </View>
@@ -80,11 +93,11 @@ export const Gallery = withStyles(GalleryComponent, (theme: ThemeType) => ({
     borderRadius: pxToPercentage(12.5),
     backgroundColor: theme['color-custom-100'],
     ...viewStyle.shadow2,
+    overflow: 'hidden',
   },
   tabView: {
     flex: 1,
     backgroundColor: theme['color-primary-11'],
-    borderRadius: pxToPercentage(12.5),
   },
   tabBar: {
     backgroundColor: theme['color-custom-100'],

@@ -19,6 +19,7 @@ import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
 import { SearchIcon, AttachmentIcon } from '@src/assets/icons';
+import { AttachmentModal } from '../../attachmentModel.component';
 
 interface ComponentProps {
   pressReleases: PressReleaseModel[];
@@ -32,6 +33,11 @@ const PressReleaseTabletComponent: React.FunctionComponent<PressReleaseTabletPro
 
   const onPressReleaseItemPress = (pressRelease: PressReleaseModel): void => {
     props.onPressReleaseItemPress(pressRelease);
+  };
+  const [isShowModal, setIsShowModal] = React.useState<boolean>(false);
+
+  const onAttachMentIconPress = () => {
+    setIsShowModal(!isShowModal);
   };
 
   const renderPressReleases = (): React.ReactElement[] => {
@@ -47,12 +53,15 @@ const PressReleaseTabletComponent: React.FunctionComponent<PressReleaseTabletPro
             <Text style={themedStyle.txtInfo}>
               {item.title}
             </Text>
-            <View style={themedStyle.viewAttachment}>
+            <TouchableOpacity
+              activeOpacity={0.75}
+              onPress={onAttachMentIconPress}
+              style={themedStyle.viewAttachment}>
               {AttachmentIcon(themedStyle.iconAttachment)}
               <Text style={themedStyle.txtAttachment}>
                 {'Tập tin đín kèm'}
               </Text>
-            </View>
+            </TouchableOpacity>
           </Td>
           <Td alignItems='center' width={200}>
             <TouchableOpacity
@@ -82,6 +91,10 @@ const PressReleaseTabletComponent: React.FunctionComponent<PressReleaseTabletPro
       <Tbody>
         {renderPressReleases()}
       </Tbody>
+      <AttachmentModal
+        isVisible={isShowModal}
+        onClosePress={onAttachMentIconPress}
+      />
     </Table>
   );
 };

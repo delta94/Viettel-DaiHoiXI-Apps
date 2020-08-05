@@ -12,16 +12,23 @@ import { viewStyle } from '@src/components/viewStyle';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { PhotoGalleryTablet } from './tabs/tablet/photoGallery.component.tablet';
 import { PhotoGallery } from '@src/core/models/photoGallery/photoGallery.model';
-
+import { GalleryTabEnum } from '@src/core/utils/constants';
+import { Videos as VideosModel } from '@src/core/models/galleryVideo/videos.model';
+import { GalleryVideoTablet } from './tabs/tablet/galleryVideo.component.tablet';
 
 interface ComponentProps {
   onBackPress: () => void;
   imgDataFake: PhotoGallery[];
+  onVideosItemPress: (id: number, url: string) => void;
+  gallery: VideosModel[];
+  videoSelected: number;
+  url: string;
 }
 
 export type GalleryTabletProps = ComponentProps & ThemedComponentProps;
 
 const GalleryTabletComponent: React.FunctionComponent<GalleryTabletProps> = (props) => {
+  const [selectedTab, setSelectedTab] = React.useState(GalleryTabEnum.HinhAnh);
 
   const onMessagePress = (): void => {
 
@@ -35,18 +42,42 @@ const GalleryTabletComponent: React.FunctionComponent<GalleryTabletProps> = (pro
 
   };
 
+  const onTabPress = (type: number) => {
+    setSelectedTab(type);
+  };
+
+  const isPhotoGallery = () => {
+    return selectedTab === GalleryTabEnum.HinhAnh;
+  };
+  const onVideosItemPress = (id: number, url: string) => {
+    props.onVideosItemPress(id, url);
+  };
+
   const { themedStyle } = props;
 
   return (
     <View style={themedStyle.container}>
       <BackHeader
-        title={'Triển Lãm'}
+        tabs={[
+          { title: 'HÌNH ẢNH TRIỂN LÃM', type: GalleryTabEnum.HinhAnh },
+          { title: 'PHIM ẢNH TRIỂN LÃM', type: GalleryTabEnum.PhimAnh },
+        ]}
+        onTabPress={onTabPress}
+        tabSelected={selectedTab}
         onBackPress={onBackPress}
         onMessagePress={onMessagePress}
         onHelpPress={onHelpPress}
       />
       <View style={themedStyle.viewCard}>
-        <PhotoGalleryTablet imgDataFake={props.imgDataFake}/>
+        {isPhotoGallery()
+          ? <PhotoGalleryTablet imgDataFake={props.imgDataFake} />
+          : <GalleryVideoTablet
+            gallery={props.gallery}
+            onVideosItemPress={onVideosItemPress}
+            videoSelected={props.videoSelected}
+            url={props.url} />
+        }
+
       </View>
     </View>
   );

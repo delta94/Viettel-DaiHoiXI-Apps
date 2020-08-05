@@ -60,26 +60,24 @@ const PhotoGalleryModalComponent: React.FunctionComponent<PhotoGalleryModalProps
 
   return (
     <Modal
-      backdropColor={'rgb(156, 156, 156)'}
+      backdropColor={'rgb(0, 0, 0)'}
       isVisible={props.isVisible}
       animationIn='slideInUp'
       animationOut='slideOutDown'
       onBackdropPress={onClosePress}
-      backdropOpacity={0.5}
+      backdropOpacity={1}
       onSwipeComplete={onClosePress}
       onBackButtonPress={onClosePress}
       backdropTransitionInTiming={1}
       backdropTransitionOutTiming={1}
       style={themedStyle.container}>
+      <SafeAreaView></SafeAreaView>
       <View style={themedStyle.viewBox}>
         <View style={themedStyle.viewTop}>
           <TouchableOpacity
             activeOpacity={0.75}
-            onPress={() => onClosePress()}
-          >
-            <SafeAreaView>
-              {CloseIconOutline(themedStyle.iconClose)}
-            </SafeAreaView>
+            onPress={() => onClosePress()}>
+            {CloseIconOutline(themedStyle.iconClose)}
           </TouchableOpacity>
         </View>
         <Swiper

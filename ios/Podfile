@@ -82,6 +82,9 @@ target 'DaiHoiXI' do
   permissions_path = '../node_modules/react-native-permissions/ios' 
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
 
+  pod 'react-native-video', :path => '../node_modules/react-native-video/react-native-video.podspec'
+  # pod 'react-native-video/VideoCaching', :path => '../node_modules/react-native-video/react-native-video.podspec'
+
   target 'DaiHoiXITests' do
     inherit! :complete
     # Pods for testing

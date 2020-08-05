@@ -3,6 +3,7 @@ import {
   View,
   TouchableOpacity,
   Text,
+  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -45,57 +46,62 @@ const DocumentListComponent: React.FunctionComponent<DocumentListProps> = (props
   const [selectedOption, setSelectedOption] = useState<any>(null);
 
   return (
-    <View style={themedStyle.container}>
-      <View style={themedStyle.viewCard}>
-        <View style={themedStyle.viewTopGroup}>
-          <ValidationInput
-            style={themedStyle.viewInput}
-            placeholder={'Nhập trích yếu/số văn bản'}
-            validator={StringValidator}
-            onChangeText={() => { }}
+    <React.Fragment>
+      <View style={themedStyle.container}>
+        <View style={themedStyle.viewCard}>
+          <View style={themedStyle.viewTopGroup}>
+            <ValidationInput
+              style={themedStyle.viewInput}
+              placeholder={'Nhập trích yếu/số văn bản'}
+              validator={StringValidator}
+              onChangeText={() => { }}
+            />
+            <TouchableOpacity style={themedStyle.btnTimKiem}
+              activeOpacity={0.75}>
+              <Text style={themedStyle.txtTimKiem}>
+                {'TÌM KIẾM'}
+              </Text>
+            </TouchableOpacity>
+            <View style={themedStyle.viewSelect}>
+              <Select
+                data={[
+                  { text: '7 chương trình đột phá' },
+                  { text: 'Về tăng cường xây dựng chỉnh đốn Đảng; ngăn chặn đẩy lùi sự suy thoái về tư tưởng chính trị' },
+                  { text: 'Công tác kết nạp đảng viên và tình hình đảng viên ra khỏi Đảng' },
+                  { text: 'Nhiệm vụ kinh tế - xã hội' },
+                  { text: 'Danh sách tổ' },
+                ]}
+                textStyle={themedStyle.txtSelectInput}
+                keyExtractor={(item) => item.text}
+                selectedOption={selectedOption}
+                controlStyle={themedStyle.selectOption}
+                placeholder={'Chọn nội dung tài liệu'}
+                placeholderStyle={themedStyle.selectOptionPhd}
+                size={'large'}
+                onSelect={setSelectedOption}>
+              </Select>
+            </View>
+          </View>
+          <Document
+            documentSections={props.documentSections}
           />
-          <TouchableOpacity style={themedStyle.btnTimKiem}
-          activeOpacity={0.75}>
-            <Text style={themedStyle.txtTimKiem}>
-              {'TÌM KIẾM'}
-            </Text>
-          </TouchableOpacity>
-          <View style={themedStyle.viewSelect}>
-            <Select
-              data={[
-                { text: '7 chương trình đột phá' },
-                { text: 'Về tăng cường xây dựng chỉnh đốn Đảng; ngăn chặn đẩy lùi sự suy thoái về tư tưởng chính trị' },
-                { text: 'Công tác kết nạp đảng viên và tình hình đảng viên ra khỏi Đảng' },
-                { text: 'Nhiệm vụ kinh tế - xã hội' },
-                { text: 'Danh sách tổ' },
-              ]}
-              textStyle={themedStyle.txtSelectInput}
-              keyExtractor={(item) => item.text}
-              selectedOption={selectedOption}
-              placeholder={'Chọn nội dung tài liệu'}
-              size={'large'}
-              onSelect={setSelectedOption}>
-            </Select>
+          <View style={themedStyle.viewYeuCau}>
+            <TouchableOpacity
+              activeOpacity={0.75}
+              onPress={onDocumentRequestPress}
+              style={themedStyle.btnYeuCau}>
+              <Text style={themedStyle.txtYeuCau}>
+                {'YÊU CẦU TÀI LIỆU'}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <Document
-          documentSections={props.documentSections}
-        />
-        <View style={themedStyle.viewYeuCau}>
-          <TouchableOpacity
-            activeOpacity={0.75}
-            onPress={onDocumentRequestPress}
-            style={themedStyle.btnYeuCau}>
-            <Text style={themedStyle.txtYeuCau}>
-              {'YÊU CẦU TÀI LIỆU'}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <ModalDocumentRequest
+          isVisible={isVisibleDocumentRequest}
+          onClosePress={onClosePress} />
       </View>
-      <ModalDocumentRequest
-        isVisible={isVisibleDocumentRequest}
-        onClosePress={onClosePress} />
-    </View>
+      <SafeAreaView />
+    </React.Fragment>
   );
 };
 
@@ -153,5 +159,14 @@ export const DocumentList = withStyles(DocumentListComponent, (theme: ThemeType)
     fontSize: pxToPercentage(14),
     padding: 0,
     ...textStyle.proTextRegular,
+  },
+  selectOption: {
+
+    height: pxToPercentage(48),
+    borderRadius: pxToPercentage(5),
+    borderColor: theme['color-primary-18'],
+  },
+  selectOptionPhd: {
+    color: theme['color-primary-18'],
   },
 }));

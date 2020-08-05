@@ -55,7 +55,7 @@ export default class ApiService {
           __DEV__ && console.log(error);
 
           const errorData = !error.response
-            ? { message: I18n.t('layout.networkDisconnect') }
+            ? { message: 'Vui lòng kiểm tra kết nối mạng và thử lại' }
             : error.response.data;
 
           const statusCode = error.response && error.response.status

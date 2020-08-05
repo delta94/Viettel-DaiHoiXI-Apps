@@ -34,7 +34,6 @@ import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/si
 import { AttendanceContainer } from '@src/containers/home/attendance/attendance.container';
 import { SeatingChartContainer } from '@src/containers/home/seatMap/seatingChart.container';
 import { SignInQRcodeContainer } from '@src/containers/auth/signInQRcode/sigInQRcode.container';
-import { GalleryVideoContainer } from '@src/containers/home/gallery/galleryVideo/galleryVideo.container';
 import { GalleryContainer } from '@src/containers/home/gallery/gallery.container';
 // import { ChatContainer } from '@src/containers/chat/chat.container';
 import { ChatContainer } from '@src/containers/chat/chat.container';
@@ -77,7 +76,6 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['signUpToSpeak']: SignUpToSpeakContainer,
   ['attendance']: AttendanceContainer,
   ['seatingChart']: SeatingChartContainer,
-  ['galleryVideo']: GalleryVideoContainer,
   ['gallery']: GalleryContainer,
   ['documentList']: DocumentContainer,
   ['chat']: ChatContainer,

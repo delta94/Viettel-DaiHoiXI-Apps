@@ -18,6 +18,7 @@ import {
 import { textStyle } from '@src/components';
 import { isTablet } from 'react-native-device-info';
 import { RNCamera as Camera } from 'react-native-camera';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface ComponentProps {
   onQRCodeScanSucces: () => void;
@@ -112,7 +113,7 @@ export const SigInQRCode = withStyles(SigInQRCodeComponent, (theme: ThemeType) =
     flex: 0,
   },
   viewbottom: {
-    position: isTablet() ? 'absolute' : 'relative',
+    position: 'absolute',
   },
   btnFlash: {
     alignItems: 'center',
@@ -141,6 +142,7 @@ export const SigInQRCode = withStyles(SigInQRCodeComponent, (theme: ThemeType) =
     minWidth: '100%',
   },
   viewMarker: {
+    marginBottom: isTablet() ? 0 : getStatusBarHeight() + pxToPercentage(80),
     height: isTablet() ? pxToPercentage(600) : pxToPercentage(250),
     width: isTablet() ? pxToPercentage(600) : pxToPercentage(250),
   },

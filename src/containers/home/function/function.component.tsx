@@ -13,7 +13,6 @@ import {
 import { FunctionModel } from '@src/core/models/function/function.model';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { ProfileInfoV2 } from '@src/components/profileInfo/profileinfoV2.component';
-import { userDataFake } from '@src/core/data/user';
 import { User } from '@src/core/models/user/user.model';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
@@ -36,7 +35,7 @@ const FunctionComponent: React.FunctionComponent<FunctionProps> = (props) => {
   return (
     <View style={themedStyle.container}>
       <ProfileInfoV2
-        user={userDataFake}
+        user={props.user}
         style={themedStyle.viewProfileInfo}
       />
       <View style={themedStyle.viewList}>

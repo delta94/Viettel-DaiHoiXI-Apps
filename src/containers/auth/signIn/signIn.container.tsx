@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { SignIn } from './signIn.component';
 import {
@@ -12,19 +12,33 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '@src/core/store';
 import { Dispatch } from 'redux';
 import { onThunkSignInReq } from './store/thunk';
+import { alerts } from '@src/core/utils/alerts';
 
 export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'SignInContainer';
   const [isPrivateIntenet, setIsPrivateIntenet] = React.useState<boolean>(true);
   const dispatch: Dispatch<any> = useDispatch();
-  const sessionReducer: SessionState = useSelector((state: AppState) => state.session);
+  const { loggedIn }: SessionState = useSelector((state: AppState) => state.session);
+
+  useEffect(() => {
+    if (loggedIn) {
+      props.navigation.navigate({
+        key: navigationKey,
+        routeName: 'app',
+      });
+    }
+  }, [loggedIn]);
 
   const onSignInAccountPress = (data: SignInAccountFormData) => {
-    dispatch(onThunkSignInReq(data));
-    // props.navigation.navigate({
-    //   key: navigationKey,
-    //   routeName: 'app',
-    // });
+    if (data) {
+      if (data.password.length < 8) {
+        alerts.alert({ message: 'Mật khẩu phải có ít nhất 8 ký tự!' });
+      } else {
+        dispatch(onThunkSignInReq(data));
+      }
+    } else {
+      alerts.alert({ message: 'Thông tin đăng nhập không được trống!' });
+    }
   };
 
   const onSignInPhoneNumberPress = (data: SignInPhoneNumberFormData) => {

@@ -8,6 +8,7 @@ import {
   getUniqueId,
   getDeviceToken,
   getDeviceType,
+  getMacAddress,
 } from 'react-native-device-info';
 
 export const appName: string = getApplicationName();
@@ -32,4 +33,8 @@ export const identifier = async (): Promise<string> => {
 
 export const deviceToken = async (): Promise<string> => {
   return await getDeviceToken();
+};
+
+export const macAddress = async (): Promise<string> => {
+  return await getMacAddress();
 };

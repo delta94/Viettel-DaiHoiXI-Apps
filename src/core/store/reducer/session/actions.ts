@@ -4,9 +4,9 @@ import {
   SessionClearAction,
   CLEAR_SESSION,
 } from './types';
-import { Session } from '@src/core/models/session/session.model';
+import { User } from '@src/core/models/user/user.model';
 
-export const onSetSession = (payload: Session): SessionSetAction => ({
+export const onSetSession = (payload: User): SessionSetAction => ({
   type: SET_SESSION,
   payload,
 });

@@ -13,8 +13,8 @@ import {
 } from '@kitten/theme';
 import { ValidationInput } from '@src/components';
 import {
-  PasswordValidator,
   NameValidator,
+  StringValidator,
 } from '@src/core/validators';
 import { SignInAccountFormData } from '@src/core/models/auth/signIn/signIn.model';
 import { usePrevious } from '@src/core/utils/hookHelper';
@@ -33,15 +33,9 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
   const [formData, setFormData] = useState<SignInAccountFormData>({
     userName: undefined,
     password: undefined,
-    deviceCode: undefined,
-    imei: undefined,
-    ipAddress: undefined,
-    macAddress: undefined,
-    osType: undefined,
-    osVersion: undefined,
   });
 
-  let prevState: SignInAccountFormData = usePrevious(formData);
+  let prevState = usePrevious(formData);
 
   if (!prevState) {
     prevState = { ...formData };
@@ -86,7 +80,7 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
       <ValidationInput
         value={formData.userName}
         placeholder='Tên đăng nhập'
-        validator={NameValidator}
+        validator={StringValidator}
         onChangeText={onUsernameInputTextChange}
         maxLength={50}
       />
@@ -95,7 +89,7 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
         style={themedStyle.inputPassword}
         placeholder='Mật khẩu'
         secureTextEntry={true}
-        validator={PasswordValidator}
+        validator={StringValidator}
         onChangeText={onPasswordInputTextChange}
         maxLength={50}
       />

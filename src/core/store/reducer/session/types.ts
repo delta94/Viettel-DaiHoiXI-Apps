@@ -1,9 +1,9 @@
-import { Session } from '@src/core/models/session/session.model';
+import { User } from '@src/core/models/user/user.model';
 
 // Describing the shape of the session's slice of state
 export interface SessionState {
   loggedIn: boolean;
-  session: Session;
+  user: User;
 }
 
 // Describing the different ACTION NAMES available
@@ -12,7 +12,7 @@ export const CLEAR_SESSION = 'CLEAR_SESSION';
 
 export interface SessionSetAction {
   type: typeof SET_SESSION;
-  payload: Session;
+  payload: User;
 }
 
 export interface SessionClearAction {

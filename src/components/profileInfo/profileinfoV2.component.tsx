@@ -15,6 +15,7 @@ import { User } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
+import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {
   user: User;
@@ -39,7 +40,7 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoV2Props> = (pro
       <View style={themedStyle.sectionBody}>
         <Image
           resizeMode='cover'
-          source={(new RemoteImage(user.avatar)).imageSource}
+          source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
           style={themedStyle.imgAvatar}
         />
         <View style={themedStyle.viewInfo}>
@@ -49,7 +50,7 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoV2Props> = (pro
               themedStyle.txtInfo,
               themedStyle.txtBold,
             ]}>
-            {`Đồng chí ${user.full_name.toUpperCase()}`}
+            {`Đồng chí ${user.fullName.toUpperCase()}`}
           </Text>
           <Text
             numberOfLines={2}
@@ -72,7 +73,7 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoV2Props> = (pro
                 themedStyle.txtInfo,
                 themedStyle.txtBoldItalic,
               ]}>
-              {user.group}
+              {user.organization}
             </Text>
           </Text>
           <View style={themedStyle.viewRow}>
@@ -86,7 +87,7 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoV2Props> = (pro
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {user.team_number}
+                {2}
               </Text>
             </Text>
             <Text
@@ -102,7 +103,7 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoV2Props> = (pro
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {user.delegate_number}
+                {user.code}
               </Text>
             </Text>
           </View>

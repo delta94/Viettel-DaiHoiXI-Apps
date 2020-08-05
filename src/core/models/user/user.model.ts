@@ -1,10 +1,10 @@
 export class User {
+  userId: string;
+  deputyId: string;
   avatar: string;
-  full_name: string;
+  fullName: string;
   position: string;
-  phone: string;
-  unit: string;
-  group: string;
-  team_number: number;
-  delegate_number: number;
+  organization: string;
+  phoneNumber: string;
+  code: string;
 }

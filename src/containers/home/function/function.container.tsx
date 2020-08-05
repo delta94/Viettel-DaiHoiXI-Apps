@@ -5,15 +5,19 @@ import React, {
 import { NavigationInjectedProps } from 'react-navigation';
 import { Function } from './function.component';
 import { functionDataFake } from '@src/core/data/function';
-import { userDataFake } from '@src/core/data/user';
 import { FunctionEnum } from '@src/core/utils/constants';
 import { isTablet } from 'react-native-device-info';
 import { FunctionTablet } from './function.component.tablet';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 import { alerts } from '@src/core/utils/alerts';
+import { SessionState } from '@src/core/store/reducer/session/types';
+import { useSelector } from 'react-redux';
+import { AppState } from '@src/core/store';
 
 export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'FunctionContainer';
+  const { user }: SessionState = useSelector((state: AppState) => state.session);
+
   const [isExample, setIsExample] = useState<boolean>(false);
 
   useEffect(() => {
@@ -79,7 +83,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
   if (isTablet()) {
     return (
       <FunctionTablet
-        user={userDataFake}
+        user={user}
         functions={functionDataFake}
         onFunctionItemPress={onFunctionItemPress}
         onBackPress={onBackPress}
@@ -89,7 +93,7 @@ export const FunctionContainer: React.FunctionComponent<NavigationInjectedProps>
 
   return (
     <Function
-      user={userDataFake}
+      user={user}
       functions={functionDataFake}
       onFunctionItemPress={onFunctionItemPress}
     />

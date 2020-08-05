@@ -20,6 +20,7 @@ import {
   LogoutIconOther,
   EditPersonIconOther,
 } from '@src/assets/icons';
+import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {
   user: User;
@@ -51,7 +52,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
         <View style={themedStyle.sectionBody}>
           <Image
             resizeMode='cover'
-            source={(new RemoteImage(user.avatar)).imageSource}
+            source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
             style={themedStyle.imgAvatar}
           />
           <View style={themedStyle.viewInfo}>
@@ -61,7 +62,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
                 themedStyle.txtInfo,
                 themedStyle.txtBold,
               ]}>
-              {`Đồng chí ${user.full_name.toUpperCase()}`}
+              {`Đồng chí ${user.fullName.toUpperCase()}`}
             </Text>
             <Text
               numberOfLines={2}
@@ -81,7 +82,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {user.unit}
+                {user.organization}
               </Text>
             </Text>
             <Text
@@ -94,7 +95,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {user.phone}
+                {user.phoneNumber}
               </Text>
             </Text>
           </View>

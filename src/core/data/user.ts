@@ -1,16 +1,4 @@
-import { User } from '../models/user/user.model';
 import { UserDetail } from '../models/user/userDetail.model';
-
-export const userDataFake: User = {
-  avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_VoThiDung.jpg',
-  full_name: 'VÕ THỊ DUNG',
-  position: 'Ủy viên Ban thường vụ Thành ủy, Phó Bí thư Thành ủy',
-  phone: '0123456789',
-  unit: 'Văn phòng thành ủy',
-  group: 'ĐẢNG BỘ KHỐI DÂN - CHÍNH - ĐẢNG THÀNH PHỐ',
-  team_number: 2,
-  delegate_number: 24,
-};
 
 export const userDetailDataFake: UserDetail = {
   avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_VoThiDung.jpg',

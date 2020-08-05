@@ -20,6 +20,7 @@ import {
   PersonIcon2,
 } from '@src/assets/icons';
 import { Button } from '../button/button.component';
+import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {
   user: User;
@@ -53,12 +54,12 @@ const ProfileInfoV2TabletComponent: React.FunctionComponent<ProfileInfoV2TabletP
       ]}>
       <Image
         resizeMode='cover'
-        source={(new RemoteImage(user.avatar)).imageSource}
+        source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
         style={themedStyle.imgAvatar}
       />
       <View style={themedStyle.viewInfo}>
         <Text style={themedStyle.txtFullname}>
-          {`Đồng chí ${user.full_name.toUpperCase()}`}
+          {`Đồng chí ${user.fullName.toUpperCase()}`}
         </Text>
         <Text
           style={[
@@ -68,18 +69,18 @@ const ProfileInfoV2TabletComponent: React.FunctionComponent<ProfileInfoV2TabletP
           {user.position}
         </Text>
         <Text style={themedStyle.txtInfo}>
-          {`Đoàn: ${user.group}`}
+          {`Đoàn: ${user.organization}`}
         </Text>
         <View style={themedStyle.viewRow}>
           <Text style={themedStyle.txtInfo}>
-            {`Tổ: ${user.team_number}`}
+            {`Tổ: ${'1'}`}
           </Text>
           <Text
             style={[
               themedStyle.txtInfo,
               themedStyle.txtDelegateNumber,
             ]}>
-            {`Số đại biểu: ${user.delegate_number}`}
+            {`Số đại biểu: ${user.code}`}
           </Text>
         </View>
       </View>
@@ -100,8 +101,11 @@ export const ProfileInfoV2Tablet = withStyles(ProfileInfoV2TabletComponent, (the
     width: pxToPercentage(150),
     borderRadius: pxToPercentage(16),
     marginRight: pxToPercentage(20),
+    marginTop: pxToPercentage(10),
   },
   viewInfo: {
+    flex: 1,
+    paddingTop: pxToPercentage(10),
     height: pxToPercentage(200),
     justifyContent: 'space-between',
   },

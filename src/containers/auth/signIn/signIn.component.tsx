@@ -51,7 +51,9 @@ interface ComponentProps {
 }
 
 export type SignInProps = ThemedComponentProps & ComponentProps;
+
 type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
+
 interface State {
   selectedTabIndex: number;
   accountFormData: SignInAccountFormData;

@@ -4,39 +4,57 @@ import { SignInReq } from '@src/core/models/auth/signIn/signInReq.model';
 import { onSetSession } from '@src/core/store/reducer/session/actions';
 import { alerts } from '@src/core/utils/alerts';
 import { ApiResult } from '@src/core/dataTransfer/apiResult';
-import I18n from '@src/assets/i18n';
 import { SignInAccountFormData } from '@src/core/models/auth/signIn/signIn.model';
+import {
+  getMacAddress,
+  getIpAddress,
+  getSystemVersion,
+  getSystemName,
+} from 'react-native-device-info';
+import { onSetEnabledSpinner } from '@src/core/store/reducer/app/actions';
 
-export const onThunkSignInReq = (data: SignInAccountFormData, onSuccess?: () => void, onError?: () => void): ThunkActionTypes => async dispatch => {
+export const onThunkSignInReq = (data: SignInAccountFormData): ThunkActionTypes => async dispatch => {
+  dispatch(onSetEnabledSpinner(true));
+
+  // const macAddress = await getMacAddress();
+  // const ipAddress = await getIpAddress();
+  // const osVersion = getSystemVersion();
+  // const osType = getSystemName();
+
   const authService = new AuthService();
   const signInReq: SignInReq = {
     userName: data.userName,
     password: data.password,
-    deviceCode: data.deviceCode,
-    imei: data.imei,
-    ipAddress: data.ipAddress,
-    macAddress: data.macAddress,
-    osType: data.osType,
-    osVersion: data.osVersion,
+    // deviceCode: undefined,
+    // imei: undefined,
+    // ipAddress,
+    // macAddress,
+    // osType,
+    // osVersion,
   };
 
   try {
     const res = await authService.signIn(signInReq);
+
     if (res.success) {
       dispatch(onSetSession(res.data));
-      if (onSuccess) {
-        onSuccess();
-      } else {
-        onError();
-        alerts.alert({ message: I18n.t('signIn.txtNoPupil') });
-      }
+      dispatch(onSetEnabledSpinner(false));
     } else {
-      onError();
-      alerts.alert({ message: res.message || res.error_message });
+      alerts.alert({
+        message: res.message,
+        onResult: () => {
+          dispatch(onSetEnabledSpinner(false));
+        },
+      });
     }
   } catch (e) {
     const { message }: ApiResult = e;
-    onError();
-    alerts.alert({ message });
+
+    alerts.alert({
+      message,
+      onResult: () => {
+        dispatch(onSetEnabledSpinner(false));
+      },
+    });
   }
 };

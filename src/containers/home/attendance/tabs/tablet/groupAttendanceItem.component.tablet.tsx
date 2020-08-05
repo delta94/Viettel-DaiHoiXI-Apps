@@ -66,7 +66,7 @@ const GroupAttendanceItemTabletComponent: React.FunctionComponent<GroupAttendanc
               {`${getPercent(attendance.present, attendance.absent)}%`}
             </Text>
             <Text style={themedStyle.txtAbsent}>
-              {`${getPercent(attendance.absent, attendance.present)}%`}
+              {`${100 - getPercent(attendance.present, attendance.absent)}%`}
             </Text>
           </View>
           <View style={themedStyle.viewPercent}>

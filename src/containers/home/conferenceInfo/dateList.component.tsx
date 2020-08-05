@@ -22,6 +22,7 @@ const dateDataFake: string[] = [
   '08/10/2020',
   '09/10/2020',
   '10/10/2020',
+  '11/10/2020',
 ];
 
 export type DateListProps = ComponentProps & ThemedComponentProps;

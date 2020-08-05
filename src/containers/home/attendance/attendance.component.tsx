@@ -77,7 +77,6 @@ export const Attendance = withStyles(AttendanceComponent, (theme: ThemeType) => 
     flex: 1,
     borderTopLeftRadius: pxToPercentage(12.5),
     borderTopRightRadius: pxToPercentage(12.5),
-    backgroundColor: theme['color-custom-100'],
     overflow: 'hidden',
   },
   tabView: {

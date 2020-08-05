@@ -3,6 +3,7 @@ import {
   View,
   Text,
   processColor,
+  ScrollView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -131,18 +132,20 @@ const HallAttendanceComponent: React.FunctionComponent<HallAttendanceProps> = (p
   return (
     <View style={themedStyle.container}>
       <DateList />
-      <View style={themedStyle.viewDescription}>
-        <View style={themedStyle.containerTitle}>
-          {renderTitle()}
-          {renderTitle('rgba(172,32,5,1)', 'Có mặt tại hội trường')}
-          {renderTitle('rgba(245,231,198,1)', 'Vắng có lý do')}
-          {renderTitle('rgba(149, 138, 131,1)', 'Vắng không lý do')}
+      <ScrollView>
+        <View style={themedStyle.viewDescription}>
+          <View style={themedStyle.containerTitle}>
+            {renderTitle()}
+            {renderTitle('rgba(172,32,5,1)', 'Có mặt tại hội trường')}
+            {renderTitle('rgba(245,231,198,1)', 'Vắng có lý do')}
+            {renderTitle('rgba(149, 138, 131,1)', 'Vắng không lý do')}
+          </View>
+          {renderSection()}
         </View>
-        {renderSection()}
-      </View>
-      <View style={themedStyle.viewChart}>
-        {renderChart()}
-      </View>
+        <View style={themedStyle.viewChart}>
+          {renderChart()}
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -163,7 +166,7 @@ export const HallAttendance = withStyles(HallAttendanceComponent, (theme: ThemeT
     justifyContent: 'center',
   },
   viewDescription: {
-    flex: 1,
+    height: pxToPercentage(155),
     flexDirection: 'row',
     paddingBottom: pxToPercentage(10),
     paddingHorizontal: pxToPercentage(5),

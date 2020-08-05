@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   View,
+  ScrollView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -70,16 +71,16 @@ const GroupAttendanceComponent: React.FunctionComponent<GroupAttendanceProps> = 
           <Tab
             title='SÁNG'
             titleStyle={themedStyle.tabTitle}>
-            <React.Fragment>
+            <ScrollView>
               {renderSection('SÁNG')}
-            </React.Fragment>
+            </ScrollView>
           </Tab>
           <Tab
             title='CHIỀU'
             titleStyle={themedStyle.tabTitle}>
-            <React.Fragment>
+            <ScrollView>
               {renderSection('CHIỀU')}
-            </React.Fragment>
+            </ScrollView>
           </Tab>
         </TabView>
       </View>
@@ -90,20 +91,9 @@ const GroupAttendanceComponent: React.FunctionComponent<GroupAttendanceProps> = 
 export const GroupAttendance = withStyles(GroupAttendanceComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    backgroundColor: theme['color-custom-100'],
   },
   viewSection: {
     flex: 1,
-  },
-  viewTitle: {
-    backgroundColor: theme['color-primary-2'],
-    justifyContent: 'center',
-    height: pxToPercentage(40),
-    paddingLeft: pxToPercentage(20),
-  },
-  txtTitle: {
-    color: theme['color-custom-100'],
-    fontSize: pxToPercentage(14),
   },
   viewContent: {
     flex: 1,

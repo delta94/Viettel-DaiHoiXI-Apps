@@ -48,3 +48,15 @@ export enum DocumentRequestEnum {
   OnlyMe,
   EveryOne,
 }
+
+export enum ConferenceInfoEnum {
+  program,
+  notification,
+  pressRelease,
+}
+
+export enum DocumentTabEnum {
+  TailieuCongTacChiDao,
+  TaiLieuLuuHanhNoiBo,
+  TaiLieuNghienCuuThamKhao,
+}

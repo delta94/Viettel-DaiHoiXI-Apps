@@ -6,6 +6,7 @@ import {
 import {
   TabView,
   Tab,
+  TabBar,
 } from '@kitten/ui';
 import {
   ThemedComponentProps,
@@ -23,6 +24,7 @@ import { PhotoGallery } from './tabs/photoGallery.component';
 import { PhotoGallery as PhotoGalleryModel } from '@src/core/models/photoGallery/photoGallery.model';
 import { GalleryVideo } from './tabs/galleryVideo.component';
 import { Videos as VideosModel } from '@src/core/models/galleryVideo/videos.model';
+import { GalleryTabEnum } from '@src/core/utils/constants';
 
 interface ComponentProps {
   imgDataFake: PhotoGalleryModel[];
@@ -47,35 +49,49 @@ const GalleryComponent: React.FunctionComponent<GalleryProps> = (props) => {
 
   const { themedStyle } = props;
 
+  const renderTabSelected = (): React.ReactElement => {
+    switch (selectedTabIndex) {
+      case GalleryTabEnum.HinhAnh: {
+        return (
+          <PhotoGallery
+            imgDataFake={props.imgDataFake}
+          />
+        );
+      }
+      case GalleryTabEnum.PhimAnh: {
+        return (
+          <GalleryVideo
+            gallery={props.gallery}
+            onVideosItemPress={onVideosItemPress}
+            videoSelected={props.videoSelected}
+            url={props.url}
+          />
+        );
+      }
+      default: {
+        return undefined;
+      }
+    }
+  };
+
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewContent}>
-        <TabView
+        <TabBar
           style={themedStyle.tabView}
-          tabBarStyle={themedStyle.tabBar}
           indicatorStyle={themedStyle.tabViewIndicator}
           selectedIndex={selectedTabIndex}
           onSelect={onTabSelect}>
           <Tab
             title='Hình ảnh'
             icon={PhotoGalleryIcon}
-            titleStyle={themedStyle.tabTitle}>
-            <PhotoGallery
-              imgDataFake={props.imgDataFake}
-            />
-          </Tab>
+            titleStyle={themedStyle.tabTitle} />
           <Tab
             title='Phim ảnh'
             icon={PressReleaseIcon}
-            titleStyle={themedStyle.tabTitle}>
-            <GalleryVideo
-              gallery={props.gallery}
-              onVideosItemPress={onVideosItemPress}
-              videoSelected={props.videoSelected}
-              url={props.url}
-            />
-          </Tab>
-        </TabView>
+            titleStyle={themedStyle.tabTitle} />
+        </TabBar>
+        {renderTabSelected()}
       </View>
       <SafeAreaView />
     </View>
@@ -96,7 +112,6 @@ export const Gallery = withStyles(GalleryComponent, (theme: ThemeType) => ({
     overflow: 'hidden',
   },
   tabView: {
-    flex: 1,
     backgroundColor: theme['color-primary-11'],
   },
   tabBar: {

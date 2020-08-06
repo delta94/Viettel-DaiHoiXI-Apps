@@ -26,7 +26,7 @@ interface ComponentProps {
 export type DocumentListTabletProps = ComponentProps & ThemedComponentProps;
 
 const DocumentListTabletComponent: React.FunctionComponent<DocumentListTabletProps> = (props) => {
-  const [selectedTab, setSelectedTab] = useState<number>(ProgramTabEnum.ChuongTrinh);
+  const [selectedTab, setSelectedTab] = useState<number>(0);
 
   const [isVisibleDocumentRequest, setIsVisibleDocumentRequest] = React.useState<boolean>(false);
 

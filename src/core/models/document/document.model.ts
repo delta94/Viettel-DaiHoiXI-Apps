@@ -8,9 +8,19 @@ export class Document {
 }
 
 export class DocumentSection {
+  documentType: string;
   title: string;
   documents: Document[];
 }
 
+export class Documents {
+  name: string;
+  topic: string;
+  documentTopics: DocumentSection[];
+}
 
+export class DocumentType {
+  name: string;
+  documents: Documents[];
+}
 

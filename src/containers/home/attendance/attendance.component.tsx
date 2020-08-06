@@ -5,6 +5,7 @@ import {
 import {
   TabView,
   Tab,
+  TabBar,
 } from '@kitten/ui';
 import {
   ThemedComponentProps,
@@ -21,6 +22,8 @@ import { HallAttendance as HallAttendanceModel } from '@src/core/models/attendan
 import { GroupAttendance as GroupAttendanceModel } from '@src/core/models/attendance/groupAttendance/groupAttendance.model';
 import { HallAttendance } from './tabs/hallAttendance.component';
 import { GroupAttendance } from './tabs/groupAttendance.component';
+import { DateList } from '../conferenceInfo/dateList.component';
+import { AttendanceTabEnum } from '@src/core/utils/constants';
 
 interface ComponentProps {
   hallAttendance: HallAttendanceModel[];
@@ -36,31 +39,45 @@ const AttendanceComponent: React.FunctionComponent<AttendanceProps> = (props) =>
     setSelectedTabIndex(selectedTabIndexParam);
   };
 
-
   const { themedStyle } = props;
+
+  const renderTabSelected = (): React.ReactElement => {
+    switch (selectedTabIndex) {
+      case AttendanceTabEnum.Hall: {
+        return (
+          <HallAttendance attendances={props.hallAttendance} />
+        );
+      }
+      case AttendanceTabEnum.Group: {
+        return (
+          <GroupAttendance groupAttendance={props.groupAttendance} />
+        );
+      }
+      default: {
+        return undefined;
+      }
+    }
+  };
 
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewContent}>
-        <TabView
+        <TabBar
           style={themedStyle.tabView}
-          tabBarStyle={themedStyle.tabBar}
           indicatorStyle={themedStyle.tabViewIndicator}
           selectedIndex={selectedTabIndex}
           onSelect={onTabSelect}>
           <Tab
             title='Hội trường'
             icon={HallIcon}
-            titleStyle={themedStyle.tabTitle}>
-            <HallAttendance attendances={props.hallAttendance} />
-          </Tab>
+            titleStyle={themedStyle.tabTitle} />
           <Tab
             title='Tổ'
             icon={PeopleIconOther}
-            titleStyle={themedStyle.tabTitle}>
-            <GroupAttendance groupAttendance={props.groupAttendance} />
-          </Tab>
-        </TabView>
+            titleStyle={themedStyle.tabTitle} />
+        </TabBar>
+        <DateList />
+        {renderTabSelected()}
       </View>
     </View>
   );
@@ -80,7 +97,6 @@ export const Attendance = withStyles(AttendanceComponent, (theme: ThemeType) => 
     overflow: 'hidden',
   },
   tabView: {
-    flex: 1,
     backgroundColor: theme['color-primary-11'],
   },
   tabBar: {

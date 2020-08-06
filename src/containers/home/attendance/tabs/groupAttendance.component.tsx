@@ -12,7 +12,6 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { GroupAttendance as GroupAttendanceModel } from '@src/core/models/attendance/groupAttendance/groupAttendance.model';
 import { GroupAttendanceContent } from '@src/core/models/attendance/groupAttendance/groupAttendance.model';
 import { GroupAttendanceItem } from './groupAttendanceItem.component';
-import { DateList } from '../../conferenceInfo/dateList.component';
 import {
   TabView,
   Tab,
@@ -60,7 +59,6 @@ const GroupAttendanceComponent: React.FunctionComponent<GroupAttendanceProps> = 
 
   return (
     <View style={themedStyle.container}>
-      <DateList />
       <View style={themedStyle.viewContent}>
         <TabView
           style={themedStyle.tabView}

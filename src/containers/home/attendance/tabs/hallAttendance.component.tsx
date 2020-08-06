@@ -131,7 +131,6 @@ const HallAttendanceComponent: React.FunctionComponent<HallAttendanceProps> = (p
 
   return (
     <View style={themedStyle.container}>
-      <DateList />
       <ScrollView>
         <View style={themedStyle.viewDescription}>
           <View style={themedStyle.containerTitle}>

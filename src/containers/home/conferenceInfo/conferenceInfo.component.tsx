@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import {
   View,
-  SafeAreaView,
 } from 'react-native';
 import {
-  TabView,
   Tab,
+  TabBar,
 } from '@kitten/ui';
 import {
   ThemedComponentProps,
@@ -26,6 +25,7 @@ import {
 import { Program as ProgramModel } from '@src/core/models/program/program.model';
 import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
 import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
+import { ConferenceInfoEnum } from '@src/core/utils/constants';
 
 interface ComponentProps {
   programs: ProgramModel[];
@@ -57,37 +57,33 @@ const ConferenceInfoComponent: React.FunctionComponent<ConferenceInfoProps> = (p
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewContent}>
-        <TabView
+        <TabBar
           style={themedStyle.tabView}
-          tabBarStyle={themedStyle.tabBar}
           indicatorStyle={themedStyle.tabViewIndicator}
           selectedIndex={selectedTabIndex}
           onSelect={onTabSelect}>
           <Tab
             title='Chương trình'
             icon={MenuIcon}
-            titleStyle={themedStyle.tabTitle}>
-            <Program programs={props.programs} />
-          </Tab>
+            titleStyle={themedStyle.tabTitle} />
           <Tab
             title='Thông báo'
             icon={SoundIcon}
-            titleStyle={themedStyle.tabTitle}>
-            <Notification
-              notifications={props.notifications}
-              onNotificationItemPress={onNotificationItemPress}
-            />
-          </Tab>
+            titleStyle={themedStyle.tabTitle} />
           <Tab
             title='Thông cáo'
             icon={PressReleaseIcon}
-            titleStyle={themedStyle.tabTitle}>
-            <PressRelease
-              pressReleases={props.pressReleases}
-              onPressReleaseItemPress={onPressReleaseItemPress}
-            />
-          </Tab>
-        </TabView>
+            titleStyle={themedStyle.tabTitle} />
+        </TabBar>
+        {selectedTabIndex === ConferenceInfoEnum.program && <Program programs={props.programs} />}
+        {selectedTabIndex === ConferenceInfoEnum.notification && <Notification
+          notifications={props.notifications}
+          onNotificationItemPress={onNotificationItemPress}
+        />}
+        {selectedTabIndex === ConferenceInfoEnum.pressRelease && <PressRelease
+          pressReleases={props.pressReleases}
+          onPressReleaseItemPress={onPressReleaseItemPress}
+        />}
       </View>
     </View>
   );
@@ -107,7 +103,6 @@ export const ConferenceInfo = withStyles(ConferenceInfoComponent, (theme: ThemeT
     ...viewStyle.shadow2,
   },
   tabView: {
-    flex: 1,
     backgroundColor: theme['color-primary-11'],
     borderRadius: pxToPercentage(12.5),
   },

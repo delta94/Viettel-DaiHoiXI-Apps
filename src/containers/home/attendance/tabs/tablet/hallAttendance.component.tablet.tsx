@@ -40,7 +40,7 @@ const HallAttendanceTabletComponent: React.FunctionComponent<HallAttendanceTable
             colors: [
               processColor('rgba(172,32,5,1)'),
               processColor('rgba(149, 138, 131,1)'),
-              processColor('rgba(245,231,198,1)'),
+              processColor('rgba(255, 194, 85,1)'),
             ],
             valueTextSize: pxToPercentage(28),
             valueTextColor: processColor('white'),
@@ -136,7 +136,7 @@ const HallAttendanceTabletComponent: React.FunctionComponent<HallAttendanceTable
         <View style={themedStyle.containerTitle}>
           {renderTitle()}
           {renderTitle('rgba(172,32,5,1)', 'Có mặt tại hội trường')}
-          {renderTitle('rgba(245,231,198,1)', 'Vắng có lý do')}
+          {renderTitle('rgba(255, 194, 85,1)', 'Vắng có lý do')}
           {renderTitle('rgba(149, 138, 131,1)', 'Vắng không lý do')}
         </View>
         {renderSection()}

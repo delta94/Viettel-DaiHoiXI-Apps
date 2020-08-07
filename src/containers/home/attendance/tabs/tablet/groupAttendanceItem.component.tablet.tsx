@@ -127,7 +127,7 @@ export const GroupAttendanceItemTablet = withStyles(GroupAttendanceItemTabletCom
   viewPercent: {
     height: pxToPercentage(20),
     flexDirection: 'row',
-    backgroundColor: theme['color-primary-19'],
+    backgroundColor: theme['color-custom-1000'],
     borderRadius: 10,
     overflow: 'hidden',
   },
@@ -145,7 +145,6 @@ export const GroupAttendanceItemTablet = withStyles(GroupAttendanceItemTabletCom
   },
   txtAbsent: {
     textAlign: 'center',
-    color: theme['color-primary-19'],
     flex: 1,
   },
   viewBottom: {
@@ -170,6 +169,6 @@ export const GroupAttendanceItemTablet = withStyles(GroupAttendanceItemTabletCom
     marginRight: pxToPercentage(20),
   },
   viewCircleAbsent: {
-    backgroundColor: theme['color-primary-19'],
+    backgroundColor: theme['color-custom-1000'],
   },
 }));

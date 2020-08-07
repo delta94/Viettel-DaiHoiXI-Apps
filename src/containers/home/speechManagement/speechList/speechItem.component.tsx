@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import { Button } from '@kitten/ui';
 import {
@@ -10,7 +9,7 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { pxToPercentage, tenMinutesCountdown } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import { Speech as SpeechModel } from '@src/core/models/speech/speech.model';
@@ -20,17 +19,17 @@ import { SpeechStatusEnum } from '@src/core/utils/constants';
 interface ComponentProps {
   index?: number;
   speech: SpeechModel;
-  onPress?: (type: number) => void;
+  cdTimer: number;
+  onSpeechInvitationPress: (id: string) => void;
 }
 
 export type SpeechItemProps = ComponentProps & ThemedComponentProps;
 
 const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) => {
   const { themedStyle, speech, index } = props;
-  const [isFocus, setIsFocus] = useState<boolean>(false);
 
-  const onItemPress = (): void => {
-    setIsFocus(prevState => !prevState);
+  const onSpeechInvitationPress = (id: string) => {
+    return props.onSpeechInvitationPress(id);
   };
 
   const renderButtons = (): React.ReactElement => {
@@ -38,7 +37,7 @@ const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) =>
       case SpeechStatusEnum.Accepted: {
         return (
           <Button
-            onPress={() => { }}
+            onPress={() => onSpeechInvitationPress(speech.id)}
             style={themedStyle.btnSuccess}>
             {'Mời phát biểu'}
           </Button>
@@ -47,7 +46,7 @@ const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) =>
       case SpeechStatusEnum.Speaking: {
         return (
           <Button
-            onPress={() => { }}
+            onPress={() => onSpeechInvitationPress(speech.id)}
             style={themedStyle.btnError}>
             {'Dừng phát biểu'}
           </Button>
@@ -56,8 +55,8 @@ const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) =>
       case SpeechStatusEnum.Finished: {
         return (
           <Button
+            disabled={true}
             textStyle={themedStyle.txtFinished}
-            onPress={() => { }}
             style={themedStyle.btnFinished}>
             {'Đã phát biểu'}
           </Button>
@@ -70,10 +69,7 @@ const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) =>
   };
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.75}
-      onPress={onItemPress}
-      style={themedStyle.container}>
+    <View style={themedStyle.container}>
       <View style={themedStyle.viewHeader}>
         <Text style={themedStyle.txtFullname}>
           {'Đại biểu: '}
@@ -104,19 +100,18 @@ const SpeechItemComponent: React.FunctionComponent<SpeechItemProps> = (props) =>
           <View style={themedStyle.viewTime}>
             <View style={themedStyle.viewTimeBox}>
               <Text style={themedStyle.txtTime}>
-                {'10:00:00'}
+                {tenMinutesCountdown(props.cdTimer)}
               </Text>
             </View>
           </View>
         </React.Fragment>)}
-      {isFocus &&
-        (<React.Fragment>
-          <Hr />
-          <View style={themedStyle.viewFooter}>
-            {renderButtons()}
-          </View>
-        </React.Fragment>)}
-    </TouchableOpacity>
+      <React.Fragment>
+        <Hr />
+        <View style={themedStyle.viewFooter}>
+          {renderButtons()}
+        </View>
+      </React.Fragment>
+    </View>
   );
 };
 

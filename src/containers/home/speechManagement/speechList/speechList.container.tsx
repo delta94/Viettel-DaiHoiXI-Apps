@@ -12,36 +12,31 @@ export const SpeechListContainer: React.FunctionComponent<NavigationInjectedProp
   const navigationKey: string = 'SpeechListContainer';
   const [delegateSpeechList, setDelegateSpeechList] = React.useState<Speech[]>(speechDataFake);
 
-  const onSpeechInvitationPress = (id: number) => {
+  const onSpeechInvitationPress = (id: string) => {
     // check speeching
-    let isSpeeching = false;
-    for (let i = 0; i < delegateSpeechList.length; i++) {
-      if (delegateSpeechList[i].status === SpeechStatusEnum.Speaking && i !== id) {
-        isSpeeching = true;
-        alerts.alert({
-          title: 'Thông báo',
-          message: 'Đang có đại biểu khác phát biểu',
-        });
-        break;
-      }
-    }
-    // if this delegate speech -> stop speech
-    if (delegateSpeechList[id].status === SpeechStatusEnum.Speaking) {
-      // stop speech -> change status to compolete speech
-      setDelegateSpeechList(delegateSpeechList.map((item, index) =>
-        index === id ?
-          { ...item, status: SpeechStatusEnum.Finished }
-          : item));
+    if (delegateSpeechList.filter(item => item.status === SpeechStatusEnum.Speaking && item.id !== id).length > 0) {
+      alerts.alert({
+        title: 'Thông báo',
+        message: 'Đang có đại biểu khác phát biểu',
+      });
     } else {
-      // if have no one speeching change this delegate status to speeching
-      if (!isSpeeching) {
-        setDelegateSpeechList(delegateSpeechList.map((item, index) =>
-          index === id ?
-            { ...item, status: SpeechStatusEnum.Speaking }
-            : item));
+      // if this delegate speech -> stop speech
+      if (delegateSpeechList.filter(item => item.status === SpeechStatusEnum.Speaking && item.id === id).length > 0) {
+        // stop speech -> change status to compolete speech
+        setDelegateSpeechList(delegateSpeechList.map((item, index) => {
+          return item.id === id ? { ...item, status: SpeechStatusEnum.Finished } : item;
+        }));
+      } else {
+        // if have no one speeching change this delegate status to speeching
+        setDelegateSpeechList(delegateSpeechList.map((item, index) => {
+          return item.id === id ? { ...item, status: SpeechStatusEnum.Speaking } : item;
+        }));
       }
-
     }
+  };
+
+  const onEndDrag = (data: Speech[]) => {
+    setDelegateSpeechList(data);
   };
 
   if (isTablet()) {
@@ -49,12 +44,15 @@ export const SpeechListContainer: React.FunctionComponent<NavigationInjectedProp
       <SpeechListTablet
         onSpeechInvitationPress={onSpeechInvitationPress}
         speechs={delegateSpeechList}
+        onEndDrag={onEndDrag}
       />
     );
   }
   return (
     <SpeechList
-      speechs={speechDataFake}
+      speechs={delegateSpeechList}
+      onEndDrag={onEndDrag}
+      onSpeechInvitationPress={onSpeechInvitationPress}
     />
   );
 };

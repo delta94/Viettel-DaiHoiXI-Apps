@@ -28,7 +28,9 @@ import { imageWatch } from '@src/assets/images';
 interface ComponentProps {
   enum?: number;
   index: number;
-  onSpeechInvitationPress: (index: number) => void;
+  id: string;
+  time: number;
+  onSpeechInvitationPress: (index: string) => void;
 }
 
 export type SpeechListStatusItemTabletProps = ThemedComponentProps & ComponentProps;
@@ -36,23 +38,7 @@ export type SpeechListStatusItemTabletProps = ThemedComponentProps & ComponentPr
 const SpeechListStatusItemTabletComponent: React.FunctionComponent<SpeechListStatusItemTabletProps> = (props) => {
   const { themedStyle } = props;
 
-  const [time, setTime] = React.useState<number>(600);
-
-  React.useEffect(() => {
-    if (props.enum === SpeechStatusEnum.Speaking) {
-      const interval = setInterval(() => {
-        if (time > 0) {
-          setTime(time - 1);
-        } else {
-          props.onSpeechInvitationPress(props.index);
-          clearInterval(interval);
-        }
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }), [];
-
-  const onSpeechInvitationPress = (index: number): void => {
+  const onSpeechInvitationPress = (index: string): void => {
     props.onSpeechInvitationPress(index);
   };
 
@@ -62,7 +48,7 @@ const SpeechListStatusItemTabletComponent: React.FunctionComponent<SpeechListSta
         childrenFlex
         style={themedStyle.viewWaitSpeech}>
         <TouchableOpacity
-          onPress={() => { onSpeechInvitationPress(props.index); }}
+          onPress={() => { onSpeechInvitationPress(props.id); }}
           activeOpacity={0.75}
           style={themedStyle.viewItem}>
           {RegisterIcon([themedStyle.icon, themedStyle.iconRegisterSpeech])}
@@ -94,14 +80,14 @@ const SpeechListStatusItemTabletComponent: React.FunctionComponent<SpeechListSta
     return (
       <Td childrenFlex style={themedStyle.viewSpeaking}>
         <TouchableOpacity
-          onPress={() => { onSpeechInvitationPress(props.index); }}
+          onPress={() => { onSpeechInvitationPress(props.id); }}
           activeOpacity={0.75}
           style={themedStyle.viewItem}>
           <ImageBackground
             source={imageWatch.imageSource}
             style={themedStyle.imageWatch}>
             <Text style={themedStyle.txtTime}>
-              {tenMinutesCountdown(time)}
+              {tenMinutesCountdown(props.time)}
             </Text>
           </ImageBackground>
           {StopSpeechIcon([themedStyle.icon, themedStyle.iconStop])}

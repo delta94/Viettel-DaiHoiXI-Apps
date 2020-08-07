@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -11,30 +11,29 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
-import { User as UserModel } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { DelegateList as DelegateListModel } from '@src/core/models/delegate/delegateList.model';
 import { viewStyle } from '@src/components/viewStyle';
-import { ArrowIosBackFill } from '@src/assets/icons';
+import { Delegate } from '@src/core/models/delegate/delegate.model';
 
 interface ComponentProps {
   delegateList: DelegateListModel;
-  onDelegateItemPress: (delegate: UserModel) => void;
+  onDelegateItemPress: (deputy: Delegate) => void;
+  index: number;
 }
 
 export type DelegateListItemProps = ThemedComponentProps & ComponentProps;
 
 const DelegateListItemComponent: React.FunctionComponent<DelegateListItemProps> = (props) => {
   const { themedStyle } = props;
-  const [isShowDelegates, setIsShowDelegates] = useState<boolean>(true);
 
-  const onDelegateItemPress = (delegate: UserModel): void => {
-    props.onDelegateItemPress(delegate);
+  const onDelegateItemPress = (deputy: Delegate): void => {
+    props.onDelegateItemPress(deputy);
   };
 
   const onRenderDelegate = (): React.ReactElement[] => {
-    return props.delegateList.delegates.map((item, index) => {
+    return props.delegateList.deputies.map((item, index) => {
       return (
         <TouchableOpacity
           activeOpacity={0.75}
@@ -43,7 +42,7 @@ const DelegateListItemComponent: React.FunctionComponent<DelegateListItemProps> 
           <View style={themedStyle.viewBody}>
             <Image
               resizeMode='cover'
-              source={(new RemoteImage(item.avatar)).imageSource}
+              source={(new RemoteImage(`http://daihoi11.imt-soft.com:8080${item.avatar}`)).imageSource}
               style={themedStyle.imgAvatar}
             />
             <View style={themedStyle.viewInfo}>
@@ -61,29 +60,24 @@ const DelegateListItemComponent: React.FunctionComponent<DelegateListItemProps> 
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {item.full_name.toUpperCase()}
+                {item.fullName.toUpperCase()}
               </Text>
               <Text
-                numberOfLines={2}
+                numberOfLines={6}
                 style={[
                   themedStyle.txtInfo,
                   themedStyle.txtItalic,
                 ]}>
-                {item.position}
+                {item.position ? item.position : 'a'}
               </Text>
               <View style={themedStyle.viewRow}>
                 <Text
                   numberOfLines={1}
-                  style={themedStyle.txtInfo}>
-                  {'Tổ: '}
-                  <Text
-                    numberOfLines={1}
-                    style={[
-                      themedStyle.txtInfo,
-                      themedStyle.txtBold,
-                    ]}>
-                    {item.team_number}
-                  </Text>
+                  style={[
+                    themedStyle.txtInfo,
+                    themedStyle.txtBold,
+                  ]}>
+                  {item.discussionGroup ? item.discussionGroup : 'Tổ: Không'}
                 </Text>
                 <Text
                   numberOfLines={1}
@@ -98,7 +92,7 @@ const DelegateListItemComponent: React.FunctionComponent<DelegateListItemProps> 
                       themedStyle.txtInfo,
                       themedStyle.txtBold,
                     ]}>
-                    {item.delegate_number}
+                    {item.code}
                   </Text>
                 </Text>
               </View>
@@ -111,17 +105,13 @@ const DelegateListItemComponent: React.FunctionComponent<DelegateListItemProps> 
 
   return (
     <View style={themedStyle.container}>
-      <TouchableOpacity
-        activeOpacity={0.75}
-        onPress={() => setIsShowDelegates(!isShowDelegates)}
-        style={themedStyle.sectionGroup}>
+      <View style={themedStyle.sectionGroup}>
         <Text style={themedStyle.txtGroup}>
-          {props.delegateList.group}
+          {`${props.index} - ${props.delegateList.group}`}
         </Text>
-        {ArrowIosBackFill(isShowDelegates ? themedStyle.iconArrowUp : themedStyle.iconArrowDown)}
-      </TouchableOpacity>
+      </View>
       <View style={themedStyle.sectionItem}>
-        {isShowDelegates && onRenderDelegate()}
+        {onRenderDelegate()}
       </View>
     </View>
   );
@@ -160,6 +150,7 @@ export const DelegateListItem = withStyles(DelegateListItemComponent, (theme: Th
     width: pxToPercentage(75),
     borderRadius: pxToPercentage(5),
     marginRight: pxToPercentage(12.5),
+    alignSelf: 'center',
   },
   viewInfo: {
     flex: 1,
@@ -167,22 +158,6 @@ export const DelegateListItem = withStyles(DelegateListItemComponent, (theme: Th
   },
   viewRow: {
     flexDirection: 'row',
-  },
-  iconArrowUp: {
-    position: 'absolute',
-    right: pxToPercentage(6),
-    width: pxToPercentage(20),
-    height: pxToPercentage(20),
-    tintColor: theme['color-custom-100'],
-    transform: [{ rotate: '90deg' }],
-  },
-  iconArrowDown: {
-    position: 'absolute',
-    right: pxToPercentage(6),
-    width: pxToPercentage(20),
-    height: pxToPercentage(20),
-    tintColor: theme['color-custom-100'],
-    transform: [{ rotate: '270deg' }],
   },
   txtInfo: {
     fontSize: pxToPercentage(13),

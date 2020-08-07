@@ -60,3 +60,25 @@ export const minusDays = function (dateParam: Date, dayCount: number) {
 export const tenMinutesCountdown = function (time: number) {
   return `${Math.trunc(time / 60) > 9 ? Math.trunc(time / 60) : `0${Math.trunc(time / 60)}`}:${time % 60 < 10 ? `0` + (time % 60) : (time % 60)}`;
 };
+
+export const stringToASCII = (str: string): string => {
+  try {
+    return str.replace(/[àáảãạâầấẩẫậăằắẳẵặ]/g, 'a')
+      .replace(/[èéẻẽẹêềếểễệ]/g, 'e')
+      .replace(/[đ]/g, 'd')
+      .replace(/[ìíỉĩị]/g, 'i')
+      .replace(/[òóỏõọôồốổỗộơờớởỡợ]/g, 'o')
+      .replace(/[ùúủũụưừứửữự]/g, 'u')
+      .replace(/[ỳýỷỹỵ]/g, 'y');
+  } catch {
+    return '';
+  }
+};
+
+export const searchASCII = (strSearch: string, strOriginal: string): boolean => {
+  const strSearchToASCII = stringToASCII(strSearch.toLowerCase());
+  const strOriginalToASCII = stringToASCII(strOriginal.toLowerCase());
+
+  return strOriginalToASCII.includes(strSearchToASCII);
+};
+

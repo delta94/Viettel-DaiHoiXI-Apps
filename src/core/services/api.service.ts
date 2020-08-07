@@ -79,6 +79,7 @@ export default class ApiService {
     if (hasToken) {
       const sessionReducer = store.getState().session;
       // headers.Authorization = `Bearer ${sessionReducer.token}`;
+      headers.Authorization = 'ok';
     }
 
     return headers;

@@ -11,9 +11,8 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { pxToPercentage, searchASCII } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { User as UserModel } from '@src/core/models/user/user.model';
 import { Table } from '@src/components/table/table.component';
 import { Thead } from '@src/components/table/thead.component';
 import { Th } from '@src/components/table/th.component';
@@ -24,21 +23,27 @@ import { textStyle } from '@src/components';
 import { SearchIcon } from '@src/assets/icons';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { Button } from '@src/components/button/button.component';
-import { Select } from '@kitten/ui';
+import { Select, SelectOption } from '@kitten/ui';
 import { RemoteImage } from '@src/assets/images';
+import { DelegateList } from '@src/core/models/delegate/delegateList.model';
+import { Delegate } from '@src/core/models/delegate/delegate.model';
 
 interface ComponentProps {
-  delegateList: UserModel[];
-  onDelegateItemPress: (delegate: UserModel) => void;
+  delegateList: DelegateList[];
+  onDelegateItemPress: (deputy: Delegate) => void;
   onBackPress: () => void;
+  dataGroup: any[];
+  dataTeam: any[];
 }
 
 export type DelegateListTabletProps = ThemedComponentProps & ComponentProps;
 
 const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletProps> = (props) => {
   const { themedStyle } = props;
-  const [selectedOption, setSelectedOption] = useState<any>(null);
-  const [selectedOptionTeam, setSelectedOptionTeam] = useState<any>(null);
+  const [changeText, setChangeText] = useState('');
+  const [selectedOption, setSelectedOption] = useState<SelectOption>();
+  const [selectedOptionTeam, setSelectedOptionTeam] = useState<SelectOption>();
+  const [delegateList, setDelegateList] = React.useState<DelegateList[]>(props.delegateList);
 
   const onMessagePress = (): void => {
 
@@ -52,32 +57,70 @@ const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletPro
 
   };
 
+  const isAll = (value: string) => {
+    if (value === 'Tất cả' || value === '') {
+      return false;
+    }
+    return true;
+  };
+
   const onSearchPress = (): void => {
-
+    let filter = [];
+    let selectedOptionTmp = selectedOption;
+    let selectedOptionTeamTmp = selectedOptionTeam;
+    if (!selectedOptionTeamTmp) {
+      selectedOptionTeamTmp = ({ text: '' });
+    }
+    if (!selectedOptionTmp) {
+      selectedOptionTmp = ({ text: '' });
+    }
+    filter = props.delegateList
+      .filter(item => isAll(selectedOptionTmp.text) ? item.group === selectedOptionTmp.text : true)
+      .map(deputie => {
+        const n = Object.assign({}, deputie, {
+          'deputies': deputie.deputies.filter(
+            subElement => changeText ? searchASCII(changeText, subElement.fullName) : true,
+            // && isAll(selectedOptionTeam.text) ? subElement.discussionGroup === selectedOptionTeam.text : true,
+          ),
+        });
+        return n;
+      });
+    setDelegateList(filter);
   };
 
-  const onDelegateItemPress = (delegate: UserModel): void => {
-    props.onDelegateItemPress(delegate);
+  const onDelegateItemPress = (deputy: Delegate): void => {
+    props.onDelegateItemPress(deputy);
   };
 
-  const renderMeetings = (): React.ReactElement[] => {
-    return props.delegateList.map((item, index) => {
+  const renderData = (): React.ReactElement[] => {
+    return delegateList.map((item, index) => {
+      return (
+        (item.group &&
+          <React.Fragment key={index}>
+            {renderDelegateList(item.deputies)}
+          </React.Fragment>)
+      );
+    });
+  };
+
+  const renderDelegateList = (deputies: Delegate[]): React.ReactElement[] => {
+    return deputies.map((item, index) => {
       return (
         <Tr key={index}>
-          <Td alignItems='center' width={110}>
+          <Td alignItems='center' width={150}>
             <Text style={themedStyle.txtTd}>
-              {item.delegate_number}
+              {item.code}
             </Text>
           </Td>
           <Td alignItems='center' width={260}>
             <Image
-              source={(new RemoteImage(item.avatar).imageSource)}
+              source={(new RemoteImage(`http://daihoi11.imt-soft.com:8080${item.avatar}`).imageSource)}
               style={themedStyle.imgAvatar}
             />
           </Td>
-          <Td width={600}>
+          <Td width={570}>
             <Text style={themedStyle.txtFullname}>
-              {item.full_name}
+              {item.fullName.toUpperCase()}
             </Text>
           </Td>
           <Td>
@@ -85,9 +128,9 @@ const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletPro
               {item.position}
             </Text>
           </Td>
-          <Td width={250}>
+          <Td width={230}>
             <Text style={themedStyle.txtTd}>
-              {`Tổ ${item.team_number}`}
+              {item.discussionGroup}
             </Text>
           </Td>
           <Td alignItems='center' width={200}>
@@ -114,15 +157,11 @@ const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletPro
         <View style={themedStyle.viewBtns}>
           <TextInput
             placeholder='Nhập họ tên đại biểu'
-            onChangeText={() => { }}
+            onChangeText={setChangeText}
             style={themedStyle.textInput}
           />
           <Select
-            data={[
-              { text: 'Tất cả' },
-              { text: 'Đảng Bộ Khối Dân Chủ Đảng' },
-              { text: 'Đảng Bộ Quận 1' },
-            ]}
+            data={[{ text: 'Tất cả' }, ...props.dataGroup]}
             textStyle={themedStyle.txtSelectInput}
             keyExtractor={(item) => item.text}
             selectedOption={selectedOption}
@@ -131,11 +170,7 @@ const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletPro
             onSelect={setSelectedOption}>
           </Select>
           <Select
-            data={[
-              { text: 'Tất cả' },
-              { text: 'Tổ 1' },
-              { text: 'Tổ 2' },
-            ]}
+            data={[{ text: 'Tất cả' }, ...props.dataTeam]}
             textStyle={themedStyle.txtSelectInput}
             keyExtractor={(item) => item.text}
             selectedOption={selectedOptionTeam}
@@ -145,25 +180,25 @@ const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletPro
           </Select>
           <Button
             title='TÌM KIẾM'
-            onPress={onSearchPress}
+            onPress={() => onSearchPress()}
             style={themedStyle.btnSearch}
           />
         </View>
         <Table style={themedStyle.viewTable}>
           <Thead>
-            <Th alignItems='center' width={110}>
+            <Th alignItems='center' width={150}>
               {'SĐB'}
             </Th>
             <Th alignItems='center' width={260}>
               {'Hình ảnh'}
             </Th>
-            <Th alignItems='center' width={600}>
+            <Th alignItems='center' width={570}>
               {'Họ tên'}
             </Th>
             <Th alignItems='center'>
               {'Chức vụ'}
             </Th>
-            <Th alignItems='center' width={250}>
+            <Th alignItems='center' width={230}>
               {'Tổ'}
             </Th>
             <Th alignItems='center' width={200}>
@@ -171,7 +206,7 @@ const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletPro
             </Th>
           </Thead>
           <Tbody>
-            {renderMeetings()}
+            {renderData()}
           </Tbody>
         </Table>
       </View>

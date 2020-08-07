@@ -12,16 +12,16 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
-import { UserDetail as UserDetailModel } from '@src/core/models/user/userDetail.model';
 import {
   RemoteImage,
   imageBannerName,
 } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
+import { Delegate } from '@src/core/models/delegate/delegate.model';
 
 interface ComponentProps {
-  user: UserDetailModel;
+  user: Delegate;
 }
 
 export type ProfileInfoV3TabletProps = ThemedComponentProps & ViewProps & ComponentProps;
@@ -37,7 +37,7 @@ const ProfileInfoV3TabletComponent: React.FunctionComponent<ProfileInfoV3TabletP
       ]}>
       <Image
         resizeMode='cover'
-        source={(new RemoteImage(user.avatar)).imageSource}
+        source={(new RemoteImage(`http://daihoi11.imt-soft.com:8080${user.avatar}`)).imageSource}
         style={themedStyle.imgAvatar}
       />
       <Text style={themedStyle.txtInfo}>
@@ -47,13 +47,13 @@ const ProfileInfoV3TabletComponent: React.FunctionComponent<ProfileInfoV3TabletP
         source={imageBannerName.imageSource}
         style={themedStyle.imgBannerName}>
         <Text
-          numberOfLines={1}
+          numberOfLines={2}
           style={themedStyle.txtFullname}>
-          {user.full_name.toUpperCase()}
+          {user.fullName.toUpperCase()}
         </Text>
       </ImageBackground>
       <Text
-        numberOfLines={2}
+        numberOfLines={5}
         style={themedStyle.txtPosition}>
         {user.position}
       </Text>
@@ -66,7 +66,7 @@ export const ProfileInfoV3Tablet = withStyles(ProfileInfoV3TabletComponent, (the
     width: pxToPercentage(688),
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: pxToPercentage(20),
+    paddingHorizontal: pxToPercentage(10),
     borderTopLeftRadius: pxToPercentage(40),
     borderBottomLeftRadius: pxToPercentage(40),
     backgroundColor: theme['color-primary-20'],
@@ -100,7 +100,7 @@ export const ProfileInfoV3Tablet = withStyles(ProfileInfoV3TabletComponent, (the
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: pxToPercentage(10),
-    height: pxToPercentage(70),
-    width: pxToPercentage(460),
+    height: pxToPercentage(80),
+    width: pxToPercentage(550),
   },
 }));

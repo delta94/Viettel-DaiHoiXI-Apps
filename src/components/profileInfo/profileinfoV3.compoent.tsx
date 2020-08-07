@@ -12,16 +12,16 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
-import { UserDetail as UserDetailModel } from '@src/core/models/user/userDetail.model';
 import {
   RemoteImage,
   imageBannerName,
 } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
+import { Delegate } from '@src/core/models/delegate/delegate.model';
 
 interface ComponentProps {
-  user: UserDetailModel;
+  user: Delegate;
 }
 
 export type ProfileInfoV3Props = ThemedComponentProps & ViewProps & ComponentProps;
@@ -38,7 +38,7 @@ const ProfileInfoV3Component: React.FunctionComponent<ProfileInfoV3Props> = (pro
       <View style={themedStyle.sectionBody}>
         <Image
           resizeMode='cover'
-          source={(new RemoteImage(user.avatar)).imageSource}
+          source={(new RemoteImage(`http://daihoi11.imt-soft.com:8080${user.avatar}`)).imageSource}
           style={themedStyle.imgAvatar}
         />
         <View style={themedStyle.viewInfo}>
@@ -46,13 +46,13 @@ const ProfileInfoV3Component: React.FunctionComponent<ProfileInfoV3Props> = (pro
             source={imageBannerName.imageSource}
             style={themedStyle.imgBannerName}>
             <Text
-              numberOfLines={1}
+              numberOfLines={2}
               style={themedStyle.txtFullname}>
-              {user.full_name.toUpperCase()}
+              {user.fullName.toUpperCase()}
             </Text>
           </ImageBackground>
           <Text
-            numberOfLines={2}
+            numberOfLines={5}
             style={themedStyle.txtPosition}>
             {user.position}
           </Text>
@@ -99,7 +99,7 @@ export const ProfileInfoV3 = withStyles(ProfileInfoV3Component, (theme: ThemeTyp
   imgBannerName: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: pxToPercentage(35),
-    width: pxToPercentage(35) * (1401 / 225),
+    height: pxToPercentage(40),
+    width: pxToPercentage(40) * (1401 / 225),
   },
 }));

@@ -8,20 +8,21 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { Select } from '@kitten/ui';
+import { Select, SelectOption } from '@kitten/ui';
 import { DelegateList as DelegateListModel } from '@src/core/models/delegate/delegateList.model';
-import { User as UserModel } from '@src/core/models/user/user.model';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { pxToPercentage, searchASCII } from '@src/core/utils/utils';
 import {
   textStyle,
   ValidationInput,
 } from '@src/components';
 import { DelegateListItem } from './delegateListItem';
 import { StringValidator } from '@src/core/validators';
+import { Delegate } from '@src/core/models/delegate/delegate.model';
 
 interface ComponentProps {
   delegateList: DelegateListModel[];
-  onDelegateItemPress: (delegate: UserModel) => void;
+  onDelegateItemPress: (deputy: Delegate) => void;
+  dataGroup: any[];
 }
 
 export type DelegateListProps = ThemedComponentProps & ComponentProps;
@@ -29,9 +30,50 @@ export type DelegateListProps = ThemedComponentProps & ComponentProps;
 const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props) => {
   const { themedStyle } = props;
   const [selectedOption, setSelectedOption] = useState<any>(null);
+  const [delegateList, setDelegateList] = React.useState<DelegateListModel[]>(props.delegateList);
+  const [changeText, setChangeText] = useState(' ');
 
-  const onDelegateItemPress = (delegate: UserModel): void => {
-    props.onDelegateItemPress(delegate);
+  const onDelegateItemPress = (deputy: Delegate): void => {
+    props.onDelegateItemPress(deputy);
+  };
+
+  const isAll = (group: string) => {
+    if (group === 'Tất cả' || group === '') {
+      return false;
+    }
+    return true;
+  };
+
+  const onSearchPress = (fullName: string = '', group: string = ''): void => {
+    const filter = props.delegateList
+      .filter(item => isAll(group) ? item.group === group : true)
+      .map(deputie => {
+        const n = Object.assign({}, deputie, {
+          'deputies': deputie.deputies.filter(
+            subElement => fullName ? searchASCII(fullName, subElement.fullName) : true,
+          ),
+        });
+        return n;
+      });
+    setDelegateList(filter);
+  };
+
+  const onChangeText = (value: string) => {
+    if (selectedOption && value) {
+      onSearchPress(value, selectedOption.text);
+    } else {
+      onSearchPress(value);
+    }
+    setChangeText(value);
+  };
+
+  const onSelect = (option: SelectOption) => {
+    if (option && changeText) {
+      onSearchPress(changeText, option.text);
+    } else {
+      onSearchPress(undefined, option.text);
+    }
+    setSelectedOption(option);
   };
 
   return (
@@ -41,13 +83,12 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
           style={themedStyle.inputSearch}
           placeholder='Nhập họ tên đại biểu'
           validator={StringValidator}
-          onChangeText={() => { }}
+          onChangeText={(value) => onChangeText(value)}
         />
         <Select
           data={[
             { text: 'Tất cả' },
-            { text: 'Đảng Bộ Khối Dân Chủ Đảng' },
-            { text: 'Đảng Bộ Quận 1' },
+            ...props.dataGroup,
           ]}
           textStyle={themedStyle.txtSelectOption}
           keyExtractor={(item) => item.text}
@@ -56,20 +97,22 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
           placeholderStyle={themedStyle.selectOptionPhd}
           size={'large'}
           controlStyle={themedStyle.selectOption}
-          onSelect={setSelectedOption}>
+          onSelect={onSelect}>
         </Select>
       </View>
       <FlatList
-        data={props.delegateList}
-        extraData={props.delegateList}
+        data={delegateList}
+        extraData={delegateList}
         contentContainerStyle={themedStyle.flatListContainer}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => {
           return (
-            <DelegateListItem
-              delegateList={item}
-              onDelegateItemPress={onDelegateItemPress}
-            />
+            (item.group &&
+              <DelegateListItem
+                delegateList={item}
+                onDelegateItemPress={onDelegateItemPress}
+                index={index + 1}
+              />)
           );
         }}
       />

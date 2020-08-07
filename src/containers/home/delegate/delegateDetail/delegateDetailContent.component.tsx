@@ -8,14 +8,14 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { UserDetail } from '@src/core/models/user/userDetail.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { Hr } from '@src/components/hr/hr.component';
+import { DelegateDetail } from '@src/core/models/delegate/delegateDetail.model';
 
 interface ComponentProps {
-  user: UserDetail;
+  user: DelegateDetail[];
 }
 
 interface InfoTypeOneParams {
@@ -73,77 +73,36 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
     );
   };
 
+  const renderInfor = (): React.ReactElement[] => {
+    const result = [];
+    for (let i = 0; i < user.length; i++) {
+      if (user[i].type === 2 && user[i + 1].type === 2) {
+        result.push(
+          renderInfoTypeOne({
+            firstTitle: user[i].key,
+            firstValue: user[i].value,
+            secondTitle: user[i + 1].key,
+            secondValue: user[i + 1].value,
+          }),
+        );
+        i = i + 1;
+      }
+      if (user[i].type === 1) {
+        result.push(
+          renderInfoTypeTwo({
+            title: user[i].key,
+            value: user[i].value,
+          }),
+        );
+      }
+      result.push(<Hr />);
+    }
+    return result;
+  };
+
   return (
     <View style={themedStyle.container}>
-      {renderInfoTypeOne({
-        firstTitle: 'Ngày sinh',
-        firstValue: user.birthDay,
-        secondTitle: 'Số đại biểu',
-        secondValue: user.delegate_number,
-      })}
-      <Hr />
-      {renderInfoTypeOne({
-        firstTitle: 'Dân tộc',
-        firstValue: user.nation,
-        secondTitle: 'Giới tính',
-        secondValue: user.sex,
-      })}
-      <Hr />
-      {renderInfoTypeOne({
-        firstTitle: 'Quê quán',
-        firstValue: user.hometown,
-        secondTitle: 'Tôn giáo',
-        secondValue: user.religion,
-      })}
-      <Hr />
-      {renderInfoTypeOne({
-        firstTitle: 'Ngày vào đảng dự bị',
-        firstValue: user.preparatoryDay,
-        secondTitle: 'Ngày vào đảng chính thức',
-        secondValue: user.officialDay,
-      })}
-      <Hr />
-      {renderInfoTypeOne({
-        firstTitle: 'Học vấn phổ thông',
-        firstValue: user.education,
-        secondTitle: 'Học hàm, học vị',
-        secondValue: user.degree,
-      })}
-      <Hr />
-      {renderInfoTypeTwo({
-        title: 'Cơ quan',
-        value: user.position,
-      })}
-      <Hr />
-      {renderInfoTypeTwo({
-        title: 'Chuyên môn, nghiệp vụ, ngoại ngữ',
-        value: user.specialize,
-      })}
-      <Hr />
-      {renderInfoTypeTwo({
-        title: 'Lý luận chính trị',
-        value: user.politicalTheory,
-      })}
-      <Hr />
-      {renderInfoTypeTwo({
-        title: 'Kỷ luật',
-        value: user.discipline,
-      })}
-      <Hr />
-      {renderInfoTypeTwo({
-        title: 'Khen thưởng',
-        value: user.bonus,
-      })}
-      <Hr />
-      {renderInfoTypeTwo({
-        title: 'Đoàn',
-        value: user.group,
-      })}
-      <Hr />
-      {renderInfoTypeTwo({
-        title: 'Ghi chú',
-        value: user.note,
-      })}
+      {renderInfor()}
     </View>
   );
 };
@@ -168,6 +127,7 @@ export const DelegateDetailContent = withStyles(DelegateDetailContentComponent, 
   },
   viewBlock: {
     flex: 1,
+    paddingHorizontal: pxToPercentage(5),
   },
   viewSectionRow: {
     flexDirection: 'row',

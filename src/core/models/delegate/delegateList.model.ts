@@ -1,12 +1,23 @@
 import { Type } from 'class-transformer';
-import { User } from '../user/user.model';
+import { Delegate } from './delegate.model';
 
 export class DelegateList {
   group: string;
-  @Type(() => User)
-  delegates: User[];
+  @Type(() => Delegate)
+  deputies: Delegate[];
 
   constructor() {
-    this.delegates = [];
+    this.deputies = [];
+  }
+}
+
+
+export class DelegateListApi {
+  success: boolean;
+  @Type(() => DelegateList)
+  data: DelegateList[];
+
+  constructor() {
+    this.data = [];
   }
 }

@@ -35,7 +35,6 @@ export const onThunkSignInReq = (data: SignInAccountFormData): ThunkActionTypes 
 
   try {
     const res = await authService.signIn(signInReq);
-
     if (res.success) {
       dispatch(onSetSession(res.data));
       dispatch(onSetEnabledSpinner(false));

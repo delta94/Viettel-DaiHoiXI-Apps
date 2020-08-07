@@ -8,15 +8,17 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { UserDetail as UserDetailModel } from '@src/core/models/user/userDetail.model';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProfileInfoV3Tablet } from '@src/components/profileInfo/profileinfoV3.compoent.tablet';
 import { DelegateDetailContentTablet } from './delegateDetailContent.component.tablet';
+import { Delegate } from '@src/core/models/delegate/delegate.model';
+import { DelegateDetail } from '@src/core/models/delegate/delegateDetail.model';
 
 interface ComponentProps {
-  delegateDetail: UserDetailModel;
+  delegateDetail: DelegateDetail[];
+  deputy: Delegate;
   onBackPress: () => void;
 }
 
@@ -46,7 +48,7 @@ const DelegateDetailTabletComponent: React.FunctionComponent<DelegateDetailTable
         onHelpPress={onHelpPress}
       />
       <View style={themedStyle.viewCard}>
-        <ProfileInfoV3Tablet user={props.delegateDetail} />
+        <ProfileInfoV3Tablet user={props.deputy} />
         <ScrollView contentContainerStyle={themedStyle.scrollViewContainer}>
           <DelegateDetailContentTablet user={props.delegateDetail} />
         </ScrollView>

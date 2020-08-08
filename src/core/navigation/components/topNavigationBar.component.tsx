@@ -66,8 +66,6 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
     );
   };
 
-  const sourcePdf = { uri: 'http://dwrm.gov.vn/uploads/download/files/02-final-thong-cao-bao-chi.pdf', cache: true };
-
   const renderRightControls = (): React.ReactElement<TopNavigationActionProps>[] => {
     return ([
       <TopNavigationAction
@@ -99,7 +97,7 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
       <HelpModel
         isVisible={isVisible}
         onClosePress={onHelpPress}
-        sourcePdf={sourcePdf} />
+      />
     </SafeAreaView>
   );
 };

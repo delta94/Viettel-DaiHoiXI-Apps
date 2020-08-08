@@ -385,6 +385,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   },
   viewFooter: {
     flex: 1,
+    minHeight: pxToPercentage(100),
     justifyContent: 'flex-end',
     paddingBottom: pxToPercentage(20),
   },

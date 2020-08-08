@@ -1,12 +1,11 @@
 import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { isTablet } from 'react-native-device-info';
-import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 import { GalleryTablet } from './gallery.component.tablet';
 import { Gallery } from './gallery.component';
-import { programDataFake } from '@src/core/data/program';
 import { imgDataFake } from '@src/core/data/photoGallery';
 import { galleryVideoDataFake } from '@src/core/data/videos';
+import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 
 export const GalleryContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'GalleryContainer';
@@ -18,6 +17,12 @@ export const GalleryContainer: React.FunctionComponent<NavigationInjectedProps> 
     setUrl(urlVideo);
   };
 
+  const onMessagePress = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'chat',
+    });
+  };
 
   const onBackPress = (): void => {
     props.navigation.goBack(KEY_NAVIGATION_BACK);
@@ -26,12 +31,14 @@ export const GalleryContainer: React.FunctionComponent<NavigationInjectedProps> 
   if (isTablet()) {
     return (
       <GalleryTablet
-        onBackPress={onBackPress}
         imgDataFake={imgDataFake}
         gallery={galleryVideoDataFake}
         onVideosItemPress={onVideosItemPress}
         videoSelected={selectedVideo}
-        url={url} />
+        url={url}
+        onBackPress={onBackPress}
+        onMessagePress={onMessagePress}
+      />
     );
   }
 
@@ -41,6 +48,7 @@ export const GalleryContainer: React.FunctionComponent<NavigationInjectedProps> 
       gallery={galleryVideoDataFake}
       onVideosItemPress={onVideosItemPress}
       videoSelected={selectedVideo}
-      url={url} />
+      url={url}
+    />
   );
 };

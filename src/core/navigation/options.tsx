@@ -50,11 +50,11 @@ const MenuTopNavigationParams: TopNavigationParams = {
     // @ts-ignore (private API)
     const { routeName } = onGetCurrentRouteState(props.navigation);
     const index: number = onGetCurrentRouteIndex(props.navigation);
-    const keyNavigation: string = 'HomeMenuTopNavigation';
+    const navigationKey: string = 'HomeMenuTopNavigation';
 
     const onMessagePress = () => {
       props.navigation.navigate({
-        key: keyNavigation,
+        key: navigationKey,
         routeName: 'chat',
       });
     };
@@ -79,13 +79,44 @@ const MenuTopNavigationParams: TopNavigationParams = {
 
 const MenuTopNavigationTabletParams: TopNavigationParams = {
   header: (props: NavigationInjectedProps): TopNavigationElement => {
-    return <TopNavigationBarTablet />;
+    const { routeName } = onGetCurrentRouteState(props.navigation);
+    const navigationKey: string = 'MenuTopNavigationTablet';
+
+    const onMessagePress = (): void => {
+      props.navigation.navigate({
+        key: navigationKey,
+        routeName: 'chat',
+      });
+    };
+
+    const onBackPress = (): void => {
+      props.navigation.goBack(KEY_NAVIGATION_BACK);
+    };
+
+    return (
+      <TopNavigationBarTablet
+        isHome={routeName === 'home'}
+        title={routeNameDataSource[routeName]}
+        onMessagePress={onMessagePress}
+        onBackPress={onBackPress}
+      />
+    );
+  },
+};
+
+const MenuTopNavigationTabletNoHeaderParams: TopNavigationParams = {
+  header: (props: NavigationInjectedProps): TopNavigationElement => {
+    return (
+      <TopNavigationBarTablet
+        isNoHeader
+      />
+    );
   },
 };
 
 const HomeMenuTopNavigationParams: TopNavigationParams = {
   header: (props: NavigationInjectedProps): TopNavigationElement => {
-    const keyNavigation: string = 'HomeMenuTopNavigation';
+    const navigationKey: string = 'HomeMenuTopNavigation';
     const { routeName } = onGetCurrentRouteState(props.navigation);
     const index: number = onGetCurrentRouteIndex(props.navigation);
 
@@ -95,14 +126,14 @@ const HomeMenuTopNavigationParams: TopNavigationParams = {
 
     const onQRCodePress = () => {
       props.navigation.navigate({
-        key: keyNavigation,
+        key: navigationKey,
         routeName: 'scanQRCode',
       });
     };
 
     const onMessagePress = () => {
       props.navigation.navigate({
-        key: keyNavigation,
+        key: navigationKey,
         routeName: 'chat',
       });
     };
@@ -126,4 +157,5 @@ const HomeMenuTopNavigationParams: TopNavigationParams = {
 
 export const MenuNavigationOptions: NavigationParams = MenuTopNavigationParams;
 export const MenuNavigationTabletOptions: NavigationParams = MenuTopNavigationTabletParams;
+export const MenuNavigationTabletNoHeaderOptions: NavigationParams = MenuTopNavigationTabletNoHeaderParams;
 export const HomeNavigationOptions: NavigationParams = HomeMenuTopNavigationParams;

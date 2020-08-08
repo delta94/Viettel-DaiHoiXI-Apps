@@ -7,15 +7,10 @@ import { Speech } from '@src/core/models/speech/speech.model';
 import { alerts } from '@src/core/utils/alerts';
 import { SpeechStatusEnum } from '@src/core/utils/constants';
 import { SpeechListTablet } from './speechList.component.tablet';
-import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 
 export const SpeechListContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'SpeechListContainer';
   const [delegateSpeechList, setDelegateSpeechList] = React.useState<Speech[]>(speechDataFake);
-
-  const onBackPress = (): void => {
-    props.navigation.goBack(KEY_NAVIGATION_BACK);
-  };
 
   const onSpeechInvitationPress = (id: number) => {
     // check speeching
@@ -54,7 +49,6 @@ export const SpeechListContainer: React.FunctionComponent<NavigationInjectedProp
       <SpeechListTablet
         onSpeechInvitationPress={onSpeechInvitationPress}
         speechs={delegateSpeechList}
-        onBackPress={onBackPress}
       />
     );
   }

@@ -9,11 +9,9 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import Pdf from 'react-native-pdf';
 
 interface ComponentProps {
-  onBackPress: () => void;
   source: object;
 }
 
@@ -22,25 +20,8 @@ export type SeatingChartTabletProps = ThemedComponentProps & ComponentProps;
 const SeatingChartTabletComponent: React.FunctionComponent<SeatingChartTabletProps> = (props) => {
   const { themedStyle } = props;
 
-  const onMessagePress = (): void => {
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
-
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'SƠ ĐỒ CHỖ NGỒI'}
-        onBackPress={onBackPress}
-        onHelpPress={onHelpPress}
-        onMessagePress={onMessagePress}
-      />
       <View style={themedStyle.viewCard}>
         <Pdf
           source={props.source}

@@ -15,32 +15,23 @@ import { PhotoGallery } from '@src/core/models/photoGallery/photoGallery.model';
 import { GalleryTabEnum } from '@src/core/utils/constants';
 import { Videos as VideosModel } from '@src/core/models/galleryVideo/videos.model';
 import { GalleryVideoTablet } from './tabs/tablet/galleryVideo.component.tablet';
+import { HelpModel } from '@src/core/navigation/components/helpModel.component';
 
 interface ComponentProps {
-  onBackPress: () => void;
   imgDataFake: PhotoGallery[];
   onVideosItemPress: (id: number, url: string) => void;
   gallery: VideosModel[];
   videoSelected: number;
   url: string;
+  onBackPress: () => void;
+  onMessagePress: () => void;
 }
 
 export type GalleryTabletProps = ComponentProps & ThemedComponentProps;
 
 const GalleryTabletComponent: React.FunctionComponent<GalleryTabletProps> = (props) => {
   const [selectedTab, setSelectedTab] = React.useState(GalleryTabEnum.HinhAnh);
-
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
   const onTabPress = (type: number) => {
     setSelectedTab(type);
@@ -52,6 +43,19 @@ const GalleryTabletComponent: React.FunctionComponent<GalleryTabletProps> = (pro
   const onVideosItemPress = (id: number, url: string) => {
     props.onVideosItemPress(id, url);
   };
+
+  const onMessagePress = (): void => {
+    props.onMessagePress();
+  };
+
+  const onBackPress = (): void => {
+    props.onBackPress();
+  };
+
+  const onHelpPress = (): void => {
+    setIsVisible(prevState => !prevState);
+  };
+
 
   const { themedStyle } = props;
 
@@ -77,8 +81,11 @@ const GalleryTabletComponent: React.FunctionComponent<GalleryTabletProps> = (pro
             videoSelected={props.videoSelected}
             url={props.url} />
         }
-
       </View>
+      <HelpModel
+        isVisible={isVisible}
+        onClosePress={onHelpPress}
+      />
     </View>
   );
 };

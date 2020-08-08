@@ -19,29 +19,16 @@ import { Td } from '@src/components/table/td.component';
 import { textStyle } from '@src/components';
 import { SpeechListStatusItemTablet } from './speechListStatusItem.component.tablet';
 import { viewStyle } from '@src/components/viewStyle';
-import { BackHeader } from '@src/components/header/backHeader.component';
 
 interface ComponentProps {
   speechs: Speech[];
   onSpeechInvitationPress: (index: number) => void;
-  onBackPress: () => void;
 }
+
 export type SpeechListTabletProps = ThemedComponentProps & ComponentProps;
 
 const SpeechListTabletComponent: React.FunctionComponent<SpeechListTabletProps> = (props) => {
   const { themedStyle } = props;
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
-
-  const onMessagePress = (): void => {
-
-  };
 
   const renderMeetings = (): React.ReactElement[] => {
     return props.speechs.map((item, index) => {
@@ -74,12 +61,6 @@ const SpeechListTabletComponent: React.FunctionComponent<SpeechListTabletProps> 
 
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'ĐĂNG KÝ PHÁT BIỂU'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
         <Table style={themedStyle.viewTable}>
           <Thead>

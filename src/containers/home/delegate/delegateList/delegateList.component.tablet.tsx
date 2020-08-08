@@ -24,7 +24,6 @@ import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
 import { textStyle } from '@src/components';
 import { SearchIcon } from '@src/assets/icons';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import { Button } from '@src/components/button/button.component';
 import {
   Select,
@@ -49,18 +48,6 @@ const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletPro
   const [groupSelected, setGroupSelected] = useState<SelectOptionType>({ text: '' });
   const [discussionGroupSelected, setDiscussionGroupSelected] = useState<SelectOptionType>({ text: '' });
   const [delegateList, setDelegateList] = useState<DelegateListModel[]>(props.delegateList);
-
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
 
   const onSearchPress = (): void => {
     let delegateListTemp: DelegateListModel[] = [];
@@ -162,12 +149,6 @@ const DelegateListTabletComponent: React.FunctionComponent<DelegateListTabletPro
 
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'DANH SÁCH ĐẠI BIỂU'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
         <View style={themedStyle.viewBtns}>
           <TextInput

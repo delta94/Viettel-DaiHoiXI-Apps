@@ -14,11 +14,9 @@ import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { BackHeader } from '@src/components/header/backHeader.component';
 
 interface ComponentProps {
   pressRelease: PressReleaseModel;
-  onBackPress: () => void;
 }
 
 export type PressReleaseDetailTabletProps = ThemedComponentProps & ComponentProps;
@@ -26,24 +24,8 @@ export type PressReleaseDetailTabletProps = ThemedComponentProps & ComponentProp
 const PressReleaseDetailTabletComponent: React.FunctionComponent<PressReleaseDetailTabletProps> = (props) => {
   const { themedStyle, pressRelease } = props;
 
-  const onMessagePress = (): void => {
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-  };
-
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'CHI TIẾT THÔNG CÁO BÁO CHÍ'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={themedStyle.viewCard}>

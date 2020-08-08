@@ -15,6 +15,7 @@ import {
   MenuNavigationOptions,
   HomeNavigationOptions,
   MenuNavigationTabletOptions,
+  MenuNavigationTabletNoHeaderOptions,
 } from './options';
 import { SplashContainer } from '@src/containers/splash/splash.container';
 import { ExampleContainer } from '@src/containers/example/example.container';
@@ -66,7 +67,10 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   },
   ['function']: FunctionContainer,
   ['scanQRCode']: ScanQRCodeContainer,
-  ['conferenceInfo']: ConferenceInfoContainer,
+  ['conferenceInfo']: {
+    screen: ConferenceInfoContainer,
+    navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletNoHeaderOptions,
+  },
   ['notificationDetail']: NotificationDetailContainer,
   ['pressReleaseDetail']: PressReleaseDetailContainer,
   ['delegateList']: DelegateListContainer,
@@ -76,7 +80,10 @@ const AppNavigator: NavigationContainer = createStackNavigator({
   ['signUpToSpeak']: SignUpToSpeakContainer,
   ['attendance']: AttendanceContainer,
   ['seatingChart']: SeatingChartContainer,
-  ['gallery']: GalleryContainer,
+  ['gallery']: {
+    screen: GalleryContainer,
+    navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletNoHeaderOptions,
+  },
   ['documentList']: DocumentContainer,
   ['chat']: ChatContainer,
   ['chatDetail']: ChatDetailContainer,

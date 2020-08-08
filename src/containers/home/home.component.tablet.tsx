@@ -12,7 +12,6 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { WeeklyMeeting as WeeklyMeetingModel } from '@src/core/models/meeting/meeting.model';
 import { viewStyle } from '@src/components/viewStyle';
 import { User } from '@src/core/models/user/user.model';
-import { HomeHeader } from '@src/components/header/homeHeader.component';
 import { ProfileInfoTablet } from '@src/components/profileInfo/profileInfo.component.tablet';
 import { WeekSelector } from '@src/components/weekSelector/weekSelector.component';
 import { HomeMeetingItemTablet } from './homeMettingItem.component.tablet';
@@ -23,7 +22,6 @@ interface ComponentProps {
   meetings: WeeklyMeetingModel[];
   onMeetingItemPress: (isExample: boolean) => void;
   onEditProfilePress: () => void;
-  onLogoutPress: () => void;
   onQRCodePress: () => void;
   onSearchPress: () => void;
   onEmailPress: () => void;
@@ -40,18 +38,6 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
 
   const onMeetingItemPress = (isExample: boolean): void => {
     props.onMeetingItemPress(isExample);
-  };
-
-  const onMessagePress = (): void => {
-    props.onEmailPress();
-  };
-
-  const onLogoutPress = (): void => {
-    props.onLogoutPress();
-  };
-
-  const onHelpPress = (): void => {
-
   };
 
   const onDatePress = (): void => {
@@ -82,11 +68,6 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
 
   return (
     <View style={themedStyle.container}>
-      <HomeHeader
-        onLogoutPress={onLogoutPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
         <ProfileInfoTablet
           user={props.user}

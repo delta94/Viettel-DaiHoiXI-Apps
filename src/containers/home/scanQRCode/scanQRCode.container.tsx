@@ -17,7 +17,6 @@ export const ScanQRCodeContainer: React.FunctionComponent<NavigationInjectedProp
     return (
       <ScanQRCodeTablet
         user={userDetailDataFake}
-        onBackPress={onBackPress}
       />
     );
   }

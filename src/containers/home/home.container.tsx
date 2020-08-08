@@ -79,7 +79,6 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
         currentWeek={32}
         meetings={weeklyMeetingDatafake}
         onEditProfilePress={onEditProfilePress}
-        onLogoutPress={onLogoutPress}
         onMeetingItemPress={onMeetingItemPress}
         onQRCodePress={onQRCodePress}
         onSearchPress={onSearchPress}

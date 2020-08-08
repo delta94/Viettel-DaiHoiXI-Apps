@@ -22,7 +22,6 @@ import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
 import { textStyle } from '@src/components';
 import { SearchIcon } from '@src/assets/icons';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import { Button } from '@src/components/button/button.component';
 import { Select } from '@kitten/ui';
 import { RemoteImage } from '@src/assets/images';
@@ -30,7 +29,6 @@ import { RemoteImage } from '@src/assets/images';
 interface ComponentProps {
   delegateList: UserModel[];
   onDelegateItemPress: (delegate: UserModel) => void;
-  onBackPress: () => void;
 }
 
 export type DelegateGroupTabletProps = ThemedComponentProps & ComponentProps;
@@ -38,18 +36,6 @@ export type DelegateGroupTabletProps = ThemedComponentProps & ComponentProps;
 const DelegateGroupTabletComponent: React.FunctionComponent<DelegateGroupTabletProps> = (props) => {
   const { themedStyle } = props;
   const [selectedOptionTeam, setSelectedOptionTeam] = useState<any>(null);
-
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
 
   const onSearchPress = (): void => {
 
@@ -103,12 +89,6 @@ const DelegateGroupTabletComponent: React.FunctionComponent<DelegateGroupTabletP
 
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'TỔ THẢO LUẬN'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
         <View style={themedStyle.viewGroupInfo}>
           <Select

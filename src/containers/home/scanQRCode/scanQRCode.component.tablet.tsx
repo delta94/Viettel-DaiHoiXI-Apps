@@ -18,7 +18,6 @@ import { textStyle } from '@src/components';
 
 interface ComponentProps {
   user: UserDetailModel;
-  onBackPress: () => void;
 }
 
 export type ScanQRCodeTabletProps = ThemedComponentProps & ComponentProps;
@@ -26,26 +25,8 @@ export type ScanQRCodeTabletProps = ThemedComponentProps & ComponentProps;
 const ScanQRCodeTabletComponent: React.FunctionComponent<ScanQRCodeTabletProps> = (props) => {
   const { themedStyle } = props;
 
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
-
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'MÃ QR CODE CỦA TÔI'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
         <ProfileInfoV3Tablet user={props.user} />
         <View style={themedStyle.viewQRCode}>

@@ -15,7 +15,6 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { User } from '@src/core/models/user/user.model';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProfileInfoV2Tablet } from '@src/components/profileInfo/profileInfoV2.component.tablet';
 import { FunctionEnum } from '@src/core/utils/constants';
 
@@ -23,7 +22,6 @@ interface ComponentProps {
   user: User;
   functions: FunctionModel[];
   onFunctionItemPress: (type: number) => void;
-  onBackPress: () => void;
 }
 
 export type FunctionTabletProps = ThemedComponentProps & ComponentProps;
@@ -31,18 +29,6 @@ export type FunctionTabletProps = ThemedComponentProps & ComponentProps;
 const FunctionTabletComponent: React.FunctionComponent<FunctionTabletProps> = (props) => {
   const onFunctionItemPress = (type: number): void => {
     props.onFunctionItemPress(type);
-  };
-
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
   };
 
   const { themedStyle } = props;
@@ -79,12 +65,6 @@ const FunctionTabletComponent: React.FunctionComponent<FunctionTabletProps> = (p
 
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'THÔNG TIN ĐẠI HỘI'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
         <ProfileInfoV2Tablet
           user={props.user}

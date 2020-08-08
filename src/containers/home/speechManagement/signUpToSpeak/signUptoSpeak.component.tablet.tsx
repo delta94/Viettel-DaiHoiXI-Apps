@@ -13,12 +13,11 @@ import {
   textStyle,
   ScrollableAvoidKeyboard,
 } from '@src/components';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import { CheckboxItemTablet } from './checkBoxItem.component.tablet';
 import { Button } from '@src/components/button/button.component';
 
 interface ComponentProps {
-  onBackPress: () => void;
+  example?: any;
 }
 
 interface TopicDataState {
@@ -47,18 +46,6 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
     ]);
 
   const [chunkTopic, setChunkTopic] = React.useState<TopicDataState[][]>(chunk(data, 6));
-
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
 
   const onSigUpPress = (): void => {
     setIsCreateScreen(false);
@@ -112,17 +99,12 @@ const SignUptoSpeakTabletComponent: React.FunctionComponent<SignUptoSpeakTabletP
 
   return (
     <ScrollableAvoidKeyboard style={themedStyle.container}>
-      <BackHeader
-        title={'ĐĂNG KÝ PHÁT BIỂU'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
-        <View style={[
-          themedStyle.viewSection,
-          data.length < 7 && themedStyle.viewOneBox,
-        ]}>
+        <View
+          style={[
+            themedStyle.viewSection,
+            data.length < 7 && themedStyle.viewOneBox,
+          ]}>
           <Text style={themedStyle.txtTitle}>
             {'Chủ đề'}
           </Text>

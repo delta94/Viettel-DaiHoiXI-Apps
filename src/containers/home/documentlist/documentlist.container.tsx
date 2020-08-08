@@ -17,7 +17,6 @@ export const DocumentContainer: React.FunctionComponent<NavigationInjectedProps>
     return (
       <DocumentListTablet
         documents={documentDataFake}
-        onBackPress={onBackPress}
       />
     );
   }

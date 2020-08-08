@@ -35,6 +35,13 @@ export const ConferenceInfoContainer: React.FunctionComponent<NavigationInjected
     });
   };
 
+  const onMessagePress = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'chat',
+    });
+  };
+
   const onBackPress = (): void => {
     props.navigation.goBack(KEY_NAVIGATION_BACK);
   };
@@ -48,6 +55,7 @@ export const ConferenceInfoContainer: React.FunctionComponent<NavigationInjected
         onNotificationItemPress={onNotificationItemPress}
         onPressReleaseItemPress={onPressReleaseItemPress}
         onBackPress={onBackPress}
+        onMessagePress={onMessagePress}
       />
     );
   }

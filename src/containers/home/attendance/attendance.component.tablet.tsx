@@ -15,7 +15,6 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import { AttendanceTabEnum } from '@src/core/utils/constants';
 import {
   PeopleIconOther,
@@ -31,7 +30,6 @@ import { GroupAttendance } from '@src/core/models/attendance/groupAttendance/gro
 interface ComponentProps {
   hallAttendance: HallAttendance[];
   groupAttendance: GroupAttendance[];
-  onBackPress: () => void;
 }
 
 export type AttendanceTabletProps = ThemedComponentProps & ComponentProps;
@@ -40,18 +38,6 @@ type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 const AttendanceTabletComponent: React.FunctionComponent<AttendanceTabletProps> = (props) => {
   const [selectedTab, setSelectedTab] = React.useState(AttendanceTabEnum.Hall);
   const { themedStyle } = props;
-
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
 
   const onDatePress = (): void => {
 
@@ -87,12 +73,6 @@ const AttendanceTabletComponent: React.FunctionComponent<AttendanceTabletProps> 
 
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'ĐIỂM DANH'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewBody}>
         <View style={themedStyle.viewTab}>
           {renderTabBtn(AttendanceTabEnum.Hall, 'Hội Trường', HallIcon, themedStyle.iconHall)}

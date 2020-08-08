@@ -13,11 +13,9 @@ import { Notification as NotificationModel } from '@src/core/models/notification
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { BackHeader } from '@src/components/header/backHeader.component';
 
 interface ComponentProps {
   notification: NotificationModel;
-  onBackPress: () => void;
 }
 
 export type NotificationDetailTabletProps = ThemedComponentProps & ComponentProps;
@@ -25,26 +23,8 @@ export type NotificationDetailTabletProps = ThemedComponentProps & ComponentProp
 const NotificationDetailTabletComponent: React.FunctionComponent<NotificationDetailTabletProps> = (props) => {
   const { themedStyle, notification } = props;
 
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
-
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'CHI TIẾT THÔNG BÁO'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={themedStyle.viewCard}>

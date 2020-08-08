@@ -10,7 +10,6 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProfileInfoV3Tablet } from '@src/components/profileInfo/profileinfoV3.compoent.tablet';
 import { DelegateDetailContentTablet } from './delegateDetailContent.component.tablet';
 import { Delegate } from '@src/core/models/delegate/delegate.model';
@@ -27,26 +26,8 @@ export type DelegateDetailTabletProps = ThemedComponentProps & ComponentProps;
 const DelegateDetailTabletComponent: React.FunctionComponent<DelegateDetailTabletProps> = (props) => {
   const { themedStyle } = props;
 
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
-  };
-
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'THÔNG TIN ĐẠI BIỂU'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
         <ProfileInfoV3Tablet user={props.deputy} />
         <ScrollView contentContainerStyle={themedStyle.scrollViewContainer}>

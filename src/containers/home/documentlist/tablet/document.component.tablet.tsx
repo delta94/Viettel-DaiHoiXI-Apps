@@ -10,7 +10,7 @@ import { Table } from '@src/components/table/table.component';
 import { Thead } from '@src/components/table/thead.component';
 import { Th } from '@src/components/table/th.component';
 import { Tbody } from '@src/components/table/tbody.component';
-import { DocumentItemTablet } from './documentItem.tablet.component';
+import { DocumentItemTablet } from './documentItem.component.tablet';
 interface ComponentProps {
   documentSections: DocumentSectionModel[];
 }

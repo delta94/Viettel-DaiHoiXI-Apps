@@ -16,11 +16,43 @@ import { SafeAreaView } from 'react-navigation';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { textStyle } from '@src/components';
+import { BackHeader } from '@src/components/header/backHeader.component';
+import { TopNavigationProps } from '@kitten/ui';
+import { HelpModel } from './helpModel.component';
+import { HomeHeader } from '@src/components/header/homeHeader.component';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+import { onClearSession } from '@src/core/store/reducer/session/actions';
 
-export type TopNavigationBarTabletProps = ThemedComponentProps;
+interface ComponentProps {
+  isHome?: boolean;
+  isNoHeader?: boolean;
+  onBackPress?: () => void;
+  onMessagePress?: () => void;
+}
+
+export type TopNavigationBarTabletProps = ComponentProps & TopNavigationProps & ThemedComponentProps;
 
 const TopNavigationBarTabletComponent: React.FunctionComponent<TopNavigationBarTabletProps> = (props) => {
   const { themedStyle } = props;
+  const dispatch: Dispatch<any> = useDispatch();
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+
+  const onBackPress = () => {
+    props.onBackPress();
+  };
+
+  const onMessagePress = () => {
+    props.onMessagePress();
+  };
+
+  const onLogoutPress = () => {
+    dispatch(onClearSession());
+  };
+
+  const onHelpPress = () => {
+    setIsVisible(prevState => !prevState);
+  };
 
   return (
     <SafeAreaView style={themedStyle.safeArea}>
@@ -40,6 +72,26 @@ const TopNavigationBarTabletComponent: React.FunctionComponent<TopNavigationBarT
         </View>
         <View style={themedStyle.viewLeftRight} />
       </View>
+      {!props.isNoHeader &&
+        (<View style={themedStyle.viewHeader}>
+          {props.isHome &&
+            (<HomeHeader
+              onLogoutPress={onLogoutPress}
+              onMessagePress={onMessagePress}
+              onHelpPress={onHelpPress}
+            />)}
+          {!props.isHome &&
+            (<BackHeader
+              title={props.title.toUpperCase()}
+              onBackPress={onBackPress}
+              onMessagePress={onMessagePress}
+              onHelpPress={onHelpPress}
+            />)}
+          <HelpModel
+            isVisible={isVisible}
+            onClosePress={onHelpPress}
+          />
+        </View>)}
     </SafeAreaView>
   );
 };
@@ -53,6 +105,9 @@ export const TopNavigationBarTablet = withStyles(TopNavigationBarTabletComponent
     flexDirection: 'row',
     height: pxToPercentage(120),
     backgroundColor: theme['color-primary-0'],
+  },
+  viewHeader: {
+    paddingHorizontal: pxToPercentage(31),
   },
   viewLeftRight: {
     flexDirection: 'row',

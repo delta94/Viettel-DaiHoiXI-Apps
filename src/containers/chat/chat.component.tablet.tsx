@@ -9,7 +9,6 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { ChatList } from '@src/core/models/chat/chat.model';
@@ -23,7 +22,6 @@ import { ChatDetailTablet } from './chatDetail/chatDetail.component.tablet';
 interface ComponentProps {
   example?: any;
   chatLists: ChatList[];
-  onBackPress: () => void;
 }
 
 export type ChatTabletProps = ThemedComponentProps & ComponentProps;
@@ -33,10 +31,6 @@ const ChatTabletComponent: React.FunctionComponent<ChatTabletProps> = (props) =>
   const [isRead, setIsRead] = React.useState<number>(0);
   const [chatDetail, setChatDetail] = React.useState<ChatDetail[]>(ChatDetailDataFake);
 
-  const onBackPress = (): void => {
-    return props.onBackPress();
-  };
-
   const onSendMessagePress = (message: string): void => {
     const date = new Date();
     setChatDetail([...chatDetail, {
@@ -44,14 +38,6 @@ const ChatTabletComponent: React.FunctionComponent<ChatTabletProps> = (props) =>
       id: 1,
       time: `${date.getHours()}:${date.getMinutes()}`,
     }]);
-  };
-
-  const onHelpPress = (): void => {
-
-  };
-
-  const onMessagePress = (): void => {
-
   };
 
   const onChatListItemPress = (index: number): void => {
@@ -86,12 +72,6 @@ const ChatTabletComponent: React.FunctionComponent<ChatTabletProps> = (props) =>
 
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={'CHAT'}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress}
-      />
       <View style={themedStyle.viewCard}>
         <View style={themedStyle.viewChatList}>
           <FlatList

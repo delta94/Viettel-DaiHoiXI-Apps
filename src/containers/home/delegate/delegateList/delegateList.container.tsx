@@ -40,16 +40,11 @@ export const DelegateListContainer: React.FunctionComponent<NavigationInjectedPr
     });
   };
 
-  const onBackPress = (): void => {
-    props.navigation.goBack(KEY_NAVIGATION_BACK);
-  };
-
   if (isTablet()) {
     return (
       <DelegateListTablet
         delegateList={delegateReducer.delegateList}
         onDelegateItemPress={onDelegateItemPress}
-        onBackPress={onBackPress}
       />
     );
   }

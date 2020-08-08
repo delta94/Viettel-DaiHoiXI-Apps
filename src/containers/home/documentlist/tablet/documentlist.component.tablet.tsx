@@ -15,14 +15,12 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import { DocumentSection as DocumentSectionModel } from '@src/core/models/document/document.model';
-import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProgramTabEnum } from '@src/core/utils/constants';
 import { DocumentTablet } from './document.component.tablet';
-import { ModalDocumentTabletRequest } from './modalDocumentRequest.tablet.component';
+import { ModalDocumentTabletRequest } from './modalDocumentRequest.component.tablet';
 
 interface ComponentProps {
   documents: DocumentSectionModel[];
-  onBackPress?: () => void;
 }
 
 export type DocumentListTabletProps = ComponentProps & ThemedComponentProps;
@@ -38,18 +36,6 @@ const DocumentListTabletComponent: React.FunctionComponent<DocumentListTabletPro
 
   const onClosePress = () => {
     setIsVisibleDocumentRequest(false);
-  };
-
-  const onMessagePress = (): void => {
-
-  };
-
-  const onBackPress = (): void => {
-    props.onBackPress();
-  };
-
-  const onHelpPress = (): void => {
-
   };
 
   const { themedStyle } = props;
@@ -78,11 +64,6 @@ const DocumentListTabletComponent: React.FunctionComponent<DocumentListTabletPro
 
   return (
     <View style={themedStyle.container}>
-      <BackHeader
-        title={''}
-        onBackPress={onBackPress}
-        onMessagePress={onMessagePress}
-        onHelpPress={onHelpPress} />
       <View style={themedStyle.viewCard}>
         <ScrollView style={themedStyle.viewLeft}>
           {renderTabBtn(0, '7 chương trình đột phá')}

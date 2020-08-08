@@ -28,6 +28,7 @@ import { ProgramTablet } from './tabs/tablet/program.component.tablet';
 import { PressReleaseTablet } from './tabs/tablet/pressRelease.component.tablet';
 import { NotificationTablet } from './tabs/tablet/notification.component.tablet';
 import { DateListTablet } from './tabs/tablet/dateList.component.tablet';
+import { HelpModel } from '@src/core/navigation/components/helpModel.component';
 
 interface ComponentProps {
   programs: ProgramModel[];
@@ -36,6 +37,7 @@ interface ComponentProps {
   pressReleases: PressReleaseModel[];
   onPressReleaseItemPress: (pressRelease: PressReleaseModel) => void;
   onBackPress: () => void;
+  onMessagePress: () => void;
 }
 
 export type ConferenceInfoTabletProps = ComponentProps & ThemedComponentProps;
@@ -44,12 +46,12 @@ type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 
 const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTabletProps> = (props) => {
   const [selectedTab, setSelectedTab] = useState<number>(ProgramTabEnum.ChuongTrinh);
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
   const dateDataFake: string[] = [
     '08/10/2020',
     '09/10/2020',
     '10/10/2020',
-
   ];
 
   const onNotificationItemPress = (notification: NotificationModel): void => {
@@ -61,7 +63,7 @@ const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTable
   };
 
   const onMessagePress = (): void => {
-
+    props.onMessagePress();
   };
 
   const onDatePress = (): void => {
@@ -73,7 +75,7 @@ const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTable
   };
 
   const onHelpPress = (): void => {
-
+    setIsVisible(prevState => !prevState);
   };
 
   const { themedStyle } = props;
@@ -156,6 +158,10 @@ const ConferenceInfoTabletComponent: React.FunctionComponent<ConferenceInfoTable
             />)}
         </View>
       </View>
+      <HelpModel
+        isVisible={isVisible}
+        onClosePress={onHelpPress}
+      />
     </View>
   );
 };

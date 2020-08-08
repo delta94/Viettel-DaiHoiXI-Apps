@@ -52,6 +52,35 @@ const ConferenceInfoComponent: React.FunctionComponent<ConferenceInfoProps> = (p
     props.onPressReleaseItemPress(pressReleae);
   };
 
+  const renderTabSelected = (): React.ReactElement => {
+    switch (selectedTabIndex) {
+      case ConferenceInfoEnum.program: {
+        return (
+          <Program programs={props.programs} />
+        );
+      }
+      case ConferenceInfoEnum.notification: {
+        return (
+          <Notification
+            notifications={props.notifications}
+            onNotificationItemPress={onNotificationItemPress}
+          />
+        );
+      }
+      case ConferenceInfoEnum.pressRelease: {
+        return (
+          <PressRelease
+            pressReleases={props.pressReleases}
+            onPressReleaseItemPress={onPressReleaseItemPress}
+          />
+        );
+      }
+      default: {
+        return undefined;
+      }
+    }
+  };
+
   const { themedStyle } = props;
 
   return (
@@ -75,15 +104,7 @@ const ConferenceInfoComponent: React.FunctionComponent<ConferenceInfoProps> = (p
             icon={PressReleaseIcon}
             titleStyle={themedStyle.tabTitle} />
         </TabBar>
-        {selectedTabIndex === ConferenceInfoEnum.program && <Program programs={props.programs} />}
-        {selectedTabIndex === ConferenceInfoEnum.notification && <Notification
-          notifications={props.notifications}
-          onNotificationItemPress={onNotificationItemPress}
-        />}
-        {selectedTabIndex === ConferenceInfoEnum.pressRelease && <PressRelease
-          pressReleases={props.pressReleases}
-          onPressReleaseItemPress={onPressReleaseItemPress}
-        />}
+        {renderTabSelected()}
       </View>
     </View>
   );

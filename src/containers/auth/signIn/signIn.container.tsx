@@ -11,8 +11,9 @@ import { SessionState } from '@src/core/store/reducer/session/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '@src/core/store';
 import { Dispatch } from 'redux';
-import { onThunkSignInReq } from './store/thunk';
+import { onThunkSignInReq, onThunkGetOtp } from './store/thunk';
 import { alerts } from '@src/core/utils/alerts';
+import { generateCaptcha } from '@src/core/utils/utils';
 
 export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'SignInContainer';
@@ -29,6 +30,17 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
     }
   }, [loggedIn]);
 
+  useEffect(() => {
+    const focusComponent = props.navigation.addListener(
+      'willFocus',
+      () => {
+      },
+    );
+    return () => {
+      focusComponent.remove();
+    };
+  }, []);
+
   const onSignInAccountPress = (data: SignInAccountFormData) => {
     if (data) {
       if (data.password.length < 8) {
@@ -42,10 +54,18 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
   };
 
   const onSignInPhoneNumberPress = (data: SignInPhoneNumberFormData) => {
-    props.navigation.navigate({
-      key: navigationKey,
-      routeName: 'otp',
-    });
+    if (data) {
+      if (data.phone.length < 10 || data.phone.length > 11) {
+        alerts.alert({ message: 'Số điện thoại không đúng!' });
+      } else
+        if (data.enterCaptca !== data.captcha) {
+          alerts.alert({ message: 'Mã xác nhận không chính xác!' });
+        } else {
+          dispatch(onThunkGetOtp(data.phone, props, false));
+        }
+    } else {
+      alerts.alert({ message: 'Số điện thoại không được để trông!' });
+    }
   };
 
   const onForgotPasswordPress = () => {

@@ -17,12 +17,12 @@ import {
   ValidationInput,
   ScrollableAvoidKeyboard,
 } from '@src/components';
-import { NumberValidator } from '@src/core/validators';
+import { StringValidator } from '@src/core/validators';
 import { Button } from '@src/components/button/button.component';
 import { ArrowPrevIcon } from '@src/assets/icons';
-import { SwitchSetting } from '@src/components/switch/switchSetting.component';
 import { widthPercentageToDP } from 'react-native-responsive-screen';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { alerts } from '@src/core/utils/alerts';
 
 interface ComponentProps {
   onResendOtpPress: () => void;
@@ -34,6 +34,19 @@ export type OtpTabletProps = ComponentProps & ThemedComponentProps;
 
 const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
   const [otp, setOtp] = useState<string | undefined>(undefined);
+  const [timeOut, setTimeOut] = React.useState<number>(1);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (timeOut > 0) {
+        setTimeOut(timeOut - 1);
+      } else {
+        alerts.alert({ message: 'Hết thời gian nhập mã?' });
+        clearInterval(interval);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const onResendOtpButtonPress = (): void => {
     props.onResendOtpPress();
@@ -86,8 +99,9 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
               <ValidationInput
                 style={themedStyle.inputOtp}
                 placeholder='Mã OTP'
-                validator={NumberValidator}
+                validator={StringValidator}
                 onChangeText={onOtpInputTextChange}
+                keyboardType='phone-pad'
               />
               <View style={themedStyle.viewBtn}>
                 <Button

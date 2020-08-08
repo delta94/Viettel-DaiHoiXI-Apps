@@ -6,24 +6,29 @@ import {
   View,
   ViewProps,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { ValidationInput } from '@src/components';
+import { ValidationInput, textStyle } from '@src/components';
 import { RefreshIconOther } from '@src/assets/icons';
 import {
   PhoneNumberValidator,
   NumberValidator,
+  EmailValidator,
+  NameValidator,
 } from '@src/core/validators';
 import { SignInPhoneNumberFormData } from '@src/core/models/auth/signIn/signIn.model';
 import { usePrevious } from '@src/core/utils/hookHelper';
 import {
   isEmpty,
   pxToPercentage,
+  generateCaptcha,
 } from '@src/core/utils/utils';
+import { Input } from 'react-native-ui-kitten/ui';
 
 interface ComponentProps {
   onDataChange: (value: SignInPhoneNumberFormData | undefined) => void;
@@ -34,6 +39,8 @@ export type SignInPhoneNumberFormProps = ThemedComponentProps & ViewProps & Comp
 const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberFormProps> = (props) => {
   const [formData, setFormData] = useState<SignInPhoneNumberFormData>({
     phone: undefined,
+    captcha: generateCaptcha(4),
+    enterCaptca: undefined,
   });
 
   let prevState = usePrevious(formData);
@@ -64,6 +71,18 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
     setFormData({ ...formData, phone });
   };
 
+  const onEnterCaptChaTextChange = (enterCaptca: string) => {
+    setFormData({ ...formData, enterCaptca });
+  };
+
+  const onCaptchaTextChange = (captcha: string) => {
+    setFormData({ ...formData, captcha });
+  };
+
+  const onRefeshCaptcha = () => {
+    setFormData({ ...formData, captcha: generateCaptcha(4) });
+  };
+
   const isValid = (value: SignInPhoneNumberFormData): boolean => {
     return !isEmpty(value.phone);
   };
@@ -78,23 +97,24 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
         placeholder='Số điện thoại'
         validator={PhoneNumberValidator}
         onChangeText={onUsernameInputTextChange}
+        keyboardType='number-pad'
       />
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput
           viewContainerStyle={themedStyle.viewInputVerification}
           placeholder='Mã xác nhận'
-          validator={NumberValidator}
-          onChangeText={onUsernameInputTextChange}
+          validator={NameValidator}
+          onChangeText={onEnterCaptChaTextChange}
         />
         <TouchableOpacity
           activeOpacity={0.75}
-          onPress={() => { }}
+          onPress={onRefeshCaptcha}
           style={themedStyle.btnCaptcha}>
-          <ValidationInput
+          <TextInput
+            style={themedStyle.viewInput}
+            value={formData.captcha}
             editable={false}
-            placeholder='ABCD'
-            validator={NumberValidator}
-            onChangeText={onUsernameInputTextChange}
+            onChangeText={onCaptchaTextChange}
           />
           {RefreshIconOther(themedStyle.iconRefresh)}
         </TouchableOpacity>
@@ -124,5 +144,16 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
     right: pxToPercentage(10),
     width: pxToPercentage(17.5),
     height: pxToPercentage(17.5),
+  },
+  viewInput: {
+    fontSize: pxToPercentage(18),
+    height: pxToPercentage(48),
+    paddingHorizontal: pxToPercentage(16),
+    borderRadius: pxToPercentage(16),
+    color: theme['text-basic-color'],
+    borderWidth: pxToPercentage(1),
+    borderColor: theme['color-primary-18'],
+    backgroundColor: theme['color-primary-12'],
+    ...textStyle.proDisplayRegular,
   },
 }));

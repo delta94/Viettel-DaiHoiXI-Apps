@@ -34,7 +34,6 @@ import {
   FaceIDIconOther,
   QRCodeIconOther,
   PersonIcon2,
-  PhoneIcon,
 } from '@src/assets/icons';
 import { IconElement } from '@src/assets/icons/icon.component';
 import { SignInTabEnum } from '@src/core/utils/constants';

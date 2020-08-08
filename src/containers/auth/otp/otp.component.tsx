@@ -11,36 +11,54 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { imageBackGroundSignInPhone } from '@src/assets/images';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { pxToPercentage, tenMinutesCountdown } from '@src/core/utils/utils';
 import {
   textStyle,
   ValidationInput,
   ScrollableAvoidKeyboard,
 } from '@src/components';
-import { NumberValidator } from '@src/core/validators';
+import { NumberValidator, StringValidator } from '@src/core/validators';
 import { Button } from '@src/components/button/button.component';
 import { ArrowPrevIcon } from '@src/assets/icons';
-import { SwitchSetting } from '@src/components/switch/switchSetting.component';
-import { widthPercentageToDP } from 'react-native-responsive-screen';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { alerts } from '@src/core/utils/alerts';
 
 interface ComponentProps {
   onResendOtpPress: () => void;
   onConfirmPress: (otp: string) => void;
   onBackPress: () => void;
+  isCount: boolean;
 }
 
 export type OtpProps = ComponentProps & ThemedComponentProps;
 
 const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
   const [otp, setOtp] = useState<string | undefined>(undefined);
+  const [time, setTime] = React.useState<number>(180);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (time) {
+        setTime(time - 1);
+      } else {
+        alerts.alert({ message: 'Thời gian cấp Otp đã hết\nHãy chọn gửi lại mã Otp' });
+        clearInterval(interval);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [time]);
 
   const onResendOtpButtonPress = (): void => {
+    setTime(180);
     props.onResendOtpPress();
   };
 
   const onConfirmButtonPress = (): void => {
-    props.onConfirmPress(otp);
+    if (time) {
+      props.onConfirmPress(otp);
+    } else {
+      alerts.alert({message: 'Thời gian hiệu lực của mã Otp đã hết\nHãy chọn gửi lại mã Otp'});
+    }
   };
 
   const onOtpInputTextChange = (otpParam: string) => {
@@ -84,14 +102,15 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
         <View style={themedStyle.viewBody}>
           <Text style={themedStyle.txtOtpNote}>
             {'Điền vào đoạn mã OTP được gửi đến\nsố +84 941219915'}
-            {'\nThời gian hiệu lực 3:10'}
+            {`\nThời gian hiệu lực ${tenMinutesCountdown(time)}`}
           </Text>
-
           <ValidationInput
-            style={themedStyle.inputOtp}
+            value={otp}
+            viewContainerStyle={themedStyle.viewInputPassword}
             placeholder='Mã OTP'
-            validator={NumberValidator}
+            validator={StringValidator}
             onChangeText={onOtpInputTextChange}
+            keyboardType='number-pad'
           />
           <View style={themedStyle.viewBtn}>
             <Button

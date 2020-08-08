@@ -30,8 +30,8 @@ export const routeNameDataSource: { [key: string]: string } = {
   'scanQRCode': 'Mã QR Code của tôi',
   'chatContainer': 'Chat',
   'seatingChart': 'Sơ đồ chỗ ngồi',
-  'signInQRCode' : 'Quét mã',
-  'galleryVideo' : 'Phim ảnh, hình ảnh triển lãm ',
+  'signInQRCode': 'Quét mã',
+  'galleryVideo': 'Phim ảnh, hình ảnh triển lãm ',
   'gallery': 'Trển Lãm',
   'documentList': 'Tài liệu',
   'chatDetail': 'Chat',
@@ -50,6 +50,14 @@ const MenuTopNavigationParams: TopNavigationParams = {
     // @ts-ignore (private API)
     const { routeName } = onGetCurrentRouteState(props.navigation);
     const index: number = onGetCurrentRouteIndex(props.navigation);
+    const keyNavigation: string = 'HomeMenuTopNavigation';
+
+    const onMessagePress = () => {
+      props.navigation.navigate({
+        key: keyNavigation,
+        routeName: 'chat',
+      });
+    };
 
     const renderArrowsBack = () => ArrowIosBackFill({
       tintColor: 'white',
@@ -60,6 +68,7 @@ const MenuTopNavigationParams: TopNavigationParams = {
         {...props}
         title={routeNameDataSource[routeName]}
         backIcon={isRootRoute(index) && renderArrowsBack}
+        onMessagePress={onMessagePress}
         onBackPress={() => {
           props.navigation.goBack(KEY_NAVIGATION_BACK);
         }}
@@ -110,7 +119,6 @@ const HomeMenuTopNavigationParams: TopNavigationParams = {
         onBack={onBackPress}
         onQRCodePress={onQRCodePress}
         onMessagePress={onMessagePress}
-
       />
     );
   },

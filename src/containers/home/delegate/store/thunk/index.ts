@@ -3,7 +3,7 @@ import { ThunkActionTypes } from '@src/core/store/thunk/types';
 import { alerts } from '@src/core/utils/alerts';
 import {
   onGetDelegateListSuccess,
-  onGetDelegateDetailSuccess,
+  onGetDelegateDetailsSuccess,
 } from '../reducer/actions';
 import { catchHandle } from '@src/core/utils/catchHelper';
 import { delegateListApiDataFake } from '@src/core/data/delegateList';
@@ -31,17 +31,17 @@ export const onThunkGetDelegateListReq = (
   }
 };
 
-export const onThunkGetDelegateDetailReq = (
+export const onThunkGetDelegateDetailsReq = (
   deputyId: string,
   onSuccess: () => void,
 ): ThunkActionTypes => async (dispatch) => {
   const delegateService = new DelegateService();
 
   try {
-    const res = await delegateService.getDelegateDetail(deputyId);
+    const res = await delegateService.getDelegateDetails(deputyId);
 
     if (res.success) {
-      dispatch(onGetDelegateDetailSuccess(res.data || []));
+      dispatch(onGetDelegateDetailsSuccess(res.data || []));
       onSuccess();
     } else {
       alerts.alert({ message: res.message || res.error_message });

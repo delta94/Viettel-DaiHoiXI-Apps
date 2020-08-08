@@ -8,16 +8,15 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { UserDetail as UserDetailModel } from '@src/core/models/user/userDetail.model';
+import { User as UserModal } from '@src/core/models/user/user.model';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { BackHeader } from '@src/components/header/backHeader.component';
-import { ProfileInfoV3Tablet } from '@src/components/profileInfo/profileinfoV3.compoent.tablet';
+import { ProfileInfoV3Tablet } from '@src/components/profileInfo/profileinfoV3.component.tablet';
 import { QRCodeIconOther } from '@src/assets/icons';
 import { textStyle } from '@src/components';
 
 interface ComponentProps {
-  user: UserDetailModel;
+  user: UserModal;
 }
 
 export type ScanQRCodeTabletProps = ThemedComponentProps & ComponentProps;

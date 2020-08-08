@@ -8,10 +8,10 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { ProfileInfoV3 } from '@src/components/profileInfo/profileinfoV3.compoent';
+import { ProfileInfoV3 } from '@src/components/profileInfo/profileinfoV3.component';
 import { DelegateDetailContent } from './delegateDetailContent.component';
 import { Delegate } from '@src/core/models/delegate/delegate.model';
-import { DelegateDetail as  DelegateDetailModel} from '@src/core/models/delegate/delegateDetail.model';
+import { DelegateDetail as DelegateDetailModel } from '@src/core/models/delegate/delegateDetail.model';
 
 interface ComponentProps {
   delegateDetail: DelegateDetailModel[];
@@ -29,7 +29,7 @@ const DelegateDetailComponent: React.FunctionComponent<DelegateDetailProps> = (p
         style={themedStyle.container}
         contentContainerStyle={themedStyle.scrollViewContainer}>
         <ProfileInfoV3 user={props.deputy} />
-        <DelegateDetailContent user={props.delegateDetail} />
+        <DelegateDetailContent delegateDetails={props.delegateDetail} />
       </ScrollView>
     </React.Fragment>
   );

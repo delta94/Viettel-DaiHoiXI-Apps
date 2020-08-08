@@ -15,7 +15,7 @@ import { Hr } from '@src/components/hr/hr.component';
 import { DelegateDetail } from '@src/core/models/delegate/delegateDetail.model';
 
 interface ComponentProps {
-  user: DelegateDetail[];
+  delegateDetails: DelegateDetail[];
 }
 
 interface InfoTypeOneParams {
@@ -33,7 +33,7 @@ interface InfoTypeTwoParams {
 export type DelegateDetailContentProps = ThemedComponentProps & ComponentProps;
 
 const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailContentProps> = (props) => {
-  const { themedStyle, user } = props;
+  const { themedStyle, delegateDetails } = props;
 
   const renderInfoTypeOne = (params: InfoTypeOneParams): React.ReactElement => {
     return (
@@ -75,26 +75,30 @@ const DelegateDetailContentComponent: React.FunctionComponent<DelegateDetailCont
 
   const renderInfor = (): React.ReactElement[] => {
     const result = [];
-    for (let i = 0; i < user.length; i++) {
-      if (user[i].type === 2 && user[i + 1].type === 2) {
+
+    for (let i = 0; i < delegateDetails.length; i++) {
+      if (delegateDetails[i].type === 2 && delegateDetails[i + 1].type === 2) {
         result.push(
           renderInfoTypeOne({
-            firstTitle: user[i].key,
-            firstValue: user[i].value,
-            secondTitle: user[i + 1].key,
-            secondValue: user[i + 1].value,
+            firstTitle: delegateDetails[i].key,
+            firstValue: delegateDetails[i].value,
+            secondTitle: delegateDetails[i + 1].key,
+            secondValue: delegateDetails[i + 1].value,
           }),
         );
+
         i = i + 1;
       }
-      if (user[i].type === 1) {
+
+      if (delegateDetails[i].type === 1) {
         result.push(
           renderInfoTypeTwo({
-            title: user[i].key,
-            value: user[i].value,
+            title: delegateDetails[i].key,
+            value: delegateDetails[i].value,
           }),
         );
       }
+
       result.push(<Hr />);
     }
     return result;

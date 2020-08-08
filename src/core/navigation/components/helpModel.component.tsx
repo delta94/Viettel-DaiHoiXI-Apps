@@ -6,15 +6,17 @@ import {
 import {
   TouchableOpacity,
   StatusBar,
+  View,
+  SafeAreaView,
 } from 'react-native';
 import { ThemedComponentProps } from '@kitten/theme';
 import { CloseIconOutline } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { isTablet } from 'react-native-device-info';
 import { themes } from '@src/core/themes';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Modal from 'react-native-modal';
 import Pdf from 'react-native-pdf';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export interface ComponentProps {
   isVisible: boolean;
@@ -49,17 +51,20 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
         backgroundColor={themes['App Theme']['color-basic-100']}
         barStyle='dark-content'
       />
-      <Pdf
-        source={sourcePdf}
-        scale={1}
-        style={themedStyle.pdf}>
+      <SafeAreaView />
+      <View style={themedStyle.container}>
         <TouchableOpacity
           activeOpacity={0.75}
           style={themedStyle.btnClose}
           onPress={() => onClosePress()}>
           {CloseIconOutline(themedStyle.iconClose)}
         </TouchableOpacity>
-      </Pdf>
+        <Pdf
+          source={sourcePdf}
+          scale={1}
+          style={themedStyle.pdf}
+        />
+      </View>
     </Modal>
   );
 };
@@ -69,10 +74,11 @@ export const HelpModel = withStyles(TopNavigationBarComponent, (theme: ThemeType
     flex: 1,
     margin: 0,
     backgroundColor: theme['color-basic-100'],
-    paddingTop: getStatusBarHeight(false),
   },
   btnClose: {
     position: 'absolute',
+    zIndex: 1,
+    top: isTablet() ? pxToPercentage(30) : 0,
     right: isTablet() ? pxToPercentage(30) : 0,
   },
   iconClose: {

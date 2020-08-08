@@ -37,7 +37,6 @@ import { SERVER_ADDRESS } from '../../../../../config';
 interface ComponentProps {
   delegateList: DelegateListModel[];
   onDelegateItemPress: (deputy: Delegate) => void;
-  onBackPress: () => void;
 }
 
 export type DelegateListTabletProps = ThemedComponentProps & ComponentProps;

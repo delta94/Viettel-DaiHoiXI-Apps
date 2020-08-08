@@ -14,12 +14,6 @@ import { textStyle } from '@src/components';
 import { User } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
-import {
-  QRCodeIconOther,
-  SearchIcon,
-  PersonIcon2,
-} from '@src/assets/icons';
-import { Button } from '../button/button.component';
 import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {

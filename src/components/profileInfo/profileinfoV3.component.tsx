@@ -19,6 +19,7 @@ import {
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
 import { Delegate } from '@src/core/models/delegate/delegate.model';
+import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {
   user: Delegate;
@@ -38,7 +39,7 @@ const ProfileInfoV3Component: React.FunctionComponent<ProfileInfoV3Props> = (pro
       <View style={themedStyle.sectionBody}>
         <Image
           resizeMode='cover'
-          source={(new RemoteImage(`http://daihoi11.imt-soft.com:8080${user.avatar}`)).imageSource}
+          source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
           style={themedStyle.imgAvatar}
         />
         <View style={themedStyle.viewInfo}>

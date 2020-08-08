@@ -18,10 +18,12 @@ import {
 } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
-import { Delegate } from '@src/core/models/delegate/delegate.model';
+import { User as UserModal } from '@src/core/models/user/user.model';
+import { Delegate as DelegateModal } from '@src/core/models/delegate/delegate.model';
+import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {
-  user: Delegate;
+  user: UserModal | DelegateModal;
 }
 
 export type ProfileInfoV3TabletProps = ThemedComponentProps & ViewProps & ComponentProps;
@@ -37,7 +39,7 @@ const ProfileInfoV3TabletComponent: React.FunctionComponent<ProfileInfoV3TabletP
       ]}>
       <Image
         resizeMode='cover'
-        source={(new RemoteImage(`http://daihoi11.imt-soft.com:8080${user.avatar}`)).imageSource}
+        source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
         style={themedStyle.imgAvatar}
       />
       <Text style={themedStyle.txtInfo}>

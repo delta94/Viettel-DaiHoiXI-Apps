@@ -40,6 +40,8 @@ const ChatComponent: React.FunctionComponent<ChatProps> = (props) => {
       <View style={themedStyle.viewChatList}>
         <FlatList
           data={props.chatLists}
+          extraData={props.chatLists}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={renderChatListItem}
         />
       </View>

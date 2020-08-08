@@ -10,7 +10,7 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { ProfileInfoV3Tablet } from '@src/components/profileInfo/profileinfoV3.compoent.tablet';
+import { ProfileInfoV3Tablet } from '@src/components/profileInfo/profileinfoV3.component.tablet';
 import { DelegateDetailContentTablet } from './delegateDetailContent.component.tablet';
 import { Delegate } from '@src/core/models/delegate/delegate.model';
 import { DelegateDetail } from '@src/core/models/delegate/delegateDetail.model';
@@ -31,7 +31,7 @@ const DelegateDetailTabletComponent: React.FunctionComponent<DelegateDetailTable
       <View style={themedStyle.viewCard}>
         <ProfileInfoV3Tablet user={props.deputy} />
         <ScrollView contentContainerStyle={themedStyle.scrollViewContainer}>
-          <DelegateDetailContentTablet user={props.delegateDetail} />
+          <DelegateDetailContentTablet delegateDetails={props.delegateDetail} />
         </ScrollView>
       </View>
     </View>

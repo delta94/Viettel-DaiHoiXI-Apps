@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  SafeAreaView,
-} from 'react-native';
+import { View } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -12,15 +7,9 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import {
-  textStyle,
-  ValidationInput,
-} from '@src/components';
+import { textStyle } from '@src/components';
 import { DocumentSection as DocumentSectionModel } from '@src/core/models/document/document.model';
-import { StringValidator } from '@src/core/validators';
-import { Document } from './document.component';
-import { Select, TabBar, Tab } from 'react-native-ui-kitten/ui';
-import { ModalDocumentRequest } from './modalDocumentRequest.component';
+import { TabBar, Tab } from 'react-native-ui-kitten/ui';
 import { DocumentTabContent } from './documentTabContent.component';
 import { MenuIcon } from '@src/assets/icons';
 
@@ -37,6 +26,7 @@ const DocumentListComponent: React.FunctionComponent<DocumentListProps> = (props
   const onTabSelect = (selectedTabIndexParam: number) => {
     setSelectedTabIndex(selectedTabIndexParam);
   };
+
   const { themedStyle } = props;
 
   return (
@@ -80,11 +70,13 @@ export const DocumentList = withStyles(DocumentListComponent, (theme: ThemeType)
     flex: 1,
     borderRadius: pxToPercentage(12.5),
     backgroundColor: theme['color-custom-100'],
+    overflow: 'hidden',
     ...viewStyle.shadow2,
   },
   tabView: {
     backgroundColor: theme['color-primary-11'],
-    borderRadius: pxToPercentage(12.5),
+    borderTopLeftRadius: pxToPercentage(12.5),
+    borderTopRightRadius: pxToPercentage(12.5),
   },
   tabBar: {
     backgroundColor: theme['color-custom-100'],

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -13,7 +14,6 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
 import { DocumentSection as DocumentSectionModel } from '@src/core/models/document/document.model';
 import { ArrowIosBackFill } from '@src/assets/icons';
-import React from 'react';
 import { ModalDocument } from './modalDocument.component';
 import { Hr } from '@src/components/hr/hr.component';
 
@@ -98,14 +98,10 @@ const DocumentItemComponent: React.FunctionComponent<DocumentItemProps> = (props
           {props.documentSection.title.toUpperCase()}
         </Text>
         {ArrowIosBackFill(isShowDocument
-          ? [
-            themedStyle.iconArrow,
-            themedStyle.iconArrowUp,
-          ]
-          : [
-            themedStyle.iconArrow,
-            themedStyle.iconArrowDown,
-          ],
+          ? [themedStyle.iconArrow,
+          themedStyle.iconArrowUp]
+          : [themedStyle.iconArrow,
+          themedStyle.iconArrowDown],
         )}
       </TouchableOpacity>
       {isShowDocument && renderDocumentItem()}

@@ -3,7 +3,6 @@ import {
   View,
   TouchableOpacity,
   Text,
-  SafeAreaView,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -11,7 +10,6 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
-import { viewStyle } from '@src/components/viewStyle';
 import {
   textStyle,
   ValidationInput,
@@ -48,59 +46,55 @@ const DocumentContentomponent: React.FunctionComponent<DocumentContentProps> = (
   return (
     <React.Fragment>
       <View style={themedStyle.container}>
-        <View style={themedStyle.viewCard}>
-          <View style={themedStyle.viewTopGroup}>
-            <ValidationInput
-              style={themedStyle.viewInput}
-              placeholder={'Nhập trích yếu/số văn bản'}
-              validator={StringValidator}
-              onChangeText={() => { }}
-            />
-            {/* <TouchableOpacity style={themedStyle.btnTimKiem}
+        <View style={themedStyle.viewTopGroup}>
+          <ValidationInput
+            style={themedStyle.viewInput}
+            placeholder={'Nhập trích yếu/số văn bản'}
+            validator={StringValidator}
+            onChangeText={() => { }}
+          />
+          {/* <TouchableOpacity style={themedStyle.btnSearch}
               activeOpacity={0.75}>
-              <Text style={themedStyle.txtTimKiem}>
+              <Text style={themedStyle.txtSearch}>
                 {'TÌM KIẾM'}
               </Text>
             </TouchableOpacity> */}
-            <View style={themedStyle.viewSelect}>
-              <Select
-                data={[
-                  { text: '7 chương trình đột phá' },
-                  { text: 'Về tăng cường xây dựng chỉnh đốn Đảng; ngăn chặn đẩy lùi sự suy thoái về tư tưởng chính trị' },
-                  { text: 'Công tác kết nạp đảng viên và tình hình đảng viên ra khỏi Đảng' },
-                  { text: 'Nhiệm vụ kinh tế - xã hội' },
-                  { text: 'Danh sách tổ' },
-                ]}
-                textStyle={themedStyle.txtSelectInput}
-                keyExtractor={(item) => item.text}
-                selectedOption={selectedOption}
-                controlStyle={themedStyle.selectOption}
-                placeholder={'Chọn nội dung tài liệu'}
-                placeholderStyle={themedStyle.selectOptionPhd}
-                size={'large'}
-                onSelect={setSelectedOption}>
-              </Select>
-            </View>
-          </View>
-          <Document
-            documentSections={props.documentSections}
-          />
-          <View style={themedStyle.viewYeuCau}>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={onDocumentRequestPress}
-              style={themedStyle.btnYeuCau}>
-              <Text style={themedStyle.txtYeuCau}>
-                {'YÊU CẦU TÀI LIỆU'}
-              </Text>
-            </TouchableOpacity>
+          <View style={themedStyle.viewSelect}>
+            <Select
+              data={[
+                { text: '7 chương trình đột phá' },
+                { text: 'Về tăng cường xây dựng chỉnh đốn Đảng; ngăn chặn đẩy lùi sự suy thoái về tư tưởng chính trị' },
+                { text: 'Công tác kết nạp đảng viên và tình hình đảng viên ra khỏi Đảng' },
+                { text: 'Nhiệm vụ kinh tế - xã hội' },
+                { text: 'Danh sách tổ' },
+              ]}
+              textStyle={themedStyle.txtSelectInput}
+              keyExtractor={(item) => item.text}
+              selectedOption={selectedOption}
+              controlStyle={themedStyle.selectOption}
+              placeholder={'Chọn nội dung tài liệu'}
+              placeholderStyle={themedStyle.selectOptionPhd}
+              size={'large'}
+              onSelect={setSelectedOption}>
+            </Select>
           </View>
         </View>
-        <ModalDocumentRequest
-          isVisible={isVisibleDocumentRequest}
-          onClosePress={onClosePress} />
+        <Document
+          documentSections={props.documentSections}
+        />
+        <TouchableOpacity
+          activeOpacity={0.75}
+          onPress={onDocumentRequestPress}
+          style={themedStyle.btnRequest}>
+          <Text style={themedStyle.txtRequest}>
+            {'YÊU CẦU TÀI LIỆU'}
+          </Text>
+        </TouchableOpacity>
       </View>
-      <SafeAreaView />
+      <ModalDocumentRequest
+        isVisible={isVisibleDocumentRequest}
+        onClosePress={onClosePress}
+      />
     </React.Fragment>
   );
 };
@@ -110,15 +104,11 @@ export const DocumentTabContent = withStyles(DocumentContentomponent, (theme: Th
     flex: 1,
     backgroundColor: theme['color-custom-100'],
   },
-  viewCard: {
-    flex: 1,
-    backgroundColor: theme['color-primary-12'],
-  },
-  viewSearch: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: pxToPercentage(10),
-  },
+  // viewSearch: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   marginBottom: pxToPercentage(10),
+  // },
   viewSelect: {
     marginTop: pxToPercentage(8),
   },
@@ -131,25 +121,25 @@ export const DocumentTabContent = withStyles(DocumentContentomponent, (theme: Th
     borderRadius: pxToPercentage(5),
     fontSize: pxToPercentage(14),
   },
-  btnTimKiem: {
-    marginTop: pxToPercentage(8),
-    height: pxToPercentage(48),
-    backgroundColor: theme['color-primary-0'],
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: pxToPercentage(10),
-  },
-  txtTimKiem: {
-    fontSize: pxToPercentage(14),
-    color: theme['color-primary-2'],
-  },
-  btnYeuCau: {
+  // btnSearch: {
+  //   marginTop: pxToPercentage(8),
+  //   height: pxToPercentage(48),
+  //   backgroundColor: theme['color-primary-0'],
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   borderRadius: pxToPercentage(10),
+  // },
+  // txtSearch: {
+  //   fontSize: pxToPercentage(14),
+  //   color: theme['color-primary-2'],
+  // },
+  btnRequest: {
     height: pxToPercentage(48),
     backgroundColor: theme['color-primary-2'],
     alignItems: 'center',
     justifyContent: 'center',
   },
-  txtYeuCau: {
+  txtRequest: {
     fontSize: pxToPercentage(14),
     color: theme['color-primary-0'],
     ...textStyle.proDisplayRegular,
@@ -160,7 +150,6 @@ export const DocumentTabContent = withStyles(DocumentContentomponent, (theme: Th
     ...textStyle.proTextRegular,
   },
   selectOption: {
-
     height: pxToPercentage(48),
     borderRadius: pxToPercentage(5),
     borderColor: theme['color-primary-18'],

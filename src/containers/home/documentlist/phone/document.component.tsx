@@ -1,6 +1,5 @@
-import {
-  ScrollView,
-} from 'react-native';
+import React from 'react';
+import { ScrollView } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
@@ -8,7 +7,6 @@ import {
 } from '@kitten/theme';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { DocumentSection as DocumentSectionModel } from '@src/core/models/document/document.model';
-import React from 'react';
 import { DocumentItem } from './documentItem.component';
 
 interface ComponentProps {
@@ -21,7 +19,6 @@ const DocumentComponent: React.FunctionComponent<DocumentProps> = (props) => {
   const { themedStyle } = props;
 
   const renderDocument = (): React.ReactElement[] => {
-
     return props.documentSections.map((item, index) => {
       return (
         <React.Fragment key={index}>

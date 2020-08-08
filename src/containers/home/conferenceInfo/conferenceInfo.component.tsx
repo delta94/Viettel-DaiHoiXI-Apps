@@ -125,7 +125,8 @@ export const ConferenceInfo = withStyles(ConferenceInfoComponent, (theme: ThemeT
   },
   tabView: {
     backgroundColor: theme['color-primary-11'],
-    borderRadius: pxToPercentage(12.5),
+    borderTopLeftRadius: pxToPercentage(12.5),
+    borderTopRightRadius: pxToPercentage(12.5),
   },
   tabBar: {
     backgroundColor: theme['color-custom-100'],

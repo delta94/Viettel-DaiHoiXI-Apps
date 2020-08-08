@@ -81,7 +81,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
       />
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput
-          style={themedStyle.inputVerification}
+          viewContainerStyle={themedStyle.viewInputVerification}
           placeholder='Mã xác nhận'
           validator={NumberValidator}
           onChangeText={onUsernameInputTextChange}
@@ -111,7 +111,7 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
     justifyContent: 'space-between',
     marginTop: pxToPercentage(7.5),
   },
-  inputVerification: {
+  viewInputVerification: {
     width: '60%',
   },
   btnCaptcha: {
@@ -122,7 +122,7 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
   iconRefresh: {
     position: 'absolute',
     right: pxToPercentage(10),
-    width: pxToPercentage(20),
-    height: pxToPercentage(20),
+    width: pxToPercentage(17.5),
+    height: pxToPercentage(17.5),
   },
 }));

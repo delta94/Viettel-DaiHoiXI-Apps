@@ -478,6 +478,22 @@ export const PhotoGalleryIcon = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const OtherEyeOn = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/eye-on.png'),
+  };
+
+  return Icon(source, style);
+};
+
+export const OtherEyeOff = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/eye-off.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export {
   Icon,
   IconSource,

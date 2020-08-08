@@ -10,13 +10,22 @@ import {
 import {
   TextInput,
   TextInputProps,
+  TouchableOpacity,
+  View,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import { usePrevious } from '@src/core/utils/hookHelper';
 import { textStyle } from '..';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { isTablet } from 'react-native-device-info';
+import {
+  OtherEyeOn,
+  OtherEyeOff,
+} from '@src/assets/icons';
 
 interface ComponentProps extends TextInputProps {
+  viewContainerStyle?: StyleProp<ViewStyle>;
   validator: (value: string) => boolean;
   formatter?: (value: string, stateValue: string) => string;
   onChangeText?: (value: string | undefined) => void;
@@ -29,6 +38,8 @@ export type ValidationInputProps = ThemedComponentProps & ComponentProps;
  */
 const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = (props) => {
   const [value, setValue] = useState<string>(props.value);
+  const [isSecure, setIsSecure] = useState<boolean>(props.secureTextEntry);
+  const [isIconShow, setIsIconShow] = useState<boolean>(false);
 
   let prevState = usePrevious({ value });
   if (!prevState) {
@@ -67,31 +78,54 @@ const ValidationInputComponent: React.FunctionComponent<ValidationInputProps> = 
     }
   };
 
+  const onIconPress = (): void => {
+    setIsSecure(!isSecure);
+    setIsIconShow(!isIconShow);
+  };
+
   const isValid = (valueParam: string): boolean => {
     const { validator } = props;
 
     return validator(valueParam);
   };
 
-  const { style, themedStyle, ...restProps } = props;
+  const { style, themedStyle, viewContainerStyle, ...restProps } = props;
 
   return (
-    <TextInput
-      autoCapitalize='none'
-      maxLength={256}
-      {...restProps}
-      value={value}
+    <View
       style={[
-        isTablet() ? themedStyle.containerTablet : themedStyle.container,
-        style,
-      ]}
-      placeholderTextColor={themedStyle.phd.color}
-      onChangeText={onChangeText}
-    />
+        themedStyle.viewContainer,
+        viewContainerStyle,
+      ]}>
+      <TextInput
+        autoCapitalize='none'
+        maxLength={256}
+        {...restProps}
+        value={value}
+        style={[
+          isTablet() ? themedStyle.containerTablet : themedStyle.container,
+          style,
+        ]}
+        placeholderTextColor={themedStyle.phd.color}
+        onChangeText={onChangeText}
+        secureTextEntry={isSecure}
+      />
+      {props.secureTextEntry &&
+        (<TouchableOpacity
+          activeOpacity={0.75}
+          onPress={onIconPress}
+          style={themedStyle.btnIcon}>
+          {isIconShow ? OtherEyeOn(themedStyle.icon) : OtherEyeOff(themedStyle.icon)}
+        </TouchableOpacity>)}
+    </View>
   );
 };
 
 export const ValidationInput = withStyles(ValidationInputComponent, (theme: ThemeType) => ({
+  viewContainer: {
+    justifyContent: 'center',
+    marginTop: 1,
+  },
   container: {
     fontSize: pxToPercentage(18),
     height: pxToPercentage(48),
@@ -116,5 +150,18 @@ export const ValidationInput = withStyles(ValidationInputComponent, (theme: Them
   },
   phd: {
     color: theme['color-primary-18'],
+  },
+  btnIcon: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: isTablet() ? pxToPercentage(10) : 0,
+    height: isTablet() ? pxToPercentage(100) : pxToPercentage(48),
+    width: isTablet() ? pxToPercentage(60) : pxToPercentage(30),
+  },
+  icon: {
+    height: isTablet() ? pxToPercentage(40) : pxToPercentage(16.09),
+    width: isTablet() ? pxToPercentage(40) : pxToPercentage(18.62),
+    tintColor: theme['color-custom-500'],
   },
 }));

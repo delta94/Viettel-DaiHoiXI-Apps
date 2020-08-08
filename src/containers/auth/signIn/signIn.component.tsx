@@ -8,6 +8,8 @@ import {
   StyleProp,
   ImageProps,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -170,21 +172,25 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
   };
 
   return (
-    <ScrollableAvoidKeyboard style={themedStyle.scrollView}>
+    <ScrollableAvoidKeyboard
+      keyboardShouldPersistTaps={'always'}
+      style={themedStyle.scrollView}>
       <View style={themedStyle.viewStatusBar} />
-      <ScrollView contentContainerStyle={themedStyle.scrollView}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ImageBackground
           resizeMode='stretch'
           source={imageBackGroundSignInPhone.imageSource}
           style={themedStyle.container}>
-          <View style={themedStyle.sectionHeader}>
-            <Text style={themedStyle.txtHeaderTitle}>
-              {'ĐẠI HỘI XI'}
-            </Text>
-            <Text style={themedStyle.txtHeaderSubtitle}>
-              {'ĐẢNG BỘ THÀNH PHỐ\n HỒ CHÍ MINH'}
-            </Text>
-          </View>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={themedStyle.sectionHeader}>
+              <Text style={themedStyle.txtHeaderTitle}>
+                {'ĐẠI HỘI XI'}
+              </Text>
+              <Text style={themedStyle.txtHeaderSubtitle}>
+                {'ĐẢNG BỘ THÀNH PHỐ\n HỒ CHÍ MINH'}
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
           {props.isPrivateIntenet &&
             <View style={themedStyle.viewTab}>
               {renderTabBtn(SignInTabEnum.Account, 'Tài khoản', PersonIcon2)}
@@ -244,7 +250,7 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
             />
           </View>
         </ImageBackground>
-      </ScrollView>
+      </TouchableWithoutFeedback>
     </ScrollableAvoidKeyboard>
   );
 };
@@ -381,8 +387,5 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     flex: 1,
     justifyContent: 'flex-end',
     paddingBottom: pxToPercentage(20),
-  },
-  scrollView: {
-    flex: 1,
   },
 }));

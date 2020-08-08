@@ -7,6 +7,8 @@ import {
   ImageProps,
   ViewStyle,
   StyleProp,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -165,83 +167,86 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
   };
 
   return (
-    <React.Fragment>
-      <View style={themedStyle.viewStatusBar} />
-      <ImageBackground
-        source={imageBackgroundSignIn.imageSource}
-        style={themedStyle.imgBg}>
-        <ScrollableAvoidKeyboard
-          style={themedStyle.container}
-          contentContainerStyle={themedStyle.scrollViewContainer}>
-          <View style={themedStyle.sectionBox}>
-            <View style={themedStyle.sectionHeader}>
-              <Text style={themedStyle.txtHeaderSubtitle}>
-                {'ĐẢNG BỘ THÀNH PHỐ \nHỒ CHÍ MINH'}
-              </Text>
-            </View>
-            {props.isPrivateIntenet &&
-              <View style={themedStyle.viewTab}>
-                {renderTabBtn(SignInTabEnum.Account, 'Tài khoản', PersonIcon2)}
-                {renderTabBtn(SignInTabEnum.QRCode, 'Mã QR', QRCodeIconOther)}
-              </View>}
-            {isCheckTab(SignInTabEnum.Account) &&
-              (<React.Fragment>
-                <SignInAccountFormTablet
-                  style={themedStyle.sectionForm}
-                  onDataChange={onAccountFormDataChange}
-                />
-                <Button
-                  title={'ĐĂNG NHẬP'}
-                  style={themedStyle.btnSignIn}
-                  onPress={onSignInButtonPress}
-                />
-                <TouchableOpacity
-                  activeOpacity={0.75}
-                  style={themedStyle.btnForgotPassword}
-                  onPress={onForgotPasswordButtonPress}>
-                  <Text style={themedStyle.txtBtnForgotPassword}>
-                    {'Quên mật khẩu?'}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={0.75}
-                  style={themedStyle.btnRecognize}>
-                  {renderRecognizeIcon()}
-                  <Text style={themedStyle.txtBtnRecognize}>
-                    {'Đăng nhập bằng vân tay'}
-                  </Text>
-                </TouchableOpacity>
-              </React.Fragment>)}
-            {isCheckTab(SignInTabEnum.PhoneNumber) &&
-              (<React.Fragment>
-                <View style={themedStyle.viewPhoneLogin}>
-                  <View>
-                  </View>
-                </View>
-                <SignInPhoneNumberFormTablet
-                  style={themedStyle.sectionForm}
-                  onDataChange={onPhoneNumberFormDataChange}
-                />
-                <Button
-                  title={'TIẾP THEO'}
-                  style={themedStyle.btnSignIn}
-                  onPress={onSignInButtonPress}
-                />
-                <Text style={themedStyle.txtOtpNote}>
-                  {'Chúng tôi sẽ gửi một SMS chưa mã OTP\n đến số điện thoại này'}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={themedStyle.container}>
+        <View style={themedStyle.viewStatusBar} />
+        <ImageBackground
+          source={imageBackgroundSignIn.imageSource}
+          style={themedStyle.imgBg}>
+          <ScrollableAvoidKeyboard
+            style={themedStyle.container}
+            keyboardShouldPersistTaps={'always'}
+            contentContainerStyle={themedStyle.scrollViewContainer}>
+            <View style={themedStyle.sectionBox}>
+              <View style={themedStyle.sectionHeader}>
+                <Text style={themedStyle.txtHeaderSubtitle}>
+                  {'ĐẢNG BỘ THÀNH PHỐ \nHỒ CHÍ MINH'}
                 </Text>
-              </React.Fragment>)}
-            {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeFormTablet />}
-            <View style={themedStyle.viewFooter}>
-              <SwitchSetting
-                isPrivateIntenet={props.isPrivateIntenet}
-                onSwichInternetPress={onSwichInternetPress}
-              />
+              </View>
+              {props.isPrivateIntenet &&
+                <View style={themedStyle.viewTab}>
+                  {renderTabBtn(SignInTabEnum.Account, 'Tài khoản', PersonIcon2)}
+                  {renderTabBtn(SignInTabEnum.QRCode, 'Mã QR', QRCodeIconOther)}
+                </View>}
+              {isCheckTab(SignInTabEnum.Account) &&
+                (<React.Fragment>
+                  <SignInAccountFormTablet
+                    style={themedStyle.sectionForm}
+                    onDataChange={onAccountFormDataChange}
+                  />
+                  <Button
+                    title={'ĐĂNG NHẬP'}
+                    style={themedStyle.btnSignIn}
+                    onPress={onSignInButtonPress}
+                  />
+                  <TouchableOpacity
+                    activeOpacity={0.75}
+                    style={themedStyle.btnForgotPassword}
+                    onPress={onForgotPasswordButtonPress}>
+                    <Text style={themedStyle.txtBtnForgotPassword}>
+                      {'Quên mật khẩu?'}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    activeOpacity={0.75}
+                    style={themedStyle.btnRecognize}>
+                    {renderRecognizeIcon()}
+                    <Text style={themedStyle.txtBtnRecognize}>
+                      {'Đăng nhập bằng vân tay'}
+                    </Text>
+                  </TouchableOpacity>
+                </React.Fragment>)}
+              {isCheckTab(SignInTabEnum.PhoneNumber) &&
+                (<React.Fragment>
+                  <View style={themedStyle.viewPhoneLogin}>
+                    <View>
+                    </View>
+                  </View>
+                  <SignInPhoneNumberFormTablet
+                    style={themedStyle.sectionForm}
+                    onDataChange={onPhoneNumberFormDataChange}
+                  />
+                  <Button
+                    title={'TIẾP THEO'}
+                    style={themedStyle.btnSignIn}
+                    onPress={onSignInButtonPress}
+                  />
+                  <Text style={themedStyle.txtOtpNote}>
+                    {'Chúng tôi sẽ gửi một SMS chưa mã OTP\n đến số điện thoại này'}
+                  </Text>
+                </React.Fragment>)}
+              {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeFormTablet />}
+              <View style={themedStyle.viewFooter}>
+                <SwitchSetting
+                  isPrivateIntenet={props.isPrivateIntenet}
+                  onSwichInternetPress={onSwichInternetPress}
+                />
+              </View>
             </View>
-          </View>
-        </ScrollableAvoidKeyboard>
-      </ImageBackground>
-    </React.Fragment>
+          </ScrollableAvoidKeyboard>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

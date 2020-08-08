@@ -86,7 +86,7 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
       />
       <ValidationInput
         value={formData.password}
-        style={themedStyle.inputPassword}
+        viewContainerStyle={themedStyle.viewInputPassword}
         placeholder='Mật khẩu'
         secureTextEntry={true}
         validator={StringValidator}
@@ -100,7 +100,7 @@ const SignInAccountFormComponent: React.FunctionComponent<SignInAccountFormProps
 export const SignInAccountForm = withStyles(SignInAccountFormComponent, (theme: ThemeType) => ({
   container: {
   },
-  inputPassword: {
+  viewInputPassword: {
     marginTop: pxToPercentage(7.5),
   },
 }));

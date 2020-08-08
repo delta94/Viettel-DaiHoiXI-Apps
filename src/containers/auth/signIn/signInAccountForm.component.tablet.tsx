@@ -84,7 +84,7 @@ const SignInAccountFormTabletComponent: React.FunctionComponent<SignInAccountFor
         maxLength={50}
       />
       <ValidationInput
-        style={themedStyle.inputPassword}
+        viewContainerStyle={themedStyle.viewInputPassword}
         placeholder='Mật khẩu'
         secureTextEntry={true}
         validator={StringValidator}
@@ -98,7 +98,7 @@ const SignInAccountFormTabletComponent: React.FunctionComponent<SignInAccountFor
 export const SignInAccountFormTablet = withStyles(SignInAccountFormTabletComponent, (theme: ThemeType) => ({
   container: {
   },
-  inputPassword: {
+  viewInputPassword: {
     marginTop: pxToPercentage(15),
   },
 }));

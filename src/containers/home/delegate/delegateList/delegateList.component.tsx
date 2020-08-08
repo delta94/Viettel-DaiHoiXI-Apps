@@ -8,9 +8,15 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { Select, SelectOption } from '@kitten/ui';
+import {
+  Select,
+  SelectOptionType,
+} from '@kitten/ui';
 import { DelegateList as DelegateListModel } from '@src/core/models/delegate/delegateList.model';
-import { pxToPercentage, searchASCII } from '@src/core/utils/utils';
+import {
+  pxToPercentage,
+  searchASCII,
+} from '@src/core/utils/utils';
 import {
   textStyle,
   ValidationInput,
@@ -22,58 +28,64 @@ import { Delegate } from '@src/core/models/delegate/delegate.model';
 interface ComponentProps {
   delegateList: DelegateListModel[];
   onDelegateItemPress: (deputy: Delegate) => void;
-  dataGroup: any[];
 }
 
 export type DelegateListProps = ThemedComponentProps & ComponentProps;
 
 const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props) => {
   const { themedStyle } = props;
-  const [selectedOption, setSelectedOption] = useState<any>(null);
-  const [delegateList, setDelegateList] = React.useState<DelegateListModel[]>(props.delegateList);
-  const [changeText, setChangeText] = useState(' ');
+  const [groupSelected, setGroupSelected] = useState<SelectOptionType>({ text: '' });
+  const [discussionGroupSelected, setDiscussionGroupSelected] = useState<SelectOptionType>({ text: '' });
+  const [keyword, setKeyword] = useState('');
+
+  const onGetGroupsFromData = () => {
+    return props.delegateList.map(item => ({ text: item.group }));
+  };
+
+  const onGetDiscussionGroupsFromData = () => {
+    const discussionGroupsTemp = [];
+
+    props.delegateList.forEach(item => {
+      item.deputies.forEach(deputie => {
+        discussionGroupsTemp.push(deputie.discussionGroup);
+      });
+    });
+
+    return [... new Set(discussionGroupsTemp)].map(item => ({ text: item }));
+  };
+
+  const onFilterDelegateListByCondition = (): DelegateListModel[] => {
+    let delegateListTemp: DelegateListModel[] = [];
+
+    props.delegateList.forEach(item => {
+      if (item.group.includes(groupSelected.text === 'Tất cả' ? '' : groupSelected.text)) {
+        delegateListTemp = [...delegateListTemp, {
+          ...item,
+          deputies: [...item.deputies.filter(deputie => {
+            return searchASCII(keyword, deputie.fullName) &&
+              deputie.discussionGroup.includes(discussionGroupSelected.text === 'Tất cả' ? '' : discussionGroupSelected.text);
+          })],
+        }];
+      }
+    });
+
+    return delegateListTemp;
+  };
 
   const onDelegateItemPress = (deputy: Delegate): void => {
     props.onDelegateItemPress(deputy);
   };
 
-  const isAll = (group: string) => {
-    if (group === 'Tất cả' || group === '') {
-      return false;
-    }
-    return true;
-  };
-
-  const onSearchPress = (fullName: string = '', group: string = ''): void => {
-    const filter = props.delegateList
-      .filter(item => isAll(group) ? item.group === group : true)
-      .map(deputie => {
-        const n = Object.assign({}, deputie, {
-          'deputies': deputie.deputies.filter(
-            subElement => fullName ? searchASCII(fullName, subElement.fullName) : true,
-          ),
-        });
-        return n;
-      });
-    setDelegateList(filter);
-  };
-
   const onChangeText = (value: string) => {
-    if (selectedOption && value) {
-      onSearchPress(value, selectedOption.text);
-    } else {
-      onSearchPress(value);
-    }
-    setChangeText(value);
+    setKeyword(value || '');
   };
 
-  const onSelect = (option: SelectOption) => {
-    if (option && changeText) {
-      onSearchPress(changeText, option.text);
-    } else {
-      onSearchPress(undefined, option.text);
-    }
-    setSelectedOption(option);
+  const onGroupSelect = (option: SelectOptionType) => {
+    setGroupSelected(option);
+  };
+
+  const onDiscussionGroupSelect = (option: SelectOptionType) => {
+    setDiscussionGroupSelected(option);
   };
 
   return (
@@ -88,31 +100,43 @@ const DelegateListComponent: React.FunctionComponent<DelegateListProps> = (props
         <Select
           data={[
             { text: 'Tất cả' },
-            ...props.dataGroup,
+            ...onGetGroupsFromData(),
           ]}
           textStyle={themedStyle.txtSelectOption}
           keyExtractor={(item) => item.text}
-          selectedOption={selectedOption}
+          selectedOption={groupSelected}
           placeholder='Chọn đoàn đại biểu'
           placeholderStyle={themedStyle.selectOptionPhd}
           size={'large'}
           controlStyle={themedStyle.selectOption}
-          onSelect={onSelect}>
+          onSelect={onGroupSelect}>
+        </Select>
+        <Select
+          data={[
+            { text: 'Tất cả' },
+            ...onGetDiscussionGroupsFromData(),
+          ]}
+          textStyle={themedStyle.txtSelectOption}
+          keyExtractor={(item) => item.text}
+          selectedOption={discussionGroupSelected}
+          placeholder='Chọn tổ'
+          placeholderStyle={themedStyle.selectOptionPhd}
+          size={'large'}
+          controlStyle={themedStyle.selectOption}
+          onSelect={onDiscussionGroupSelect}>
         </Select>
       </View>
       <FlatList
-        data={delegateList}
-        extraData={delegateList}
+        data={[...onFilterDelegateListByCondition().filter(item => item.deputies.length !== 0)]}
+        extraData={props.delegateList}
         contentContainerStyle={themedStyle.flatListContainer}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => {
           return (
-            (item.group &&
-              <DelegateListItem
-                delegateList={item}
-                onDelegateItemPress={onDelegateItemPress}
-                index={index + 1}
-              />)
+            <DelegateListItem
+              delegateList={item}
+              onDelegateItemPress={onDelegateItemPress}
+            />
           );
         }}
       />

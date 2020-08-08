@@ -20,7 +20,6 @@ import { Delegate } from '@src/core/models/delegate/delegate.model';
 interface ComponentProps {
   delegateList: DelegateListModel;
   onDelegateItemPress: (deputy: Delegate) => void;
-  index: number;
 }
 
 export type DelegateListItemProps = ThemedComponentProps & ComponentProps;
@@ -107,7 +106,7 @@ const DelegateListItemComponent: React.FunctionComponent<DelegateListItemProps> 
     <View style={themedStyle.container}>
       <View style={themedStyle.sectionGroup}>
         <Text style={themedStyle.txtGroup}>
-          {`${props.index} - ${props.delegateList.group}`}
+          {props.delegateList.group}
         </Text>
       </View>
       <View style={themedStyle.sectionItem}>

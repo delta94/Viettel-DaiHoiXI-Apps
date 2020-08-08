@@ -4,7 +4,6 @@ import { User } from '@src/core/models/user/user.model';
 export interface SessionState {
   loggedIn: boolean;
   user: User;
-  meetingId: string;
 }
 
 // Describing the different ACTION NAMES available

@@ -4,11 +4,7 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import {
-  ImageProps, View, TouchableOpacity, StatusBar,
-} from 'react-native';
-import Modal from 'react-native-modal';
-
+import { ImageProps } from 'react-native';
 import {
   TopNavigation,
   TopNavigationAction,
@@ -21,11 +17,8 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import {
   MessageIconOther,
   QuestionIcon,
-  CloseIconOutline,
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
-import Pdf from 'react-native-pdf';
-import { isTablet } from 'react-native-device-info';
 import { HelpModel } from './helpModel.component';
 
 export interface ComponentProps {

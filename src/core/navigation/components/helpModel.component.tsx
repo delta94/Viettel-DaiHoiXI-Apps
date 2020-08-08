@@ -1,28 +1,17 @@
 import React from 'react';
 import {
-  StyleType,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
 import {
-  ImageProps, View, TouchableOpacity, StatusBar,
+  View,
+  TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import Modal from 'react-native-modal';
-
-import {
-  TopNavigation,
-  TopNavigationAction,
-  TopNavigationActionProps,
-  TopNavigationProps,
-} from '@kitten/ui';
-import { textStyle } from '@src/components';
+import { ThemedComponentProps } from '@kitten/theme';
 import { SafeAreaView } from 'react-navigation';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
-import {
-  MessageIconOther,
-  QuestionIcon,
-  CloseIconOutline,
-} from '@src/assets/icons';
+import { CloseIconOutline } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
 import Pdf from 'react-native-pdf';
 import { isTablet } from 'react-native-device-info';
@@ -33,20 +22,17 @@ export interface ComponentProps {
   sourcePdf: any;
 }
 
-export type TopNavigationBarProps = TopNavigationProps & ComponentProps;
+export type TopNavigationBarProps = ThemedComponentProps & ComponentProps;
 
 const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> = (props) => {
-  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+  const { themedStyle } = props;
 
   const onClosePress = () => {
     props.onClosePress();
   };
 
-
-  const { themedStyle } = props;
-
   return (
-    <View>
+    <View style={themedStyle.container}>
       {props.isVisible &&
         <StatusBar
           backgroundColor='black'

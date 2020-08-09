@@ -31,5 +31,14 @@ export const imageBackGroundSignInPhone: ImageSource = {
   imageSource: require('./source/imgae-bg-signin-phone.png'),
 };
 
+export const imageBgPhone: ImageSource = {
+  imageSource: require('./source/image-bg-phone.jpeg'),
+};
 
+export const imageBgTablet: ImageSource = {
+  imageSource: require('./source/image-bg-tablet.jpeg'),
+};
 
+export const imageFlag: ImageSource = {
+  imageSource: require('./source/image-flag.png'),
+};

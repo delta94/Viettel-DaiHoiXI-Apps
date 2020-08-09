@@ -44,32 +44,41 @@ const SigInQRCodeComponent: React.FunctionComponent<SigInQRCodeProps> = (props) 
     return (
       <View style={themedStyle.viewMarker}>
         <View style={themedStyle.viewMarkerColumn}>
-          <View style={[
-            themedStyle.viewBorderMarker,
-            themedStyle.borderTopLeft,
-          ]} />
-          <View style={[
-            themedStyle.viewBorderMarker,
-            themedStyle.borderTopRight,
-          ]} />
+          <View
+            style={[
+              themedStyle.viewBorderMarker,
+              themedStyle.borderTopLeft,
+            ]}
+          />
+          <View
+            style={[
+              themedStyle.viewBorderMarker,
+              themedStyle.borderTopRight,
+            ]}
+          />
         </View>
         <View style={themedStyle.viewMarkerCenterColumn}>
           <Text style={themedStyle.centerMark}>
             {'+'}
           </Text>
         </View>
-        <View style={[
-          themedStyle.viewMarkerColumn,
-          themedStyle.viewBottomColumn,
-        ]}>
-          <View style={[
-            themedStyle.viewBorderMarker,
-            themedStyle.borderBottomLeft,
-          ]} />
-          <View style={[
-            themedStyle.viewBorderMarker,
-            themedStyle.borderBottomRight,
-          ]} />
+        <View
+          style={[
+            themedStyle.viewMarkerColumn,
+            themedStyle.viewBottomColumn,
+          ]}>
+          <View
+            style={[
+              themedStyle.viewBorderMarker,
+              themedStyle.borderBottomLeft,
+            ]}
+          />
+          <View
+            style={[
+              themedStyle.viewBorderMarker,
+              themedStyle.borderBottomRight,
+            ]}
+          />
         </View>
       </View>
     );
@@ -85,10 +94,10 @@ const SigInQRCodeComponent: React.FunctionComponent<SigInQRCodeProps> = (props) 
         customMarker={renderMarker()}
         showMarker={true}
         topViewStyle={themedStyle.viewTopCamera}
-        cameraStyle={isTablet() ? themedStyle.cameraTablet : themedStyle.camera}
+        cameraStyle={themedStyle.camera}
         onRead={onQRCodeScanSucces}
       />
-      <View style={themedStyle.viewbottom}>
+      <View style={themedStyle.viewBottom}>
         <Text style={themedStyle.txt}>
           {'Quét mã QR từ cán bộ điểm danh\nđể đăng nhập '}
         </Text>
@@ -106,15 +115,19 @@ const SigInQRCodeComponent: React.FunctionComponent<SigInQRCodeProps> = (props) 
 export const SigInQRCode = withStyles(SigInQRCodeComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    backgroundColor: theme['color-primary-11'],
+    backgroundColor: 'black',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  camera: {
+    minHeight: '100%',
   },
   viewTopCamera: {
     flex: 0,
   },
-  viewbottom: {
+  viewBottom: {
     position: 'absolute',
+    bottom: isTablet() ? pxToPercentage(25) : pxToPercentage(5),
   },
   btnFlash: {
     alignItems: 'center',
@@ -125,22 +138,15 @@ export const SigInQRCode = withStyles(SigInQRCodeComponent, (theme: ThemeType) =
     alignItems: 'center',
   },
   txt: {
-    fontSize: isTablet() ? pxToPercentage(64) : pxToPercentage(18),
-    color: theme['color-custom-100'],
     textAlign: 'center',
+    fontSize: isTablet() ? pxToPercentage(50) : pxToPercentage(18),
+    color: theme['color-custom-100'],
     ...textStyle.proDisplayRegular,
-    marginTop: pxToPercentage(10),
   },
   icon: {
-    height: isTablet() ? pxToPercentage(54) : pxToPercentage(24),
-    width: isTablet() ? pxToPercentage(54) : pxToPercentage(24),
-    marginTop: pxToPercentage(5),
-  },
-  camera: {
-    minHeight: '100%',
-  },
-  cameraTablet: {
-    minWidth: '100%',
+    height: isTablet() ? pxToPercentage(60) : pxToPercentage(24),
+    width: isTablet() ? pxToPercentage(60) : pxToPercentage(24),
+    marginTop: isTablet() ? pxToPercentage(30) : pxToPercentage(10),
   },
   viewMarker: {
     marginBottom: isTablet() ? 0 : getStatusBarHeight() + pxToPercentage(80),
@@ -177,12 +183,13 @@ export const SigInQRCode = withStyles(SigInQRCodeComponent, (theme: ThemeType) =
     borderRightWidth: isTablet() ? pxToPercentage(8) : pxToPercentage(3),
   },
   viewMarkerCenterColumn: {
-    flex: 1, justifyContent: 'center',
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   centerMark: {
     fontSize: isTablet() ? pxToPercentage(64) : pxToPercentage(28),
     color: theme['color-custom-100'],
-    ...textStyle.proRoundedLight,
+    ...textStyle.proDisplayBold,
   },
 }));

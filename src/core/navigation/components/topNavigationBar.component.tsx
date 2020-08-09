@@ -22,6 +22,7 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { HelpModel } from './helpModel.component';
 
 export interface ComponentProps {
+  routeName: string;
   backIcon?: BackIconProp;
   onBackPress?: () => void;
   onMessagePress?: () => void;
@@ -67,6 +68,10 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
   };
 
   const renderRightControls = (): React.ReactElement<TopNavigationActionProps>[] => {
+    if (props.routeName === 'signInQRCode') {
+      return [];
+    }
+
     return ([
       <TopNavigationAction
         icon={renderQuestionIcon}

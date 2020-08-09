@@ -22,6 +22,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface ComponentProps {
   title: string;
+  routeName: string;
   backIcon?: BackIconProp;
   onMessagePress: () => void;
   onQRCodePress: () => void;
@@ -66,6 +67,10 @@ const HomeNavigationBarComponent: React.FunctionComponent<HomeNavigationBarProps
   };
 
   const renderRightControls = (): React.ReactElement<TopNavigationActionProps>[] => {
+    if (props.routeName === 'signInQRCode') {
+      return [];
+    }
+
     return ([
       <TopNavigationAction
         icon={renderQRCodeIcon}

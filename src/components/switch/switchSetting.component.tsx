@@ -15,9 +15,7 @@ import {
   ViewProps,
   TouchableOpacity,
 } from 'react-native';
-import {
-  pxToPercentage,
-} from '@src/core/utils/utils';
+import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '../textStyle';
 import {
   ArrowNextIcon,
@@ -100,7 +98,7 @@ export const SwitchSetting = withStyles(SwitchSettingComponent, (theme: ThemeTyp
     alignItems: 'center',
     marginLeft: pxToPercentage(20),
     width: isTablet() ? pxToPercentage(194) : pxToPercentage(112),
-    height: isTablet() ? pxToPercentage(70) : pxToPercentage(48),
+    height: isTablet() ? pxToPercentage(70) : pxToPercentage(40),
     backgroundColor: theme['color-custom-100'],
     borderWidth: isTablet() ? pxToPercentage(2) : pxToPercentage(1),
     borderColor: theme['color-custom-900'],
@@ -114,8 +112,8 @@ export const SwitchSetting = withStyles(SwitchSettingComponent, (theme: ThemeTyp
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: pxToPercentage(5),
-    width: isTablet() ? pxToPercentage(54) : pxToPercentage(36),
-    height: isTablet() ? pxToPercentage(54) : pxToPercentage(36),
+    width: isTablet() ? pxToPercentage(54) : pxToPercentage(30),
+    height: isTablet() ? pxToPercentage(54) : pxToPercentage(30),
     borderRadius: pxToPercentage(40),
     borderColor: theme['color-custom-900'],
     borderWidth: pxToPercentage(1),

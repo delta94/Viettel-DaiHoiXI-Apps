@@ -7,9 +7,9 @@ import {
   ImageBackground,
   StyleProp,
   ImageProps,
-  ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -21,7 +21,7 @@ import {
   ScrollableAvoidKeyboard,
   textStyle,
 } from '@src/components';
-import { imageBackGroundSignInPhone } from '@src/assets/images';
+import { imageBgPhone, imageFlag } from '@src/assets/images';
 import {
   SignInAccountFormData,
   SignInPhoneNumberFormData,
@@ -177,9 +177,12 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
       <View style={themedStyle.viewStatusBar} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ImageBackground
-          resizeMode='stretch'
-          source={imageBackGroundSignInPhone.imageSource}
+          source={imageBgPhone.imageSource}
           style={themedStyle.container}>
+          <Image
+            source={imageFlag.imageSource}
+            style={themedStyle.imgFlag}
+          />
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={themedStyle.sectionHeader}>
               <Text style={themedStyle.txtHeaderTitle}>
@@ -205,31 +208,27 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
                 title={'ĐĂNG NHẬP'}
                 style={themedStyle.btnSignIn}
                 onPress={onSignInButtonPress} />
-              <React.Fragment>
-                <TouchableOpacity
-                  activeOpacity={0.75}
-                  style={themedStyle.btnForgotPassword}
-                  onPress={onForgotPasswordButtonPress}>
-                  <Text style={themedStyle.txtBtnForgotPassword}>
-                    {'Quên mật khẩu?'}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={0.75}
-                  style={themedStyle.btnRecognize}>
-                  {renderRecognizeIcon()}
-                  <Text style={themedStyle.txtBtnRecognize}>
-                    {'Đăng nhập bằng vân tay'}
-                  </Text>
-                </TouchableOpacity>
-              </React.Fragment>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                style={themedStyle.btnForgotPassword}
+                onPress={onForgotPasswordButtonPress}>
+                <Text style={themedStyle.txtBtnForgotPassword}>
+                  {'Quên mật khẩu?'}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.75}
+                style={themedStyle.btnRecognize}>
+                {renderRecognizeIcon()}
+                <Text style={themedStyle.txtBtnRecognize}>
+                  {'Đăng nhập bằng vân tay'}
+                </Text>
+              </TouchableOpacity>
             </React.Fragment>)}
           {isCheckTab(SignInTabEnum.PhoneNumber) &&
             (<React.Fragment>
-              <View style={themedStyle.viewTabPhoneLogin}>
-              </View>
               <SignInPhoneNumberForm
-                style={themedStyle.sectionForm}
+                style={themedStyle.sectionFormPhone}
                 onDataChange={onPhoneNumberFormDataChange}
               />
               <Button
@@ -258,18 +257,24 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
     paddingHorizontal: pxToPercentage(16),
-    backgroundColor: theme['color-custom-100'],
   },
   viewStatusBar: {
     height: getStatusBarHeight(false),
     backgroundColor: theme['color-primary-2'],
   },
   sectionHeader: {
-    justifyContent: 'flex-end',
-    marginTop: pxToPercentage(150),
+    marginTop: pxToPercentage(65),
   },
   sectionForm: {
-    marginTop: pxToPercentage(4),
+    marginTop: pxToPercentage(7.5),
+  },
+  sectionFormPhone: {
+    marginTop: pxToPercentage(13),
+  },
+  imgFlag: {
+    position: 'absolute',
+    width: pxToPercentage(300),
+    height: pxToPercentage(300) * (901 / 1854),
   },
   txtHeaderTitle: {
     fontSize: pxToPercentage(32),
@@ -284,8 +289,15 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     ...textStyle.proDisplayBold,
     textAlign: 'right',
   },
+  viewTab: {
+    marginTop: pxToPercentage(14),
+    flexDirection: 'row',
+    borderRadius: pxToPercentage(16),
+    borderWidth: pxToPercentage(1),
+    borderColor: theme['color-primary-2'],
+  },
   btnSignIn: {
-    marginTop: pxToPercentage(20),
+    marginTop: pxToPercentage(15),
   },
   btnForgotPassword: {
     alignSelf: 'center',
@@ -315,28 +327,14 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
     ...textStyle.proDisplayRegular,
   },
   iconFingerprint: {
-    height: pxToPercentage(47.91),
-    width: pxToPercentage(47.92),
+    height: pxToPercentage(40),
+    width: pxToPercentage(40),
     tintColor: theme['color-primary-2'],
   },
   iconFaceID: {
-    height: pxToPercentage(47.91),
-    width: pxToPercentage(47.92),
+    height: pxToPercentage(40),
+    width: pxToPercentage(40),
     tintColor: theme['color-primary-2'],
-  },
-  viewTab: {
-    height: pxToPercentage(50),
-    marginVertical: pxToPercentage(14),
-    flexDirection: 'row',
-    borderRadius: pxToPercentage(16),
-    borderWidth: pxToPercentage(1),
-    borderColor: theme['color-primary-2'],
-  },
-  viewTabPhoneLogin: {
-    height: pxToPercentage(50),
-    marginVertical: pxToPercentage(14),
-    flexDirection: 'row',
-    borderRadius: pxToPercentage(16),
   },
   iconMenu: {
     height: pxToPercentage(28),
@@ -360,7 +358,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   btnTab: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: pxToPercentage(48),
+    height: pxToPercentage(46),
     borderRadius: pxToPercentage(15),
     borderColor: theme['color-primary-2'],
     borderRightWidth: pxToPercentage(1),

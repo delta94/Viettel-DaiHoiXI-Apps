@@ -67,6 +67,7 @@ const MenuTopNavigationParams: TopNavigationParams = {
       <TopNavigationBar
         {...props}
         title={routeNameDataSource[routeName]}
+        routeName={routeName}
         backIcon={isRootRoute(index) && renderArrowsBack}
         onMessagePress={onMessagePress}
         onBackPress={() => {
@@ -146,6 +147,7 @@ const HomeMenuTopNavigationParams: TopNavigationParams = {
       <HomeNavigationBar
         {...props}
         title={routeNameDataSource[routeName]}
+        routeName={routeName}
         backIcon={isRootRoute(index) && renderArrowsBack}
         onBack={onBackPress}
         onQRCodePress={onQRCodePress}

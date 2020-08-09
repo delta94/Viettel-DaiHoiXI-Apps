@@ -9,6 +9,7 @@ import {
   StyleProp,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -20,7 +21,7 @@ import {
   ScrollableAvoidKeyboard,
   textStyle,
 } from '@src/components';
-import { imageBackgroundSignIn } from '@src/assets/images';
+import { imageBgTablet, imageFlag } from '@src/assets/images';
 import {
   SignInAccountFormData,
   SignInPhoneNumberFormData,
@@ -33,7 +34,6 @@ import {
   FaceIDIconOther,
   QRCodeIconOther,
   PersonIcon2,
-  PhoneIcon,
 } from '@src/assets/icons';
 import { IconElement } from '@src/assets/icons/icon.component';
 import { SignInTabEnum } from '@src/core/utils/constants';
@@ -171,8 +171,12 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
       <View style={themedStyle.container}>
         <View style={themedStyle.viewStatusBar} />
         <ImageBackground
-          source={imageBackgroundSignIn.imageSource}
-          style={themedStyle.imgBg}>
+          source={imageBgTablet.imageSource}
+          style={themedStyle.container}>
+          <Image
+            source={imageFlag.imageSource}
+            style={themedStyle.imgFlag}
+          />
           <ScrollableAvoidKeyboard
             style={themedStyle.container}
             keyboardShouldPersistTaps={'always'}
@@ -218,12 +222,8 @@ const SignInTabletComponent: React.FunctionComponent<SignInTabletProps> = (props
                 </React.Fragment>)}
               {isCheckTab(SignInTabEnum.PhoneNumber) &&
                 (<React.Fragment>
-                  <View style={themedStyle.viewPhoneLogin}>
-                    <View>
-                    </View>
-                  </View>
                   <SignInPhoneNumberFormTablet
-                    style={themedStyle.sectionForm}
+                    style={themedStyle.sectionFormPhoneNumber}
                     onDataChange={onPhoneNumberFormDataChange}
                   />
                   <Button
@@ -254,13 +254,14 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
   container: {
     flex: 1,
   },
-  imgBg: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
   viewStatusBar: {
     height: getStatusBarHeight(false),
     backgroundColor: theme['color-primary-2'],
+  },
+  imgFlag: {
+    position: 'absolute',
+    width: pxToPercentage(1500),
+    height: pxToPercentage(1500) * (901 / 1854),
   },
   scrollViewContainer: {
     flex: 1,
@@ -281,6 +282,10 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
   },
   sectionForm: {
     width: pxToPercentage(860),
+  },
+  sectionFormPhoneNumber: {
+    width: pxToPercentage(860),
+    marginTop: pxToPercentage(48),
   },
   txtHeaderSubtitle: {
     textAlign: 'center',
@@ -365,13 +370,6 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
     borderRadius: pxToPercentage(32),
     borderWidth: pxToPercentage(2),
     borderColor: theme['color-primary-2'],
-  },
-  viewPhoneLogin: {
-    width: pxToPercentage(860),
-    height: pxToPercentage(144),
-    marginVertical: pxToPercentage(48),
-    flexDirection: 'row',
-    justifyContent: 'center',
   },
   iconMenu: {
     height: pxToPercentage(53.12),

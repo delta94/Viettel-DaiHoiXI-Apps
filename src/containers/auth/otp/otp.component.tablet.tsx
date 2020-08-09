@@ -4,13 +4,14 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  Image,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { imageBackgroundSignIn } from '@src/assets/images';
+import { imageBgTablet, imageFlag } from '@src/assets/images';
 import { pxToPercentage, tenMinutesCountdown } from '@src/core/utils/utils';
 import {
   textStyle,
@@ -87,8 +88,12 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
     <React.Fragment>
       <View style={themedStyle.viewStatusBar} />
       <ImageBackground
-        source={imageBackgroundSignIn.imageSource}
-        style={themedStyle.imgBg}>
+        source={imageBgTablet.imageSource}
+        style={themedStyle.container}>
+        <Image
+          source={imageFlag.imageSource}
+          style={themedStyle.imgFlag}
+        />
         <ScrollableAvoidKeyboard
           style={themedStyle.container}
           contentContainerStyle={themedStyle.scrollViewContainer}>
@@ -151,9 +156,10 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
     height: getStatusBarHeight(false),
     backgroundColor: theme['color-primary-2'],
   },
-  imgBg: {
-    flex: 1,
-    alignItems: 'flex-end',
+  imgFlag: {
+    position: 'absolute',
+    width: pxToPercentage(1500),
+    height: pxToPercentage(1500) * (901 / 1854),
   },
   scrollViewContainer: {
     flex: 1,

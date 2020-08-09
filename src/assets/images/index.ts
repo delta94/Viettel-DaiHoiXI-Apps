@@ -23,14 +23,6 @@ export const imageWatch: ImageSource = {
   imageSource: require('./source/image-watch.png'),
 };
 
-export const imageBackgroundSignIn: ImageSource = {
-  imageSource: require('./source/image-bg-sign-in.png'),
-};
-
-export const imageBackGroundSignInPhone: ImageSource = {
-  imageSource: require('./source/imgae-bg-signin-phone.png'),
-};
-
 export const imageBgPhone: ImageSource = {
   imageSource: require('./source/image-bg-phone.jpeg'),
 };

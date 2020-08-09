@@ -228,7 +228,7 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
           {isCheckTab(SignInTabEnum.PhoneNumber) &&
             (<React.Fragment>
               <SignInPhoneNumberForm
-                style={themedStyle.sectionFormPhone}
+                style={themedStyle.sectionFormPhoneNumber}
                 onDataChange={onPhoneNumberFormDataChange}
               />
               <Button
@@ -268,7 +268,7 @@ export const SignIn = withStyles(SignInComponent, (theme: ThemeType) => ({
   sectionForm: {
     marginTop: pxToPercentage(7.5),
   },
-  sectionFormPhone: {
+  sectionFormPhoneNumber: {
     marginTop: pxToPercentage(13),
   },
   imgFlag: {

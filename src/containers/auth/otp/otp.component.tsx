@@ -4,13 +4,14 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  Image,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { imageBackGroundSignInPhone } from '@src/assets/images';
+import { imageBgPhone, imageFlag } from '@src/assets/images';
 import { pxToPercentage, tenMinutesCountdown } from '@src/core/utils/utils';
 import {
   textStyle,
@@ -87,9 +88,12 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
     <ScrollableAvoidKeyboard>
       <View style={themedStyle.viewStatusBar} />
       <ImageBackground
-        resizeMode='stretch'
-        source={imageBackGroundSignInPhone.imageSource}
+        source={imageBgPhone.imageSource}
         style={themedStyle.container}>
+        <Image
+          source={imageFlag.imageSource}
+          style={themedStyle.imgFlag}
+        />
         <View style={themedStyle.sectionHeader}>
           <Text style={themedStyle.txtHeaderTitle}>
             {'ĐẠI HỘI XI'}
@@ -152,9 +156,16 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
     height: getStatusBarHeight(false),
     backgroundColor: theme['color-primary-2'],
   },
+  imgFlag: {
+    position: 'absolute',
+    width: pxToPercentage(300),
+    height: pxToPercentage(300) * (901 / 1854),
+  },
   sectionHeader: {
-    justifyContent: 'flex-end',
-    marginTop: pxToPercentage(150),
+    marginTop: pxToPercentage(65),
+  },
+  viewHeaderLeftRight: {
+    flex: 1,
   },
   viewInputOTP: {
     marginTop: pxToPercentage(10),
@@ -203,7 +214,7 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
   viewBtn: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: pxToPercentage(16),
+    marginTop: pxToPercentage(15),
   },
   btn: {
     width: '49%',

@@ -19,9 +19,10 @@ import { textStyle } from '@src/components';
 import { isTablet } from 'react-native-device-info';
 import { RNCamera as Camera } from 'react-native-camera';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { SignInAccountFormData } from '@src/core/models/auth/signIn/signIn.model';
 
 interface ComponentProps {
-  onQRCodeScanSucces: () => void;
+  onQRCodeScanSucces: (e: object) => void;
 }
 
 export type SigInQRCodeProps = ComponentProps & ThemedComponentProps;
@@ -32,7 +33,7 @@ const SigInQRCodeComponent: React.FunctionComponent<SigInQRCodeProps> = (props) 
   const { themedStyle } = props;
 
   const onQRCodeScanSucces = (e: object) => {
-    props.onQRCodeScanSucces();
+    props.onQRCodeScanSucces(e);
   };
 
   const onFlashPress = () => {

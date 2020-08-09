@@ -6,7 +6,7 @@ export class SignInAccountFormData {
 export class SignInPhoneNumberFormData {
   phone: string | undefined;
   captcha: string;
-  enterCaptca: string;
+  enterCaptcha: string;
 }
 
 export class Otp {

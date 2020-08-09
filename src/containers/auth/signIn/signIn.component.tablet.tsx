@@ -280,6 +280,7 @@ export const SignInTablet = withStyles(SignInTabletComponent, (theme: ThemeType)
     marginTop: pxToPercentage(120),
   },
   sectionForm: {
+    width: pxToPercentage(860),
   },
   txtHeaderSubtitle: {
     textAlign: 'center',

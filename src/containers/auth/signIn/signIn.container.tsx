@@ -13,7 +13,6 @@ import { AppState } from '@src/core/store';
 import { Dispatch } from 'redux';
 import { onThunkSignInReq, onThunkGetOtp } from './store/thunk';
 import { alerts } from '@src/core/utils/alerts';
-import { generateCaptcha } from '@src/core/utils/utils';
 
 export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'SignInContainer';
@@ -30,17 +29,6 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
     }
   }, [loggedIn]);
 
-  useEffect(() => {
-    const focusComponent = props.navigation.addListener(
-      'willFocus',
-      () => {
-      },
-    );
-    return () => {
-      focusComponent.remove();
-    };
-  }, []);
-
   const onSignInAccountPress = (data: SignInAccountFormData) => {
     if (data) {
       if (data.password.length < 8) {
@@ -55,16 +43,19 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
 
   const onSignInPhoneNumberPress = (data: SignInPhoneNumberFormData) => {
     if (data) {
-      if (data.phone.length < 10 || data.phone.length > 11) {
-        alerts.alert({ message: 'Số điện thoại không đúng!' });
-      } else
-        if (data.enterCaptca !== data.captcha) {
-          alerts.alert({ message: 'Mã xác nhận không chính xác!' });
-        } else {
-          dispatch(onThunkGetOtp(data.phone, props, false));
-        }
+      if (data.phone.length < 9 || data.phone.length > 11) {
+        alerts.alert({ message: 'Số điện thoại không hợp lệ!' });
+        return;
+      }
+
+      if (data.enterCaptcha !== data.captcha) {
+        alerts.alert({ message: 'Mã xác nhận không chính xác!' });
+        return;
+      }
+
+      dispatch(onThunkGetOtp(data.phone, props, false));
     } else {
-      alerts.alert({ message: 'Số điện thoại không được để trông!' });
+      alerts.alert({ message: 'Số điện thoại không được trống!' });
     }
   };
 

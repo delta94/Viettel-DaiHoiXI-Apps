@@ -20,6 +20,6 @@ export class VerifyOTPReq {
   macAddress?: string;
 }
 
-export class OtpReq {
+export class GetOTPReq {
   phoneNumber: string;
 }

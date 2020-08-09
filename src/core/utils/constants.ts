@@ -60,3 +60,5 @@ export enum DocumentTabEnum {
   TaiLieuLuuHanhNoiBo,
   TaiLieuNghienCuuThamKhao,
 }
+
+export const OTPTime = 180;

@@ -1,47 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Dispatch } from 'redux';
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
 import { BackHandler } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import { Otp } from './otp.component';
 import { isTablet } from 'react-native-device-info';
 import { OtpTablet } from './otp.component.tablet';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
-import { onThunkVerifyOtp, onThunkSignInReq, onThunkGetOtp } from '../signIn/store/thunk';
+import { onThunkVerifyOtp, onThunkGetOtp } from '../signIn/store/thunk';
 import { SessionState } from '@src/core/store/reducer/session/types';
-import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '@src/core/store';
-import { Dispatch } from 'redux';
 import { alerts } from '@src/core/utils/alerts';
 import { isEmpty } from '@src/core/utils/utils';
 
 export const OtpContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'OtpContainer';
-  const [phoneNumber, setPhoneNumber] = React.useState<string>('');
   const dispatch: Dispatch<any> = useDispatch();
+  const phoneNumber: string | undefined = props.navigation.getParam('phoneNumber');
   const { loggedIn }: SessionState = useSelector((state: AppState) => state.session);
-  const [isCount, setCount] = React.useState<boolean>(true);
 
-  const backAction = () => {
-    alerts.alert({ message: 'Quay lại trang đăng nhập?', accept: 'đồng ý', onResult: onBackResult });
-    return true;
-  };
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', onBackEventHandle);
 
-  React.useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', backAction);
-    return () =>
-      BackHandler.removeEventListener('hardwareBackPress', backAction);
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackEventHandle);
   }, []);
 
-  const onBackResult = () => {
-    props.navigation.goBack(KEY_NAVIGATION_BACK);
-  };
-
-  const onResendOtpPress = (): void => {
-    dispatch(onThunkGetOtp(phoneNumber, props, true));
-  };
-
-  React.useEffect(() => {
-    const phoneNumberTemp: string = props.navigation.getParam('phoneNumber');
-    setPhoneNumber(phoneNumberTemp);
+  useEffect(() => {
     if (loggedIn) {
       props.navigation.navigate({
         key: navigationKey,
@@ -50,25 +37,48 @@ export const OtpContainer: React.FunctionComponent<NavigationInjectedProps> = (p
     }
   }, [loggedIn]);
 
+  const onResendOtpPress = (): void => {
+    dispatch(onThunkGetOtp(phoneNumber, props, true));
+  };
+
   const onConfirmPress = (otp: string): void => {
     if (!isEmpty(otp)) {
-      if (otp.length < 4 || otp.length > 4) {
-        alerts.alert({ message: 'Mã OTP phải có 4 ký tự!' });
-      } else {
-        dispatch(onThunkVerifyOtp(otp, phoneNumber));
-      }
+      dispatch(onThunkVerifyOtp(otp, phoneNumber));
     } else {
-      alerts.alert({ message: 'Mã OTP không được trông!' });
+      alerts.alert({ message: 'Mã xác nhận OTP không được trống!' });
     }
   };
 
+  const onBackEventHandle = () => {
+    alerts.confirm({
+      message: 'Quay lại trang đăng nhập?',
+      accept: 'Đồng ý',
+      cancel: 'Huỷ',
+      onResult: onBackResult,
+    });
+
+    return true;
+  };
+
   const onBackPress = (): void => {
-    alerts.alert({ message: 'Quay lại trang đăng nhập?', accept: 'đồng ý', onResult: onBackResult });
+    alerts.confirm({
+      message: 'Quay lại trang đăng nhập?',
+      accept: 'Đồng ý',
+      cancel: 'Huỷ',
+      onResult: onBackResult,
+    });
+  };
+
+  const onBackResult = (value) => {
+    if (value) {
+      props.navigation.goBack(KEY_NAVIGATION_BACK);
+    }
   };
 
   if (isTablet()) {
     return (
       <OtpTablet
+        phoneNumber={phoneNumber}
         onResendOtpPress={onResendOtpPress}
         onConfirmPress={onConfirmPress}
         onBackPress={onBackPress}
@@ -78,10 +88,10 @@ export const OtpContainer: React.FunctionComponent<NavigationInjectedProps> = (p
 
   return (
     <Otp
+      phoneNumber={phoneNumber}
       onResendOtpPress={onResendOtpPress}
       onConfirmPress={onConfirmPress}
       onBackPress={onBackPress}
-      isCount={isCount}
     />
   );
 };

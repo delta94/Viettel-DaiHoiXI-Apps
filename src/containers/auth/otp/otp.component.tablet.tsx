@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { imageBackgroundSignIn } from '@src/assets/images';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { pxToPercentage, tenMinutesCountdown } from '@src/core/utils/utils';
 import {
   textStyle,
   ValidationInput,
@@ -20,11 +20,12 @@ import {
 import { StringValidator } from '@src/core/validators';
 import { Button } from '@src/components/button/button.component';
 import { ArrowPrevIcon } from '@src/assets/icons';
-import { widthPercentageToDP } from 'react-native-responsive-screen';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { alerts } from '@src/core/utils/alerts';
+import { OTPTime } from '@src/core/utils/constants';
 
 interface ComponentProps {
+  phoneNumber: string | undefined;
   onResendOtpPress: () => void;
   onConfirmPress: (otp: string) => void;
   onBackPress: () => void;
@@ -34,26 +35,42 @@ export type OtpTabletProps = ComponentProps & ThemedComponentProps;
 
 const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
   const [otp, setOtp] = useState<string | undefined>(undefined);
-  const [timeOut, setTimeOut] = React.useState<number>(1);
+  const [time, setTime] = useState<number>(OTPTime);
+  const [timer, setTimer] = useState<NodeJS.Timeout>(undefined);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (timeOut > 0) {
-        setTimeOut(timeOut - 1);
-      } else {
-        alerts.alert({ message: 'Hết thời gian nhập mã?' });
-        clearInterval(interval);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
+  useEffect(() => {
+    setTimer(setInterval(() => {
+      setTime(prevState => prevState - 1);
+    }, 1000));
+
+    return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (time <= 0) {
+      clearInterval(timer);
+    }
+  }, [time]);
+
   const onResendOtpButtonPress = (): void => {
+    if (time <= 0) {
+      setTime(OTPTime);
+      setTimer(setInterval(() => {
+        setTime(prevState => prevState - 1);
+      }, 1000));
+    } else {
+      setTime(OTPTime);
+    }
+
     props.onResendOtpPress();
   };
 
   const onConfirmButtonPress = (): void => {
-    props.onConfirmPress(otp);
+    if (time > 0) {
+      props.onConfirmPress(otp);
+    } else {
+      alerts.alert({ message: 'Thời gian hiệu lực của mã Otp đã hết!' });
+    }
   };
 
   const onOtpInputTextChange = (otpParam: string) => {
@@ -91,12 +108,13 @@ const OtpTabletComponent: React.FunctionComponent<OtpTabletProps> = (props) => {
             </View>
             <View style={themedStyle.viewBody}>
               <Text style={themedStyle.txtOtpNote}>
-                {'Điền vào đoạn mã OTP được gửi đến \nsố +84 0123456789'}
+                {`Điền vào đoạn mã OTP được gửi đến\nsố ${props.phoneNumber}`}
               </Text>
               <Text style={themedStyle.txtOtpNote}>
-                {'Thời gian hiệu lực 3:10'}
+                {`\nThời gian hiệu lực ${tenMinutesCountdown(time)}`}
               </Text>
               <ValidationInput
+                value={otp}
                 style={themedStyle.inputOtp}
                 placeholder='Mã OTP'
                 validator={StringValidator}
@@ -140,11 +158,10 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   scrollViewContainer: {
     flex: 1,
     alignItems: 'flex-end',
-    width: widthPercentageToDP(100),
     paddingRight: pxToPercentage(200),
   },
   sectionBox: {
-    width: pxToPercentage(950),
+    width: pxToPercentage(860),
     height: '100%',
     paddingTop: pxToPercentage(210),
   },
@@ -157,7 +174,6 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   },
   viewBody: {
     flex: 1,
-    paddingHorizontal: pxToPercentage(32),
   },
   viewHeaderLeftRight: {
     width: pxToPercentage(100),
@@ -185,7 +201,7 @@ export const OtpTablet = withStyles(OtpTabletComponent, (theme: ThemeType) => ({
   viewBtn: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: pxToPercentage(32),
+    marginTop: pxToPercentage(40),
   },
   btn: {
     width: '49%',

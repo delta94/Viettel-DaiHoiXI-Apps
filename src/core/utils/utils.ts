@@ -43,22 +43,26 @@ export const chunk = <T>(array: Array<T>, size: number): T[][] => {
   return chunkedArr;
 };
 
-export const addDays = function (dateParam: Date, dayCount: number) {
+export const addDays = (dateParam: Date, dayCount: number): Date => {
   const date = new Date(dateParam);
   date.setDate(date.getDate() + dayCount);
 
   return date;
 };
 
-export const minusDays = function (dateParam: Date, dayCount: number) {
+export const minusDays = (dateParam: Date, dayCount: number): Date => {
   const date = new Date(dateParam);
   date.setDate(date.getDate() - dayCount);
 
   return date;
 };
 
-export const tenMinutesCountdown = function (time: number) {
-  return `${Math.trunc(time / 60) > 9 ? Math.trunc(time / 60) : `0${Math.trunc(time / 60)}`}:${time % 60 < 10 ? `0` + (time % 60) : (time % 60)}`;
+export const tenMinutesCountdown = (time: number): string => {
+  return `${Math.trunc(time / 60) > 9
+    ? Math.trunc(time / 60)
+    : `0${Math.trunc(time / 60)}`}:${time % 60 < 10
+      ? `0` + (time % 60)
+      : (time % 60)}`;
 };
 
 export const stringToASCII = (str: string): string => {

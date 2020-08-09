@@ -15,12 +15,7 @@ import {
 } from '@kitten/theme';
 import { ValidationInput, textStyle } from '@src/components';
 import { RefreshIconOther } from '@src/assets/icons';
-import {
-  PhoneNumberValidator,
-  NumberValidator,
-  NameValidator,
-  StringValidator,
-} from '@src/core/validators';
+import { StringValidator } from '@src/core/validators';
 import { SignInPhoneNumberFormData } from '@src/core/models/auth/signIn/signIn.model';
 import { usePrevious } from '@src/core/utils/hookHelper';
 import {
@@ -39,7 +34,7 @@ const SignInPhoneNumberFormTabletComponent: React.FunctionComponent<SignInPhoneN
   const [formData, setFormData] = useState<SignInPhoneNumberFormData>({
     phone: undefined,
     captcha: generateCaptcha(4),
-    enterCaptca: undefined,
+    enterCaptcha: undefined,
   });
 
   let prevState = usePrevious(formData);
@@ -75,7 +70,7 @@ const SignInPhoneNumberFormTabletComponent: React.FunctionComponent<SignInPhoneN
   };
 
   const onEnterCaptChaTextChange = (enterCaptca: string) => {
-    setFormData({ ...formData, enterCaptca });
+    setFormData({ ...formData, enterCaptcha: enterCaptca });
   };
 
   const onCaptchaTextChange = (captcha: string) => {
@@ -94,9 +89,11 @@ const SignInPhoneNumberFormTabletComponent: React.FunctionComponent<SignInPhoneN
       style={[themedStyle.container, style]}>
       <ValidationInput
         placeholder='Số điện thoại'
-        validator={PhoneNumberValidator}
+        validator={StringValidator}
         onChangeText={onUsernameInputTextChange}
         keyboardType='phone-pad'
+        value={formData.phone}
+        maxLength={12}
       />
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput
@@ -104,6 +101,8 @@ const SignInPhoneNumberFormTabletComponent: React.FunctionComponent<SignInPhoneN
           placeholder='Mã xác nhận'
           validator={StringValidator}
           onChangeText={onEnterCaptChaTextChange}
+          value={formData.enterCaptcha}
+          maxLength={4}
         />
         <TouchableOpacity
           activeOpacity={0.75}
@@ -128,10 +127,10 @@ export const SignInPhoneNumberFormTablet = withStyles(SignInPhoneNumberFormTable
   viewCaptcha: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: pxToPercentage(15),
+    marginTop: pxToPercentage(13),
   },
   viewInputVerification: {
-    width: '65%',
+    width: '60%',
   },
   btnCaptcha: {
     flex: 1,

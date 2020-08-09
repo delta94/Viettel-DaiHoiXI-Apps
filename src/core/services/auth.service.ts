@@ -5,6 +5,7 @@ import {
   GetOTPReq,
   VerifyOTPReq,
 } from '../models/auth/signIn/signInReq.model';
+import { ApiResult } from '../dataTransfer/apiResult';
 
 export default class AuthService extends ApiService {
   public signIn(data: SignInReq) {
@@ -12,7 +13,7 @@ export default class AuthService extends ApiService {
   }
 
   public getOTP(data: GetOTPReq) {
-    return this.apiPost<SignInApiResult>('/users/login/otp', data, null, false);
+    return this.apiPost<ApiResult>('/users/login/otp', data, null, false);
   }
 
   public verifyOTP(data: VerifyOTPReq) {

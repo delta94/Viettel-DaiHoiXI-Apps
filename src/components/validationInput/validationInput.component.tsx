@@ -16,7 +16,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { usePrevious } from '@src/core/utils/hookHelper';
-import { textStyle } from '..';
+import { textStyle } from '../textStyle';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { isTablet } from 'react-native-device-info';
 import {

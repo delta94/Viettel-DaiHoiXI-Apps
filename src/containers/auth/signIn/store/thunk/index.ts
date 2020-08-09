@@ -3,22 +3,18 @@ import { ThunkActionTypes } from '@src/core/store/thunk/types';
 import {
   SignInReq,
   VerifyOTPReq,
-  OtpReq,
+  GetOTPReq,
 } from '@src/core/models/auth/signIn/signInReq.model';
 import { onSetSession } from '@src/core/store/reducer/session/actions';
 import { alerts } from '@src/core/utils/alerts';
 import { ApiResult } from '@src/core/dataTransfer/apiResult';
-import {
-  SignInAccountFormData,
-  SignInPhoneNumberFormData,
-  Otp,
-} from '@src/core/models/auth/signIn/signIn.model';
-import {
-  getMacAddress,
-  getIpAddress,
-  getSystemVersion,
-  getSystemName,
-} from 'react-native-device-info';
+import { SignInAccountFormData } from '@src/core/models/auth/signIn/signIn.model';
+// import {
+//   getMacAddress,
+//   getIpAddress,
+//   getSystemVersion,
+//   getSystemName,
+// } from 'react-native-device-info';
 import { onSetEnabledSpinner } from '@src/core/store/reducer/app/actions';
 import { NavigationInjectedProps } from 'react-navigation';
 
@@ -67,29 +63,32 @@ export const onThunkSignInReq = (data: SignInAccountFormData): ThunkActionTypes 
   }
 };
 
-export const onThunkGetOtp = (phone: string, navigator: NavigationInjectedProps, isResetCaptcha: boolean): ThunkActionTypes => async dispatch => {
+export const onThunkGetOtp = (phoneNumber: string, navigator: NavigationInjectedProps, fromOTPScreen: boolean): ThunkActionTypes => async dispatch => {
   dispatch(onSetEnabledSpinner(true));
 
   const authService = new AuthService();
-  const otpReq: OtpReq = {
-    phoneNumber: phone,
+  const otpReq: GetOTPReq = {
+    phoneNumber,
   };
 
   try {
     const res = await authService.getOTP(otpReq);
 
     if (res.success) {
-      if (isResetCaptcha) {
-        dispatch(onSetEnabledSpinner(false));
-        alerts.alert({ message: 'Cấp lại mã Otp thành công' });
+      if (fromOTPScreen) {
+        alerts.alert({
+          message: `Mã xác nhận OTP đã được gửi đến số điện thoại ${phoneNumber}!`,
+          onResult: () => dispatch(onSetEnabledSpinner(false)),
+        });
       } else {
         navigator.navigation.navigate({
           key: 'SignInContainer',
           routeName: 'otp',
           params: {
-            phoneNumber: phone,
+            phoneNumber,
           },
         });
+
         dispatch(onSetEnabledSpinner(false));
       }
     } else {
@@ -112,13 +111,13 @@ export const onThunkGetOtp = (phone: string, navigator: NavigationInjectedProps,
   }
 };
 
-export const onThunkVerifyOtp = (otpValue: string, phoneNumber: string): ThunkActionTypes => async dispatch => {
+export const onThunkVerifyOtp = (otp: string, phoneNumber: string): ThunkActionTypes => async dispatch => {
   dispatch(onSetEnabledSpinner(true));
 
   const authService = new AuthService();
   const verifyOTPReq: VerifyOTPReq = {
     phoneNumber: phoneNumber,
-    otp: otpValue,
+    otp,
     // deviceCode: undefined,
     // imei: undefined,
     // ipAddress,

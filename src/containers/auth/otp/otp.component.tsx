@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -17,47 +17,59 @@ import {
   ValidationInput,
   ScrollableAvoidKeyboard,
 } from '@src/components';
-import { NumberValidator, StringValidator } from '@src/core/validators';
+import { StringValidator } from '@src/core/validators';
 import { Button } from '@src/components/button/button.component';
 import { ArrowPrevIcon } from '@src/assets/icons';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { alerts } from '@src/core/utils/alerts';
+import { OTPTime } from '@src/core/utils/constants';
 
 interface ComponentProps {
+  phoneNumber: string | undefined;
   onResendOtpPress: () => void;
   onConfirmPress: (otp: string) => void;
   onBackPress: () => void;
-  isCount: boolean;
 }
 
 export type OtpProps = ComponentProps & ThemedComponentProps;
 
 const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
   const [otp, setOtp] = useState<string | undefined>(undefined);
-  const [time, setTime] = React.useState<number>(180);
+  const [time, setTime] = useState<number>(OTPTime);
+  const [timer, setTimer] = useState<NodeJS.Timeout>(undefined);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (time) {
-        setTime(time - 1);
-      } else {
-        alerts.alert({ message: 'Thời gian cấp Otp đã hết\nHãy chọn gửi lại mã Otp' });
-        clearInterval(interval);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
+  useEffect(() => {
+    setTimer(setInterval(() => {
+      setTime(prevState => prevState - 1);
+    }, 1000));
+
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (time <= 0) {
+      clearInterval(timer);
+    }
   }, [time]);
 
   const onResendOtpButtonPress = (): void => {
-    setTime(180);
+    if (time <= 0) {
+      setTime(OTPTime);
+      setTimer(setInterval(() => {
+        setTime(prevState => prevState - 1);
+      }, 1000));
+    } else {
+      setTime(OTPTime);
+    }
+
     props.onResendOtpPress();
   };
 
   const onConfirmButtonPress = (): void => {
-    if (time) {
+    if (time > 0) {
       props.onConfirmPress(otp);
     } else {
-      alerts.alert({message: 'Thời gian hiệu lực của mã Otp đã hết\nHãy chọn gửi lại mã Otp'});
+      alerts.alert({ message: 'Thời gian hiệu lực của mã Otp đã hết!' });
     }
   };
 
@@ -101,12 +113,12 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
         </View>
         <View style={themedStyle.viewBody}>
           <Text style={themedStyle.txtOtpNote}>
-            {'Điền vào đoạn mã OTP được gửi đến\nsố +84 941219915'}
+            {`Điền vào đoạn mã OTP được gửi đến\nsố ${props.phoneNumber}`}
             {`\nThời gian hiệu lực ${tenMinutesCountdown(time)}`}
           </Text>
           <ValidationInput
             value={otp}
-            viewContainerStyle={themedStyle.viewInputPassword}
+            viewContainerStyle={themedStyle.viewInputOTP}
             placeholder='Mã OTP'
             validator={StringValidator}
             onChangeText={onOtpInputTextChange}
@@ -133,7 +145,7 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
 export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
   container: {
     flex: 1,
-    paddingHorizontal: pxToPercentage(12),
+    paddingHorizontal: pxToPercentage(16),
     backgroundColor: theme['color-custom-100'],
   },
   viewStatusBar: {
@@ -143,6 +155,9 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
   sectionHeader: {
     justifyContent: 'flex-end',
     marginTop: pxToPercentage(150),
+  },
+  viewInputOTP: {
+    marginTop: pxToPercentage(10),
   },
   txtHeaderTitle: {
     fontSize: pxToPercentage(32),
@@ -157,9 +172,6 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
     ...textStyle.proDisplayBold,
     textAlign: 'right',
   },
-  btnSignIn: {
-    marginTop: pxToPercentage(20),
-  },
   imgBg: {
     flex: 1,
     alignItems: 'flex-end',
@@ -172,7 +184,7 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: pxToPercentage(1),
+    marginTop: pxToPercentage(20),
   },
   viewBody: {
     flex: 1,
@@ -195,7 +207,7 @@ export const Otp = withStyles(OtpComponent, (theme: ThemeType) => ({
   },
   btn: {
     width: '49%',
-    borderRadius: pxToPercentage(28),
+    borderRadius: pxToPercentage(16),
     height: pxToPercentage(48),
     backgroundColor: theme['color-primary-2'],
   },

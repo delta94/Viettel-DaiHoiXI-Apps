@@ -15,12 +15,7 @@ import {
 } from '@kitten/theme';
 import { ValidationInput, textStyle } from '@src/components';
 import { RefreshIconOther } from '@src/assets/icons';
-import {
-  PhoneNumberValidator,
-  NumberValidator,
-  EmailValidator,
-  NameValidator,
-} from '@src/core/validators';
+import { StringValidator } from '@src/core/validators';
 import { SignInPhoneNumberFormData } from '@src/core/models/auth/signIn/signIn.model';
 import { usePrevious } from '@src/core/utils/hookHelper';
 import {
@@ -28,7 +23,6 @@ import {
   pxToPercentage,
   generateCaptcha,
 } from '@src/core/utils/utils';
-import { Input } from 'react-native-ui-kitten/ui';
 
 interface ComponentProps {
   onDataChange: (value: SignInPhoneNumberFormData | undefined) => void;
@@ -40,7 +34,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
   const [formData, setFormData] = useState<SignInPhoneNumberFormData>({
     phone: undefined,
     captcha: generateCaptcha(4),
-    enterCaptca: undefined,
+    enterCaptcha: undefined,
   });
 
   let prevState = usePrevious(formData);
@@ -72,7 +66,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
   };
 
   const onEnterCaptChaTextChange = (enterCaptca: string) => {
-    setFormData({ ...formData, enterCaptca });
+    setFormData({ ...formData, enterCaptcha: enterCaptca });
   };
 
   const onCaptchaTextChange = (captcha: string) => {
@@ -95,16 +89,19 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
       style={[themedStyle.container, style]}>
       <ValidationInput
         placeholder='Số điện thoại'
-        validator={PhoneNumberValidator}
+        validator={StringValidator}
         onChangeText={onUsernameInputTextChange}
         keyboardType='number-pad'
+        value={formData.phone}
       />
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput
           viewContainerStyle={themedStyle.viewInputVerification}
           placeholder='Mã xác nhận'
-          validator={NameValidator}
+          validator={StringValidator}
           onChangeText={onEnterCaptChaTextChange}
+          value={formData.enterCaptcha}
+          maxLength={4}
         />
         <TouchableOpacity
           activeOpacity={0.75}
@@ -129,7 +126,7 @@ export const SignInPhoneNumberForm = withStyles(SignInPhoneNumberFormComponent, 
   viewCaptcha: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: pxToPercentage(7.5),
+    marginTop: pxToPercentage(7),
   },
   viewInputVerification: {
     width: '60%',

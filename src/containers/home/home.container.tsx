@@ -12,7 +12,6 @@ import {
   useSelector,
 } from 'react-redux';
 import { Dispatch } from 'redux';
-import { onClearSession } from '@src/core/store/reducer/session/actions';
 import { SessionState } from '@src/core/store/reducer/session/types';
 import { AppState } from '@src/core/store';
 
@@ -43,15 +42,11 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
     });
   };
 
-  const onEditProfilePress = (): void => {
+  const onMyProfilePress = (): void => {
     props.navigation.navigate({
       key: navigationKey,
       routeName: 'delegateDetail',
     });
-  };
-
-  const onLogoutPress = (): void => {
-    dispatch(onClearSession());
   };
 
   const onQRCodePress = (): void => {
@@ -78,7 +73,7 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
         user={user}
         currentWeek={32}
         meetings={weeklyMeetingDatafake}
-        onEditProfilePress={onEditProfilePress}
+        onMyProfilePress={onMyProfilePress}
         onMeetingItemPress={onMeetingItemPress}
         onQRCodePress={onQRCodePress}
         onSearchPress={onSearchPress}
@@ -92,8 +87,9 @@ export const HomeContainer: React.FunctionComponent<NavigationInjectedProps> = (
       user={user}
       currentWeek={32}
       meetings={meetingDataFake}
-      onEditProfilePress={onEditProfilePress}
-      onLogoutPress={onLogoutPress}
+      onMyProfilePress={onMyProfilePress}
+      onSearchPress={onSearchPress}
+      onQRCodePress={onQRCodePress}
       onMeetingItemPress={onMeetingItemPress}
     />
   );

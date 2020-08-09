@@ -19,13 +19,17 @@ import { viewStyle } from '../viewStyle';
 import {
   LogoutIconOther,
   EditPersonIconOther,
+  PersonIcon2,
+  SearchIcon,
+  QRCodeIconOther,
 } from '@src/assets/icons';
 import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {
   user: User;
-  onEditProfilePress: () => void;
-  onLogoutPress: () => void;
+  onMyProfilePress: () => void;
+  onSearchPress: () => void;
+  onQRCodePress: () => void;
 }
 
 export type ProfileInfoProps = ThemedComponentProps & ViewProps & ComponentProps;
@@ -33,12 +37,16 @@ export type ProfileInfoProps = ThemedComponentProps & ViewProps & ComponentProps
 const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) => {
   const { style, themedStyle, user } = props;
 
-  const onEditProfileButtonPress = (): void => {
-    props.onEditProfilePress();
+  const onMyProfileButtonPress = (): void => {
+    props.onMyProfilePress();
   };
 
-  const onLogoutButtonPress = (): void => {
-    props.onLogoutPress();
+  const onSearchButtonPress = (): void => {
+    props.onSearchPress();
+  };
+
+  const onQRCodeButtonPress = (): void => {
+    props.onQRCodePress();
   };
 
   return (
@@ -103,20 +111,29 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
         <View style={themedStyle.sectionFooter}>
           <TouchableOpacity
             activeOpacity={0.75}
-            onPress={onEditProfileButtonPress}
+            onPress={onMyProfileButtonPress}
             style={themedStyle.btn}>
-            {EditPersonIconOther(themedStyle.iconBtnEdit)}
+            {PersonIcon2(themedStyle.iconBtnEdit)}
             <Text style={themedStyle.txtBtn}>
-              {'SỬA THÔNG TIN'}
+              {'Cá nhân'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.75}
-            onPress={onLogoutButtonPress}
+            onPress={onSearchButtonPress}
             style={themedStyle.btn}>
-            {LogoutIconOther(themedStyle.iconBtnLogout)}
+            {SearchIcon(themedStyle.iconBtnEdit)}
             <Text style={themedStyle.txtBtn}>
-              {'ĐĂNG XUẤT'}
+              {'Tìm kiếm'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={onQRCodeButtonPress}
+            style={themedStyle.btn}>
+            {QRCodeIconOther(themedStyle.iconBtnLogout)}
+            <Text style={themedStyle.txtBtn}>
+              {'Mã QR'}
             </Text>
           </TouchableOpacity>
         </View>

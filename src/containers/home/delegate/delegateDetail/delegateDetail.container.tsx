@@ -17,12 +17,8 @@ import { Delegate } from '@src/core/models/delegate/delegate.model';
 export const DelegateDetailContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'DelegateDetailContainer';
   const dispatch: Dispatch<any> = useDispatch();
-  const { delegateDetails: delegateDetail }: DelegateState = useSelector((state: AppState) => state.delegate);
+  const { delegateDetails }: DelegateState = useSelector((state: AppState) => state.delegate);
   const deputy: Delegate = props.navigation.getParam('deputy');
-
-  const onBackPress = (): void => {
-    props.navigation.goBack(KEY_NAVIGATION_BACK);
-  };
 
   useEffect(() => {
     onGetDelegateDetails();
@@ -32,10 +28,14 @@ export const DelegateDetailContainer: React.FunctionComponent<NavigationInjected
     dispatch(onThunkGetDelegateDetailsReq(deputy.id, () => { }));
   };
 
+  const onBackPress = (): void => {
+    props.navigation.goBack(KEY_NAVIGATION_BACK);
+  };
+
   if (isTablet()) {
     return (
       <DelegateDetailTablet
-        delegateDetail={delegateDetail}
+        delegateDetails={delegateDetails}
         onBackPress={onBackPress}
         deputy={deputy}
       />
@@ -44,7 +44,7 @@ export const DelegateDetailContainer: React.FunctionComponent<NavigationInjected
 
   return (
     <DelegateDetail
-      delegateDetail={delegateDetail}
+      delegateDetails={delegateDetails}
       deputy={deputy}
     />
   );

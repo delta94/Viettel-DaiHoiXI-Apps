@@ -16,7 +16,7 @@ import { Delegate } from '@src/core/models/delegate/delegate.model';
 import { DelegateDetail } from '@src/core/models/delegate/delegateDetail.model';
 
 interface ComponentProps {
-  delegateDetail: DelegateDetail[];
+  delegateDetails: DelegateDetail[];
   deputy: Delegate;
   onBackPress: () => void;
 }
@@ -31,7 +31,7 @@ const DelegateDetailTabletComponent: React.FunctionComponent<DelegateDetailTable
       <View style={themedStyle.viewCard}>
         <ProfileInfoV3Tablet user={props.deputy} />
         <ScrollView contentContainerStyle={themedStyle.scrollViewContainer}>
-          <DelegateDetailContentTablet delegateDetails={props.delegateDetail} />
+          <DelegateDetailContentTablet delegateDetails={props.delegateDetails} />
         </ScrollView>
       </View>
     </View>

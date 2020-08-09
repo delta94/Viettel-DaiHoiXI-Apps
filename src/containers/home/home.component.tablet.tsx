@@ -21,7 +21,7 @@ interface ComponentProps {
   currentWeek: number;
   meetings: WeeklyMeetingModel[];
   onMeetingItemPress: (isExample: boolean) => void;
-  onEditProfilePress: () => void;
+  onMyProfilePress: () => void;
   onQRCodePress: () => void;
   onSearchPress: () => void;
   onEmailPress: () => void;
@@ -32,8 +32,8 @@ export type HomeTabletProps = ThemedComponentProps & ComponentProps;
 const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) => {
   const { themedStyle } = props;
 
-  const onEditProfilePress = (): void => {
-    props.onEditProfilePress();
+  const onMyProfilePress = (): void => {
+    props.onMyProfilePress();
   };
 
   const onMeetingItemPress = (isExample: boolean): void => {
@@ -71,7 +71,7 @@ const HomeTabletComponent: React.FunctionComponent<HomeTabletProps> = (props) =>
       <View style={themedStyle.viewCard}>
         <ProfileInfoTablet
           user={props.user}
-          onProfilePress={onEditProfilePress}
+          onProfilePress={onMyProfilePress}
           onQRCodePress={onQRCodePress}
           onSearchPress={onSearchPress}
         />

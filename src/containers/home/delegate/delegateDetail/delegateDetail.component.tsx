@@ -14,7 +14,7 @@ import { Delegate } from '@src/core/models/delegate/delegate.model';
 import { DelegateDetail as DelegateDetailModel } from '@src/core/models/delegate/delegateDetail.model';
 
 interface ComponentProps {
-  delegateDetail: DelegateDetailModel[];
+  delegateDetails: DelegateDetailModel[];
   deputy: Delegate;
 }
 
@@ -29,7 +29,7 @@ const DelegateDetailComponent: React.FunctionComponent<DelegateDetailProps> = (p
         style={themedStyle.container}
         contentContainerStyle={themedStyle.scrollViewContainer}>
         <ProfileInfoV3 user={props.deputy} />
-        <DelegateDetailContent delegateDetails={props.delegateDetail} />
+        <DelegateDetailContent delegateDetails={props.delegateDetails} />
       </ScrollView>
     </React.Fragment>
   );

@@ -50,7 +50,7 @@ const MenuTopNavigationParams: TopNavigationParams = {
     // @ts-ignore (private API)
     const { routeName } = onGetCurrentRouteState(props.navigation);
     const index: number = onGetCurrentRouteIndex(props.navigation);
-    const navigationKey: string = 'HomeMenuTopNavigation';
+    const navigationKey: string = 'MenuTopNavigation';
 
     const onMessagePress = () => {
       props.navigation.navigate({

@@ -21,8 +21,9 @@ interface ComponentProps {
   currentWeek: number;
   meetings: MeetingItem[];
   onMeetingItemPress: (isExample: boolean) => void;
-  onEditProfilePress: () => void;
-  onLogoutPress: () => void;
+  onMyProfilePress: () => void;
+  onSearchPress: () => void;
+  onQRCodePress: () => void;
 }
 
 export type HomeProps = ThemedComponentProps & ComponentProps;
@@ -30,12 +31,16 @@ export type HomeProps = ThemedComponentProps & ComponentProps;
 const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
   const { themedStyle } = props;
 
-  const onEditProfilePress = (): void => {
-    props.onEditProfilePress();
+  const onMyProfilePress = (): void => {
+    props.onMyProfilePress();
   };
 
-  const onLogoutPress = (): void => {
-    props.onLogoutPress();
+  const onSearchPress = (): void => {
+    props.onSearchPress();
+  };
+
+  const onQRCodePress = (): void => {
+    props.onQRCodePress();
   };
 
   const onMeetingItemPress = (isExample: boolean): void => {
@@ -68,8 +73,9 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
         <ProfileInfo
           user={props.user}
           style={themedStyle.viewProfileInfo}
-          onEditProfilePress={onEditProfilePress}
-          onLogoutPress={onLogoutPress}
+          onMyProfilePress={onMyProfilePress}
+          onSearchPress={onSearchPress}
+          onQRCodePress={onQRCodePress}
         />
         <View style={themedStyle.viewContent}>
           <HomeMeetingWeek
@@ -82,7 +88,6 @@ const HomeComponent: React.FunctionComponent<HomeProps> = (props) => {
           </ScrollView>
         </View>
       </View>
-      {/* <SafeAreaView /> */}
     </React.Fragment>
   );
 };

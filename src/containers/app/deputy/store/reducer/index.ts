@@ -1,6 +1,7 @@
 import {
   DeputyState,
   DeputyActionTypes,
+  GET_DEPUTY_DISCUSSION_GROUPS_SUCCESS,
   GET_DEPUTY_GROUPS_SUCCESS,
   GET_DEPUTY_DETAILS_SUCCESS,
 } from './types';
@@ -8,6 +9,7 @@ import {
 const initialState: DeputyState = {
   deputyGroups: [],
   deputyDetails: [],
+  deputyDiscussionGroups: [],
 };
 
 export const deputyReducer = (state = initialState, action: DeputyActionTypes): DeputyState => {
@@ -22,6 +24,12 @@ export const deputyReducer = (state = initialState, action: DeputyActionTypes): 
       return {
         ...state,
         deputyDetails: action.payload,
+      };
+    }
+    case GET_DEPUTY_DISCUSSION_GROUPS_SUCCESS: {
+      return {
+        ...state,
+        deputyDiscussionGroups: action.payload,
       };
     }
     default: {

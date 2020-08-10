@@ -1,56 +1,58 @@
-import { DelegateGroup } from '../models/delegate/delegateGroup.model';
+import { DeputyDiscussionGroup } from '../models/deputy/deputyDiscussionGroup.model';
 
-export const delegateGroupDataFake: DelegateGroup = {
-  delegates: [
-    {
-      avatar: 'https://data.voh.com.vn//uploads/Image/2016/05/17/1447013-QH-NGUYENPHUOCLOC.gif',
-      full_name: 'NGUYỄN PHƯỚC LỘC',
-      position: ' Phó Trưởng ban Dân vận Trung ương',
-      phone: '0123456789',
-      unit: 'Văn phòng thành ủy',
-      group: 'ĐẢNG BỘ KHỐI DÂN - CHÍNH - ĐẢNG THÀNH PHỐ',
-      team_number: 2,
-      delegate_number: 24,
-    },
-    {
-      avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_NguyenThienNhan.jpg',
-      full_name: 'NGUYỄN THIỆN NHÂN',
-      position: 'Ủy viên Bộ Chính trị, Bí thư Thành ủy ',
-      phone: '0123456789',
-      unit: 'Văn phòng thành ủy',
-      group: 'ĐẢNG BỘ KHỐI DÂN - CHÍNH - ĐẢNG THÀNH PHỐ',
-      team_number: 2,
-      delegate_number: 25,
-    },
-    {
-      avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_VoThiDung.jpg',
-      full_name: 'VÕ THỊ DUNG',
-      position: ' Ủy viên Ban thường vụ Thành ủy, Phó Bí thư Thành ủy Thành phố Hồ Chí Minh',
-      phone: '0123456789',
-      unit: 'Văn phòng thành ủy',
-      group: 'ĐẢNG BỘ KHỐI DÂN - CHÍNH - ĐẢNG THÀNH PHỐ',
-      team_number: 3,
-      delegate_number: 26,
-    },
-    {
-      avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_TranVinhTuyen.jpg',
-      full_name: 'TRẦN VĨNH TUYẾN',
-      position: 'Phó Chủ tịch UBND TP',
-      phone: '0123456789',
-      unit: 'Văn phòng thành ủy',
-      group: 'ĐẢNG BỘ KHỐI DÂN - CHÍNH - ĐẢNG THÀNH PHỐ',
-      team_number: 3,
-      delegate_number: 27,
-    },
-    {
-      avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_TranLuuQuang.jpg',
-      full_name: 'TRẦN LƯU QUANG',
-      position: ' Ủy viên Trung ương Đảng, Phó Bí thư Thường trực Thành ủy',
-      phone: '0123456789',
-      unit: 'Văn phòng thành ủy',
-      group: 'ĐẢNG BỘ KHỐI DÂN - CHÍNH - ĐẢNG THÀNH PHỐ',
-      team_number: 4,
-      delegate_number: 28,
-    },
-  ],
-};
+export const delegateGroupDataFake: DeputyDiscussionGroup[] = [
+  {
+    id: 'b8f84645-739f-4103-bfad-a5208aa57a2e',
+    name: 'Tổ 1',
+    meetingRoom: 'Phòng 403 - Trung tâm Hội nghị 272 Võ Thị Sáu',
+    discussionGroupDeputies: [
+      {
+        id: 'b8f84645-739f-4103-bfad-a5208aa57a2e',
+        fullName: 'Nguyễn Thiện Nhân',
+        avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_NguyenThienNhan.jpg',
+        position: 'Ủy viên Bộ chính trị, Bí thư Thành ủy',
+        code: 'DB01',
+        positionInGroup: 'Tổ trưởng',
+      },
+      {
+        id: 'b8f84645-739f-4103-bfad-a5208aa57a2e',
+        fullName: 'Nguyễn Phước lộc',
+        avatar: 'https://data.voh.com.vn//uploads/Image/2016/05/17/1447013-QH-NGUYENPHUOCLOC.gif',
+        position: 'Ủy viên Trung ương Đảng, Phó Bí thư Thường trực Thành ủy',
+        code: 'DB02',
+        positionInGroup: 'Thư ký',
+      },
+      {
+        id: 'b8f84645-739f-4103-bfad-a5208aa57a2e',
+        fullName: 'Trần Lưu Quang',
+        avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_TranLuuQuang.jpg',
+        position: 'Ủy viên Trung ương Đảng, Phó Bí thư Thành ủy, Chủ tịch Ủy ban nhân dân thành phố',
+        code: 'DB03',
+        positionInGroup: 'Tổ phó',
+      },
+    ],
+  },
+  {
+    id: 'b8f84645-739f-4103-bfad-a5208aa57a2ec',
+    name: 'Tổ 2',
+    meetingRoom: 'Phòng 402 - Trung tâm Hội nghị 272 Võ Thị Sáu',
+    discussionGroupDeputies: [
+      {
+        id: 'b8f84645-739f-4103-bfad-a5208aa57a2ea',
+        fullName: 'Nguyễn Phước Lộc',
+        avatar: 'https://data.voh.com.vn//uploads/Image/2016/05/17/1447013-QH-NGUYENPHUOCLOC.gif',
+        position: 'Thành ủy viên, Bí thư Quận ủy Quận 1',
+        code: 'DB04',
+        positionInGroup: 'Tổ trưởng',
+      },
+      {
+        id: 'b8f84645-739f-4103-bfad-a5208aa57a2e',
+        fullName: 'Trần Lưu Quang',
+        avatar: 'https://images.hcmcpv.org.vn//res/news/2015/10/DHX_TranLuuQuang.jpg',
+        position: 'Ủy viên Trung ương Đảng, Phó Bí thư Thành ủy, Chủ tịch Ủy ban nhân dân thành phố',
+        code: 'DB03',
+        positionInGroup: 'Tổ phó',
+      },
+    ],
+  },
+];

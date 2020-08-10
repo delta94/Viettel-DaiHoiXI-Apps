@@ -1,6 +1,7 @@
 import ApiService from './api.service';
 import { GetDeputyGroupsApiResult } from '../dataTransfer/deputy/getDeputyGroups.apiResult';
 import { GetDeputyDetailsApiResult } from '../dataTransfer/deputy/getDeputyDetails.apiResult';
+import { GetDeputyDiscussionGroupsApiResult } from '../dataTransfer/deputy/getDeputyDiscussionGroups.apiResult';
 
 export default class DeputyService extends ApiService {
   public getDeputyGroups(meetingId: string) {
@@ -10,4 +11,9 @@ export default class DeputyService extends ApiService {
   public getDeputyDetails(deputyId: string) {
     return this.apiGet<GetDeputyDetailsApiResult>(`/deputies/${deputyId}`, null, true);
   }
+
+  public getDeputyDiscussionGroups(meetingId: string) {
+    return this.apiGet<GetDeputyDiscussionGroupsApiResult>(`/meetings/${meetingId}/discussion-groups`, null, true);
+  }
+
 }

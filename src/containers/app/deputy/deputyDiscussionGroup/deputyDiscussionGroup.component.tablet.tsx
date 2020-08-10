@@ -5,15 +5,15 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {
   ThemedComponentProps,
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { pxToPercentage, searchASCII, isEmpty } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { User as UserModel } from '@src/core/models/user/user.model';
 import { Table } from '@src/components/table/table.component';
 import { Thead } from '@src/components/table/thead.component';
 import { Th } from '@src/components/table/th.component';
@@ -23,46 +23,91 @@ import { Td } from '@src/components/table/td.component';
 import { textStyle } from '@src/components';
 import { SearchIcon } from '@src/assets/icons';
 import { Button } from '@src/components/button/button.component';
-import { Select } from '@kitten/ui';
+import { Select, SelectOptionType } from '@kitten/ui';
 import { RemoteImage } from '@src/assets/images';
+import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
+import { DeputyDiscussionGroup as DeputyDiscussionGroupModel } from '@src/core/models/deputy/deputyDiscussionGroup.model';
+import { IMAGE_SERVER_ADDRESS } from '../../../../../config';
 
 interface ComponentProps {
-  delegateList: UserModel[];
-  onDelegateItemPress: (delegate: UserModel) => void;
+  deputyDiscussionGroups: DeputyDiscussionGroupModel[];
+  onDelegateItemPress: (deputy: DeputyModel) => void;
 }
 
 export type DeputyDiscussionGroupTabletProps = ThemedComponentProps & ComponentProps;
 
 const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscussionGroupTabletProps> = (props) => {
   const { themedStyle } = props;
-  const [selectedOptionTeam, setSelectedOptionTeam] = useState<any>(null);
+  const [discussionGroupSelected, setDiscussionGroupSelected] = useState<SelectOptionType>({ text: '' });
+  const [keyword, setKeyword] = useState('');
 
   const onSearchPress = (): void => {
 
   };
 
-  const onDelegateItemPress = (delegate: UserModel): void => {
+  const onFilterDeputiesByCondition = (): DeputyModel[] => {
+    const delegateListTemp: DeputyModel[] = [];
+
+    props.deputyDiscussionGroups.forEach(item => {
+      if (`${item.name}`.includes(discussionGroupSelected.text === 'Tất cả' ? '' : discussionGroupSelected.text)) {
+        item.discussionGroupDeputies.map(deputy => {
+          if (searchASCII(keyword, deputy.fullName)) {
+            delegateListTemp.push(deputy);
+          }
+        });
+      }
+    });
+
+    return delegateListTemp;
+  };
+
+  const onGetDiscussionGroupsFromData = () => {
+    const discussionGroupsTemp = [];
+
+    props.deputyDiscussionGroups.forEach(item => {
+      if (!isEmpty(item.discussionGroupDeputies)) {
+        discussionGroupsTemp.push(item.name);
+      }
+    });
+
+    return [... new Set(discussionGroupsTemp)].map(item => ({ text: item }));
+  };
+  const onDelegateItemPress = (delegate: DeputyModel): void => {
     props.onDelegateItemPress(delegate);
   };
 
+  const onGetDeputyByGroups = (): DeputyDiscussionGroupModel[] => {
+    return props.deputyDiscussionGroups.filter(item => [
+      'Tổ 1',
+    ].includes(item.meetingRoom));
+  };
+
+  const onGroupSelect = (option: SelectOptionType) => {
+    setDiscussionGroupSelected(option);
+  };
+
+  const onChangeText = (value: string) => {
+    setKeyword(value || '');
+  };
+
   const renderMeetings = (): React.ReactElement[] => {
-    return props.delegateList.map((item, index) => {
+    return onFilterDeputiesByCondition().map((item, index) => {
       return (
         <Tr key={index}>
-          <Td alignItems='center' width={110}>
+          <Td alignItems='center' width={150}>
             <Text style={themedStyle.txtInfo}>
-              {item.delegate_number}
+              {item.code}
             </Text>
           </Td>
           <Td alignItems='center' width={260}>
             <Image
-              source={(new RemoteImage(item.avatar).imageSource)}
+               source={(new RemoteImage(`${IMAGE_SERVER_ADDRESS}${item.avatar}`)).imageSource}
               style={themedStyle.imgAvatar}
             />
           </Td>
           <Td width={600}>
             <Text style={themedStyle.txtFullname}>
-              {item.full_name}
+              {item.fullName}
             </Text>
           </Td>
           <Td>
@@ -72,7 +117,7 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
           </Td>
           <Td width={250}>
             <Text style={themedStyle.txtInfo}>
-              {`Tổ ${item.team_number}`}
+              {item.discussionGroup || 'không'}
             </Text>
           </Td>
           <Td alignItems='center' width={200}>
@@ -94,15 +139,14 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
           <Select
             data={[
               { text: 'Tất cả' },
-              { text: 'Tổ 1' },
-              { text: 'Tổ 2' },
+              ...onGetDiscussionGroupsFromData(),
             ]}
             textStyle={themedStyle.txtSelectInput}
             keyExtractor={(item) => item.text}
-            selectedOption={selectedOptionTeam}
+            selectedOption={discussionGroupSelected}
             controlStyle={themedStyle.selectInputTeam}
             placeholder='Chọn tổ'
-            onSelect={setSelectedOptionTeam}>
+            onSelect={onGroupSelect}>
           </Select>
           <View style={themedStyle.viewInfo}>
             <Text style={themedStyle.txtInfo}>
@@ -112,21 +156,23 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
             </Text>
           </View>
         </View>
-        <View style={themedStyle.viewBtns}>
-          <TextInput
-            placeholder='Nhập họ tên đại biểu'
-            onChangeText={() => { }}
-            style={themedStyle.textInput}
-          />
-          <Button
-            title='TÌM KIẾM'
-            onPress={onSearchPress}
-            style={themedStyle.btnSearch}
-          />
-        </View>
+        <KeyboardAvoidingView>
+          <View style={themedStyle.viewBtns}>
+            <TextInput
+              placeholder='Nhập họ tên đại biểu'
+              onChangeText={onChangeText}
+              style={themedStyle.textInput}
+            />
+            <Button
+              title='TÌM KIẾM'
+              onPress={onSearchPress}
+              style={themedStyle.btnSearch}
+            />
+          </View>
+        </KeyboardAvoidingView>
         <Table style={themedStyle.viewTable}>
           <Thead>
-            <Th alignItems='center' width={110}>
+            <Th alignItems='center' width={150}>
               {'SĐB'}
             </Th>
             <Th alignItems='center' width={260}>

@@ -12,13 +12,14 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
-import { User as UserModel } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
+import { IMAGE_SERVER_ADDRESS } from '../../../../../config';
+import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 
 interface ComponentProps extends TouchableOpacityProps {
-  delegate: UserModel;
+  delegate: DeputyModel;
 }
 
 export type DeputyDiscussionGroupItemProps = ThemedComponentProps & ComponentProps;
@@ -34,7 +35,7 @@ const DeputyDiscussionGroupItemComponent: React.FunctionComponent<DeputyDiscussi
       <View style={themedStyle.viewBody}>
         <Image
           resizeMode='cover'
-          source={(new RemoteImage(delegate.avatar)).imageSource}
+          source={(new RemoteImage(`${IMAGE_SERVER_ADDRESS}${delegate.avatar}`)).imageSource}
           style={themedStyle.imgAvatar}
         />
         <View style={themedStyle.viewInfo}>
@@ -52,7 +53,7 @@ const DeputyDiscussionGroupItemComponent: React.FunctionComponent<DeputyDiscussi
               themedStyle.txtInfo,
               themedStyle.txtBold,
             ]}>
-            {delegate.full_name.toUpperCase()}
+            {delegate.fullName}
           </Text>
           <Text
             numberOfLines={2}
@@ -73,7 +74,7 @@ const DeputyDiscussionGroupItemComponent: React.FunctionComponent<DeputyDiscussi
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {delegate.team_number}
+                {delegate.discussionGroup || 'Không'}
               </Text>
             </Text>
             <Text
@@ -89,7 +90,7 @@ const DeputyDiscussionGroupItemComponent: React.FunctionComponent<DeputyDiscussi
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {delegate.delegate_number}
+                {delegate.code}
               </Text>
             </Text>
           </View>
@@ -140,6 +141,6 @@ export const DeputyDiscussionGroupItem = withStyles(DeputyDiscussionGroupItemCom
     ...textStyle.proTextBoldItalic,
   },
   txtDelegateNumber: {
-    marginLeft: pxToPercentage(40),
+    marginLeft: pxToPercentage(20),
   },
 }));

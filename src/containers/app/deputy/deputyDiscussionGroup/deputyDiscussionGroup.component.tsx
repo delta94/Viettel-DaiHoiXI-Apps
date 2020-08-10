@@ -8,8 +8,8 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { Select } from '@kitten/ui';
-import { pxToPercentage } from '@src/core/utils/utils';
+import { Select, SelectOptionType } from '@kitten/ui';
+import { pxToPercentage, isEmpty, searchASCII } from '@src/core/utils/utils';
 import {
   textStyle,
   ValidationInput,
@@ -28,10 +28,47 @@ export type DeputyDiscussionGroupProps = ThemedComponentProps & ComponentProps;
 
 const DeputyDiscussionGroupComponent: React.FunctionComponent<DeputyDiscussionGroupProps> = (props) => {
   const { themedStyle } = props;
-  const [selectedOption, setSelectedOption] = useState<any>(null);
+  const [discussionGroupSelected, setSelectedOption] = useState<SelectOptionType>({ text: '' });
+  const [keyword, setKeyword] = useState('');
 
   const onDeputyPress = (deputy: DeputyModel): void => {
     props.onDeputyPress(deputy);
+  };
+
+  const onFilterDeputiesByCondition = (): DeputyModel[] => {
+    const delegateListTemp: DeputyModel[] = [];
+
+    props.deputyDiscussionGroups.forEach(item => {
+      if (`${item.name}`.includes(discussionGroupSelected.text === 'Tất cả' ? '' : discussionGroupSelected.text)) {
+        item.discussionGroupDeputies.map(deputy => {
+          if (searchASCII(keyword, deputy.fullName)) {
+            delegateListTemp.push(deputy);
+          }
+        });
+      }
+    });
+
+    return delegateListTemp;
+  };
+
+  const onGetDiscussionGroupsFromData = () => {
+    const discussionGroupsTemp = [];
+
+    props.deputyDiscussionGroups.forEach(item => {
+      if (!isEmpty(item.discussionGroupDeputies)) {
+        discussionGroupsTemp.push(item.name);
+      }
+    });
+
+    return [... new Set(discussionGroupsTemp)].map(item => ({ text: item }));
+  };
+
+  const onGroupSelect = (option: SelectOptionType) => {
+    setSelectedOption(option);
+  };
+
+  const onChangeText = (value: string) => {
+    setKeyword(value || '');
   };
 
   return (
@@ -40,28 +77,26 @@ const DeputyDiscussionGroupComponent: React.FunctionComponent<DeputyDiscussionGr
         <Select
           data={[
             { text: 'Tất cả' },
-            { text: 'Tổ 1' },
-            { text: 'Tổ 2' },
+            ...onGetDiscussionGroupsFromData(),
           ]}
+          placeholder='Chọn Tổ'
           textStyle={themedStyle.txtSelectInput}
-          selectedOption={selectedOption}
+          selectedOption={discussionGroupSelected}
           keyExtractor={(item) => item.text}
-          placeholder='Chọn tổ'
           placeholderStyle={themedStyle.selectOptionPhd}
           size={'large'}
           controlStyle={themedStyle.selectOption}
-          onSelect={setSelectedOption}>
+          onSelect={onGroupSelect}>
         </Select>
         <ValidationInput
           style={themedStyle.inputSearch}
           placeholder='Nhập họ tên đại biểu'
           validator={StringValidator}
-          onChangeText={() => { }}
+          onChangeText={onChangeText}
         />
       </View>
       <FlatList
-        data={props.deputyDiscussionGroups}
-        extraData={props.deputyDiscussionGroups}
+        data={onFilterDeputiesByCondition()}
         contentContainerStyle={themedStyle.flatListContainer}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => {

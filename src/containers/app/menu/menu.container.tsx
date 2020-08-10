@@ -71,7 +71,10 @@ export const MenuContainer: React.FunctionComponent<NavigationInjectedProps> = (
         break;
       }
       case MenuEnum.ToThaoLuan: {
-        // routeName = 'deputyDiscussionGroup';
+         routeName = 'deputyDiscussionGroup';
+         params = {
+          meetingId,
+        };
         break;
       }
       default: {

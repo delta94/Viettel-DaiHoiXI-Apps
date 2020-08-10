@@ -56,6 +56,10 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
     });
   };
 
+  const onFilterDeputiesKeyMember = (): DeputyModel[] => {
+    return props.discussionGroupKeyMember.keyMembers;
+  };
+
   const onGetDiscussionGroupsFromData = () => {
     const discussionGroupsTemp = [];
     props.discussionGroups.forEach((item) => {
@@ -120,19 +124,16 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
     });
   };
 
-  const renderDescussionKeyMember = (): React.ReactElement => {
-    if (props.discussionGroupKeyMember.KeyMembers) {
-      props.discussionGroupKeyMember.KeyMembers.map(item => {
-        return (
-          <Text
-            style={themedStyle.txtInfo}
-            numberOfLines={1}>
-            {`${item.position}:\tĐồng chí ${item.fullName} - ${item.position}`}
-          </Text>
-        );
-      });
-    }
-    return undefined;
+  const renderDescussionKeyMember = (): React.ReactElement[] => {
+    return onFilterDeputiesKeyMember().map(item => {
+      return (
+        <Text
+          style={themedStyle.txtInfo}
+          numberOfLines={1}>
+          {`${item.positionInGroup}:\tĐồng chí ${item.fullName} - ${item.position}`}
+        </Text>
+      );
+    });
   };
 
   return (
@@ -237,7 +238,6 @@ export const DeputyDiscussionGroupTablet = withStyles(DeputyDiscussionGroupTable
     flex: 1,
   },
   txtInfo: {
-    flex: 1,
     fontSize: pxToPercentage(34),
     lineHeight: pxToPercentage(45),
     ...textStyle.proDisplayRegular,

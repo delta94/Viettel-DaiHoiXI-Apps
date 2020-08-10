@@ -4,5 +4,5 @@ export class DiscussionGroupKeyMember {
     id: string;
     name: string;
     meetingRoom: string;
-    KeyMembers: Deputy[];
+    keyMembers: Deputy[];
 }

@@ -4,6 +4,8 @@ import {
   onGetDeputyGroupsSuccess,
   onGetDeputyDetailsSuccess,
   onGetDeputyDiscussionGroupsSuccess,
+  onGetDiscussionGroupsSuccess,
+  onGetDiscussionGroupKeyMemberSuccess,
 } from '../reducer/actions';
 import { catchHandle } from '@src/core/utils/catchHelper';
 import { toasts } from '@src/core/utils/toasts';
@@ -49,16 +51,55 @@ export const onThunkGetDeputyDetailsReq = (deputyId: string): ThunkActionTypes =
   dispatch(onSetEnabledSpinner(false));
 };
 
-export const onThunkGetDeputyDiscussionGroupsReq = (meetingId: string): ThunkActionTypes => async (dispatch) => {
+export const onThunkGetDeputyDiscussionGroupsReq = (meetingId: string, discussionGroupId: string): ThunkActionTypes => async (dispatch) => {
   dispatch(onSetEnabledSpinner(true));
 
   const deputyService = new DeputyService();
 
   try {
-    const res = await deputyService.getDeputyDiscussionGroups(meetingId);
+    const res = await deputyService.getDeputyDiscussionGroups(meetingId, discussionGroupId);
+    if (res.success) {
+      dispatch(onGetDeputyDiscussionGroupsSuccess(res.data));
+    } else {
+      toasts.error(res.message);
+    }
+  } catch (e) {
+    catchHandle(e, dispatch);
+  }
+
+  dispatch(onSetEnabledSpinner(false));
+};
+
+export const onThunkGetDiscussionGroupsReq = (meetingId: string): ThunkActionTypes => async (dispatch) => {
+  dispatch(onSetEnabledSpinner(true));
+
+  const deputyService = new DeputyService();
+
+  try {
+    const res = await deputyService.getDiscussionGroups(meetingId);
 
     if (res.success) {
-      dispatch(onGetDeputyDiscussionGroupsSuccess(res.data || []));
+      dispatch(onGetDiscussionGroupsSuccess(res.data || []));
+    } else {
+      toasts.error(res.message + 'bien');
+    }
+  } catch (e) {
+    catchHandle(e, dispatch);
+  }
+
+  dispatch(onSetEnabledSpinner(false));
+};
+
+export const onThunkGetDiscussionGroupsKeyMemberReq = (meetingId: string, discussionGroupId: string): ThunkActionTypes => async (dispatch) => {
+  dispatch(onSetEnabledSpinner(true));
+
+  const deputyService = new DeputyService();
+
+  try {
+    const res = await deputyService.getDiscussionGroupsKeyMember(meetingId, discussionGroupId);
+    if (res.success) {
+      dispatch(onGetDiscussionGroupKeyMemberSuccess(res.data));
+
     } else {
       toasts.error(res.message);
     }

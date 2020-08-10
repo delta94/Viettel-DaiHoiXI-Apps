@@ -18,17 +18,20 @@ import { DeputyDiscussionGroupItem } from './deputyDiscussionGroupItem.component
 import { StringValidator } from '@src/core/validators';
 import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 import { DeputyDiscussionGroup as DeputyDiscussionGroupModel } from '@src/core/models/deputy/deputyDiscussionGroup.model';
+import { DiscussionGroup } from '@src/core/models/deputy/discussionGroup.model';
 
 interface ComponentProps {
-  deputyDiscussionGroups: DeputyDiscussionGroupModel[];
+  deputyDiscussionGroups: DeputyDiscussionGroupModel;
   onDeputyPress: (delegate: DeputyModel) => void;
+  discussionGroups: DiscussionGroup[];
+  onSelectGroupChange: (groupName: SelectOptionType) => void;
+  discussionGroupSelected: SelectOptionType;
 }
 
 export type DeputyDiscussionGroupProps = ThemedComponentProps & ComponentProps;
 
 const DeputyDiscussionGroupComponent: React.FunctionComponent<DeputyDiscussionGroupProps> = (props) => {
   const { themedStyle } = props;
-  const [discussionGroupSelected, setSelectedOption] = useState<SelectOptionType>({ text: '' });
   const [keyword, setKeyword] = useState('');
 
   const onDeputyPress = (deputy: DeputyModel): void => {
@@ -36,26 +39,16 @@ const DeputyDiscussionGroupComponent: React.FunctionComponent<DeputyDiscussionGr
   };
 
   const onFilterDeputiesByCondition = (): DeputyModel[] => {
-    const delegateListTemp: DeputyModel[] = [];
-
-    props.deputyDiscussionGroups.forEach(item => {
-      if (`${item.name}`.includes(discussionGroupSelected.text === 'Tất cả' ? '' : discussionGroupSelected.text)) {
-        item.discussionGroupDeputies.map(deputy => {
-          if (searchASCII(keyword, deputy.fullName)) {
-            delegateListTemp.push(deputy);
-          }
-        });
-      }
+    return props.deputyDiscussionGroups.discussionGroupDeputies.filter(deputy => {
+      return searchASCII(keyword, deputy.fullName);
     });
-
-    return delegateListTemp;
   };
 
   const onGetDiscussionGroupsFromData = () => {
     const discussionGroupsTemp = [];
 
-    props.deputyDiscussionGroups.forEach(item => {
-      if (!isEmpty(item.discussionGroupDeputies)) {
+    props.discussionGroups.forEach((item) => {
+      if (!isEmpty(item.name)) {
         discussionGroupsTemp.push(item.name);
       }
     });
@@ -64,7 +57,7 @@ const DeputyDiscussionGroupComponent: React.FunctionComponent<DeputyDiscussionGr
   };
 
   const onGroupSelect = (option: SelectOptionType) => {
-    setSelectedOption(option);
+    props.onSelectGroupChange(option);
   };
 
   const onChangeText = (value: string) => {
@@ -75,13 +68,10 @@ const DeputyDiscussionGroupComponent: React.FunctionComponent<DeputyDiscussionGr
     <View style={themedStyle.container}>
       <View style={themedStyle.viewSearch}>
         <Select
-          data={[
-            { text: 'Tất cả' },
-            ...onGetDiscussionGroupsFromData(),
-          ]}
+          data={onGetDiscussionGroupsFromData()}
           placeholder='Chọn Tổ'
           textStyle={themedStyle.txtSelectInput}
-          selectedOption={discussionGroupSelected}
+          selectedOption={props.discussionGroupSelected}
           keyExtractor={(item) => item.text}
           placeholderStyle={themedStyle.selectOptionPhd}
           size={'large'}

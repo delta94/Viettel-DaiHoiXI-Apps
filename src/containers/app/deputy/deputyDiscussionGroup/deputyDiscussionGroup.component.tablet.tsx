@@ -28,44 +28,38 @@ import { RemoteImage } from '@src/assets/images';
 import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 import { DeputyDiscussionGroup as DeputyDiscussionGroupModel } from '@src/core/models/deputy/deputyDiscussionGroup.model';
 import { IMAGE_SERVER_ADDRESS } from '../../../../../config';
+import { DiscussionGroup } from '@src/core/models/deputy/discussionGroup.model';
+import { DiscussionGroupKeyMember } from '@src/core/models/deputy/keyMember.model';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface ComponentProps {
-  deputyDiscussionGroups: DeputyDiscussionGroupModel[];
+  deputyDiscussionGroups: DeputyDiscussionGroupModel;
   onDelegateItemPress: (deputy: DeputyModel) => void;
+  discussionGroups: DiscussionGroup[];
+  onSelectGroupChange: (groupName: SelectOptionType) => void;
+  discussionGroupSelected: SelectOptionType;
+  discussionGroupKeyMember: DiscussionGroupKeyMember;
 }
 
 export type DeputyDiscussionGroupTabletProps = ThemedComponentProps & ComponentProps;
 
 const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscussionGroupTabletProps> = (props) => {
   const { themedStyle } = props;
-  const [discussionGroupSelected, setDiscussionGroupSelected] = useState<SelectOptionType>({ text: '' });
   const [keyword, setKeyword] = useState('');
 
   const onSearchPress = (): void => {
-
   };
 
   const onFilterDeputiesByCondition = (): DeputyModel[] => {
-    const delegateListTemp: DeputyModel[] = [];
-
-    props.deputyDiscussionGroups.forEach(item => {
-      if (`${item.name}`.includes(discussionGroupSelected.text === 'Tất cả' ? '' : discussionGroupSelected.text)) {
-        item.discussionGroupDeputies.map(deputy => {
-          if (searchASCII(keyword, deputy.fullName)) {
-            delegateListTemp.push(deputy);
-          }
-        });
-      }
+    return props.deputyDiscussionGroups.discussionGroupDeputies.filter(deputy => {
+      return searchASCII(keyword, deputy.fullName);
     });
-
-    return delegateListTemp;
   };
 
   const onGetDiscussionGroupsFromData = () => {
     const discussionGroupsTemp = [];
-
-    props.deputyDiscussionGroups.forEach(item => {
-      if (!isEmpty(item.discussionGroupDeputies)) {
+    props.discussionGroups.forEach((item) => {
+      if (!isEmpty(item.name)) {
         discussionGroupsTemp.push(item.name);
       }
     });
@@ -76,14 +70,8 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
     props.onDelegateItemPress(delegate);
   };
 
-  const onGetDeputyByGroups = (): DeputyDiscussionGroupModel[] => {
-    return props.deputyDiscussionGroups.filter(item => [
-      'Tổ 1',
-    ].includes(item.meetingRoom));
-  };
-
   const onGroupSelect = (option: SelectOptionType) => {
-    setDiscussionGroupSelected(option);
+    props.onSelectGroupChange(option);
   };
 
   const onChangeText = (value: string) => {
@@ -101,7 +89,7 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
           </Td>
           <Td alignItems='center' width={260}>
             <Image
-               source={(new RemoteImage(`${IMAGE_SERVER_ADDRESS}${item.avatar}`)).imageSource}
+              source={(new RemoteImage(`${IMAGE_SERVER_ADDRESS}${item.avatar}`)).imageSource}
               style={themedStyle.imgAvatar}
             />
           </Td>
@@ -112,12 +100,12 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
           </Td>
           <Td>
             <Text style={themedStyle.txtInfo}>
-              {item.position}
+              {item.position || '-'}
             </Text>
           </Td>
           <Td width={250}>
             <Text style={themedStyle.txtInfo}>
-              {item.discussionGroup || 'không'}
+              {props.deputyDiscussionGroups.name || '-'}
             </Text>
           </Td>
           <Td alignItems='center' width={200}>
@@ -132,29 +120,43 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
     });
   };
 
+  const renderDescussionKeyMember = (): React.ReactElement => {
+    if (props.discussionGroupKeyMember.KeyMembers) {
+      props.discussionGroupKeyMember.KeyMembers.map(item => {
+        return (
+          <Text
+            style={themedStyle.txtInfo}
+            numberOfLines={1}>
+            {`${item.position}:\tĐồng chí ${item.fullName} - ${item.position}`}
+          </Text>
+        );
+      });
+    }
+    return undefined;
+  };
+
   return (
     <View style={themedStyle.container}>
       <View style={themedStyle.viewCard}>
         <View style={themedStyle.viewGroupInfo}>
           <Select
-            data={[
-              { text: 'Tất cả' },
-              ...onGetDiscussionGroupsFromData(),
-            ]}
+            data={onGetDiscussionGroupsFromData()}
             textStyle={themedStyle.txtSelectInput}
             keyExtractor={(item) => item.text}
-            selectedOption={discussionGroupSelected}
+            selectedOption={props.discussionGroupSelected}
             controlStyle={themedStyle.selectInputTeam}
             placeholder='Chọn tổ'
             onSelect={onGroupSelect}>
           </Select>
           <View style={themedStyle.viewInfo}>
-            <Text style={themedStyle.txtInfo}>
-              {'Tổ trưởng:\tĐồng chí Nguyễn Thiện Nhân - Ủy viên Bộ Chính trị, Bí thư Thành ủy'}
-              {'\nThư ký:\t\tĐồng chí Phan Thanh Tân - Phó Bí thư Thường trực Đảng ủy, Phó Chánh Văn phòng Thành ủy'}
-              {'\nVị trí họp:\tPhòng 403 - Trung tâm Hội nghị 272 Võ Thị Sáu'}
-            </Text>
+            <ScrollView>
+              <Text style={themedStyle.txtInfo}>
+                {`Vị trí họp:\t${isEmpty(props.discussionGroupKeyMember.meetingRoom) ? '-' : props.discussionGroupKeyMember.meetingRoom}`}
+              </Text>
+              {renderDescussionKeyMember()}
+            </ScrollView>
           </View>
+
         </View>
         <KeyboardAvoidingView>
           <View style={themedStyle.viewBtns}>
@@ -235,6 +237,7 @@ export const DeputyDiscussionGroupTablet = withStyles(DeputyDiscussionGroupTable
     flex: 1,
   },
   txtInfo: {
+    flex: 1,
     fontSize: pxToPercentage(34),
     lineHeight: pxToPercentage(45),
     ...textStyle.proDisplayRegular,

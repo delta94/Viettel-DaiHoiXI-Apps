@@ -6,6 +6,7 @@ import { meetingReducer } from '@src/containers/app/store/reducer';
 import { menuReducer } from '@src/containers/app/menu/store/reducer';
 import { meetingDetailReducer } from '@src/containers/app/meetingDetail/store/reducer';
 
+
 export const rootReducer = combineReducers({
   session: sessionReducer,
   app: appReducer,

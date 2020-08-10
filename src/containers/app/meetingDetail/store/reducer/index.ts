@@ -1,5 +1,5 @@
 import {
-  ConferenceListState,
+  MeetingDetailState,
   MeetingDetailActionTypes,
   GET_PROGRAM_LIST_SUCCESS,
   GET_ANNOUCEMENT_LIST_SUCCESS,
@@ -7,13 +7,13 @@ import {
 
 } from './types';
 
-const initialState: ConferenceListState = {
+const initialState: MeetingDetailState = {
   programs: [],
   annoucement: [],
   notifications: [],
 };
 
-export const meetingDetailReducer = (state = initialState, action: MeetingDetailActionTypes): ConferenceListState => {
+export const meetingDetailReducer = (state = initialState, action: MeetingDetailActionTypes): MeetingDetailState => {
   switch (action.type) {
     case GET_PROGRAM_LIST_SUCCESS: {
       return {

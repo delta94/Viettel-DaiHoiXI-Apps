@@ -2,7 +2,7 @@ import { Program as ProgramModel } from '@src/core/models/program/program.model'
 import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
 import { Annoucement as AnnoucementModel } from '@src/core/models/annoucement/annoucement.model';
 
-export interface ConferenceListState {
+export interface MeetingDetailState {
   programs: ProgramModel[];
   notifications: NotificationModel[];
   annoucement: AnnoucementModel[];

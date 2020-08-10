@@ -9,7 +9,7 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
-import { ConferenceListState } from './store/reducer/types';
+import { MeetingDetailState } from './store/reducer/types';
 import { AppState } from '@src/core/store';
 import { SessionState } from '@src/core/store/reducer/session/types';
 import { onThunkGetProgramListReq, onThunkGetNotificationListReq, onThunkGetAnnoucementListReq } from './store/thunk';
@@ -20,21 +20,21 @@ export const MeetingDetailContainer: React.FunctionComponent<NavigationInjectedP
   const navigationKey: string = 'MeetingDetailContainer';
 
   const dispatch: Dispatch<any> = useDispatch();
-  const meetingDetailReducer: ConferenceListState = useSelector((state: AppState) => state.meetingDetail);
+  const meetingId: string = props.navigation.getParam('meetingId');
+  const meetingDetailReducer: MeetingDetailState = useSelector((state: AppState) => state.meetingDetail);
 
   React.useEffect(() => {
     onGetDelegateList();
   }, []);
 
   const onGetDelegateList = (): void => {
-    // dispatch(onThunkGetProgramListReq(meetingId, () => { }));
-    // dispatch(onThunkGetNotificationListReq(meetingId, () => { }));
-    // dispatch(onThunkGetPressReleaseListReq(meetingId, () => { }));
-
+    dispatch(onThunkGetProgramListReq(meetingId, () => { }));
+    dispatch(onThunkGetNotificationListReq(meetingId, () => { }));
+    dispatch(onThunkGetAnnoucementListReq(meetingId, () => { }));
     // hard code meetingId
-    dispatch(onThunkGetProgramListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
-    dispatch(onThunkGetNotificationListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
-    dispatch(onThunkGetAnnoucementListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
+    // dispatch(onThunkGetProgramListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
+    // dispatch(onThunkGetNotificationListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
+    // dispatch(onThunkGetAnnoucementListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
   };
 
   const onNotificationItemPress = (notification: NotificationItem): void => {

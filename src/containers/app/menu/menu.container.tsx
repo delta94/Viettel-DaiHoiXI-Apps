@@ -32,7 +32,10 @@ export const MenuContainer: React.FunctionComponent<NavigationInjectedProps> = (
 
     switch (type) {
       case MenuEnum.ThongTin: {
-        // routeName = 'meetingDetail';
+        routeName = 'meetingDetail';
+        params = {
+          meetingId,
+        };
         break;
       }
       case MenuEnum.DanhSachDaiBieu: {
@@ -64,7 +67,7 @@ export const MenuContainer: React.FunctionComponent<NavigationInjectedProps> = (
         break;
       }
       case MenuEnum.QuanLyPhatBieu: {
-        // routeName = 'speechManagement';
+        routeName = 'speechManagement';
         break;
       }
       case MenuEnum.ToThaoLuan: {

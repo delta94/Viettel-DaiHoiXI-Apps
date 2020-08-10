@@ -56,16 +56,16 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
 });
 
 const AppNavigator: NavigationContainer = createStackNavigator({
-  ['meetingDetail']: {
-    screen: MeetingDetailContainer,
-    navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletNoHeaderOptions,
-  },
   ['home']: {
     screen: MeetingContainer,
     navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletOptions,
   },
   ['menu']: MenuContainer,
   ['myQRCode']: MyQRCodeContainer,
+  ['meetingDetail']: {
+    screen: MeetingDetailContainer,
+    navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletNoHeaderOptions,
+  },
   ['notification']: NotificationAnnouncementDetailContainer,
   ['announcement']: NotificationAnnouncementDetailContainer,
   ['deputyGroup']: DeputyGroupContainer,

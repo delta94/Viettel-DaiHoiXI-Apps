@@ -67,11 +67,12 @@ const MeetingDetailDateTabletComponent: React.FunctionComponent<MeetingDetailDat
   };
 
   const getBtnDateStyle = (dateChooseIndex: string, index: number): StyleProp<ViewStyle> => {
-    const btnDateStyle = [themedStyle.btnDate];
+    const btnDateStyle = [themedStyle.btnDate, dates.length <= 3 && themedStyle.viewBtn];
     if (dateChooseIndex === dateSelected) {
       btnDateStyle.push(themedStyle.btnDateSelected);
     }
-    if (dates[index + 1] === dateSelected || index + 1 === dateLength + 3) {
+    const isLast = dates.length > 2 ? index + 1 === dateLength + 3 : index + 1 === dateLength + 2;
+    if (dates[index + 1] === dateSelected || isLast) {
       btnDateStyle.push(themedStyle.btnDateNoBorder);
     }
     return btnDateStyle;
@@ -99,23 +100,24 @@ const MeetingDetailDateTabletComponent: React.FunctionComponent<MeetingDetailDat
 
   return (
     <View style={themedStyle.container}>
-      <TouchableOpacity
-        onPress={() => onPrevDatesPress()}
-        activeOpacity={0.75}
-        style={themedStyle.btnPrevChangeDates}>
-        {dates.length >= 3 &&
-          ArrowPrevIcon(themedStyle.iconBtnChangeDates)}
-      </TouchableOpacity>
+      {dates.length > 3 &&
+        <TouchableOpacity
+          onPress={() => onPrevDatesPress()}
+          activeOpacity={0.75}
+          style={themedStyle.btnPrevChangeDates}>
+          {ArrowPrevIcon(themedStyle.iconBtnChangeDates)}
+        </TouchableOpacity>}
       <View style={themedStyle.viewDates}>
         {renderBtnDates()}
       </View>
-      <TouchableOpacity
-        onPress={() => onNextDatesPress()}
-        activeOpacity={0.75}
-        style={themedStyle.btnNextChangeDates}>
-        {dates.length >= 3 &&
-          ArrowNextIcon(themedStyle.iconBtnChangeDates)}
-      </TouchableOpacity>
+      {dates.length > 3 &&
+        <TouchableOpacity
+          onPress={() => onNextDatesPress()}
+          activeOpacity={0.75}
+          style={themedStyle.btnNextChangeDates}>
+          {dates.length > 3 &&
+            ArrowNextIcon(themedStyle.iconBtnChangeDates)}
+        </TouchableOpacity>}
     </View>
   );
 };
@@ -124,9 +126,9 @@ export const MeetingDetailDateTablet = withStyles(MeetingDetailDateTabletCompone
   container: {
     flexDirection: 'row',
     height: pxToPercentage(86),
+    justifyContent: 'flex-start',
   },
   viewDates: {
-    flex: 1,
     borderWidth: pxToPercentage(2),
     borderRightWidth: pxToPercentage(2),
     borderColor: theme['color-primary-2'],
@@ -134,7 +136,7 @@ export const MeetingDetailDateTablet = withStyles(MeetingDetailDateTabletCompone
     flexDirection: 'row',
   },
   btnDate: {
-    flex: 1,
+    width: pxToPercentage(525),
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: pxToPercentage(30),
@@ -168,5 +170,8 @@ export const MeetingDetailDateTablet = withStyles(MeetingDetailDateTabletCompone
   iconBtnChangeDates: {
     width: pxToPercentage(50),
     height: pxToPercentage(46),
+  },
+  viewBtn: {
+    width: pxToPercentage(588),
   },
 }));

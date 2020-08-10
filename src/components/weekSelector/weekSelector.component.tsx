@@ -41,7 +41,7 @@ const WeekSelectorComponent: React.FunctionComponent<WeekSelectorProps> = (props
     const meetingWeekIndexFound: number = props.meetingWeeks.findIndex(item => item.selected);
 
     if (meetingWeekIndexFound > -1) {
-      setMeetingWeekSelected(meetingWeeks[meetingWeekIndexFound]);
+      setMeetingWeekSelected(props.meetingWeeks[meetingWeekIndexFound]);
 
       const meetingWeeksByNumTemp: MeetingWeekModel[] = [];
       let quotient: number = Math.floor((meetingWeekIndexFound + 1) / 4);
@@ -54,7 +54,7 @@ const WeekSelectorComponent: React.FunctionComponent<WeekSelectorProps> = (props
       }
 
       for (let i = 0; i < 4; i++) {
-        meetingWeeksByNumTemp.push(meetingWeeks[quotient + i]);
+        meetingWeeksByNumTemp.push(props.meetingWeeks[quotient + i]);
       }
 
       setMeetingWeeksByNum([...meetingWeeksByNumTemp]);

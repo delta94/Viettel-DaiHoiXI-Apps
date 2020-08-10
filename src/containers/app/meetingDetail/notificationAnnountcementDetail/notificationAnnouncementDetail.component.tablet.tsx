@@ -9,14 +9,14 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { Notifications } from '@src/core/models/notification/notification.model';
+import { NotificationItem } from '@src/core/models/notification/notification.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
-import { Annoucements } from '@src/core/models/annoucement/annoucement.model';
+import { AnnoucementItem } from '@src/core/models/annoucement/annoucement.model';
 
 interface ComponentProps {
-  notification: Notifications | Annoucements;
+  notification: NotificationItem | AnnoucementItem;
 }
 
 export type NotificationAnnouncementDetailTabletProps = ThemedComponentProps & ComponentProps;

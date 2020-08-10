@@ -1,6 +1,6 @@
 import {
   ConferenceListState,
-  ProgramListActionTypes,
+  MeetingDetailActionTypes,
   GET_PROGRAM_LIST_SUCCESS,
   GET_ANNOUCEMENT_LIST_SUCCESS,
   GET_NOTIFICATION_LIST_SUCCESS,
@@ -13,7 +13,7 @@ const initialState: ConferenceListState = {
   notifications: [],
 };
 
-export const meetingDetailReducer = (state = initialState, action: ProgramListActionTypes): ConferenceListState => {
+export const meetingDetailReducer = (state = initialState, action: MeetingDetailActionTypes): ConferenceListState => {
   switch (action.type) {
     case GET_PROGRAM_LIST_SUCCESS: {
       return {

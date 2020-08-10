@@ -18,7 +18,7 @@ export interface GetNotificationListAction {
   payload: NotificationModel[];
 }
 
-export interface GetPressReleaseListAction {
+export interface GetAnnoucementListAction {
   type: typeof GET_ANNOUCEMENT_LIST_SUCCESS;
   payload: AnnoucementModel[];
 }
@@ -28,4 +28,4 @@ export interface GetProgramListAction {
   payload: ProgramModel[];
 }
 
-export type ProgramListActionTypes = GetProgramListAction & GetNotificationListAction & GetPressReleaseListAction;
+export type MeetingDetailActionTypes = GetProgramListAction & GetNotificationListAction & GetAnnoucementListAction;

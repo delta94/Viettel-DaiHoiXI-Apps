@@ -22,16 +22,16 @@ import {
   MenuIcon,
 } from '@src/assets/icons';
 import { Program as ProgramModel } from '@src/core/models/program/program.model';
-import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
-import { Annoucement as AnnoucementModel, Annoucements } from '@src/core/models/annoucement/annoucement.model';
+import { Notification as NotificationModel, NotificationItem } from '@src/core/models/notification/notification.model';
+import { Annoucement as AnnoucementModel, AnnoucementItem } from '@src/core/models/annoucement/annoucement.model';
 import { ConferenceInfoEnum } from '@src/core/utils/constants';
 
 interface ComponentProps {
   programs: ProgramModel[];
   notifications: NotificationModel[];
-  onNotificationItemPress: (notification: Notifications) => void;
-  annoucement: AnnoucementModel[];
-  onAnnoucementItemPress: (annoucement: Annoucements) => void;
+  onNotificationItemPress: (notification: NotificationItem) => void;
+  annoucements: AnnoucementModel[];
+  onAnnoucementItemPress: (annoucement: AnnoucementItem) => void;
 }
 
 export type MeetingDetailProps = ComponentProps & ThemedComponentProps;
@@ -59,11 +59,11 @@ const MeetingDetailComponent: React.FunctionComponent<MeetingDetailProps> = (pro
     setSelectedTabIndex(selectedTabIndexParam);
   };
 
-  const onNotificationItemPress = (notification: Notifications): void => {
+  const onNotificationItemPress = (notification: NotificationItem): void => {
     props.onNotificationItemPress(notification);
   };
 
-  const onAnnoucementItemPress = (annoucement: Annoucements): void => {
+  const onAnnoucementItemPress = (annoucement: AnnoucementItem): void => {
     props.onAnnoucementItemPress(annoucement);
   };
 
@@ -97,7 +97,7 @@ const MeetingDetailComponent: React.FunctionComponent<MeetingDetailProps> = (pro
       case ConferenceInfoEnum.pressRelease: {
         return (
           <NotificationAnnouncement
-            notifications={props.annoucement}
+            notifications={props.annoucements}
             onNotificationItemPress={onAnnoucementItemPress}
             dateSelected={dateSelected}
             dateList={dates}

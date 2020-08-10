@@ -20,8 +20,8 @@ import {
   SoundIcon,
 } from '@src/assets/icons';
 import { Program as ProgramModel } from '@src/core/models/program/program.model';
-import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
-import { Annoucement, Annoucements } from '@src/core/models/annoucement/annoucement.model';
+import { Notification as NotificationModel, NotificationItem } from '@src/core/models/notification/notification.model';
+import { Annoucement, AnnoucementItem } from '@src/core/models/annoucement/annoucement.model';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProgramTabEnum } from '@src/core/utils/constants';
 import { ProgramTablet } from './program/program.component.tablet';
@@ -32,9 +32,9 @@ import { NotificationAnnouncementTablet } from './notificationAnnouncement/notif
 interface ComponentProps {
   programs: ProgramModel[];
   notifications: NotificationModel[];
-  onNotificationItemPress: (notification: Notifications) => void;
-  annoucement: Annoucement[];
-  onAnnoucementItemPress: (annoucement: Annoucements) => void;
+  onNotificationItemPress: (notification: NotificationItem) => void;
+  annoucements: Annoucement[];
+  onAnnoucementItemPress: (annoucement: AnnoucementItem) => void;
   onBackPress: () => void;
   onMessagePress: () => void;
 }
@@ -63,11 +63,11 @@ const MeetingDetailTabletComponent: React.FunctionComponent<MeetingDetailTabletP
     return dateTemp;
   };
 
-  const onNotificationItemPress = (notification: Notifications): void => {
+  const onNotificationItemPress = (notification: NotificationItem): void => {
     props.onNotificationItemPress(notification);
   };
 
-  const onAnnoucementItemPress = (annoucement: Annoucements): void => {
+  const onAnnoucementItemPress = (annoucement: AnnoucementItem): void => {
     props.onAnnoucementItemPress(annoucement);
   };
 
@@ -157,7 +157,7 @@ const MeetingDetailTabletComponent: React.FunctionComponent<MeetingDetailTabletP
             />)}
           {selectedTab === ProgramTabEnum.ThongCao &&
             (<NotificationAnnouncementTablet
-              notifications={props.annoucement}
+              notifications={props.annoucements}
               onNotificationItemPress={onAnnoucementItemPress}
               isNotifications={false}
               dateSelected={dateSelected}

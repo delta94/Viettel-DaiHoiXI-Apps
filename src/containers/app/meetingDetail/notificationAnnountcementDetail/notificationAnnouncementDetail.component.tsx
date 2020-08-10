@@ -9,14 +9,14 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { Notifications } from '@src/core/models/notification/notification.model';
+import { NotificationItem } from '@src/core/models/notification/notification.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { SafeAreaView } from 'react-navigation';
 import { viewStyle } from '@src/components/viewStyle';
 
 interface ComponentProps {
-  notification: Notifications;
+  notification: NotificationItem;
 }
 
 export type NotificationAnnouncementDetailProps = ThemedComponentProps & ComponentProps;

@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 
-export class Annoucements {
+export class AnnoucementItem {
   id: string;
   date: string;
   title: string;
@@ -10,8 +10,8 @@ export class Annoucements {
 
 export class Annoucement {
   date: string;
-  @Type(() => Annoucements)
-  annoucements: Annoucements[];
+  @Type(() => AnnoucementItem)
+  annoucements: AnnoucementItem[];
 
   constructor() {
     this.annoucements = [];

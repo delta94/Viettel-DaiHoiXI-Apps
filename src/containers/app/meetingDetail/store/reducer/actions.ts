@@ -5,7 +5,7 @@ import {
   GET_NOTIFICATION_LIST_SUCCESS,
   GET_ANNOUCEMENT_LIST_SUCCESS,
   GetNotificationListAction,
-  GetPressReleaseListAction,
+  GetAnnoucementListAction,
 } from './types';
 import { Notification } from '@src/core/models/notification/notification.model';
 import { Annoucement } from '@src/core/models/annoucement/annoucement.model';
@@ -20,7 +20,7 @@ export const onGetNotificationListSuccess = (payload: Notification[]): GetNotifi
   payload,
 });
 
-export const onGetAnnoucementListSuccess = (payload: Annoucement[]): GetPressReleaseListAction => ({
+export const onGetAnnoucementListSuccess = (payload: Annoucement[]): GetAnnoucementListAction => ({
   type: GET_ANNOUCEMENT_LIST_SUCCESS,
   payload,
 });

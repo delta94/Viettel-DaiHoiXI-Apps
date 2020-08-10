@@ -15,14 +15,14 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import { MeetingDetailDate } from '../meetingDetailDate.component';
-import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
+import { Notification as NotificationModel, NotificationItem } from '@src/core/models/notification/notification.model';
 import { AttachmentIcon } from '@src/assets/icons';
 import { AttachmentModal } from '../attachmentModel.component';
-import { Annoucements, Annoucement as AnnoucementModel } from '@src/core/models/annoucement/annoucement.model';
+import { AnnoucementItem, Annoucement as AnnoucementModel } from '@src/core/models/annoucement/annoucement.model';
 
 interface ComponentProps {
   notifications: NotificationModel[] | AnnoucementModel[];
-  onNotificationItemPress: (notification: Notifications | Annoucements) => void;
+  onNotificationItemPress: (notification: NotificationItem | AnnoucementItem) => void;
   dateSelected: string;
   dateList: string[];
   onDatePress(date: string): void;
@@ -41,7 +41,7 @@ const NotificationAnnouncementComponent: React.FunctionComponent<NotificationAnn
     setNotifications(props.notifications.filter(item => item.date === props.dateSelected));
   }, [props.dateSelected, props.notifications]);
 
-  const onNotificationItemPress = (notification: Notifications): void => {
+  const onNotificationItemPress = (notification: NotificationItem | AnnoucementItem): void => {
     props.onNotificationItemPress(notification);
   };
 

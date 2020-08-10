@@ -17,13 +17,13 @@ import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
 import { SearchIcon, AttachmentIcon } from '@src/assets/icons';
-import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
+import { Notification as NotificationModel, NotificationItem } from '@src/core/models/notification/notification.model';
 import { AttachmentModal } from '../attachmentModel.component';
-import { Annoucements, Annoucement as AnnoucementModel } from '@src/core/models/annoucement/annoucement.model';
+import { AnnoucementItem, Annoucement as AnnoucementModel } from '@src/core/models/annoucement/annoucement.model';
 
 interface ComponentProps {
   notifications: NotificationModel[] | AnnoucementModel[];
-  onNotificationItemPress: (notification: Notifications | Annoucements) => void;
+  onNotificationItemPress: (notification: NotificationItem | AnnoucementItem) => void;
   dateSelected: string;
   isNotifications: boolean;
 }
@@ -42,7 +42,7 @@ const NotificationAnnouncementTabletComponent: React.FunctionComponent<Notificat
   const onAttachMentIconPress = () => {
     setIsShowModal(!isShowModal);
   };
-  const onNotificationItemPress = (notification: Notifications): void => {
+  const onNotificationItemPress = (notification: NotificationItem | AnnoucementItem): void => {
     props.onNotificationItemPress(notification);
   };
 

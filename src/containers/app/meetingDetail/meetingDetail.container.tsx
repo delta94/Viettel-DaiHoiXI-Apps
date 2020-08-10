@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
-import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
-import { Annoucements } from '@src/core/models/annoucement/annoucement.model';
+import { NotificationItem } from '@src/core/models/notification/notification.model';
+import { AnnoucementItem } from '@src/core/models/annoucement/annoucement.model';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 import { isTablet } from 'react-native-device-info';
 import { Dispatch } from 'redux';
@@ -37,7 +37,7 @@ export const MeetingDetailContainer: React.FunctionComponent<NavigationInjectedP
     dispatch(onThunkGetAnnoucementListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
   };
 
-  const onNotificationItemPress = (notification: Notifications): void => {
+  const onNotificationItemPress = (notification: NotificationItem): void => {
     props.navigation.navigate({
       key: navigationKey,
       routeName: 'notification',
@@ -47,7 +47,7 @@ export const MeetingDetailContainer: React.FunctionComponent<NavigationInjectedP
     });
   };
 
-  const onAnnoucementItemPress = (notification: Annoucements): void => {
+  const onAnnoucementItemPress = (notification: AnnoucementItem): void => {
     props.navigation.navigate({
       key: navigationKey,
       routeName: 'announcement',
@@ -73,7 +73,7 @@ export const MeetingDetailContainer: React.FunctionComponent<NavigationInjectedP
       <MeetingDetailTablet
         programs={meetingDetailReducer.programs}
         notifications={meetingDetailReducer.notifications}
-        annoucement={meetingDetailReducer.annoucement}
+        annoucements={meetingDetailReducer.annoucement}
         onNotificationItemPress={onNotificationItemPress}
         onAnnoucementItemPress={onAnnoucementItemPress}
         onBackPress={onBackPress}
@@ -85,7 +85,7 @@ export const MeetingDetailContainer: React.FunctionComponent<NavigationInjectedP
     <MeetingDetail
       programs={meetingDetailReducer.programs}
       notifications={meetingDetailReducer.notifications}
-      annoucement={meetingDetailReducer.annoucement}
+      annoucements={meetingDetailReducer.annoucement}
       onNotificationItemPress={onNotificationItemPress}
       onAnnoucementItemPress={onAnnoucementItemPress}
     />

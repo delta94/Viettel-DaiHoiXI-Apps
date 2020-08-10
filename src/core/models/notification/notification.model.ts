@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 
-export class Notifications {
+export class NotificationItem {
   id: string;
   date: string;
   title: string;
@@ -9,8 +9,8 @@ export class Notifications {
 }
 export class Notification {
   date: string;
-  @Type(() => Notifications)
-  notifications: Notifications[];
+  @Type(() => NotificationItem)
+  notifications: NotificationItem[];
 
   constructor() {
     this.notifications = [];

@@ -25,7 +25,7 @@ import { SearchIcon } from '@src/assets/icons';
 import { Button } from '@src/components/button/button.component';
 import { Select, SelectOptionType } from '@kitten/ui';
 import { RemoteImage } from '@src/assets/images';
-import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
+import { Deputy as DeputyModel, Deputy } from '@src/core/models/deputy/deputy.model';
 import { DeputyDiscussionGroup as DeputyDiscussionGroupModel } from '@src/core/models/deputy/deputyDiscussionGroup.model';
 import { IMAGE_SERVER_ADDRESS } from '../../../../../config';
 import { DiscussionGroup } from '@src/core/models/deputy/discussionGroup.model';
@@ -38,7 +38,7 @@ interface ComponentProps {
   discussionGroups: DiscussionGroup[];
   onSelectGroupChange: (groupName: SelectOptionType) => void;
   discussionGroupSelected: SelectOptionType;
-  discussionGroupKeyMember: DiscussionGroupKeyMember;
+  discussionGroupKeyMember: Deputy[];
 }
 
 export type DeputyDiscussionGroupTabletProps = ThemedComponentProps & ComponentProps;
@@ -57,7 +57,7 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
   };
 
   const onFilterDeputiesKeyMember = (): DeputyModel[] => {
-    return props.discussionGroupKeyMember.keyMembers;
+    return props.discussionGroupKeyMember;
   };
 
   const onGetDiscussionGroupsFromData = () => {
@@ -125,7 +125,7 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
   };
 
   const renderDescussionKeyMember = (): React.ReactElement[] => {
-    return onFilterDeputiesKeyMember().map(item => {
+    return props.discussionGroupKeyMember.map(item => {
       return (
         <Text
           style={themedStyle.txtInfo}
@@ -152,7 +152,7 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
           <View style={themedStyle.viewInfo}>
             <ScrollView>
               <Text style={themedStyle.txtInfo}>
-                {`Vị trí họp:\t${isEmpty(props.discussionGroupKeyMember.meetingRoom) ? '-' : props.discussionGroupKeyMember.meetingRoom}`}
+                {`Vị trí họp:\t${isEmpty(props.deputyDiscussionGroups.meetingRoom) ? '-' : props.deputyDiscussionGroups.meetingRoom}`}
               </Text>
               {renderDescussionKeyMember()}
             </ScrollView>

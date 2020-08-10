@@ -79,7 +79,7 @@ export const DeputyDiscussionGroupContainer: React.FunctionComponent<NavigationI
         discussionGroups={discussionGroup}
         onSelectGroupChange={onSelectGroupChange}
         discussionGroupSelected={discussionGroupSelected}
-        discussionGroupKeyMember={discussionGroupKeyMember}
+        discussionGroupKeyMember={discussionGroupKeyMember.keyMembers || []}
       />
     );
   }

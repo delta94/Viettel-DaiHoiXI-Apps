@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
 import {
   View,
   Text,
@@ -11,8 +14,15 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { imageBgPhone, imageFlag } from '@src/assets/images';
-import { pxToPercentage, tenMinutesCountdown } from '@src/core/utils/utils';
+import {
+  imageBgPhone,
+  imageFlag,
+} from '@src/assets/images';
+import {
+  pxToPercentage,
+  tenMinutesCountdown,
+  isEmpty,
+} from '@src/core/utils/utils';
 import {
   textStyle,
   ValidationInput,
@@ -22,8 +32,8 @@ import { StringValidator } from '@src/core/validators';
 import { Button } from '@src/components/button/button.component';
 import { ArrowPrevIcon } from '@src/assets/icons';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { alerts } from '@src/core/utils/alerts';
 import { OTPTime } from '@src/core/utils/constants';
+import { toasts } from '@src/core/utils/toasts';
 
 interface ComponentProps {
   phoneNumber: string | undefined;
@@ -68,9 +78,13 @@ const OtpComponent: React.FunctionComponent<OtpProps> = (props) => {
 
   const onConfirmButtonPress = (): void => {
     if (time > 0) {
-      props.onConfirmPress(otp);
+      if (!isEmpty(otp)) {
+        props.onConfirmPress(otp);
+      } else {
+        toasts.error('Mã xác nhận OTP không được trống!');
+      }
     } else {
-      alerts.alert({ message: 'Thời gian hiệu lực của mã Otp đã hết!' });
+      toasts.error('Thời gian hiệu lực của mã Otp đã hết!');
     }
   };
 

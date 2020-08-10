@@ -1,9 +1,9 @@
-import { User } from '@src/core/models/user/user.model';
+import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 
 // Describing the shape of the session's slice of state
 export interface SessionState {
   loggedIn: boolean;
-  user: User;
+  deputy: DeputyModel;
 }
 
 // Describing the different ACTION NAMES available
@@ -12,7 +12,7 @@ export const CLEAR_SESSION = 'CLEAR_SESSION';
 
 export interface SessionSetAction {
   type: typeof SET_SESSION;
-  payload: User;
+  payload: DeputyModel;
 }
 
 export interface SessionClearAction {

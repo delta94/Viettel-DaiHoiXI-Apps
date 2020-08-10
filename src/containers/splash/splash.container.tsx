@@ -12,24 +12,30 @@ export const SplashContainer: React.FunctionComponent<NavigationInjectedProps> =
   useEffect(() => {
     const timer = setTimeout(() => {
       if (loggedIn) {
-        props.navigation.navigate({
-          key: navigationKey,
-          routeName: 'app',
-        });
+        onNavigateToApp();
       } else {
-        props.navigation.navigate({
-          key: navigationKey,
-          routeName: 'auth',
-        });
+        onNavigateToAuth();
       }
-    }, 1500);
+    }, 2000);
 
     return () => {
       clearTimeout(timer);
     };
   }, []);
 
-  return (
-    <Splash />
-  );
+  const onNavigateToApp = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'app',
+    });
+  };
+
+  const onNavigateToAuth = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'auth',
+    });
+  };
+
+  return <Splash />;
 };

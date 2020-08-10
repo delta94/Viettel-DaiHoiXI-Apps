@@ -18,18 +18,17 @@ import {
 } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
-import { User as UserModal } from '@src/core/models/user/user.model';
-import { Delegate as DelegateModal } from '@src/core/models/delegate/delegate.model';
+import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {
-  user: UserModal | DelegateModal;
+  deputy: DeputyModel;
 }
 
 export type ProfileInfoV3TabletProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 const ProfileInfoV3TabletComponent: React.FunctionComponent<ProfileInfoV3TabletProps> = (props) => {
-  const { style, themedStyle, user } = props;
+  const { style, themedStyle, deputy } = props;
 
   return (
     <View
@@ -39,7 +38,7 @@ const ProfileInfoV3TabletComponent: React.FunctionComponent<ProfileInfoV3TabletP
       ]}>
       <Image
         resizeMode='cover'
-        source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
+        source={(new RemoteImage(`${SERVER_ADDRESS}${deputy.avatar}`)).imageSource}
         style={themedStyle.imgAvatar}
       />
       <Text style={themedStyle.txtInfo}>
@@ -51,13 +50,13 @@ const ProfileInfoV3TabletComponent: React.FunctionComponent<ProfileInfoV3TabletP
         <Text
           numberOfLines={2}
           style={themedStyle.txtFullname}>
-          {user.fullName.toUpperCase()}
+          {deputy.fullName.toUpperCase()}
         </Text>
       </ImageBackground>
       <Text
         numberOfLines={5}
         style={themedStyle.txtPosition}>
-        {user.position}
+        {deputy.position}
       </Text>
     </View>
   );

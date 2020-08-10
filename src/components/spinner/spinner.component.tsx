@@ -95,7 +95,7 @@ const SpinnerComponent: React.FunctionComponent<SpinnerProps> = (props) => {
       style={themedStyle.container}>
       <StatusBar
         backgroundColor='transparent'
-        barStyle='light-content'
+        barStyle='dark-content'
       />
       {renderIndicator()}
     </Modal>

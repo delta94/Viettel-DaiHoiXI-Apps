@@ -9,15 +9,16 @@ export enum SignInTabEnum {
   QRCode,
 }
 
-export enum FunctionEnum {
-  ThongTin,
-  DanhSachDaiBieu,
-  TaiLieu,
-  PhimAnhHinhAnh,
-  SoDoChoNgoi,
-  DiemDanh,
-  DangKyPhatBieu,
-  ToThaoLuan,
+export enum MenuEnum {
+  ThongTin = 'ThongTin',
+  DanhSachDaiBieu = 'DanhSachDaiBieu',
+  TaiLieu = 'TaiLieu',
+  PhimAnhHinhAnh = 'PhimAnhHinhAnh',
+  SoDoChoNgoi = 'SoDoChoNgoi',
+  DiemDanh = 'DiemDanh',
+  DangKyPhatBieu = 'DangKyPhatBieu',
+  QuanLyPhatBieu = 'QuanLyPhatBieu',
+  ToThaoLuan = 'ToThaoLuan',
 }
 
 export enum SpeechStatusEnum {

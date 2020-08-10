@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import { SigInQRCode } from './sigInQRCode.component';
 import { Dispatch } from 'redux';
-import { onThunkSignInReq } from '../signIn/store/thunk';
+import { onThunkSignInReq } from '../store/thunk';
 import { useDispatch } from 'react-redux';
 import { QrCode } from '@src/core/models/qrCode/qrCode.model';
 

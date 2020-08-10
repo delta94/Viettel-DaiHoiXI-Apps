@@ -21,7 +21,10 @@ import {
   ScrollableAvoidKeyboard,
   textStyle,
 } from '@src/components';
-import { imageBgPhone, imageFlag } from '@src/assets/images';
+import {
+  imageBgPhone,
+  imageFlag,
+} from '@src/assets/images';
 import {
   SignInAccountFormData,
   SignInPhoneNumberFormData,
@@ -39,16 +42,17 @@ import { IconElement } from '@src/assets/icons/icon.component';
 import { SignInTabEnum } from '@src/core/utils/constants';
 import { Button } from '@src/components/button/button.component';
 import { SwitchSetting } from '@src/components/switch/switchSetting.component';
-import { SignInQRCodeForm } from './signInQRcodeForm.component';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { toasts } from '@src/core/utils/toasts';
 
 interface ComponentProps {
+  isPrivateInternet: boolean;
   onSignInAccountPress: (formData: SignInAccountFormData) => void;
   onSignInPhoneNumberPress: (formData: SignInPhoneNumberFormData) => void;
   onForgotPasswordPress: () => void;
-  isPrivateIntenet: boolean;
-  onSwichInternetPress: () => void;
+  onSwitchInternetPress: () => void;
   onSigInQRCodePress: () => void;
+  onRecognizePress: () => void;
 }
 
 export type SignInProps = ThemedComponentProps & ComponentProps;
@@ -75,13 +79,47 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
     const formValue: SignInAccountFormData | SignInPhoneNumberFormData = getSelectedFormData();
 
     switch (selectedTabIndex) {
-      case SignInTabEnum.Account:
-        props.onSignInAccountPress(formValue as SignInAccountFormData);
+      case SignInTabEnum.Account: {
+        const accountFormData = formValue as SignInAccountFormData;
+
+        if (accountFormData) {
+          if (accountFormData.password.length < 8) {
+            toasts.error('Mật khẩu phải có ít nhất 8 ký tự!');
+          } else {
+            props.onSignInAccountPress(accountFormData);
+          }
+        } else {
+          toasts.error('Thông tin không được trống!');
+        }
+
         break;
-      case SignInTabEnum.PhoneNumber:
-        props.onSignInPhoneNumberPress(formValue as SignInPhoneNumberFormData);
+      }
+      case SignInTabEnum.PhoneNumber: {
+        const phoneNumberFormData = formValue as SignInPhoneNumberFormData;
+
+        if (phoneNumberFormData) {
+          if (phoneNumberFormData.phoneNumber.length < 9 || phoneNumberFormData.phoneNumber.length > 11) {
+            toasts.error('Số điện thoại không hợp lệ!');
+            return;
+          }
+
+          if (phoneNumberFormData.enterCaptcha !== phoneNumberFormData.captcha) {
+            toasts.error('Mã xác nhận không chính xác!');
+            return;
+          }
+
+          props.onSignInPhoneNumberPress(phoneNumberFormData);
+        } else {
+          toasts.error('Thông tin không được trống!');
+        }
+
         break;
+      }
     }
+  };
+
+  const onRecognizeButtonPress = (): void => {
+    props.onRecognizePress();
   };
 
   const isCheckTab = (tabIndex: number): boolean => {
@@ -92,9 +130,9 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
     props.onForgotPasswordPress();
   };
 
-  const onSwichInternetPress = () => {
-    onTabSelect(!props.isPrivateIntenet ? SignInTabEnum.Account : SignInTabEnum.PhoneNumber);
-    return props.onSwichInternetPress();
+  const onSwitchInternetPress = () => {
+    onTabSelect(!props.isPrivateInternet ? SignInTabEnum.Account : SignInTabEnum.PhoneNumber);
+    return props.onSwitchInternetPress();
   };
 
   const onTabSelect = (selectedTabIndex: number) => {
@@ -193,7 +231,7 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
               </Text>
             </View>
           </TouchableWithoutFeedback>
-          {props.isPrivateIntenet &&
+          {props.isPrivateInternet &&
             <View style={themedStyle.viewTab}>
               {renderTabBtn(SignInTabEnum.Account, 'Tài khoản', PersonIcon2)}
               {renderTabBtn(SignInTabEnum.QRCode, 'Mã QR', QRCodeIconOther)}
@@ -218,7 +256,8 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.75}
-                style={themedStyle.btnRecognize}>
+                style={themedStyle.btnRecognize}
+                onPress={onRecognizeButtonPress}>
                 {renderRecognizeIcon()}
                 <Text style={themedStyle.txtBtnRecognize}>
                   {'Đăng nhập bằng vân tay'}
@@ -240,11 +279,10 @@ const SignInComponent: React.FunctionComponent<SignInProps> = (props) => {
                 {'Chúng tôi sẽ gửi một SMS chứa mã OTP đến số điện thoại này'}
               </Text>
             </React.Fragment>)}
-          {isCheckTab(SignInTabEnum.QRCode) && <SignInQRCodeForm />}
           <View style={themedStyle.viewFooter}>
             <SwitchSetting
-              isPrivateIntenet={props.isPrivateIntenet}
-              onSwichInternetPress={onSwichInternetPress}
+              isPrivateIntenet={props.isPrivateInternet}
+              onSwichInternetPress={onSwitchInternetPress}
             />
           </View>
         </ImageBackground>

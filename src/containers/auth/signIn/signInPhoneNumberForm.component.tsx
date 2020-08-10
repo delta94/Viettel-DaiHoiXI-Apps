@@ -13,7 +13,10 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { ValidationInput, textStyle } from '@src/components';
+import {
+  ValidationInput,
+  textStyle,
+} from '@src/components';
 import { RefreshIconOther } from '@src/assets/icons';
 import { StringValidator } from '@src/core/validators';
 import { SignInPhoneNumberFormData } from '@src/core/models/auth/signIn/signIn.model';
@@ -32,7 +35,7 @@ export type SignInPhoneNumberFormProps = ThemedComponentProps & ViewProps & Comp
 
 const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberFormProps> = (props) => {
   const [formData, setFormData] = useState<SignInPhoneNumberFormData>({
-    phone: undefined,
+    phoneNumber: undefined,
     captcha: generateCaptcha(4),
     enterCaptcha: undefined,
   });
@@ -62,7 +65,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
   });
 
   const onUsernameInputTextChange = (phone: string) => {
-    setFormData({ ...formData, phone });
+    setFormData({ ...formData, phoneNumber: phone });
   };
 
   const onEnterCaptChaTextChange = (enterCaptca: string) => {
@@ -78,7 +81,7 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
   };
 
   const isValid = (value: SignInPhoneNumberFormData): boolean => {
-    return !isEmpty(value.phone);
+    return !isEmpty(value.phoneNumber) && !isEmpty(value.enterCaptcha);
   };
 
   const { style, themedStyle, theme, ...restProps } = props;
@@ -92,7 +95,8 @@ const SignInPhoneNumberFormComponent: React.FunctionComponent<SignInPhoneNumberF
         validator={StringValidator}
         onChangeText={onUsernameInputTextChange}
         keyboardType='number-pad'
-        value={formData.phone}
+        value={formData.phoneNumber}
+        maxLength={11}
       />
       <View style={themedStyle.viewCaptcha}>
         <ValidationInput

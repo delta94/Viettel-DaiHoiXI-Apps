@@ -27,6 +27,8 @@ import {
 } from './components';
 import { isTablet } from 'react-native-device-info';
 import Orientation from 'react-native-orientation-locker';
+import Toast from 'react-native-toast-message';
+import { View, Text } from 'react-native';
 
 const App: React.FunctionComponent = () => {
   const [theme, setTheme] = useState<ThemeKey>('App Theme');
@@ -55,13 +57,14 @@ const App: React.FunctionComponent = () => {
       <PersistGate
         loading={null}
         persistor={persistor}>
-        <DynamicStatusBar barStyle='light-content' />
+        <DynamicStatusBar barStyle='dark-content' />
         <ThemeContext.Provider value={contextValue}>
           <ApplicationProvider
             mapping={mapping}
             theme={themes[theme]}>
             <Spinner />
             <Router />
+            <Toast ref={(ref) => Toast.setRef(ref)} />
           </ApplicationProvider>
         </ThemeContext.Provider>
       </PersistGate>

@@ -1,4 +1,12 @@
-import React, { useEffect } from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+import { Dispatch } from 'redux';
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
 import { NavigationInjectedProps } from 'react-navigation';
 import { SignIn } from './signIn.component';
 import {
@@ -6,18 +14,20 @@ import {
   SignInPhoneNumberFormData,
 } from '@src/core/models/auth/signIn/signIn.model';
 import { isTablet } from 'react-native-device-info';
-import { SignInTablet } from './signIn.component.tablet';
+import { SignInTablet } from './tablet/signIn.component.tablet';
 import { SessionState } from '@src/core/store/reducer/session/types';
-import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '@src/core/store';
-import { Dispatch } from 'redux';
-import { onThunkSignInReq, onThunkGetOtp } from './store/thunk';
-import { alerts } from '@src/core/utils/alerts';
+import {
+  onThunkSignInReq,
+  onThunkGetOtpReq,
+} from '../store/thunk';
+import { toasts } from '@src/core/utils/toasts';
+import { Keyboard } from 'react-native';
 
 export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'SignInContainer';
-  const [isPrivateIntenet, setIsPrivateIntenet] = React.useState<boolean>(true);
   const dispatch: Dispatch<any> = useDispatch();
+  const [isPrivateInternet, setIsPrivateInternet] = useState<boolean>(true);
   const { loggedIn }: SessionState = useSelector((state: AppState) => state.session);
 
   useEffect(() => {
@@ -30,41 +40,16 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
   }, [loggedIn]);
 
   const onSignInAccountPress = (data: SignInAccountFormData) => {
-    if (data) {
-      if (data.password.length < 8) {
-        alerts.alert({ message: 'Mật khẩu phải có ít nhất 8 ký tự!' });
-      } else {
-        dispatch(onThunkSignInReq(data));
-      }
-    } else {
-      alerts.alert({ message: 'Thông tin đăng nhập không được trống!' });
-    }
+    dispatch(onThunkSignInReq(data));
   };
 
   const onSignInPhoneNumberPress = (data: SignInPhoneNumberFormData) => {
-    if (data) {
-      if (data.phone.length < 9 || data.phone.length > 11) {
-        alerts.alert({ message: 'Số điện thoại không hợp lệ!' });
-        return;
-      }
-
-      if (data.enterCaptcha !== data.captcha) {
-        alerts.alert({ message: 'Mã xác nhận không chính xác!' });
-        return;
-      }
-
-      dispatch(onThunkGetOtp(data.phone, props, false));
-    } else {
-      alerts.alert({ message: 'Số điện thoại không được trống!' });
-    }
+    Keyboard.dismiss();
+    dispatch(onThunkGetOtpReq(data, props, false));
   };
 
-  const onForgotPasswordPress = () => {
-
-  };
-
-  const onSwichInternetPress = () => {
-    setIsPrivateIntenet(!isPrivateIntenet);
+  const onSwitchInternetPress = () => {
+    setIsPrivateInternet(!isPrivateInternet);
   };
 
   const onSigInQRCodePress = () => {
@@ -74,27 +59,37 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
     });
   };
 
+  const onRecognizePress = (): void => {
+    toasts.info('Chức năng này không có sẵn!');
+  };
+
+  const onForgotPasswordPress = () => {
+    toasts.info('Chức năng này không có sẵn!');
+  };
+
   if (isTablet()) {
     return (
       <SignInTablet
+        isPrivateIntenet={isPrivateInternet}
         onSignInAccountPress={onSignInAccountPress}
         onSignInPhoneNumberPress={onSignInPhoneNumberPress}
         onForgotPasswordPress={onForgotPasswordPress}
-        isPrivateIntenet={isPrivateIntenet}
-        onSwichInternetPress={onSwichInternetPress}
+        onSwichInternetPress={onSwitchInternetPress}
         onSigInQRCodePress={onSigInQRCodePress}
+        onRecognizePress={onRecognizePress}
       />
     );
   }
 
   return (
     <SignIn
+      isPrivateInternet={isPrivateInternet}
       onSignInAccountPress={onSignInAccountPress}
       onSignInPhoneNumberPress={onSignInPhoneNumberPress}
       onForgotPasswordPress={onForgotPasswordPress}
-      isPrivateIntenet={isPrivateIntenet}
-      onSwichInternetPress={onSwichInternetPress}
+      onSwitchInternetPress={onSwitchInternetPress}
       onSigInQRCodePress={onSigInQRCodePress}
+      onRecognizePress={onRecognizePress}
     />
   );
 };

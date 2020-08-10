@@ -1,32 +1,27 @@
 import { Type } from 'class-transformer';
+
 export class MeetingItem {
-  name: string;
-  fromTime: string;
-  toTime: string;
-  date: string;
-  day: string;
-  isExample: boolean;
+  meetingId: string;
+  meetingName: string;
+  time: string;
+  color: string;
+
+  constructor() {
+    this.meetingId = '';
+    this.meetingName = '';
+    this.time = '';
+  }
 }
 
 export class Meeting {
+  date: string;
+  dayOfWeek: string;
+  @Type(() => MeetingItem)
   meetings: MeetingItem[];
-}
-
-export class WeeklyMeetingItem {
-  name: string;
-  fromTime: string;
-  toTime: string;
-  date: string;
-  isExample: boolean;
-}
-
-export class WeeklyMeeting {
-  day: number;
-  date: string;
-  @Type(() => WeeklyMeetingItem)
-  contents: WeeklyMeetingItem[];
 
   constructor() {
-    this.contents = [];
+    this.date = '';
+    this.dayOfWeek = '';
+    this.meetings = [];
   }
 }

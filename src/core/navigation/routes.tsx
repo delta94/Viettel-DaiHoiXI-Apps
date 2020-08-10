@@ -13,44 +13,39 @@ import {
 import { isTablet } from 'react-native-device-info';
 import {
   MenuNavigationOptions,
-  HomeNavigationOptions,
   MenuNavigationTabletOptions,
   MenuNavigationTabletNoHeaderOptions,
 } from './options';
 import { SplashContainer } from '@src/containers/splash/splash.container';
-import { ExampleContainer } from '@src/containers/example/example.container';
 import { SignInContainer } from '@src/containers/auth/signIn/signIn.container';
 import { OtpContainer } from '@src/containers/auth/otp/otp.container';
-import { HomeContainer } from '@src/containers/home/home.container';
-import { FunctionContainer } from '@src/containers/home/function/function.container';
-import { ScanQRCodeContainer } from '@src/containers/home/scanQRCode/scanQRCode.container';
-import { ConferenceInfoContainer } from '@src/containers/home/conferenceInfo/conferenceInfo.container';
-import { NotificationDetailContainer } from '@src/containers/home/conferenceInfo/notificationDetail/notificationDetail.container';
-import { PressReleaseDetailContainer } from '@src/containers/home/conferenceInfo/pressReleaseDetail/pressReleaseDetail.container';
-import { DelegateListContainer } from '@src/containers/home/delegate/delegateList/delegateList.container';
-import { DelegateDetailContainer } from '@src/containers/home/delegate/delegateDetail/delegateDetail.container';
-import { SpeechListContainer } from '@src/containers/home/speechManagement/speechList/speechList.container';
-import { DelegateGroupContainer } from '@src/containers/home/delegate/delegateGroup/delegateGroup.container';
-import { SignUpToSpeakContainer } from '@src/containers/home/speechManagement/signUpToSpeak/signUpToSpeak.container';
-import { AttendanceContainer } from '@src/containers/home/attendance/attendance.container';
-import { SeatingChartContainer } from '@src/containers/home/seatMap/seatingChart.container';
+import { MeetingContainer } from '@src/containers/app/meeting.container';
+import { MenuContainer } from '@src/containers/app/menu/menu.container';
+import { MyQRCodeContainer } from '@src/containers/app/myQRCode/myQRCode.container';
+import { MeetingDetailContainer } from '@src/containers/app/meetingDetail/meetingDetail.container';
+import { DeputyGroupContainer } from '@src/containers/app/deputy/deputyGroup/deputyGroup.container';
+import { DeputyDetailContainer } from '@src/containers/app/deputy/deputyDetail/deputyDetail.container';
+import { SpeechManagementContainer } from '@src/containers/app/speechManagement/speechManagement.container';
+import { DeputyDiscussionGroupContainer } from '@src/containers/app/deputy/deputyDiscussionGroup/deputyDiscussionGroup.container';
+import { SpeechSignUpContainer } from '@src/containers/app/speechSignUp/speechSignUp.container';
+import { AttendanceContainer } from '@src/containers/app/attendance/attendance.container';
+import { SeatingChartContainer } from '@src/containers/app/seatingChart/seatingChart.container';
 import { SignInQRcodeContainer } from '@src/containers/auth/signInQRcode/sigInQRcode.container';
-import { GalleryContainer } from '@src/containers/home/gallery/gallery.container';
-// import { ChatContainer } from '@src/containers/chat/chat.container';
-import { ChatContainer } from '@src/containers/chat/chat.container';
-import { ChatDetailContainer } from '@src/containers/chat/chatDetail/chatDetail.container';
+import { GalleryContainer } from '@src/containers/app/gallery/gallery.container';
+import { ChatContainer } from '@src/containers/app/chat/chat.container';
+import { ChatDetailContainer } from '@src/containers/app/chat/chatDetail/chatDetail.container';
+import { DocumentContainer } from '@src/containers/app/document/document.container';
+import { NotificationAnnouncementDetailContainer } from '@src/containers/app/meetingDetail/notificationAnnountcementDetail/notificationAnnouncementDetail.container';
 
-import { DocumentContainer } from '@src/containers/home/documentlist/documentlist.container';
 // Auth
 const AuthNavigator: NavigationContainer = createStackNavigator({
   ['signIn']: SignInContainer,
-  ['forgotPassword']: ExampleContainer,
   ['otp']: {
     screen: OtpContainer,
   },
   ['signInQRCode']: {
     screen: SignInQRcodeContainer,
-    navigationOptions: !isTablet() ? MenuNavigationOptions : HomeNavigationOptions,
+    navigationOptions: MenuNavigationOptions,
   },
 
 }, {
@@ -62,29 +57,29 @@ const AuthNavigator: NavigationContainer = createStackNavigator({
 
 const AppNavigator: NavigationContainer = createStackNavigator({
   ['home']: {
-    screen: HomeContainer,
-    navigationOptions: !isTablet() ? HomeNavigationOptions : MenuNavigationTabletOptions,
+    screen: MeetingContainer,
+    navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletOptions,
   },
-  ['function']: FunctionContainer,
-  ['scanQRCode']: ScanQRCodeContainer,
-  ['conferenceInfo']: {
-    screen: ConferenceInfoContainer,
+  ['menu']: MenuContainer,
+  ['myQRCode']: MyQRCodeContainer,
+  ['meetingDetail']: {
+    screen: MeetingDetailContainer,
     navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletNoHeaderOptions,
   },
-  ['notificationDetail']: NotificationDetailContainer,
-  ['pressReleaseDetail']: PressReleaseDetailContainer,
-  ['delegateList']: DelegateListContainer,
-  ['delegateGroup']: DelegateGroupContainer,
-  ['delegateDetail']: DelegateDetailContainer,
-  ['speechList']: SpeechListContainer,
-  ['signUpToSpeak']: SignUpToSpeakContainer,
+  ['notification']: NotificationAnnouncementDetailContainer,
+  ['announcement']: NotificationAnnouncementDetailContainer,
+  ['deputyGroup']: DeputyGroupContainer,
+  ['deputyDiscussionGroup']: DeputyDiscussionGroupContainer,
+  ['deputyDetail']: DeputyDetailContainer,
+  ['speechManagement']: SpeechManagementContainer,
+  ['speechSignUp']: SpeechSignUpContainer,
   ['attendance']: AttendanceContainer,
   ['seatingChart']: SeatingChartContainer,
   ['gallery']: {
     screen: GalleryContainer,
     navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletNoHeaderOptions,
   },
-  ['documentList']: DocumentContainer,
+  ['document']: DocumentContainer,
   ['chat']: ChatContainer,
   ['chatDetail']: ChatDetailContainer,
 }, {

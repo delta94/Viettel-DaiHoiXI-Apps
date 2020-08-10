@@ -1,6 +1,6 @@
 import { ApiResult } from '../dataTransfer/apiResult';
 import { onClearSession } from '../store/reducer/session/actions';
-import { alerts } from './alerts';
+import { toasts } from './toasts';
 import I18n from '@src/assets/i18n';
 
 export const catchHandle = (e: any, dispatch: any): void => {
@@ -9,12 +9,12 @@ export const catchHandle = (e: any, dispatch: any): void => {
   switch (status_code) {
     case 401: {
       dispatch(onClearSession());
-      alerts.alert({ message: I18n.t('common.txtSessionExpired') });
+      toasts.error(I18n.t('common.txtSessionExpired'));
 
       break;
     }
     default: {
-      alerts.alert({ message });
+      toasts.error(message);
     }
   }
 };

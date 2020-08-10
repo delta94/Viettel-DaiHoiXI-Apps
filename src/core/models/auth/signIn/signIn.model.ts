@@ -4,11 +4,7 @@ export class SignInAccountFormData {
 }
 
 export class SignInPhoneNumberFormData {
-  phone: string | undefined;
-  captcha: string;
-  enterCaptcha: string;
-}
-
-export class Otp {
-  value: string;
+  phoneNumber: string | undefined;
+  captcha?: string;
+  enterCaptcha?: string;
 }

@@ -10,11 +10,13 @@ import { Otp } from './otp.component';
 import { isTablet } from 'react-native-device-info';
 import { OtpTablet } from './otp.component.tablet';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
-import { onThunkVerifyOtp, onThunkGetOtp } from '../signIn/store/thunk';
+import {
+  onThunkVerifyOtpReq,
+  onThunkGetOtpReq,
+} from '../store/thunk';
 import { SessionState } from '@src/core/store/reducer/session/types';
 import { AppState } from '@src/core/store';
 import { alerts } from '@src/core/utils/alerts';
-import { isEmpty } from '@src/core/utils/utils';
 
 export const OtpContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'OtpContainer';
@@ -38,15 +40,11 @@ export const OtpContainer: React.FunctionComponent<NavigationInjectedProps> = (p
   }, [loggedIn]);
 
   const onResendOtpPress = (): void => {
-    dispatch(onThunkGetOtp(phoneNumber, props, true));
+    dispatch(onThunkGetOtpReq({ phoneNumber }, props, true));
   };
 
   const onConfirmPress = (otp: string): void => {
-    if (!isEmpty(otp)) {
-      dispatch(onThunkVerifyOtp(otp, phoneNumber));
-    } else {
-      alerts.alert({ message: 'Mã xác nhận OTP không được trống!' });
-    }
+    dispatch(onThunkVerifyOtpReq(otp, phoneNumber));
   };
 
   const onBackEventHandle = () => {

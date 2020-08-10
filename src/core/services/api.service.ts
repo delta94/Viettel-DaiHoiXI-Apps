@@ -4,7 +4,6 @@ import {
   API_URL,
 } from '../../../config';
 import { store } from '../store';
-import I18n from '@src/assets/i18n';
 
 interface RequestHeader {
   'Accept': string;

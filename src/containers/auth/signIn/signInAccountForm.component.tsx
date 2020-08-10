@@ -12,10 +12,7 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { ValidationInput } from '@src/components';
-import {
-  NameValidator,
-  StringValidator,
-} from '@src/core/validators';
+import { StringValidator } from '@src/core/validators';
 import { SignInAccountFormData } from '@src/core/models/auth/signIn/signIn.model';
 import { usePrevious } from '@src/core/utils/hookHelper';
 import {

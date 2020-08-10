@@ -5,8 +5,6 @@ export const PERSIST_CONFIG = {
   storage: AsyncStorage,
   whitelist: [
     'session',
-    'setting',
-    'contact',
   ], // save specific reducers
   blacklist: [], // don't save specific reducers
 };

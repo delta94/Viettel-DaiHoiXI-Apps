@@ -12,21 +12,19 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
-import { User } from '@src/core/models/user/user.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
 import {
-  LogoutIconOther,
-  EditPersonIconOther,
   PersonIcon2,
   SearchIcon,
   QRCodeIconOther,
 } from '@src/assets/icons';
 import { SERVER_ADDRESS } from '../../../config';
+import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 
 interface ComponentProps {
-  user: User;
+  deputy: DeputyModel;
   onMyProfilePress: () => void;
   onSearchPress: () => void;
   onQRCodePress: () => void;
@@ -35,7 +33,7 @@ interface ComponentProps {
 export type ProfileInfoProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) => {
-  const { style, themedStyle, user } = props;
+  const { style, themedStyle, deputy } = props;
 
   const onMyProfileButtonPress = (): void => {
     props.onMyProfilePress();
@@ -60,7 +58,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
         <View style={themedStyle.sectionBody}>
           <Image
             resizeMode='cover'
-            source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
+            source={(new RemoteImage(`${SERVER_ADDRESS}${deputy.avatar}`)).imageSource}
             style={themedStyle.imgAvatar}
           />
           <View style={themedStyle.viewInfo}>
@@ -70,7 +68,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
                 themedStyle.txtInfo,
                 themedStyle.txtBold,
               ]}>
-              {`Đồng chí ${user.fullName.toUpperCase()}`}
+              {`Đồng chí ${deputy.fullName.toUpperCase()}`}
             </Text>
             <Text
               numberOfLines={2}
@@ -78,7 +76,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
                 themedStyle.txtInfo,
                 themedStyle.txtItalic,
               ]}>
-              {user.position}
+              {deputy.position}
             </Text>
             <Text
               numberOfLines={1}
@@ -90,7 +88,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {user.organization}
+                {deputy.organization}
               </Text>
             </Text>
             <Text
@@ -103,7 +101,7 @@ const ProfileInfoComponent: React.FunctionComponent<ProfileInfoProps> = (props) 
                   themedStyle.txtInfo,
                   themedStyle.txtBold,
                 ]}>
-                {user.phoneNumber}
+                {deputy.phoneNumber}
               </Text>
             </Text>
           </View>

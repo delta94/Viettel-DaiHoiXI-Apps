@@ -20,85 +20,104 @@ import {
   ArrowNextIcon,
 } from '@src/assets/icons';
 import { textStyle } from '../textStyle';
+import { MeetingWeek as MeetingWeekModel } from '@src/core/models/meeting/meetingWeek.model';
 
 interface ComponentProps {
-  weekSelected: number;
-  numWeeks: number;
-  onWeekPress: (week: number) => void;
+  meetingWeeks: MeetingWeekModel[];
+  onMeetingWeekPress: (meetingWeekId: string) => void;
 }
 
 export type WeekSelectorProps = ComponentProps & ThemedComponentProps;
 
 const WeekSelectorComponent: React.FunctionComponent<WeekSelectorProps> = (props) => {
   const { themedStyle } = props;
-  const [weeks, setWeeks] = useState<number[]>([]);
-  const [weekSelected, setWeekSelected] = useState<number>(props.weekSelected);
+  const [meetingWeeks, setMeetingWeeks] = useState<MeetingWeekModel[]>(props.meetingWeeks);
+  const [meetingWeeksByNum, setMeetingWeeksByNum] = useState<MeetingWeekModel[]>([]);
+  const [meetingWeekSelected, setMeetingWeekSelected] = useState<MeetingWeekModel>(new MeetingWeekModel());
 
   useEffect(() => {
-    onInitWeeks();
-  }, []);
+    setMeetingWeeks(props.meetingWeeks);
 
-  const onInitWeeks = (): void => {
-    const weeksTemp: number[] = [];
-    let quotient: number = Math.floor(props.weekSelected / props.numWeeks);
-    const remainder: number = props.weekSelected % props.numWeeks;
+    const meetingWeekIndexFound: number = props.meetingWeeks.findIndex(item => item.selected);
 
-    if (remainder === 0) {
-      quotient = (quotient - 1) * props.numWeeks;
-    } else {
-      quotient *= props.numWeeks;
+    if (meetingWeekIndexFound > -1) {
+      setMeetingWeekSelected(meetingWeeks[meetingWeekIndexFound]);
+
+      const meetingWeeksByNumTemp: MeetingWeekModel[] = [];
+      let quotient: number = Math.floor((meetingWeekIndexFound + 1) / 4);
+      const remainder: number = (meetingWeekIndexFound + 1) % 4;
+
+      if (remainder === 0) {
+        quotient = (quotient - 1) * 4;
+      } else {
+        quotient *= 4;
+      }
+
+      for (let i = 0; i < 4; i++) {
+        meetingWeeksByNumTemp.push(meetingWeeks[quotient + i]);
+      }
+
+      setMeetingWeeksByNum([...meetingWeeksByNumTemp]);
     }
+  }, [props.meetingWeeks]);
 
-    for (let i = 0; i < props.numWeeks; i++) {
-      weeksTemp.push(quotient + i + 1);
-    }
+  const onMeetingWeekPress = (meetingWeekId: string): void => {
+    setMeetingWeeksByNum([]);
 
-    setWeeks([...weeksTemp]);
-  };
-
-  const onWeekPress = (week: number): void => {
-    setWeekSelected(week);
+    props.onMeetingWeekPress(meetingWeekId);
   };
 
   const onPrevWeeksPress = (): void => {
-    if (weeks[0] !== 1) {
-      setWeeks(prevState => prevState.map(value => value - props.numWeeks));
+    const meetingWeekIndexFound: number = props.meetingWeeks.findIndex(item => item.id === meetingWeeksByNum[0].id);
+
+    if (meetingWeekIndexFound + 1 !== 1) {
+      const meetingWeeksByNumTemp: MeetingWeekModel[] = [];
+
+      for (let i = 0; i < 4; i++) {
+        meetingWeeksByNumTemp.push(meetingWeeks[meetingWeekIndexFound - i - 1]);
+      }
+
+      setMeetingWeeksByNum([...meetingWeeksByNumTemp].reverse());
     }
   };
 
   const onNextWeeksPress = (): void => {
-    if (weeks[weeks.length - 1] !== 52) {
-      setWeeks(prevState => prevState.map(value => value + props.numWeeks));
+    const meetingWeekIndexFound: number = props.meetingWeeks.findIndex(item => item.id === meetingWeeksByNum[meetingWeeksByNum.length - 1].id);
+
+    if (meetingWeekIndexFound + 1 < 52) {
+      const meetingWeeksByNumTemp: MeetingWeekModel[] = [];
+
+      for (let i = 0; i < 4; i++) {
+        meetingWeeksByNumTemp.push(meetingWeeks[meetingWeekIndexFound + i + 1]);
+      }
+
+      setMeetingWeeksByNum([...meetingWeeksByNumTemp]);
     }
   };
 
-  const getBtnWeekStyle = (week: number, index: number): StyleProp<ViewStyle> => {
+  const getBtnWeekStyle = (meetingWeekId: string, index: number): StyleProp<ViewStyle> => {
     const btnWeekStyle = [themedStyle.btnWeek];
 
-    if (week === weekSelected) {
+    if (meetingWeekId === meetingWeekSelected.id) {
       btnWeekStyle.push(themedStyle.btnWeekSelected);
-    }
-
-    if (week + 1 === weekSelected || index + 1 === weeks.length) {
-      btnWeekStyle.push(themedStyle.btnWeekNoBorder);
     }
 
     return btnWeekStyle;
   };
 
   const renderBtnWeeks = (): React.ReactElement[] => {
-    return weeks.map((item, index) => {
+    return meetingWeeksByNum.map((item, index) => {
       return (
         <TouchableOpacity
           activeOpacity={0.75}
-          onPress={() => onWeekPress(item)}
-          style={getBtnWeekStyle(item, index)}>
+          onPress={() => onMeetingWeekPress(item.id)}
+          style={getBtnWeekStyle(item.id, index)}>
           <Text
             style={[
               themedStyle.txtWeek,
-              item === weekSelected && themedStyle.txtWeekSelected,
+              item.id === meetingWeekSelected.id && themedStyle.txtWeekSelected,
             ]}>
-            {`Tuần ${item}`}
+            {item.weekName}
           </Text>
         </TouchableOpacity>
       );
@@ -146,9 +165,6 @@ export const WeekSelector = withStyles(WeekSelectorComponent, (theme: ThemeType)
     borderRadius: pxToPercentage(30),
     borderRightWidth: pxToPercentage(2),
     borderColor: theme['color-primary-2'],
-  },
-  btnWeekNoBorder: {
-    borderRightWidth: 0,
   },
   btnWeekSelected: {
     borderRadius: pxToPercentage(30),

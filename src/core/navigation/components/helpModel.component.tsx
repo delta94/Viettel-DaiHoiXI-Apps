@@ -16,7 +16,6 @@ import { isTablet } from 'react-native-device-info';
 import { themes } from '@src/core/themes';
 import Modal from 'react-native-modal';
 import Pdf from 'react-native-pdf';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export interface ComponentProps {
   isVisible: boolean;
@@ -32,7 +31,7 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
     props.onClosePress();
   };
 
-  const sourcePdf = { uri: 'http://dwrm.gov.vn/uploads/download/files/02-final-thong-cao-bao-chi.pdf', cache: true };
+  const sourcePdf = { uri: 'http://www.pdf995.com/samples/pdf.pdf', cache: true };
 
   return (
     <Modal

@@ -11,13 +11,13 @@ import {
   withStyles,
 } from '@kitten/theme';
 import { textStyle } from '@src/components';
-import { User } from '@src/core/models/user/user.model';
+import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 import { RemoteImage } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { SERVER_ADDRESS } from '../../../config';
 
 interface ComponentProps {
-  user: User;
+  deputy: DeputyModel;
   onProfilePress: () => void;
   onQRCodePress: () => void;
   onSearchPress: () => void;
@@ -26,7 +26,7 @@ interface ComponentProps {
 export type ProfileInfoV2TabletProps = ThemedComponentProps & ViewProps & ComponentProps;
 
 const ProfileInfoV2TabletComponent: React.FunctionComponent<ProfileInfoV2TabletProps> = (props) => {
-  const { style, themedStyle, user } = props;
+  const { style, themedStyle, deputy } = props;
 
   const onProfileButtonPress = (): void => {
     props.onProfilePress();
@@ -48,22 +48,22 @@ const ProfileInfoV2TabletComponent: React.FunctionComponent<ProfileInfoV2TabletP
       ]}>
       <Image
         resizeMode='cover'
-        source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
+        source={(new RemoteImage(`${SERVER_ADDRESS}${deputy.avatar}`)).imageSource}
         style={themedStyle.imgAvatar}
       />
       <View style={themedStyle.viewInfo}>
         <Text style={themedStyle.txtFullname}>
-          {`Đồng chí ${user.fullName.toUpperCase()}`}
+          {`Đồng chí ${deputy.fullName.toUpperCase()}`}
         </Text>
         <Text
           style={[
             themedStyle.txtInfo,
             themedStyle.txtItalic,
           ]}>
-          {user.position}
+          {deputy.position}
         </Text>
         <Text style={themedStyle.txtInfo}>
-          {`Đoàn: ${user.organization}`}
+          {`Đoàn: ${deputy.organization}`}
         </Text>
         <View style={themedStyle.viewRow}>
           <Text style={themedStyle.txtInfo}>
@@ -74,7 +74,7 @@ const ProfileInfoV2TabletComponent: React.FunctionComponent<ProfileInfoV2TabletP
               themedStyle.txtInfo,
               themedStyle.txtDelegateNumber,
             ]}>
-            {`Số đại biểu: ${user.code}`}
+            {`Số đại biểu: ${deputy.code}`}
           </Text>
         </View>
       </View>

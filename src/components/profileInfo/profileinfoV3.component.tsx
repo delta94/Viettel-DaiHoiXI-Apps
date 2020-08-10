@@ -18,17 +18,17 @@ import {
 } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '../viewStyle';
-import { Delegate } from '@src/core/models/delegate/delegate.model';
 import { SERVER_ADDRESS } from '../../../config';
+import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 
 interface ComponentProps {
-  user: Delegate;
+  deputy: DeputyModel;
 }
 
 export type ProfileInfoV3Props = ThemedComponentProps & ViewProps & ComponentProps;
 
 const ProfileInfoV3Component: React.FunctionComponent<ProfileInfoV3Props> = (props) => {
-  const { style, themedStyle, user } = props;
+  const { style, themedStyle, deputy } = props;
 
   return (
     <View
@@ -39,7 +39,7 @@ const ProfileInfoV3Component: React.FunctionComponent<ProfileInfoV3Props> = (pro
       <View style={themedStyle.sectionBody}>
         <Image
           resizeMode='cover'
-          source={(new RemoteImage(`${SERVER_ADDRESS}${user.avatar}`)).imageSource}
+          source={(new RemoteImage(`${SERVER_ADDRESS}${deputy.avatar}`)).imageSource}
           style={themedStyle.imgAvatar}
         />
         <View style={themedStyle.viewInfo}>
@@ -49,13 +49,13 @@ const ProfileInfoV3Component: React.FunctionComponent<ProfileInfoV3Props> = (pro
             <Text
               numberOfLines={2}
               style={themedStyle.txtFullname}>
-              {user.fullName.toUpperCase()}
+              {deputy.fullName.toUpperCase()}
             </Text>
           </ImageBackground>
           <Text
             numberOfLines={5}
             style={themedStyle.txtPosition}>
-            {user.position}
+            {deputy.position}
           </Text>
         </View>
       </View>

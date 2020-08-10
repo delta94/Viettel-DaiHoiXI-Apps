@@ -4,11 +4,11 @@ import {
   SET_SESSION,
   CLEAR_SESSION,
 } from './types';
-import { User } from '@src/core/models/user/user.model';
+import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 
 const initialState: SessionState = {
   loggedIn: false,
-  user: new User(),
+  deputy: new DeputyModel(),
 };
 
 export const sessionReducer = (state = initialState, action: SessionActionTypes): SessionState => {
@@ -16,7 +16,7 @@ export const sessionReducer = (state = initialState, action: SessionActionTypes)
     case SET_SESSION: {
       return {
         loggedIn: true,
-        user: action.payload,
+        deputy: action.payload,
       };
     }
     case CLEAR_SESSION: {

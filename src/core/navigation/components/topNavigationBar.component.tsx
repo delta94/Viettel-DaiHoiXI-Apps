@@ -1,74 +1,101 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleType,
   ThemeType,
   withStyles,
+  ThemedComponentProps,
 } from '@kitten/theme';
-import { ImageProps } from 'react-native';
+import { ImageProps, View } from 'react-native';
 import {
   TopNavigation,
   TopNavigationAction,
   TopNavigationActionProps,
-  TopNavigationProps,
 } from '@kitten/ui';
 import { textStyle } from '@src/components';
-import { SafeAreaView } from 'react-navigation';
+import {
+  SafeAreaView,
+  NavigationInjectedProps,
+} from 'react-navigation';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import {
   MessageIconOther,
   QuestionIcon,
+  ArrowIosBackFill,
+  ExitIcon,
 } from '@src/assets/icons';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { HelpModel } from './helpModel.component';
+import { onGetCurrentRouteState } from '../util';
+import { KEY_NAVIGATION_BACK } from '../constants';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+import { onClearSession } from '@src/core/store/reducer/session/actions';
+import { routeNameDataSource } from '../options';
 
-export interface ComponentProps {
-  routeName: string;
-  backIcon?: BackIconProp;
-  onBackPress?: () => void;
-  onMessagePress?: () => void;
-}
-
-export type TopNavigationBarProps = TopNavigationProps & ComponentProps;
-
-type BackIconProp = (style: StyleType) => React.ReactElement<ImageProps>;
-type BackButtonElement = React.ReactElement<TopNavigationActionProps>;
+export type TopNavigationBarProps = NavigationInjectedProps & ThemedComponentProps;
 
 const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> = (props) => {
-  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+  const { themedStyle } = props;
+  const navigationKey: string = 'MenuTopNavigation';
+  const dispatch: Dispatch<any> = useDispatch();
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const { routeName } = onGetCurrentRouteState(props.navigation);
 
-  const onBackButtonPress = () => {
-    if (props.onBackPress) {
-      props.onBackPress();
-    }
+  const onBackButtonPress = (): void => {
+    props.navigation.goBack(KEY_NAVIGATION_BACK);
   };
 
-  const onMessagePress = () => {
-    props.onMessagePress();
+  const onLogoutButtonPress = (): void => {
+    dispatch(onClearSession());
+  };
+
+  const onMessagePress = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'chat',
+    });
   };
 
   const onHelpPress = () => {
     setIsVisible(prevState => !prevState);
   };
 
+  const renderBackIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+    return ArrowIosBackFill({ ...style, ...themedStyle.iconBack });
+  };
+
   const renderQuestionIcon = (style: StyleType): React.ReactElement<ImageProps> => {
-    return QuestionIcon({ ...style, ...themedStyle.iconQRCode });
+    return QuestionIcon({ ...style, ...themedStyle.iconQuestion });
+  };
+
+  const renderLogoutIcon = (style: StyleType): React.ReactElement<ImageProps> => {
+    return ExitIcon({ ...style, ...themedStyle.iconLogout });
   };
 
   const renderMessageIcon = (style: StyleType): React.ReactElement<ImageProps> => {
     return MessageIconOther({ ...style, ...themedStyle.iconMessage });
   };
 
-  const renderBackButton = (source: BackIconProp): BackButtonElement => {
+  const renderLeftControls = (): React.ReactElement<TopNavigationActionProps> => {
+    if (routeName === 'home') {
+      return (
+        <TopNavigationAction
+          icon={renderLogoutIcon}
+          onPress={onLogoutButtonPress}
+        />
+      );
+    }
+
     return (
       <TopNavigationAction
-        icon={source}
+        icon={renderBackIcon}
         onPress={onBackButtonPress}
       />
     );
   };
 
   const renderRightControls = (): React.ReactElement<TopNavigationActionProps>[] => {
-    if (props.routeName === 'signInQRCode') {
+    if (routeName === 'signInQRCode') {
       return [];
     }
 
@@ -77,26 +104,24 @@ const TopNavigationBarComponent: React.FunctionComponent<TopNavigationBarProps> 
         icon={renderQuestionIcon}
         onPress={onHelpPress}
       />,
-      <TopNavigationAction
-        icon={renderMessageIcon}
-        onPress={onMessagePress}
-      />,
+      routeName !== 'chat'
+        ? (<TopNavigationAction
+          icon={renderMessageIcon}
+          onPress={onMessagePress}
+        />)
+        : <View />,
     ]);
   };
-
-  const { themedStyle, title, backIcon } = props;
-
-  const leftControlElement: BackButtonElement | null = backIcon ? renderBackButton(backIcon) : null;
 
   return (
     <SafeAreaView style={themedStyle.safeArea}>
       <TopNavigation
         alignment='center'
-        title={title}
+        title={routeNameDataSource[routeName]}
         titleStyle={themedStyle.titleStyle}
         style={themedStyle.header}
         subtitleStyle={textStyle.regular}
-        leftControl={leftControlElement}
+        leftControl={renderLeftControls()}
         rightControls={renderRightControls()}
       />
       <HelpModel
@@ -119,7 +144,17 @@ export const TopNavigationBar = withStyles(TopNavigationBarComponent, (theme: Th
     color: theme['text-control-color'],
     ...textStyle.proTextSemibold,
   },
-  iconQRCode: {
+  iconBack: {
+    width: pxToPercentage(25),
+    height: pxToPercentage(25),
+    tintColor: theme['color-custom-100'],
+  },
+  iconLogout: {
+    width: pxToPercentage(23),
+    height: pxToPercentage(23),
+    tintColor: theme['color-custom-100'],
+  },
+  iconQuestion: {
     width: pxToPercentage(25),
     height: pxToPercentage(25),
     tintColor: theme['color-custom-100'],

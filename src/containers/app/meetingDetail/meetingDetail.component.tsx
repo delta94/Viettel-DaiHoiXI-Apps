@@ -45,7 +45,7 @@ const MeetingDetailComponent: React.FunctionComponent<MeetingDetailProps> = (pro
     const temp = onGetDateList();
     setDates(temp);
     setDateSelected(temp[0]);
-  }, []);
+  }, [props.programs, props.annoucements, props.notifications]);
 
   const onGetDateList = () => {
     const dateTemp: string[] = [];

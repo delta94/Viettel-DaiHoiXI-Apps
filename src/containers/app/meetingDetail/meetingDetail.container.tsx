@@ -31,10 +31,6 @@ export const MeetingDetailContainer: React.FunctionComponent<NavigationInjectedP
     dispatch(onThunkGetProgramListReq(meetingId, () => { }));
     dispatch(onThunkGetNotificationListReq(meetingId, () => { }));
     dispatch(onThunkGetAnnoucementListReq(meetingId, () => { }));
-    // hard code meetingId
-    // dispatch(onThunkGetProgramListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
-    // dispatch(onThunkGetNotificationListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
-    // dispatch(onThunkGetAnnoucementListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
   };
 
   const onNotificationItemPress = (notification: NotificationItem): void => {

@@ -53,7 +53,7 @@ const MeetingDetailTabletComponent: React.FunctionComponent<MeetingDetailTabletP
     const temp = onGetDateList();
     setDates(temp);
     setDateSelected(temp[0]);
-  }, []);
+  }, [props.programs, props.annoucements, props.notifications]);
 
   const onGetDateList = () => {
     const dateTemp: string[] = [];

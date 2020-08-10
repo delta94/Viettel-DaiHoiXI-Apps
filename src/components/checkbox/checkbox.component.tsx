@@ -15,11 +15,17 @@ import { CheckIcon } from '@src/assets/icons';
 import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
-  topic: any;
+  topic: SpeechFieldsDataState;
   onCheckboxPress: (id: number, chunkNumber: number) => void;
   isCreateScreen: boolean;
   index: number;
   chunkNumber?: number;
+}
+
+interface SpeechFieldsDataState {
+  key: string;
+  value: string;
+  status: boolean;
 }
 
 export type CheckboxProps = ThemedComponentProps & ComponentProps;
@@ -51,8 +57,10 @@ const CheckboxComponent: React.FunctionComponent<CheckboxProps> = (props) => {
           </View>
         )}
       </View>
-      <Text style={themedStyle.txtCheckBox}>
-        {props.topic.text}
+      <Text
+        style={themedStyle.txtCheckBox}
+        numberOfLines={2}>
+        {props.topic.value}
       </Text>
     </TouchableOpacity>
   );
@@ -83,6 +91,7 @@ export const Checkbox = withStyles(CheckboxComponent, (theme: ThemeType) => ({
     backgroundColor: theme['color-primary-2'],
   },
   txtCheckBox: {
+    flex: 1,
     fontSize: isTablet() ? pxToPercentage(34) : pxToPercentage(14),
     ...textStyle.proDisplayRegular,
     marginLeft: isTablet() ? pxToPercentage(25) : pxToPercentage(10),

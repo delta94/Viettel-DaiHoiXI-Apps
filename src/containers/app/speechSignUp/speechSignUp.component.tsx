@@ -16,13 +16,19 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import { Checkbox } from '../../../components/checkbox/checkbox.component';
+import { SpeechField } from '@src/core/models/speechSignUp/speechField.model';
+import { toasts } from '@src/core/utils/toasts';
 
 interface ComponentProps {
-  example?: any;
+  isCreateScreen: boolean;
+  fields: SpeechField[];
+  onSigUpPress: (fieldsId: any) => void;
+  onEditFieldPress: (fieldsId: any) => void;
 }
 
-interface TopicDataState {
-  text: string;
+interface SpeechFieldsDataState {
+  key: string;
+  value: string;
   status: boolean;
 }
 
@@ -30,45 +36,70 @@ export type SpeechSignUpProps = ComponentProps & ThemedComponentProps;
 
 const SpeechSignUpComponent: React.FunctionComponent<SpeechSignUpProps> = (props) => {
   const { themedStyle } = props;
-  const [isCreateScreen, setIsCreateScreen] = useState<boolean>(true);
-  const [data, setData] = React.useState<TopicDataState[]>
-    ([
-      { text: 'Kinh tế', status: false },
-      { text: 'Quản lý đô thị', status: false },
-      { text: 'Giáo dục - Đào tạo', status: false },
-      { text: 'Khoa học công nghệ', status: false },
-      { text: 'Quốc phòng - An ninh', status: false },
-      { text: 'Văn hoá - Xã hội', status: false },
-      { text: 'Du lịch', status: false },
-      { text: 'Du lịch', status: false },
-      { text: 'Đối ngoại', status: false },
-      { text: 'Ngoại giao', status: false },
-      { text: 'Xây dựng', status: false },
-    ]);
+  const [fields, setFields] = React.useState<SpeechFieldsDataState[]>([]);
+
+  React.useEffect(() => {
+    setFields([...props.fields.map((item) => {
+      if (item.key) {
+        const list = {
+          status: false,
+          value: item.value,
+          key: item.key,
+        };
+        return list;
+      }
+    })]);
+  }, [props.fields]);
 
   const onSignUpPress = (): void => {
-    setIsCreateScreen(false);
+    const fieldIds = [];
+
+    const selectList = fields.filter(item => {
+      return item.status === true;
+    });
+
+    if (selectList.length > 0) {
+      selectList.forEach(item => {
+        fieldIds.push(item.key);
+      });
+      props.onSigUpPress(fieldIds);
+    } else {
+      toasts.error('Đăng ký không thành công! \nChưa chọn chủ đề phát biểu ');
+    }
   };
 
   const onEditPress = (): void => {
-    setIsCreateScreen(true);
+    const fieldIds = [];
+
+    const selectList = fields.filter(item => {
+      return item.status === true;
+    });
+
+    if (selectList.length > 0) {
+      selectList.forEach(item => {
+        fieldIds.push(item.key);
+      });
+      props.onEditFieldPress(fieldIds);
+    } else {
+      toasts.error('Chỉnh sửa đăng ký không thành công! \nChưa chọn chủ đề phát biểu ');
+    }
   };
 
   const onCheckboxPress = (id: number) => {
-    setData(data.map((item, index) => index === id ?
+    setFields(fields.map((item, index) => index === id ?
       { ...item, status: !item.status }
       : item));
   };
 
   const renderCheckBoxList = (): React.ReactElement[] => {
-    return data.map((item, index) => {
+    return fields.map((item, index) => {
       return (
         <Checkbox
           key={index}
           onCheckboxPress={onCheckboxPress}
           index={index}
           topic={item}
-          isCreateScreen={isCreateScreen}
+          isCreateScreen={props.isCreateScreen}
         />
       );
     });
@@ -82,7 +113,7 @@ const SpeechSignUpComponent: React.FunctionComponent<SpeechSignUpProps> = (props
             {renderCheckBoxList()}
           </ScrollView>
         </View>
-        {isCreateScreen
+        {props.isCreateScreen
           ? <Button
             style={themedStyle.btnSignUp}
             onPress={onSignUpPress}>

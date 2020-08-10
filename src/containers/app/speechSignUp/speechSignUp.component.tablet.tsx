@@ -15,48 +15,84 @@ import {
 } from '@src/components';
 import { Checkbox } from '../../../components/checkbox/checkbox.component';
 import { Button } from '@src/components/button/button.component';
+import { SpeechField } from '@src/core/models/speechSignUp/speechField.model';
+import { toasts } from '@src/core/utils/toasts';
 
 interface ComponentProps {
-  example?: any;
+  fields: SpeechField[];
+  isCreateScreen: boolean;
+  onSigUpPress: (fieldIds: any) => void;
+  onEditFieldPress: (fieldIds: any) => void;
 }
 
-interface TopicDataState {
-  text: string;
+interface SpeechFieldsDataState {
+  key: string;
+  value: string;
   status: boolean;
 }
+
 export type SpeechSignUpTabletProps = ThemedComponentProps & ComponentProps;
 
 const SpeechSignUpTabletComponent: React.FunctionComponent<SpeechSignUpTabletProps> = (props) => {
   const { themedStyle } = props;
-  const [isCreateScreen, setIsCreateScreen] = React.useState<boolean>(true);
-  const [data, setData] = React.useState<TopicDataState[]>
-    ([
-      { text: 'Kinh tế', status: false },
-      { text: 'Quản lý đô thị', status: false },
-      { text: 'Giáo dục - Đào tạo', status: false },
-      { text: 'Khoa học công nghệ', status: false },
-      { text: 'Quốc phòng - An ninh', status: false },
-      { text: 'Văn hoá - Xã hội', status: false },
-      { text: 'Du lịch', status: false },
-      { text: 'Du lịch', status: false },
-      { text: 'Đối ngoại', status: false },
-      { text: 'Ngoại giao', status: false },
-      { text: 'Xây dựng', status: false },
-      { text: 'Giáo dục', status: false },
-    ]);
+  const [chunkFields, setChunkFields] = React.useState<SpeechFieldsDataState[][]>([]);
 
-  const [chunkTopic, setChunkTopic] = React.useState<TopicDataState[][]>(chunk(data, 6));
+  React.useEffect(() => {
+    setChunkFields(chunk([...props.fields.map((item) => {
+      if (item.key) {
+        const list = {
+          status: false,
+          value: item.value,
+          key: item.key,
+        };
+        return list;
+      }
+    })], 6));
+  }, [props.fields]);
 
   const onSigUpPress = (): void => {
-    setIsCreateScreen(false);
+    const selectList  = [];
+    chunkFields.forEach(item => {
+      const list: SpeechFieldsDataState[] = item.filter(field => {
+        return field.status === true;
+      });
+      if (list) {
+        list.forEach(field => {
+          selectList.push(field.key);
+        });
+      }
+    });
+
+    if (selectList.length > 0) {
+      return props.onSigUpPress(selectList);
+
+    } else {
+      toasts.error('Đăng ký không thành công! Chưa chọn chủ đề phát biểu');
+    }
   };
 
   const onEditPress = (): void => {
-    setIsCreateScreen(true);
+    const selectList = [];
+    chunkFields.forEach(item => {
+      const list: SpeechFieldsDataState[] = item.filter(field => {
+        return field.status === true;
+      });
+      if (list) {
+        list.forEach(field => {
+          selectList.push(field.key);
+        });
+      }
+    });
+
+    if (selectList.length > 0) {
+      props.onEditFieldPress(selectList);
+    } else {
+      toasts.error('Đăng ký không thành công! Chưa chọn chủ đề phát biểu');
+    }
   };
 
   const onCheckboxPress = (id: number, chunkNumber: number) => {
-    setChunkTopic([...chunkTopic.map((item, index) => {
+    setChunkFields([...chunkFields.map((item, index) => {
       if (index === chunkNumber) {
         return [...item.map((value, e) => {
           if (e === id) {
@@ -72,15 +108,15 @@ const SpeechSignUpTabletComponent: React.FunctionComponent<SpeechSignUpTabletPro
 
   };
 
-  const renderChunk = (topics: { text: string; status: boolean; }[], chunkNumber: number): React.ReactElement[] => {
-    return topics.map((item, index) => {
+  const renderChunk = (fieldsItem: SpeechFieldsDataState[], chunkNumber: number): React.ReactElement[] => {
+    return fieldsItem.map((item, index) => {
       return (
         <Checkbox
           key={index}
           onCheckboxPress={onCheckboxPress}
           index={index}
           topic={item}
-          isCreateScreen={isCreateScreen}
+          isCreateScreen={props.isCreateScreen}
           chunkNumber={chunkNumber}
         />
       );
@@ -88,7 +124,7 @@ const SpeechSignUpTabletComponent: React.FunctionComponent<SpeechSignUpTabletPro
   };
 
   const renderCheckBox = (): React.ReactElement[] => {
-    return chunkTopic.map((item, index) => {
+    return chunkFields.map((item, index) => {
       return (
         <View style={themedStyle.viewBoxGroup}>
           {renderChunk(item, index)}
@@ -103,7 +139,7 @@ const SpeechSignUpTabletComponent: React.FunctionComponent<SpeechSignUpTabletPro
         <View
           style={[
             themedStyle.viewSection,
-            data.length < 7 && themedStyle.viewOneBox,
+            props.fields.length < 7 && themedStyle.viewOneBox,
           ]}>
           <Text style={themedStyle.txtTitle}>
             {'Chủ đề'}
@@ -111,7 +147,7 @@ const SpeechSignUpTabletComponent: React.FunctionComponent<SpeechSignUpTabletPro
           <View style={themedStyle.viewCardContent}>
             {renderCheckBox()}
           </View>
-          {isCreateScreen &&
+          {props.isCreateScreen &&
             <Button
               titleStyle={themedStyle.txtSignUp}
               title='ĐĂNG KÝ'
@@ -123,7 +159,7 @@ const SpeechSignUpTabletComponent: React.FunctionComponent<SpeechSignUpTabletPro
               ]}
             />
           }
-          {!isCreateScreen &&
+          {!props.isCreateScreen &&
             <View style={themedStyle.viewGroupButton}>
               <Button
                 titleStyle={[

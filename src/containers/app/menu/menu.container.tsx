@@ -63,7 +63,10 @@ export const MenuContainer: React.FunctionComponent<NavigationInjectedProps> = (
         break;
       }
       case MenuEnum.DangKyPhatBieu: {
-        // routeName = 'speechSignUp';
+        params = {
+          meetingId,
+        };
+         routeName = 'speechSignUp';
         break;
       }
       case MenuEnum.QuanLyPhatBieu: {

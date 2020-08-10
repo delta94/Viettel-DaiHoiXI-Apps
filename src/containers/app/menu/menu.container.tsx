@@ -46,11 +46,11 @@ export const MenuContainer: React.FunctionComponent<NavigationInjectedProps> = (
         break;
       }
       case MenuEnum.TaiLieu: {
-        // routeName = 'document';
+        routeName = 'document';
         break;
       }
       case MenuEnum.PhimAnhHinhAnh: {
-        // routeName = 'gallery';
+        routeName = 'gallery';
         break;
       }
       case MenuEnum.SoDoChoNgoi: {
@@ -59,14 +59,14 @@ export const MenuContainer: React.FunctionComponent<NavigationInjectedProps> = (
         break;
       }
       case MenuEnum.DiemDanh: {
-        // routeName = 'attendance';
+        routeName = 'attendance';
         break;
       }
       case MenuEnum.DangKyPhatBieu: {
         params = {
           meetingId,
         };
-         routeName = 'speechSignUp';
+        routeName = 'speechSignUp';
         break;
       }
       case MenuEnum.QuanLyPhatBieu: {
@@ -74,8 +74,8 @@ export const MenuContainer: React.FunctionComponent<NavigationInjectedProps> = (
         break;
       }
       case MenuEnum.ToThaoLuan: {
-         routeName = 'deputyDiscussionGroup';
-         params = {
+        routeName = 'deputyDiscussionGroup';
+        params = {
           meetingId,
         };
         break;

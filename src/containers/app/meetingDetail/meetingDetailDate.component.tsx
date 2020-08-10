@@ -15,30 +15,37 @@ import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 
 interface ComponentProps {
-  example?: any;
+  dateSelected: string;
+  dateList: string[];
+  onDatePress(date: string): void;
 }
-
-const dateDataFake: string[] = [
-  '08/10/2020',
-  '09/10/2020',
-  '10/10/2020',
-  '11/10/2020',
-];
 
 export type MeetingDetailDateProps = ComponentProps & ThemedComponentProps;
 
 const MeetingDetailDateComponent: React.FunctionComponent<MeetingDetailDateProps> = (props) => {
-  const [dateSelected, setDateSelected] = useState<string>(dateDataFake[0]);
-
   const { themedStyle } = props;
+  const [dates, setDates] = useState<string[]>(props.dateList);
+  const [dateSelected, setDateSelected] = useState<string>(props.dateSelected);
+
+  React.useEffect(() => {
+    setDates(props.dateList);
+  }, [props.dateList]);
+
+  React.useEffect(() => {
+    setDateSelected(props.dateSelected);
+  }, [props.dateSelected]);
+
+  const onDatePress = (date: string): void => {
+    props.onDatePress(date);
+  };
 
   const renderDates = (): React.ReactElement[] => {
-    return dateDataFake.map((item, index) => {
+    return dates.map((item, index) => {
       return (
         <TouchableOpacity
           key={index}
           activeOpacity={0.75}
-          onPress={() => setDateSelected(item)}
+          onPress={() => onDatePress(item)}
           style={[
             themedStyle.viewDate,
             item === dateSelected && themedStyle.viewDateSelected,

@@ -21,65 +21,82 @@ import { MeetingDetailDate } from '../meetingDetailDate.component';
 
 interface ComponentProps {
   programs: ProgramModel[];
+  dateSelected: string;
+  dateList: string[];
+  onDatePress(date: string): void;
 }
 
 export type ProgramProps = ComponentProps & ThemedComponentProps;
 
 const ProgramComponent: React.FunctionComponent<ProgramProps> = (props) => {
   const { themedStyle } = props;
+  const [programs, setPrograms] = React.useState<ProgramModel[]>(props.programs);
 
-  const renderPrograms = (): React.ReactElement[] => {
-    return props.programs.map((item, index) => {
-      return (
-        <View key={index}>
-          <View style={themedStyle.viewSection}>
-            <Text style={themedStyle.txtSection}>
-              {item.section}
-            </Text>
-          </View>
-          {item.contents.map((itemChild, indexChild) => {
-            return (
-              <View
-                key={indexChild}
-                style={themedStyle.viewItem}>
-                <View style={themedStyle.viewItemTop}>
-                  <View style={themedStyle.viewTime}>
-                    <Text style={themedStyle.txtTime}>
-                      {itemChild.fromTime}
-                    </Text>
-                    {ArrowHeadDownIconFill(themedStyle.iconArrow)}
-                    <Text style={themedStyle.txtTime}>
-                      {itemChild.toTime}
+  React.useEffect(() => {
+    setPrograms(props.programs.filter(item => item.date === props.dateSelected));
+  }, [props.dateSelected]);
+
+  const onDatePress = (date: string): void => {
+    props.onDatePress(date);
+  };
+
+  const renderPrograms = (): React.ReactElement[][] => {
+    return programs.map((item, index) => {
+      return item.programs.map((value, e) => {
+        return (
+          <View key={index}>
+            <View style={themedStyle.viewSection}>
+              <Text style={themedStyle.txtSection}>
+                {value.type}
+              </Text>
+            </View>
+            {value.details.map((itemChild, indexChild) => {
+              return (
+                <View
+                  key={indexChild}
+                  style={themedStyle.viewItem}>
+                  <View style={themedStyle.viewItemTop}>
+                    <View style={themedStyle.viewTime}>
+                      <Text style={themedStyle.txtTime}>
+                        {itemChild.startHour}
+                      </Text>
+                      {ArrowHeadDownIconFill(themedStyle.iconArrow)}
+                      <Text style={themedStyle.txtTime}>
+                        {itemChild.endHour}
+                      </Text>
+                    </View>
+                    <Text style={themedStyle.txtDescription}>
+                      {itemChild.content}
                     </Text>
                   </View>
-                  <Text style={themedStyle.txtDescription}>
-                    {itemChild.description}
-                  </Text>
-                </View>
-                {!isEmpty(itemChild.implementer) &&
-                  (<View style={themedStyle.viewItemBottom}>
-                    <Text
-                      style={[
-                        themedStyle.txtImplementer,
-                        themedStyle.txtBold,
-                      ]}>
-                      {`Chủ trì: `}
-                      <Text style={themedStyle.txtImplementer}>
-                        {itemChild.implementer}
+                  {!isEmpty(itemChild.implementer) &&
+                    (<View style={themedStyle.viewItemBottom}>
+                      <Text
+                        style={[
+                          themedStyle.txtImplementer,
+                          themedStyle.txtBold,
+                        ]}>
+                        {`Chủ trì: `}
+                        <Text style={themedStyle.txtImplementer}>
+                          {itemChild.implementer}
+                        </Text>
                       </Text>
-                    </Text>
-                  </View>)}
-              </View>
-            );
-          })}
-        </View>
-      );
+                    </View>)}
+                </View>
+              );
+            })}
+          </View>
+        );
+      });
     });
   };
 
   return (
     <Layout style={themedStyle.container}>
-      <MeetingDetailDate />
+      <MeetingDetailDate
+        dateSelected={props.dateSelected}
+        dateList={props.dateList}
+        onDatePress={onDatePress} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={themedStyle.scrollViewContainer}>

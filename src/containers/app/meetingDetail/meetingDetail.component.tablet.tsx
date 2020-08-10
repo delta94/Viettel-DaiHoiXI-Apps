@@ -20,8 +20,8 @@ import {
   SoundIcon,
 } from '@src/assets/icons';
 import { Program as ProgramModel } from '@src/core/models/program/program.model';
-import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
-import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
+import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
+import { Annoucement, Annoucements } from '@src/core/models/annoucement/annoucement.model';
 import { BackHeader } from '@src/components/header/backHeader.component';
 import { ProgramTabEnum } from '@src/core/utils/constants';
 import { ProgramTablet } from './program/program.component.tablet';
@@ -32,9 +32,9 @@ import { NotificationAnnouncementTablet } from './notificationAnnouncement/notif
 interface ComponentProps {
   programs: ProgramModel[];
   notifications: NotificationModel[];
-  onNotificationItemPress: (notification: NotificationModel) => void;
-  pressReleases: PressReleaseModel[];
-  onPressReleaseItemPress: (pressRelease: PressReleaseModel) => void;
+  onNotificationItemPress: (notification: Notifications) => void;
+  annoucement: Annoucement[];
+  onAnnoucementItemPress: (annoucement: Annoucements) => void;
   onBackPress: () => void;
   onMessagePress: () => void;
 }
@@ -46,27 +46,37 @@ type IconProp = (style: StyleType) => React.ReactElement<ImageProps>;
 const MeetingDetailTabletComponent: React.FunctionComponent<MeetingDetailTabletProps> = (props) => {
   const [selectedTab, setSelectedTab] = useState<number>(ProgramTabEnum.ChuongTrinh);
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
+  const [dates, setDates] = useState<string[]>([]);
+  const [dateSelected, setDateSelected] = useState<string>('');
 
-  const dateDataFake: string[] = [
-    '08/10/2020',
-    '09/10/2020',
-    '10/10/2020',
-  ];
+  React.useEffect(() => {
+    const temp = onGetDateList();
+    setDates(temp);
+    setDateSelected(temp[0]);
+  }, []);
 
-  const onNotificationItemPress = (notification: NotificationModel): void => {
+  const onGetDateList = () => {
+    const dateTemp: string[] = [];
+    props.programs.forEach(item => {
+      dateTemp.push(item.date);
+    });
+    return dateTemp;
+  };
+
+  const onNotificationItemPress = (notification: Notifications): void => {
     props.onNotificationItemPress(notification);
   };
 
-  const onPressReleaseItemPress = (pressReleae: PressReleaseModel): void => {
-    props.onPressReleaseItemPress(pressReleae);
+  const onAnnoucementItemPress = (annoucement: Annoucements): void => {
+    props.onAnnoucementItemPress(annoucement);
   };
 
   const onMessagePress = (): void => {
     props.onMessagePress();
   };
 
-  const onDatePress = (): void => {
-
+  const onDatePress = (date: string): void => {
+    setDateSelected(date);
   };
 
   const onBackPress = (): void => {
@@ -136,24 +146,28 @@ const MeetingDetailTabletComponent: React.FunctionComponent<MeetingDetailTabletP
         </View>
         <View style={themedStyle.viewCard}>
           <MeetingDetailDateTablet
-            dateSelected={new Date()}
-            numDates={2}
+            dateSelected={dateSelected}
             onDatePress={onDatePress}
-            dateList={dateDataFake}
+            dateList={dates}
           />
           {selectedTab === ProgramTabEnum.ChuongTrinh &&
             (<ProgramTablet
               programs={props.programs}
+              dateSelected={dateSelected}
             />)}
           {selectedTab === ProgramTabEnum.ThongCao &&
             (<NotificationAnnouncementTablet
-              notifications={props.pressReleases}
-              onNotificationItemPress={onPressReleaseItemPress}
+              notifications={props.annoucement}
+              onNotificationItemPress={onAnnoucementItemPress}
+              isNotifications={false}
+              dateSelected={dateSelected}
             />)}
           {selectedTab === ProgramTabEnum.ThongBao &&
             (<NotificationAnnouncementTablet
               notifications={props.notifications}
               onNotificationItemPress={onNotificationItemPress}
+              dateSelected={dateSelected}
+              isNotifications
             />)}
         </View>
       </View>

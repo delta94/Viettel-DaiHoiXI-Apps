@@ -17,59 +17,65 @@ import { Td } from '@src/components/table/td.component';
 
 interface ComponentProps {
   programs: ProgramModel[];
+  dateSelected: string;
 }
 
 export type ProgramTabletProps = ComponentProps & ThemedComponentProps;
 
 const ProgramTabletComponent: React.FunctionComponent<ProgramTabletProps> = (props) => {
   const { themedStyle } = props;
+  const [programs, setPrograms] = React.useState<ProgramModel[]>(props.programs);
 
-  const renderPrograms = (): React.ReactElement[] => {
+  React.useEffect(() => {
+    setPrograms(props.programs.filter(item => item.date === props.dateSelected));
+  }, [props.dateSelected]);
+
+  const renderPrograms = (): React.ReactElement[][] => {
     let indexTemp: number = 0;
-
-    return props.programs.map((item, index) => {
-      return (
-        <React.Fragment key={index}>
-          <Tr>
-            <Td alignItems='center' width={110} />
-            <Td alignItems='center' width={300}>
-              <Text style={themedStyle.txtInfo}>
-                {item.section}
-              </Text>
-            </Td>
-            <Td width={600} />
-            <Td alignItems='center' />
-          </Tr>
-          {item.contents.map((itemChild, indexChild) => {
-            indexTemp++;
-
-            return (
-              <Tr key={indexChild}>
-                <Td alignItems='center' width={110}>
-                  <Text style={themedStyle.txtInfo}>
-                    {indexTemp}
-                  </Text>
-                </Td>
-                <Td alignItems='center' width={300}>
-                  <Text style={themedStyle.txtInfo}>
-                    {`${itemChild.fromTime} - ${itemChild.toTime}`}
-                  </Text>
-                </Td>
-                <Td width={600}>
-                  <Text style={themedStyle.txtInfo}>
-                    {itemChild.description}
-                  </Text>
-                </Td>
-                <Td alignItems='center'>
-                  <Text style={themedStyle.txtInfo}>
-                    {itemChild.implementer || '-'}
-                  </Text>
-                </Td>
-              </Tr>
-            );
-          })}
-        </React.Fragment>
-      );
+    return programs.map(value => {
+      return value.programs.map((item, index) => {
+        return (
+          <React.Fragment key={index}>
+            <Tr>
+              <Td alignItems='center' width={110} />
+              <Td alignItems='center' width={300}>
+                <Text style={themedStyle.txtInfo}>
+                  {item.type}
+                </Text>
+              </Td>
+              <Td width={600} />
+              <Td alignItems='center' />
+            </Tr>
+            {item.details.map((itemChild, indexChild) => {
+              indexTemp++;
+              return (
+                <Tr key={indexChild}>
+                  <Td alignItems='center' width={110}>
+                    <Text style={themedStyle.txtInfo}>
+                      {indexTemp}
+                    </Text>
+                  </Td>
+                  <Td alignItems='center' width={300}>
+                    <Text style={themedStyle.txtInfo}>
+                      {`${itemChild.startHour} - ${itemChild.endHour}`}
+                    </Text>
+                  </Td>
+                  <Td width={600}>
+                    <Text style={themedStyle.txtInfo}>
+                      {itemChild.content}
+                    </Text>
+                  </Td>
+                  <Td alignItems='center'>
+                    <Text style={themedStyle.txtInfo}>
+                      {itemChild.implementer || '-'}
+                    </Text>
+                  </Td>
+                </Tr>
+              );
+            })}
+          </React.Fragment>
+        );
+      });
     });
   };
 

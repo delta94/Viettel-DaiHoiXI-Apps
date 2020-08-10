@@ -17,12 +17,15 @@ import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
 import { SearchIcon, AttachmentIcon } from '@src/assets/icons';
-import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
+import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
 import { AttachmentModal } from '../attachmentModel.component';
+import { Annoucements, Annoucement as AnnoucementModel } from '@src/core/models/annoucement/annoucement.model';
 
 interface ComponentProps {
-  notifications: NotificationModel[];
-  onNotificationItemPress: (notification: NotificationModel) => void;
+  notifications: NotificationModel[] | AnnoucementModel[];
+  onNotificationItemPress: (notification: Notifications | Annoucements) => void;
+  dateSelected: string;
+  isNotifications: boolean;
 }
 
 export type NotificationAnnouncementTabletProps = ComponentProps & ThemedComponentProps;
@@ -30,47 +33,91 @@ export type NotificationAnnouncementTabletProps = ComponentProps & ThemedCompone
 const NotificationAnnouncementTabletComponent: React.FunctionComponent<NotificationAnnouncementTabletProps> = (props) => {
   const { themedStyle } = props;
   const [isShowModal, setIsShowModal] = React.useState<boolean>(false);
+  const [notifications, setNotifications] = React.useState<NotificationModel[] | AnnoucementModel[]>(props.notifications);
+
+  React.useEffect(() => {
+    setNotifications(props.notifications.filter(item => item.date === props.dateSelected));
+  }, [props.dateSelected]);
 
   const onAttachMentIconPress = () => {
     setIsShowModal(!isShowModal);
   };
-  const onNotificationItemPress = (notification: NotificationModel): void => {
+  const onNotificationItemPress = (notification: Notifications): void => {
     props.onNotificationItemPress(notification);
   };
 
-  const renderNotifications = (): React.ReactElement[] => {
-    return props.notifications.map((item, index) => {
-      return (
-        <Tr key={index}>
-          <Td alignItems='center' width={110}>
-            <Text style={themedStyle.txtInfo}>
-              {++index}
-            </Text>
-          </Td>
-          <Td>
-            <Text style={themedStyle.txtInfo}>
-              {item.title}
-            </Text>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={onAttachMentIconPress}
-              style={themedStyle.viewAttachment}>
-              {AttachmentIcon(themedStyle.iconAttachment)}
-              <Text style={themedStyle.txtAttachment}>
-                {'Tập tin đín kèm'}
-              </Text>
-            </TouchableOpacity>
-          </Td>
-          <Td alignItems='center' width={200}>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={() => onNotificationItemPress(item)}>
-              {SearchIcon(themedStyle.iconSearch)}
-            </TouchableOpacity>
-          </Td>
-        </Tr>
-      );
-    });
+  const renderNotifications = (): React.ReactElement[][] => {
+    if (props.isNotifications) {
+      return notifications.map(value => {
+        return value.notifications.map((item, index) => {
+          return (
+            <Tr key={index}>
+              <Td alignItems='center' width={110}>
+                <Text style={themedStyle.txtInfo}>
+                  {++index}
+                </Text>
+              </Td>
+              <Td>
+                <Text style={themedStyle.txtInfo}>
+                  {item.title}
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  onPress={onAttachMentIconPress}
+                  style={themedStyle.viewAttachment}>
+                  {AttachmentIcon(themedStyle.iconAttachment)}
+                  <Text style={themedStyle.txtAttachment}>
+                    {'Tập tin đín kèm'}
+                  </Text>
+                </TouchableOpacity>
+              </Td>
+              <Td alignItems='center' width={200}>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  onPress={() => onNotificationItemPress(item)}>
+                  {SearchIcon(themedStyle.iconSearch)}
+                </TouchableOpacity>
+              </Td>
+            </Tr>
+          );
+        });
+      });
+    } else {
+      return notifications.map(value => {
+        return value.annoucements.map((item, index) => {
+          return (
+            <Tr key={index}>
+              <Td alignItems='center' width={110}>
+                <Text style={themedStyle.txtInfo}>
+                  {++index}
+                </Text>
+              </Td>
+              <Td>
+                <Text style={themedStyle.txtInfo}>
+                  {item.title}
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  onPress={onAttachMentIconPress}
+                  style={themedStyle.viewAttachment}>
+                  {AttachmentIcon(themedStyle.iconAttachment)}
+                  <Text style={themedStyle.txtAttachment}>
+                    {'Tập tin đín kèm'}
+                  </Text>
+                </TouchableOpacity>
+              </Td>
+              <Td alignItems='center' width={200}>
+                <TouchableOpacity
+                  activeOpacity={0.75}
+                  onPress={() => onNotificationItemPress(item)}>
+                  {SearchIcon(themedStyle.iconSearch)}
+                </TouchableOpacity>
+              </Td>
+            </Tr>
+          );
+        });
+      });
+    }
   };
 
   return (

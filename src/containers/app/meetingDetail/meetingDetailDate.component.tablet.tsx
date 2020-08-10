@@ -23,72 +23,98 @@ import {
 import { textStyle } from '@src/components';
 
 interface ComponentProps {
-  dateSelected: Date;
-  numDates: number;
-  onDatePress: (date: Date) => void;
+  dateSelected: string;
   dateList: string[];
+  onDatePress(date: string): void;
 }
 
 export type MeetingDetailDateTabletProps = ComponentProps & ThemedComponentProps;
 
 const MeetingDetailDateTabletComponent: React.FunctionComponent<MeetingDetailDateTabletProps> = (props) => {
   const { themedStyle } = props;
-  const [dates, setDates] = useState<Date[]>([]);
-  const [dateSelected, setDateSelected] = useState<number>(0);
+  const [dates, setDates] = useState<string[]>(props.dateList);
+  const [dateSelected, setDateSelected] = useState<string>(props.dateSelected);
+  const [dateLength, setDateLengthSelected] = useState<number>(0);
 
-  const onDatePress = (date: number): void => {
-    setDateSelected(date);
+  React.useEffect(() => {
+    setDates(props.dateList);
+  }, [props.dateList]);
+
+  React.useEffect(() => {
+    setDateSelected(props.dateSelected);
+  }, [props.dateSelected]);
+
+  const onDatePress = (date: string): void => {
+    props.onDatePress(date);
   };
 
-  // sẽ xử lý sau khi chốt tối đa bao nhiêu ngày trong 1 cuộc họp
-  // const onPrevDatesPress = (): void => {
-  // };
+  const onPrevDatesPress = (): void => {
+    if (dateLength - 3 >= 0) {
+      setDateLengthSelected(dateLength - 3);
+    } else if (dateLength - 2 === 0 || dateLength - 1 === 0) {
+      setDateLengthSelected(0);
+    } else { }
+  };
 
-  // const onNextDatesPress = (): void => {
-  // };
+  const onNextDatesPress = (): void => {
+    if (dateLength + 3 <= dates.length - 3) {
+      setDateLengthSelected(dateLength + 3);
+    } else if (dateLength + 2 === dates.length - 3) {
+      setDateLengthSelected(dateLength + 2);
+    } else if (dateLength + 1 === dates.length - 3) {
+      setDateLengthSelected(dateLength + 1);
+    } else { }
+  };
 
-  const getBtnDateStyle = (dateChooseIndex: number, index: number): StyleProp<ViewStyle> => {
+  const getBtnDateStyle = (dateChooseIndex: string, index: number): StyleProp<ViewStyle> => {
     const btnDateStyle = [themedStyle.btnDate];
-
     if (dateChooseIndex === dateSelected) {
       btnDateStyle.push(themedStyle.btnDateSelected);
     }
-
-    if (dateChooseIndex + 1 === dateSelected || index + 1 === dates.length) {
+    if (dates[index + 1] === dateSelected || index + 1 === dateLength + 3) {
       btnDateStyle.push(themedStyle.btnDateNoBorder);
     }
     return btnDateStyle;
   };
 
   const renderBtnDates = (): React.ReactElement[] => {
-    return props.dateList.map((item, index) => {
+    return [dateLength, dateLength + 1, dateLength + 2].map((item, index) => {
       return (
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => onDatePress(index)}
-          style={getBtnDateStyle(index, index)}>
-          <Text
-            style={[
-              themedStyle.txtDate,
-              index === dateSelected && themedStyle.txtDateSelected,
-            ]}>
-            {item}
-          </Text>
-        </TouchableOpacity>
+        (dates[index] &&
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={() => onDatePress(dates[item])}
+            style={getBtnDateStyle(dates[item], item)}>
+            <Text
+              style={[
+                themedStyle.txtDate,
+                dates[item] === dateSelected && themedStyle.txtDateSelected,
+              ]}>
+              {dates[item]}
+            </Text>
+          </TouchableOpacity>)
       );
     });
   };
 
   return (
     <View style={themedStyle.container}>
-      <TouchableOpacity style={themedStyle.btnPrevChangeDates}>
-        {ArrowPrevIcon(themedStyle.iconBtnChangeDates)}
+      <TouchableOpacity
+        onPress={() => onPrevDatesPress()}
+        activeOpacity={0.75}
+        style={themedStyle.btnPrevChangeDates}>
+        {dates.length >= 3 &&
+          ArrowPrevIcon(themedStyle.iconBtnChangeDates)}
       </TouchableOpacity>
       <View style={themedStyle.viewDates}>
         {renderBtnDates()}
       </View>
-      <TouchableOpacity style={themedStyle.btnNextChangeDates}>
-        {ArrowNextIcon(themedStyle.iconBtnChangeDates)}
+      <TouchableOpacity
+        onPress={() => onNextDatesPress()}
+        activeOpacity={0.75}
+        style={themedStyle.btnNextChangeDates}>
+        {dates.length >= 3 &&
+          ArrowNextIcon(themedStyle.iconBtnChangeDates)}
       </TouchableOpacity>
     </View>
   );
@@ -121,6 +147,7 @@ export const MeetingDetailDateTablet = withStyles(MeetingDetailDateTabletCompone
   btnDateSelected: {
     borderRadius: pxToPercentage(30),
     backgroundColor: theme['color-primary-2'],
+    borderRightWidth: 0,
   },
   txtDate: {
     fontSize: pxToPercentage(34),

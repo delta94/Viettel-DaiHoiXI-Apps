@@ -1,6 +1,18 @@
-export class Notification {
-  title: string;
-  description: string;
+import { Type } from 'class-transformer';
+
+export class Notifications {
+  id: string;
   date: string;
-  read: boolean;
+  title: string;
+  content: string;
+  attachment: String[];
+}
+export class Notification {
+  date: string;
+  @Type(() => Notifications)
+  notifications: Notifications[];
+
+  constructor() {
+    this.notifications = [];
+  }
 }

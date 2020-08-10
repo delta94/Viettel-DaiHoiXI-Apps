@@ -22,40 +22,64 @@ import {
   MenuIcon,
 } from '@src/assets/icons';
 import { Program as ProgramModel } from '@src/core/models/program/program.model';
-import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
-import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
+import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
+import { Annoucement as AnnoucementModel, Annoucements } from '@src/core/models/annoucement/annoucement.model';
 import { ConferenceInfoEnum } from '@src/core/utils/constants';
 
 interface ComponentProps {
   programs: ProgramModel[];
   notifications: NotificationModel[];
-  onNotificationItemPress: (notification: NotificationModel) => void;
-  pressReleases: PressReleaseModel[];
-  onPressReleaseItemPress: (pressRelease: PressReleaseModel) => void;
+  onNotificationItemPress: (notification: Notifications) => void;
+  annoucement: AnnoucementModel[];
+  onAnnoucementItemPress: (annoucement: Annoucements) => void;
 }
 
 export type MeetingDetailProps = ComponentProps & ThemedComponentProps;
 
 const MeetingDetailComponent: React.FunctionComponent<MeetingDetailProps> = (props) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
+  const [dates, setDates] = useState<string[]>([]);
+  const [dateSelected, setDateSelected] = useState<string>('');
+
+  React.useEffect(() => {
+    const temp = onGetDateList();
+    setDates(temp);
+    setDateSelected(temp[0]);
+  }, []);
+
+  const onGetDateList = () => {
+    const dateTemp: string[] = [];
+    props.programs.forEach(item => {
+      dateTemp.push(item.date);
+    });
+    return dateTemp;
+  };
 
   const onTabSelect = (selectedTabIndexParam: number) => {
     setSelectedTabIndex(selectedTabIndexParam);
   };
 
-  const onNotificationItemPress = (notification: NotificationModel): void => {
+  const onNotificationItemPress = (notification: Notifications): void => {
     props.onNotificationItemPress(notification);
   };
 
-  const onPressReleaseItemPress = (pressReleae: PressReleaseModel): void => {
-    props.onPressReleaseItemPress(pressReleae);
+  const onAnnoucementItemPress = (annoucement: Annoucements): void => {
+    props.onAnnoucementItemPress(annoucement);
+  };
+
+  const onDatePress = (date: string): void => {
+    setDateSelected(date);
   };
 
   const renderTabSelected = (): React.ReactElement => {
     switch (selectedTabIndex) {
       case ConferenceInfoEnum.program: {
         return (
-          <Program programs={props.programs} />
+          <Program
+            programs={props.programs}
+            dateList={dates}
+            onDatePress={onDatePress}
+            dateSelected={dateSelected} />
         );
       }
       case ConferenceInfoEnum.notification: {
@@ -63,14 +87,22 @@ const MeetingDetailComponent: React.FunctionComponent<MeetingDetailProps> = (pro
           <NotificationAnnouncement
             notifications={props.notifications}
             onNotificationItemPress={onNotificationItemPress}
+            dateSelected={dateSelected}
+            dateList={dates}
+            onDatePress={onDatePress}
+            isNotifications
           />
         );
       }
       case ConferenceInfoEnum.pressRelease: {
         return (
           <NotificationAnnouncement
-            notifications={props.pressReleases}
-            onNotificationItemPress={onPressReleaseItemPress}
+            notifications={props.annoucement}
+            onNotificationItemPress={onAnnoucementItemPress}
+            dateSelected={dateSelected}
+            dateList={dates}
+            onDatePress={onDatePress}
+            isNotifications={false}
           />
         );
       }

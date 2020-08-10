@@ -1,18 +1,20 @@
 import { Type } from 'class-transformer';
 
-export class ProgramContent {
-  description: string;
-  fromTime: string;
-  toTime: string;
+export class Detail {
+  id: string;
+  startHour: string;
+  endHour: string;
+  content: string;
   implementer: string;
 }
 
-export class Program {
-  section: string;
-  @Type(() => ProgramContent)
-  contents: ProgramContent[];
+export class ProgramSection {
+  type: string;
+  @Type(() => Detail)
+  details: Detail[];
+}
 
-  constructor() {
-    this.contents = [];
-  }
+export class Program {
+  date: string;
+  programs: ProgramSection[];
 }

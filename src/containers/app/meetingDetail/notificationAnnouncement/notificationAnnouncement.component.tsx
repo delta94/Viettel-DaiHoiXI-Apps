@@ -15,13 +15,18 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import { MeetingDetailDate } from '../meetingDetailDate.component';
-import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
+import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
 import { AttachmentIcon } from '@src/assets/icons';
 import { AttachmentModal } from '../attachmentModel.component';
+import { Annoucements, Annoucement as AnnoucementModel } from '@src/core/models/annoucement/annoucement.model';
 
 interface ComponentProps {
-  notifications: NotificationModel[];
-  onNotificationItemPress: (notification: NotificationModel) => void;
+  notifications: NotificationModel[] | AnnoucementModel[];
+  onNotificationItemPress: (notification: Notifications | Annoucements) => void;
+  dateSelected: string;
+  dateList: string[];
+  onDatePress(date: string): void;
+  isNotifications: boolean;
 }
 
 export type NotificationAnnouncementProps = ComponentProps & ThemedComponentProps;
@@ -30,7 +35,13 @@ const NotificationAnnouncementComponent: React.FunctionComponent<NotificationAnn
   const { themedStyle } = props;
   const [isShowModal, setIsShowModal] = React.useState<boolean>(false);
 
-  const onNotificationItemPress = (notification: NotificationModel): void => {
+  const [notifications, setNotifications] = React.useState<NotificationModel[] | AnnoucementModel[]>(props.notifications);
+
+  React.useEffect(() => {
+    setNotifications(props.notifications.filter(item => item.date === props.dateSelected));
+  }, [props.dateSelected, props.notifications]);
+
+  const onNotificationItemPress = (notification: Notifications): void => {
     props.onNotificationItemPress(notification);
   };
 
@@ -38,13 +49,26 @@ const NotificationAnnouncementComponent: React.FunctionComponent<NotificationAnn
     setIsShowModal(!isShowModal);
   };
 
+  const onDatePress = (date: string): void => {
+    props.onDatePress(date);
+  };
+
+  const getData = () => {
+    if (props.isNotifications) {
+      return notifications[0].notifications;
+    }
+    return notifications[0].annoucements;
+  };
 
   return (
     <Layout style={themedStyle.container}>
-      <MeetingDetailDate />
+      <MeetingDetailDate
+        dateSelected={props.dateSelected}
+        dateList={props.dateList}
+        onDatePress={onDatePress} />
       <FlatList
-        data={props.notifications}
-        extraData={props.notifications}
+        data={notifications.length > 0 && getData()}
+        extraData={notifications}
         style={themedStyle.flatList}
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={false}

@@ -1,36 +1,58 @@
 import React from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
-import { MeetingDetail } from './meetingDetail.component';
-import { programDataFake } from '@src/core/data/program';
-import {
-  notificationDataFake,
-  pressReleaseDataFake,
-} from '@src/core/data/notification';
-import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
-import { PressRelease as PressReleaseModel } from '@src/core/models/pressRelease/pressRelease.model';
+import { Notification as NotificationModel, Notifications } from '@src/core/models/notification/notification.model';
+import { Annoucements } from '@src/core/models/annoucement/annoucement.model';
 import { KEY_NAVIGATION_BACK } from '@src/core/navigation/constants';
 import { isTablet } from 'react-native-device-info';
+import { Dispatch } from 'redux';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
+import { ConferenceListState } from './store/reducer/types';
+import { AppState } from '@src/core/store';
+import { SessionState } from '@src/core/store/reducer/session/types';
+import { onThunkGetProgramListReq, onThunkGetNotificationListReq, onThunkGetAnnoucementListReq } from './store/thunk';
 import { MeetingDetailTablet } from './meetingDetail.component.tablet';
+import { MeetingDetail } from './meetingDetail.component';
 
 export const MeetingDetailContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'MeetingDetailContainer';
 
-  const onNotificationItemPress = (notification: NotificationModel): void => {
+  const dispatch: Dispatch<any> = useDispatch();
+  const meetingDetailReducer: ConferenceListState = useSelector((state: AppState) => state.meetingDetail);
+
+  React.useEffect(() => {
+    onGetDelegateList();
+  }, []);
+
+  const onGetDelegateList = (): void => {
+    // dispatch(onThunkGetProgramListReq(meetingId, () => { }));
+    // dispatch(onThunkGetNotificationListReq(meetingId, () => { }));
+    // dispatch(onThunkGetPressReleaseListReq(meetingId, () => { }));
+
+    // hard code meetingId
+    dispatch(onThunkGetProgramListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
+    dispatch(onThunkGetNotificationListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
+    dispatch(onThunkGetAnnoucementListReq('e05561b7-b2ec-4d8e-8639-08d8352259e3', () => { }));
+  };
+
+  const onNotificationItemPress = (notification: Notifications): void => {
     props.navigation.navigate({
       key: navigationKey,
-      routeName: 'notificationDetail',
+      routeName: 'notification',
       params: {
         notification,
       },
     });
   };
 
-  const onPressReleaseItemPress = (pressRelease: PressReleaseModel): void => {
+  const onAnnoucementItemPress = (notification: Annoucements): void => {
     props.navigation.navigate({
       key: navigationKey,
-      routeName: 'pressReleaseDetail',
+      routeName: 'announcement',
       params: {
-        pressRelease,
+        notification,
       },
     });
   };
@@ -49,24 +71,23 @@ export const MeetingDetailContainer: React.FunctionComponent<NavigationInjectedP
   if (isTablet()) {
     return (
       <MeetingDetailTablet
-        programs={programDataFake}
-        notifications={notificationDataFake}
-        pressReleases={pressReleaseDataFake}
+        programs={meetingDetailReducer.programs}
+        notifications={meetingDetailReducer.notifications}
+        annoucement={meetingDetailReducer.annoucement}
         onNotificationItemPress={onNotificationItemPress}
-        onPressReleaseItemPress={onPressReleaseItemPress}
+        onAnnoucementItemPress={onAnnoucementItemPress}
         onBackPress={onBackPress}
         onMessagePress={onMessagePress}
       />
     );
   }
-
   return (
     <MeetingDetail
-      programs={programDataFake}
-      notifications={notificationDataFake}
-      pressReleases={pressReleaseDataFake}
+      programs={meetingDetailReducer.programs}
+      notifications={meetingDetailReducer.notifications}
+      annoucement={meetingDetailReducer.annoucement}
       onNotificationItemPress={onNotificationItemPress}
-      onPressReleaseItemPress={onPressReleaseItemPress}
+      onAnnoucementItemPress={onAnnoucementItemPress}
     />
   );
 };

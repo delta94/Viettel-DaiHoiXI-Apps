@@ -9,13 +9,14 @@ import {
   ThemeType,
   withStyles,
 } from '@kitten/theme';
-import { Notification as NotificationModel } from '@src/core/models/notification/notification.model';
+import { Notifications } from '@src/core/models/notification/notification.model';
 import { textStyle } from '@src/components';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
+import { Annoucements } from '@src/core/models/annoucement/annoucement.model';
 
 interface ComponentProps {
-  notification: NotificationModel;
+  notification: Notifications | Annoucements;
 }
 
 export type NotificationAnnouncementDetailTabletProps = ThemedComponentProps & ComponentProps;
@@ -35,7 +36,7 @@ const NotificationAnnouncementDetailTabletComponent: React.FunctionComponent<Not
           style={themedStyle.txtDescription}>
           {'Nội dung: '}
           <Text style={themedStyle.txtDescription}>
-            {notification.description}
+            {notification.content}
           </Text>
         </Text>
       </ScrollView>

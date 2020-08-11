@@ -63,6 +63,7 @@ const DocumentRequestTabletModalComponent: React.FunctionComponent<DocumentReque
       onBackButtonPress={onClosePress}
       backdropTransitionInTiming={1}
       backdropTransitionOutTiming={1}
+      backdropOpacity={0.5}
       style={themedStyle.viewModal}>
       <View style={themedStyle.viewBox}>
         <View style={themedStyle.viewIcon}>

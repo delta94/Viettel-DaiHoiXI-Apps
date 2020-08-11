@@ -19,11 +19,10 @@ import {
   MessageIcon,
   PencilIcon,
 } from '@src/assets/icons';
-import {
-  imageDocument,
-} from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
+import Pdf from 'react-native-pdf';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface ComponentProps {
   // Add PDF here Cuong
@@ -38,16 +37,17 @@ const DocumentModalTabletComponent: React.FunctionComponent<DocumentModalTabletP
     props.onClosePress();
   };
 
+  const sourcePdf = { uri: 'http://www.pdf995.com/samples/pdf.pdf', cache: true };
+
   const { themedStyle } = props;
 
   return (
     <Modal
       isVisible={props.isVisible}
-      animationIn='slideInUp'
-      animationOut='slideOutDown'
+      animationIn='fadeIn'
+      animationOut='fadeOut'
       onBackdropPress={onClosePress}
-      backdropColor={'rgba(0, 0, 0, 0.6)'}
-      swipeDirection={['down']}
+      backdropOpacity={0.5}
       onSwipeComplete={onClosePress}
       onBackButtonPress={onClosePress}
       backdropTransitionInTiming={1}
@@ -88,12 +88,11 @@ const DocumentModalTabletComponent: React.FunctionComponent<DocumentModalTabletP
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={themedStyle.viewDocImage}>
-            <Image
-              style={themedStyle.imgDocument}
-              source={imageDocument.imageSource}>
-            </Image>
-          </View>
+          <Pdf
+            source={sourcePdf}
+            scale={1}
+            style={themedStyle.pdf}
+          />
         </View>
         <TouchableOpacity
           activeOpacity={0.75}>
@@ -109,10 +108,15 @@ const DocumentModalTabletComponent: React.FunctionComponent<DocumentModalTabletP
 export const DocumentModalTablet = withStyles(DocumentModalTabletComponent, (theme: ThemeType) => ({
   viewModal: {
     alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    paddingBottom: getStatusBarHeight() / 2,
   },
   viewBox: {
+    flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   viewDoc: {
     width: pxToPercentage(1556),
@@ -209,5 +213,9 @@ export const DocumentModalTablet = withStyles(DocumentModalTabletComponent, (the
   imgDocument: {
     width: pxToPercentage(710),
     height: pxToPercentage(1035),
+  },
+  pdf: {
+    flex: 1,
+    backgroundColor: theme['color-basic-100'],
   },
 }));

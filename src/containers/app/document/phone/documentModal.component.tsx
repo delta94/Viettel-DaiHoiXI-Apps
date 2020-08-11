@@ -4,6 +4,8 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -17,15 +19,18 @@ import {
   NightModeIcon,
   MessageIcon,
   PencilIcon,
+  CloseIconOutline,
 } from '@src/assets/icons';
 import {
   imageDocument,
 } from '@src/assets/images';
 import { pxToPercentage } from '@src/core/utils/utils';
 import { textStyle } from '@src/components';
+import { themes } from '@src/core/themes';
+import Pdf from 'react-native-pdf';
+import { isTablet } from 'react-native-device-info';
 
 interface ComponentProps {
-  // Add PDF here Cuong
   isVisible: boolean;
   onClosePress: () => void;
 }
@@ -39,115 +44,94 @@ const DocumentModalComponent: React.FunctionComponent<DocumentModalProps> = (pro
 
   const { themedStyle } = props;
 
+  const sourcePdf = { uri: 'http://www.pdf995.com/samples/pdf.pdf', cache: true };
+
   return (
     <Modal
+      backdropColor={'black'}
       isVisible={props.isVisible}
-      animationIn='slideInUp'
-      animationOut='slideOutDown'
+      animationIn='fadeIn'
+      animationOut='fadeOut'
       onBackdropPress={onClosePress}
-      backdropColor={'rgb(156, 156, 156)'}
-      swipeDirection={['down']}
+      backdropOpacity={0.9}
       onSwipeComplete={onClosePress}
       onBackButtonPress={onClosePress}
       backdropTransitionInTiming={1}
       backdropTransitionOutTiming={1}
-      style={themedStyle.viewModal}>
-      <View style={themedStyle.viewBox}>
-        <TouchableOpacity
-          activeOpacity={0.75}>
-          {ArrowPrevIcon([
-            themedStyle.iconArrow,
-            themedStyle.iconArrowPrev,
-          ])}
+      style={themedStyle.container}>
+      <StatusBar
+        backgroundColor={themes['App Theme']['color-basic-100']}
+        barStyle='dark-content'
+      />
+      <SafeAreaView />
+      <View style={themedStyle.viewDocHeader}>
+        <TouchableOpacity style={themedStyle.viewDocLeft}>
+          {NightModeIcon(themedStyle.iconNightMode)}
+          <Text
+            style={themedStyle.txtNightMode}
+            numberOfLines={1
+            }>
+            {'Chuyển chế độ'}
+          </Text>
         </TouchableOpacity>
-        <View style={themedStyle.viewDoc}>
-          <View style={themedStyle.viewDocHeader}>
-            <TouchableOpacity style={themedStyle.viewDocLeft}>
-              {NightModeIcon(themedStyle.iconNightMode)}
-              <Text style={themedStyle.txtNightMode}>
-                {'Chuyển chế độ'}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={themedStyle.viewDocCenter}>
-              {PencilIcon(themedStyle.iconPencil)}
-              <Text style={themedStyle.txtPencil}>
-                {'Ghi chú'}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={themedStyle.viewDocRight}>
-              {MessageIcon(themedStyle.iconMessage)}
-              <Text style={themedStyle.txtMessage}>
-                {'Góp ý '}
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={themedStyle.viewDocImage}>
-            <Image
-              style={themedStyle.image}
-              source={imageDocument.imageSource}>
-            </Image>
-          </View>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.75}>
-          {ArrowNextIcon([
-            themedStyle.iconArrow,
-            themedStyle.iconArrowNext])}
+        <TouchableOpacity style={themedStyle.viewDocCenter}>
+          {PencilIcon(themedStyle.iconPencil)}
+          <Text style={themedStyle.txtPencil}>
+            {'Ghi chú'}
+          </Text>
         </TouchableOpacity>
+        <TouchableOpacity style={themedStyle.viewDocRight}>
+          {MessageIcon(themedStyle.iconMessage)}
+          <Text style={themedStyle.txtMessage}>
+            {'Góp ý'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={themedStyle.viewExit}
+          activeOpacity={0.75}
+          onPress={onClosePress}>
+          {CloseIconOutline(themedStyle.iconClose)}
+          <Text style={themedStyle.txtMessage}>
+            {'Thoát '}
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={themedStyle.container}>
+        <Pdf
+          source={sourcePdf}
+          scale={1}
+          style={themedStyle.pdf}
+        />
       </View>
     </Modal>
   );
 };
 
 export const DocumentModal = withStyles(DocumentModalComponent, (theme: ThemeType) => ({
-  viewModal: {
-    alignItems: 'center',
-  },
-  viewBox: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  viewDoc: {
-    width: pxToPercentage(300),
-    height: pxToPercentage(450),
-    backgroundColor: theme['color-primary-20'],
+  container: {
+    backgroundColor: 'red',
+    flex: 1,
+    margin: 0,
   },
   viewDocHeader: {
     flexDirection: 'row',
-    height: pxToPercentage(30),
-    backgroundColor: theme['color-primary-21'],
+    height: pxToPercentage(50),
+    backgroundColor: theme['color-primary-18'],
     alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  iconArrow: {
-    tintColor: theme['color-primary-12'],
-    alignItems: 'center',
-    width: pxToPercentage(20),
-    height: pxToPercentage(20),
-  },
-  iconArrowPrev: {
-    marginRight: pxToPercentage(10),
-  },
-  iconArrowNext: {
-    marginLeft: pxToPercentage(10),
   },
   viewDocLeft: {
+    flex: 1,
     flexDirection: 'row',
-    width: pxToPercentage(150),
-    height: pxToPercentage(20),
     alignItems: 'center',
   },
   viewDocCenter: {
     flexDirection: 'row',
-    width: pxToPercentage(60),
-    height: pxToPercentage(20),
     alignItems: 'center',
+    width: pxToPercentage(76),
   },
   viewDocRight: {
     flexDirection: 'row',
-    width: pxToPercentage(85),
-    height: pxToPercentage(20),
-    alignItems: 'center',
+    width: pxToPercentage(70),
   },
   iconNightMode: {
     tintColor: theme['color-primary-3'],
@@ -157,9 +141,14 @@ export const DocumentModal = withStyles(DocumentModalComponent, (theme: ThemeTyp
   },
   txtNightMode: {
     color: theme['color-primary-12'],
-    fontSize: pxToPercentage(12),
+    fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
     marginLeft: pxToPercentage(5),
+  },
+  iconClose: {
+    width: pxToPercentage(30),
+    height: pxToPercentage(30),
+    tintColor: theme['color-primary-3'],
   },
   iconPencil: {
     tintColor: theme['color-primary-3'],
@@ -168,7 +157,7 @@ export const DocumentModal = withStyles(DocumentModalComponent, (theme: ThemeTyp
   },
   txtPencil: {
     color: theme['color-primary-12'],
-    fontSize: pxToPercentage(12),
+    fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
     marginRight: pxToPercentage(5),
 
@@ -177,20 +166,22 @@ export const DocumentModal = withStyles(DocumentModalComponent, (theme: ThemeTyp
     tintColor: theme['color-primary-3'],
     width: pxToPercentage(20),
     height: pxToPercentage(20),
-    marginLeft: pxToPercentage(15),
+    marginLeft: pxToPercentage(8),
   },
   txtMessage: {
     color: theme['color-primary-12'],
-    fontSize: pxToPercentage(12),
+    fontSize: pxToPercentage(14),
     ...textStyle.proDisplayRegular,
     marginLeft: pxToPercentage(5),
   },
-  viewDocImage: {
+  viewExit: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    width: pxToPercentage(80),
+    marginRight: pxToPercentage(4),
   },
-  image: {
-    width: pxToPercentage(210),
-    height: pxToPercentage(420),
+  pdf: {
+    flex: 1,
+    backgroundColor: theme['color-basic-100'],
   },
 }));

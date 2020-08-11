@@ -77,10 +77,7 @@ const DocumentItemComponent: React.FunctionComponent<DocumentItemProps> = (props
             </Text>
           </TouchableOpacity>
           <Hr style={themedStyle.viewHr} />
-          <DocumentModal
-            isVisible={isVisibleDocument}
-            onClosePress={onClosePress}
-          />
+
         </View>
       );
     });
@@ -105,6 +102,10 @@ const DocumentItemComponent: React.FunctionComponent<DocumentItemProps> = (props
         )}
       </TouchableOpacity>
       {isShowDocument && renderDocumentItem()}
+      <DocumentModal
+        isVisible={isVisibleDocument}
+        onClosePress={onClosePress}
+      />
     </ScrollView>
   );
 };

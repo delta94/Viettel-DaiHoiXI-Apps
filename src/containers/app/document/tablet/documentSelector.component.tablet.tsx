@@ -15,18 +15,23 @@ import { pxToPercentage } from '@src/core/utils/utils';
 import { viewStyle } from '@src/components/viewStyle';
 import { textStyle } from '@src/components';
 import { DocumentSection as DocumentSectionModel } from '@src/core/models/document/document.model';
-import { ProgramTabEnum } from '@src/core/utils/constants';
+import { DocumentTabEnum } from '@src/core/utils/constants';
 import { DocumentTablet } from './document.component.tablet';
 import { DocumentRequestTabletModal } from './documentRequestModal.component.tablet';
+import { DocumentBackHeader } from '@src/components/header/documentBackHeader.coponent';
+import { HelpModel } from '@src/core/navigation/components/helpModel.component';
 
 interface ComponentProps {
   documents: DocumentSectionModel[];
+  onBackPress: () => void;
+  onMessagePress: () => void;
 }
 
 export type DocumentSelectorTabletProps = ComponentProps & ThemedComponentProps;
 
 const DocumentSelectorTabletComponent: React.FunctionComponent<DocumentSelectorTabletProps> = (props) => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
+  const [selectedTabView, setSelectedTabView] = useState<number>(DocumentTabEnum.TailieuCongTacChiDao);
 
   const [isVisibleDocumentRequest, setIsVisibleDocumentRequest] = React.useState<boolean>(false);
 
@@ -36,6 +41,24 @@ const DocumentSelectorTabletComponent: React.FunctionComponent<DocumentSelectorT
 
   const onClosePress = () => {
     setIsVisibleDocumentRequest(false);
+  };
+
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+
+  const onTabPress = (type: number) => {
+    setSelectedTabView(type);
+  };
+
+  const onMessagePress = (): void => {
+    props.onMessagePress();
+  };
+
+  const onBackPress = (): void => {
+    props.onBackPress();
+  };
+
+  const onHelpPress = (): void => {
+    setIsVisible(prevState => !prevState);
   };
 
   const { themedStyle } = props;
@@ -64,6 +87,18 @@ const DocumentSelectorTabletComponent: React.FunctionComponent<DocumentSelectorT
 
   return (
     <View style={themedStyle.container}>
+      <DocumentBackHeader
+        tabs={[
+          { title: 'Tài liệu về công tác chỉ đạo', type: DocumentTabEnum.TailieuCongTacChiDao },
+          { title: 'Tài liệu lưu hành tại đại hội', type: DocumentTabEnum.TaiLieuLuuHanhNoiBo },
+          { title: 'Tài liệu nghiên cứu, tham khảo', type: DocumentTabEnum.TaiLieuNghienCuuThamKhao },
+        ]}
+        onTabPress={onTabPress}
+        tabSelected={selectedTabView}
+        onBackPress={onBackPress}
+        onMessagePress={onMessagePress}
+        onHelpPress={onHelpPress}
+      />
       <View style={themedStyle.viewCard}>
         <ScrollView style={themedStyle.viewLeft}>
           {renderTabBtn(0, '7 chương trình đột phá')}
@@ -100,6 +135,10 @@ const DocumentSelectorTabletComponent: React.FunctionComponent<DocumentSelectorT
       <DocumentRequestTabletModal
         isVisible={isVisibleDocumentRequest}
         onClosePress={onClosePress} />
+      <HelpModel
+        isVisible={isVisible}
+        onClosePress={onHelpPress}
+      />
     </View>
   );
 };

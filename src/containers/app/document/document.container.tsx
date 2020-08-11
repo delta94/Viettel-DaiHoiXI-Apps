@@ -9,6 +9,13 @@ import { DocumentType } from './phone/documentType.component';
 export const DocumentContainer: React.FunctionComponent<NavigationInjectedProps> = (props) => {
   const navigationKey: string = 'DocumentContainer';
 
+  const onMessagePress = (): void => {
+    props.navigation.navigate({
+      key: navigationKey,
+      routeName: 'chat',
+    });
+  };
+
   const onBackPress = (): void => {
     props.navigation.goBack(KEY_NAVIGATION_BACK);
   };
@@ -17,6 +24,8 @@ export const DocumentContainer: React.FunctionComponent<NavigationInjectedProps>
     return (
       <DocumentSelectorTablet
         documents={documentDataFake}
+        onBackPress={onBackPress}
+        onMessagePress={onMessagePress}
       />
     );
   }

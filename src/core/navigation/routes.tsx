@@ -79,7 +79,10 @@ const AppNavigator: NavigationContainer = createStackNavigator({
     screen: GalleryContainer,
     navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletNoHeaderOptions,
   },
-  ['document']: DocumentContainer,
+  ['document']: {
+    screen: DocumentContainer,
+    navigationOptions: !isTablet() ? MenuNavigationOptions : MenuNavigationTabletNoHeaderOptions,
+  },
   ['chat']: ChatContainer,
   ['chatDetail']: ChatDetailContainer,
 }, {

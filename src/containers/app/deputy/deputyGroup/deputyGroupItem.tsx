@@ -17,6 +17,7 @@ import { viewStyle } from '@src/components/viewStyle';
 import { DeputyGroup as DeputyGroupModel } from '@src/core/models/deputy/deputyGroup.model';
 import { Deputy as DeputyModel } from '@src/core/models/deputy/deputy.model';
 import { SERVER_ADDRESS } from '../../../../../config';
+import { ArrowIosBackFill } from '@src/assets/icons';
 
 interface ComponentProps {
   deputyGroup: DeputyGroupModel;
@@ -27,9 +28,14 @@ export type DeputyGroupItemProps = ThemedComponentProps & ComponentProps;
 
 const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = (props) => {
   const { themedStyle } = props;
+  const [isCollapse, setIsCollapse] = React.useState<boolean>(false);
 
   const onDeputyPress = (deputy: DeputyModel): void => {
     props.onDeputyPress(deputy);
+  };
+
+  const onCollapsePress = () => {
+    setIsCollapse(prevState => !prevState);
   };
 
   const onRenderDeputies = (): React.ReactElement[] => {
@@ -105,13 +111,22 @@ const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = 
 
   return (
     <View style={themedStyle.container}>
-      <View style={themedStyle.sectionGroup}>
+      <TouchableOpacity
+        onPress={onCollapsePress}
+        activeOpacity={0.75}
+        style={themedStyle.sectionGroup}>
         <Text style={themedStyle.txtGroup}>
           {props.deputyGroup.group}
         </Text>
-      </View>
+        {ArrowIosBackFill(isCollapse
+          ? [themedStyle.iconArrow,
+          themedStyle.iconArrowUp]
+          : [themedStyle.iconArrow,
+          themedStyle.iconArrowDown],
+        )}
+      </TouchableOpacity>
       <View style={themedStyle.sectionItem}>
-        {onRenderDeputies()}
+        {isCollapse && onRenderDeputies()}
       </View>
     </View>
   );
@@ -175,5 +190,18 @@ export const DeputyGroupItem = withStyles(DeputyGroupItemComponent, (theme: Them
   },
   txtDeputyNumber: {
     marginLeft: pxToPercentage(40),
+  },
+  iconArrow: {
+    position: 'absolute',
+    right: pxToPercentage(6),
+    width: pxToPercentage(20),
+    height: pxToPercentage(20),
+    tintColor: theme['color-custom-100'],
+  },
+  iconArrowUp: {
+    transform: [{ rotate: '90deg' }],
+  },
+  iconArrowDown: {
+    transform: [{ rotate: '270deg' }],
   },
 }));

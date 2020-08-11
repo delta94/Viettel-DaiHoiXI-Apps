@@ -17,6 +17,7 @@ import {
   ArrowPrevIcon,
   CloseIconOutline,
 } from '@src/assets/icons';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface ComponentProps {
   image: ImageSource;
@@ -91,6 +92,7 @@ export const PhotoGalleryModalTablet = withStyles(PhotoGalleryModalTabletCompone
   container: {
     margin: 0,
     justifyContent: 'flex-end',
+    paddingBottom: getStatusBarHeight() / 2,
   },
   viewBox: {
     flex: 1,

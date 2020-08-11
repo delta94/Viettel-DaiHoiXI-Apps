@@ -118,9 +118,11 @@ export const PhotoGalleryModalTablet = withStyles(PhotoGalleryModalTabletCompone
     tintColor: theme['color-custom-100'],
   },
   btnClose: {
-    alignSelf: 'flex-end',
+    position: 'absolute',
+    top: pxToPercentage(50),
+    right: 0,
     marginRight: pxToPercentage(100),
-    marginTop: pxToPercentage(50),
+    zIndex: 1,
   },
   iconClose: {
     width: pxToPercentage(150),

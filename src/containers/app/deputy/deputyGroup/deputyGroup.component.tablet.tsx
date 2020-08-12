@@ -47,25 +47,47 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
   const [keyword, setKeyword] = useState('');
   const [groupSelected, setGroupSelected] = useState<SelectOptionType>({ text: '' });
   const [discussionGroupSelected, setDiscussionGroupSelected] = useState<SelectOptionType>({ text: '' });
-  const [deputies, setDeputies] = useState<DeputyGroupModel[]>(props.deputyGroups);
+  const [deputies, setDeputies] = useState<DeputyModel[]>([]);
 
-  const onSearchPress = (): void => {
-    let deputyGroupsTemp: DeputyGroupModel[] = [];
+  React.useEffect(() => {
+    onSearchPress(false);
+  }, []);
+
+  const onSearchPress = (isMoreLoad: boolean): void => {
+    let deputyGroupsTemp: DeputyModel[] = [];
 
     props.deputyGroups.forEach(item => {
       if (`${item.group}`.includes(groupSelected.text === 'Tất cả' ? '' : groupSelected.text)) {
-        deputyGroupsTemp = [...deputyGroupsTemp, {
-          ...item,
-          deputies: [...item.deputies.filter(deputy => {
-            return searchASCII(keyword, deputy.fullName) &&
-              `${deputy.discussionGroup}`.includes(discussionGroupSelected.text === 'Tất cả' ? '' : discussionGroupSelected.text);
-          })],
-        }];
+        deputyGroupsTemp = [...deputyGroupsTemp, ...[...item.deputies.filter(deputy => {
+          return searchASCII(keyword, deputy.fullName) &&
+            `${deputy.discussionGroup}`.includes(discussionGroupSelected.text === 'Tất cả' ? '' : discussionGroupSelected.text);
+        })].slice(0, 2),
+        ];
       }
     });
 
-    setDeputies(JSON.parse(JSON.stringify(deputyGroupsTemp)));
+    const deputyList: DeputyModel[] = JSON.parse(JSON.stringify(deputyGroupsTemp));
+
+    if (isMoreLoad) {
+      if (deputyList.length > deputies.length + 10) {
+        setDeputies([...deputies, ...deputyList.slice(deputies.length, deputies.length + 10)]);
+      } else {
+        setDeputies([...deputies, ...deputyList.slice(deputies.length, deputyList.length)]);
+      }
+    } else {
+      if (deputyList.length > 10) {
+        setDeputies(deputyList.slice(0, 10));
+      } else {
+        setDeputies(deputyList.slice(0, deputyList.length));
+      }
+      return;
+    }
+    setDeputies(deputyList);
   };
+
+  React.useEffect(() => {
+    onSearchPress(false);
+  }, [deputies]);
 
   const onDeputyItemPress = (deputy: DeputyModel): void => {
     props.onDeputyItemPress(deputy);
@@ -109,14 +131,13 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
     return deputies.map((item, index) => {
       return (
         <React.Fragment key={index}>
-          {renderDeputies(item.deputies)}
         </React.Fragment>
       );
     });
   };
 
-  const renderDeputies = (deputiesParam: DeputyModel[]): React.ReactElement[] => {
-    return deputiesParam.map((item, index) => {
+  const renderDeputies = (): React.ReactElement[] => {
+    return deputies.map((item, index) => {
       return (
         <Tr key={index}>
           <Td alignItems='center' width={150}>
@@ -192,7 +213,7 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
           </Select>
           <Button
             title='TÌM KIẾM'
-            onPress={() => onSearchPress()}
+            onPress={() => onSearchPress(true)}
             style={themedStyle.btnSearch}
           />
         </View>
@@ -218,7 +239,7 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
             </Th>
           </Thead>
           <Tbody>
-            {renderData()}
+            {renderDeputies()}
           </Tbody>
         </Table>
       </View>

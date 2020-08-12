@@ -28,7 +28,9 @@ export type DeputyGroupItemProps = ThemedComponentProps & ComponentProps;
 
 const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = (props) => {
   const { themedStyle } = props;
-  const [isCollapse, setIsCollapse] = React.useState<boolean>(false);
+  const [isCollapse, setIsCollapse] = React.useState<boolean>(true);
+  const [deputies, setDeputies] = React.useState<DeputyModel[]>([]);
+  const [isShowLoadMore, setShowLoadMore] = React.useState<boolean>(false);
 
   const onDeputyPress = (deputy: DeputyModel): void => {
     props.onDeputyPress(deputy);
@@ -38,8 +40,40 @@ const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = 
     setIsCollapse(prevState => !prevState);
   };
 
+  React.useEffect(() => {
+    onSliceDeputyFromDate(false);
+  }, [props.deputyGroup]);
+
+
+  const onSliceDeputyFromDate = (isMoreLoad: boolean) => {
+    const Grouplength = props.deputyGroup.deputies.length;
+    const StartLength = deputies.length;
+    if (isMoreLoad) {
+      if (Grouplength > StartLength + 10) {
+        setShowLoadMore(true);
+        setDeputies([...deputies, ...props.deputyGroup.deputies.slice(StartLength, StartLength + 10)]);
+        return;
+      }
+      if (Grouplength <= StartLength + 10) {
+        setDeputies([...deputies, ...props.deputyGroup.deputies.slice(StartLength, Grouplength)]);
+        setShowLoadMore(false);
+        return;
+      }
+    } else {
+      if (Grouplength > 10) {
+        setShowLoadMore(true);
+        setDeputies(props.deputyGroup.deputies.slice(0, 10));
+      } else {
+        setShowLoadMore(false);
+        setDeputies(props.deputyGroup.deputies);
+      }
+      return;
+    }
+  };
+
+
   const onRenderDeputies = (): React.ReactElement[] => {
-    return props.deputyGroup.deputies.map((item, index) => {
+    return deputies.map((item, index) => {
       return (
         <TouchableOpacity
           activeOpacity={0.75}
@@ -127,6 +161,16 @@ const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = 
       </TouchableOpacity>
       <View style={themedStyle.sectionItem}>
         {isCollapse && onRenderDeputies()}
+        {isCollapse && isShowLoadMore && (
+          <TouchableOpacity
+            activeOpacity={0.75}
+            onPress={() => { onSliceDeputyFromDate(true); }}
+            style={themedStyle.btnLoadMore}>
+            <Text style={themedStyle.txtLoadMore}>
+              {'Xem thêm'}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -203,5 +247,16 @@ export const DeputyGroupItem = withStyles(DeputyGroupItemComponent, (theme: Them
   },
   iconArrowDown: {
     transform: [{ rotate: '270deg' }],
+  },
+  btnLoadMore: {
+    alignSelf: 'flex-end',
+    height: pxToPercentage(30),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  txtLoadMore: {
+    fontSize: pxToPercentage(14),
+    color: theme['color-primary-2'],
+    ...textStyle.proDisplayRegularItalic,
   },
 }));

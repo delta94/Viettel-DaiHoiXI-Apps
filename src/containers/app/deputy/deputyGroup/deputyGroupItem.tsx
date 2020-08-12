@@ -44,7 +44,6 @@ const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = 
     onSliceDeputyFromDate(false);
   }, [props.deputyGroup]);
 
-
   const onSliceDeputyFromDate = (isMoreLoad: boolean) => {
     const Grouplength = props.deputyGroup.deputies.length;
     const StartLength = deputies.length;
@@ -59,6 +58,7 @@ const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = 
         setShowLoadMore(false);
         return;
       }
+      return;
     } else {
       if (Grouplength > 10) {
         setShowLoadMore(true);

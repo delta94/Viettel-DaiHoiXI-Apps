@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  ActivityIndicator,
+  FlatList,
 } from 'react-native';
 import {
   ThemedComponentProps,
@@ -20,7 +22,6 @@ import { viewStyle } from '@src/components/viewStyle';
 import { Table } from '@src/components/table/table.component';
 import { Thead } from '@src/components/table/thead.component';
 import { Th } from '@src/components/table/th.component';
-import { Tbody } from '@src/components/table/tbody.component';
 import { Tr } from '@src/components/table/tr.component';
 import { Td } from '@src/components/table/td.component';
 import { textStyle } from '@src/components';
@@ -48,10 +49,11 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
   const [groupSelected, setGroupSelected] = useState<SelectOptionType>({ text: '' });
   const [discussionGroupSelected, setDiscussionGroupSelected] = useState<SelectOptionType>({ text: '' });
   const [deputies, setDeputies] = useState<DeputyModel[]>([]);
+  const [isLoadding, setLoadding] = useState<boolean>(false);
 
   React.useEffect(() => {
     onSearchPress(false);
-  }, []);
+  }, [props.deputyGroups]);
 
   const onSearchPress = (isMoreLoad: boolean): void => {
     let deputyGroupsTemp: DeputyModel[] = [];
@@ -61,7 +63,7 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
         deputyGroupsTemp = [...deputyGroupsTemp, ...[...item.deputies.filter(deputy => {
           return searchASCII(keyword, deputy.fullName) &&
             `${deputy.discussionGroup}`.includes(discussionGroupSelected.text === 'Tất cả' ? '' : discussionGroupSelected.text);
-        })].slice(0, 2),
+        })],
         ];
       }
     });
@@ -71,23 +73,23 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
     if (isMoreLoad) {
       if (deputyList.length > deputies.length + 10) {
         setDeputies([...deputies, ...deputyList.slice(deputies.length, deputies.length + 10)]);
+        setLoadding(true);
       } else {
         setDeputies([...deputies, ...deputyList.slice(deputies.length, deputyList.length)]);
+        setLoadding(false);
       }
+      return;
     } else {
       if (deputyList.length > 10) {
         setDeputies(deputyList.slice(0, 10));
+        setLoadding(true);
       } else {
         setDeputies(deputyList.slice(0, deputyList.length));
+        setLoadding(false);
       }
       return;
     }
-    setDeputies(deputyList);
   };
-
-  React.useEffect(() => {
-    onSearchPress(false);
-  }, [deputies]);
 
   const onDeputyItemPress = (deputy: DeputyModel): void => {
     props.onDeputyItemPress(deputy);
@@ -127,56 +129,60 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
     setDiscussionGroupSelected(option);
   };
 
-  const renderData = (): React.ReactElement[] => {
-    return deputies.map((item, index) => {
+  const ListFooter = () => {
+    if (isLoadding) {
       return (
-        <React.Fragment key={index}>
-        </React.Fragment>
+        <View style={themedStyle.viewListFooter}>
+          <ActivityIndicator size='large' />
+        </View>
       );
-    });
+    }
+    return (
+      <View />
+    );
   };
 
-  const renderDeputies = (): React.ReactElement[] => {
-    return deputies.map((item, index) => {
-      return (
-        <Tr key={index}>
-          <Td alignItems='center' width={150}>
-            <Text style={themedStyle.txtTd}>
-              {item.code}
-            </Text>
-          </Td>
-          <Td alignItems='center' width={260}>
-            <Image
-              source={(new RemoteImage(`${SERVER_ADDRESS}${item.avatar}`).imageSource)}
-              style={themedStyle.imgAvatar}
-            />
-          </Td>
-          <Td width={570}>
-            <Text style={themedStyle.txtFullname}>
-              {item.fullName.toUpperCase()}
-            </Text>
-          </Td>
-          <Td>
-            <Text style={themedStyle.txtTd}>
-              {item.position}
-            </Text>
-          </Td>
-          <Td alignItems='center' width={230}>
-            <Text style={themedStyle.txtTd}>
-              {item.discussionGroup || 'Không'}
-            </Text>
-          </Td>
-          <Td alignItems='center' width={200}>
-            <TouchableOpacity
-              activeOpacity={0.75}
-              onPress={() => onDeputyItemPress(item)}>
-              {SearchIcon(themedStyle.iconSearch)}
-            </TouchableOpacity>
-          </Td>
-        </Tr>
-      );
-    });
+  const hadelLoadMore = () => {
+    onSearchPress(true);
   };
+
+  const renderDeputies = ({ item, index }) => (
+    <Tr>
+      <Td alignItems='center' width={150}>
+        <Text style={themedStyle.txtTd}>
+          {item.code}
+        </Text>
+      </Td>
+      <Td alignItems='center' width={260}>
+        <Image
+          source={(new RemoteImage(`${SERVER_ADDRESS}${item.avatar}`).imageSource)}
+          style={themedStyle.imgAvatar}
+        />
+      </Td>
+      <Td width={570}>
+        <Text style={themedStyle.txtFullname}>
+          {item.fullName.toUpperCase()}
+        </Text>
+      </Td>
+      <Td>
+        <Text style={themedStyle.txtTd}>
+          {item.position}
+        </Text>
+      </Td>
+      <Td alignItems='center' width={230}>
+        <Text style={themedStyle.txtTd}>
+          {item.discussionGroup || 'Không'}
+        </Text>
+      </Td>
+      <Td alignItems='center' width={200}>
+        <TouchableOpacity
+          activeOpacity={0.75}
+          onPress={() => onDeputyItemPress(item)}>
+          {SearchIcon(themedStyle.iconSearch)}
+        </TouchableOpacity>
+      </Td>
+    </Tr>
+  );
 
   return (
     <View style={themedStyle.container}>
@@ -238,9 +244,15 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
               {'Xem'}
             </Th>
           </Thead>
-          <Tbody>
-            {renderDeputies()}
-          </Tbody>
+          <FlatList
+            data={deputies}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={renderDeputies}
+            style={{ width: '100%' }}
+            onEndReached={hadelLoadMore}
+            onEndReachedThreshold={4}
+            ListFooterComponent={ListFooter}
+          />
         </Table>
       </View>
     </View>
@@ -319,4 +331,11 @@ export const DeputyGroupTablet = withStyles(DeputyGroupTabletComponent, (theme: 
     width: pxToPercentage(54),
     height: pxToPercentage(54),
   },
+  viewListFooter: {
+    flexDirection: 'row',
+    height: pxToPercentage(80),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
 }));

@@ -157,7 +157,6 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
               {renderDescussionKeyMember()}
             </ScrollView>
           </View>
-
         </View>
         <KeyboardAvoidingView>
           <View style={themedStyle.viewBtns}>

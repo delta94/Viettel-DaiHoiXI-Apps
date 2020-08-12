@@ -35,8 +35,18 @@ export type AttendanceProps = ComponentProps & ThemedComponentProps;
 const AttendanceComponent: React.FunctionComponent<AttendanceProps> = (props) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 
+  const dateFake = [
+    '04/08/2020',
+    '05/08/2020',
+    '06/08/2020',
+    '07/08/2020',
+  ];
+
   const onTabSelect = (selectedTabIndexParam: number) => {
     setSelectedTabIndex(selectedTabIndexParam);
+  };
+
+  const onDatePress = (date: string): void => {
   };
 
   const { themedStyle } = props;
@@ -76,7 +86,11 @@ const AttendanceComponent: React.FunctionComponent<AttendanceProps> = (props) =>
             icon={PeopleIconOther}
             titleStyle={themedStyle.tabTitle} />
         </TabBar>
-        <MeetingDetailDate />
+        <MeetingDetailDate
+          dateSelected={dateFake[0]}
+          dateList={dateFake}
+          onDatePress={onDatePress}
+          />
         {renderTabSelected()}
       </View>
     </View>

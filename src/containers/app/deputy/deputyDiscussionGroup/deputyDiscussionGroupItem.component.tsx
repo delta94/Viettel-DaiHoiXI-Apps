@@ -83,7 +83,7 @@ const DeputyDiscussionGroupItemComponent: React.FunctionComponent<DeputyDiscussi
                 themedStyle.txtInfo,
                 themedStyle.txtDelegateNumber,
               ]}>
-              {'Số đại biểu: '}
+              {'Số Đại biểu: '}
               <Text
                 numberOfLines={1}
                 style={[

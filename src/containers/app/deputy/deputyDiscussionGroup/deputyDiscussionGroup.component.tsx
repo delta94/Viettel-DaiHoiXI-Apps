@@ -69,7 +69,7 @@ const DeputyDiscussionGroupComponent: React.FunctionComponent<DeputyDiscussionGr
       <View style={themedStyle.viewSearch}>
         <Select
           data={onGetDiscussionGroupsFromData()}
-          placeholder='Chọn Tổ'
+          placeholder='Chọn tổ'
           textStyle={themedStyle.txtSelectInput}
           selectedOption={props.discussionGroupSelected}
           keyExtractor={(item) => item.text}

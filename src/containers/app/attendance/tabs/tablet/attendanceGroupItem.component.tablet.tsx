@@ -81,7 +81,7 @@ const AttendanceGroupItemTabletComponent: React.FunctionComponent<AttendanceGrou
       </View>
       <View style={themedStyle.viewBottom}>
         <Text style={themedStyle.txt}>
-          {`Tổng số đại biểu: ${attendance.present + attendance.absent}`}
+          {`Tổng số Đại biểu: ${attendance.present + attendance.absent}`}
         </Text>
         <View style={themedStyle.viewDescription}>
           {renderDescription('Đại biểu có mặt', attendance.present)}

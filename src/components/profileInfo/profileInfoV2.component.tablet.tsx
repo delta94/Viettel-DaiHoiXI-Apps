@@ -74,7 +74,7 @@ const ProfileInfoV2TabletComponent: React.FunctionComponent<ProfileInfoV2TabletP
               themedStyle.txtInfo,
               themedStyle.txtDelegateNumber,
             ]}>
-            {`Số đại biểu: ${deputy.code}`}
+            {`Số Đại biểu: ${deputy.code}`}
           </Text>
         </View>
       </View>

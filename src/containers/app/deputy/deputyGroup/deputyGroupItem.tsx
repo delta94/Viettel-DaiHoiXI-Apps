@@ -91,7 +91,7 @@ const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = 
                     themedStyle.txtInfo,
                     themedStyle.txtDeputyNumber,
                   ]}>
-                  {'Số đại biểu: '}
+                  {'Số Đại biểu: '}
                   <Text
                     numberOfLines={1}
                     style={[

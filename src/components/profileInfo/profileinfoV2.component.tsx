@@ -96,7 +96,7 @@ const ProfileInfoV2Component: React.FunctionComponent<ProfileInfoV2Props> = (pro
                 themedStyle.txtInfo,
                 themedStyle.txtDelegateNumber,
               ]}>
-              {'Số đại biểu: '}
+              {'Số Đại biểu: '}
               <Text
                 numberOfLines={1}
                 style={[

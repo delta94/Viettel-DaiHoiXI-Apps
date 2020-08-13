@@ -1,7 +1,7 @@
 export class SignInReq {
   userName: string;
   password: string;
-  osType?: string;
+  osType?: number;
   osVersion?: string;
   deviceCode?: string;
   imei?: string;
@@ -12,7 +12,7 @@ export class SignInReq {
 export class VerifyOTPReq {
   phoneNumber: string;
   otp: string;
-  osType?: string;
+  osType?: number;
   osVersion?: string;
   deviceCode?: string;
   imei?: string;

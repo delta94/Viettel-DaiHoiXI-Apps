@@ -11,12 +11,13 @@ import {
   SignInAccountFormData,
   SignInPhoneNumberFormData,
 } from '@src/core/models/auth/signIn/signIn.model';
-// import {
-//   getMacAddress,
-//   getIpAddress,
-//   getSystemVersion,
-//   getSystemName,
-// } from 'react-native-device-info';
+import {
+  getMacAddress,
+  getIpAddress,
+  getSystemVersion,
+  getSystemName,
+  getModel,
+} from 'react-native-device-info';
 import { onSetEnabledSpinner } from '@src/core/store/reducer/app/actions';
 import { NavigationInjectedProps } from 'react-navigation';
 import { toasts } from '@src/core/utils/toasts';
@@ -24,21 +25,22 @@ import { toasts } from '@src/core/utils/toasts';
 export const onThunkSignInReq = (data: SignInAccountFormData): ThunkActionTypes => async dispatch => {
   dispatch(onSetEnabledSpinner(true));
 
-  // const macAddress = await getMacAddress();
-  // const ipAddress = await getIpAddress();
-  // const osVersion = getSystemVersion();
-  // const osType = getSystemName();
+  const macAddress = await getMacAddress();
+  const ipAddress = await getIpAddress();
+  const osVersion = getSystemVersion();
+  const osType = getSystemName();
+  const deviceCode = getModel();
 
   const authService = new AuthService();
   const signInReq: SignInReq = {
     userName: data.userName,
     password: data.password,
-    // deviceCode: undefined,
-    // imei: undefined,
-    // ipAddress,
-    // macAddress,
-    // osType,
-    // osVersion,
+    deviceCode,
+    imei: null,
+    ipAddress,
+    macAddress,
+    osType: osType === 'android' ? 2 : 1,
+    osVersion,
   };
 
   try {
@@ -94,16 +96,22 @@ export const onThunkGetOtpReq = (data: SignInPhoneNumberFormData, navigator: Nav
 export const onThunkVerifyOtpReq = (otp: string, phoneNumber: string): ThunkActionTypes => async dispatch => {
   dispatch(onSetEnabledSpinner(true));
 
+  const macAddress = await getMacAddress();
+  const ipAddress = await getIpAddress();
+  const osVersion = getSystemVersion();
+  const osType = getSystemName();
+  const deviceCode = getModel();
   const authService = new AuthService();
+
   const verifyOTPReq: VerifyOTPReq = {
     phoneNumber: phoneNumber,
     otp,
-    // deviceCode: undefined,
-    // imei: undefined,
-    // ipAddress,
-    // macAddress,
-    // osType,
-    // osVersion,
+    deviceCode,
+    imei: null,
+    ipAddress,
+    macAddress,
+    osType: osType === 'android' ? 2 : 1,
+    osVersion,
   };
 
   try {

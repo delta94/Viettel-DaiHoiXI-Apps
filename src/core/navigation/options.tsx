@@ -19,7 +19,7 @@ export const routeNameDataSource: { [key: string]: string } = {
   'deputyDiscussionGroup': 'Tổ thảo luận',
   'deputyDetail': 'Thông tin đại biểu',
   'speechSignUp': 'Đăng ký phát biểu',
-  'speechManagement': 'Quản lý phát biểu',
+  'speechManagement': 'Điều hành phát biểu',
   'attendance': 'Điểm danh',
   'myQRCode': 'Mã QR Code của tôi',
   'chat': 'Chat',

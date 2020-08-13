@@ -26,6 +26,7 @@ import {
   PersonIconOther,
   SignUpToSpeakIconOther,
   PeopleIconOther,
+  SpeechManagementIconOther,
 } from '@src/assets/icons';
 
 interface ComponentProps {
@@ -65,6 +66,9 @@ const MenuComponent: React.FunctionComponent<MenuProps> = (props) => {
       }
       case MenuEnum.DangKyPhatBieu: {
         return SignUpToSpeakIconOther(themedStyle.icon);
+      }
+      case MenuEnum.QuanLyPhatBieu: {
+        return SpeechManagementIconOther(themedStyle.icon);
       }
       case MenuEnum.ToThaoLuan: {
         return PeopleIconOther(themedStyle.icon);

@@ -193,6 +193,14 @@ export const SeatMapIconOther = (style: StyleProp<ImageStyle>): IconElement => {
   return Icon(source, style);
 };
 
+export const SpeechManagementIconOther = (style: StyleProp<ImageStyle>): IconElement => {
+  const source: IconSource = {
+    imageSource: require('./other/icon-speech-management.png'),
+  };
+
+  return Icon(source, style);
+};
+
 export const SignUpToSpeakIconOther = (style: StyleProp<ImageStyle>): IconElement => {
   const source: IconSource = {
     imageSource: require('./other/icon-sign-up-to-speak.png'),

@@ -26,6 +26,7 @@ import {
   PersonIconOther,
   SignUpToSpeakIconOther,
   PeopleIconOther,
+  SpeechManagementIconOther,
 } from '@src/assets/icons';
 
 interface ComponentProps {
@@ -66,6 +67,9 @@ const MenuTabletComponent: React.FunctionComponent<MenuTabletProps> = (props) =>
       case MenuEnum.DangKyPhatBieu: {
         return SignUpToSpeakIconOther(themedStyle.iconDangKyPhatBieu);
       }
+      case MenuEnum.QuanLyPhatBieu: {
+        return SpeechManagementIconOther(themedStyle.icon);
+      }
       case MenuEnum.ToThaoLuan: {
         return PeopleIconOther(themedStyle.iconToThaoLuan);
       }
@@ -79,6 +83,7 @@ const MenuTabletComponent: React.FunctionComponent<MenuTabletProps> = (props) =>
     <View style={themedStyle.container}>
       <View style={themedStyle.viewCard}>
         <ProfileInfoV2Tablet
+          style={themedStyle.viewProfile}
           deputy={props.deputy}
           onProfilePress={() => { }}
           onQRCodePress={() => { }}
@@ -122,6 +127,9 @@ export const MenuTablet = withStyles(MenuTabletComponent, (theme: ThemeType) => 
     padding: pxToPercentage(20),
     backgroundColor: theme['color-custom-100'],
     ...viewStyle.shadow2,
+  },
+  viewProfile: {
+    marginBottom: pxToPercentage(10),
   },
   viewListContainer: {
     alignItems: 'center',

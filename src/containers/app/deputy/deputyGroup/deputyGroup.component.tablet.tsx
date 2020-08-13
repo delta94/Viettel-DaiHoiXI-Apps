@@ -71,6 +71,10 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
     const deputyList: DeputyModel[] = JSON.parse(JSON.stringify(deputyGroupsTemp));
 
     if (isMoreLoad) {
+      if (deputyList.length === deputies.length) {
+        setLoadding(false);
+        return;
+      }
       if (deputyList.length > deputies.length + 10) {
         setDeputies([...deputies, ...deputyList.slice(deputies.length, deputies.length + 10)]);
         setLoadding(true);
@@ -83,6 +87,7 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
       if (deputyList.length > 10) {
         setDeputies(deputyList.slice(0, 10));
         setLoadding(true);
+
       } else {
         setDeputies(deputyList.slice(0, deputyList.length));
         setLoadding(false);
@@ -150,7 +155,7 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
     <Tr>
       <Td alignItems='center' width={150}>
         <Text style={themedStyle.txtTd}>
-          {item.code}
+          {index}
         </Text>
       </Td>
       <Td alignItems='center' width={260}>
@@ -219,7 +224,7 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
           </Select>
           <Button
             title='TÌM KIẾM'
-            onPress={() => onSearchPress(true)}
+            onPress={() => onSearchPress(false)}
             style={themedStyle.btnSearch}
           />
         </View>
@@ -248,9 +253,9 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
             data={deputies}
             keyExtractor={(item, index) => index.toString()}
             renderItem={renderDeputies}
-            style={{ width: '100%' }}
+            style={themedStyle.viewFlatList}
             onEndReached={hadelLoadMore}
-            onEndReachedThreshold={4}
+            onEndReachedThreshold={1}
             ListFooterComponent={ListFooter}
           />
         </Table>
@@ -337,5 +342,7 @@ export const DeputyGroupTablet = withStyles(DeputyGroupTabletComponent, (theme: 
     alignItems: 'center',
     justifyContent: 'center',
   },
-
+  viewFlatList: {
+    width: '100%',
+  },
 }));

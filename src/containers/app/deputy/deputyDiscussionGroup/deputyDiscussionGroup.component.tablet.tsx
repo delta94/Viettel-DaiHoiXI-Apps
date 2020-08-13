@@ -29,7 +29,6 @@ import { Deputy as DeputyModel, Deputy } from '@src/core/models/deputy/deputy.mo
 import { DeputyDiscussionGroup as DeputyDiscussionGroupModel } from '@src/core/models/deputy/deputyDiscussionGroup.model';
 import { IMAGE_SERVER_ADDRESS } from '../../../../../config';
 import { DiscussionGroup } from '@src/core/models/deputy/discussionGroup.model';
-import { DiscussionGroupKeyMember } from '@src/core/models/deputy/keyMember.model';
 import { ScrollView } from 'react-native-gesture-handler';
 
 interface ComponentProps {
@@ -54,10 +53,6 @@ const DeputyDiscussionGroupTabletComponent: React.FunctionComponent<DeputyDiscus
     return props.deputyDiscussionGroups.discussionGroupDeputies.filter(deputy => {
       return searchASCII(keyword, deputy.fullName);
     });
-  };
-
-  const onFilterDeputiesKeyMember = (): DeputyModel[] => {
-    return props.discussionGroupKeyMember;
   };
 
   const onGetDiscussionGroupsFromData = () => {

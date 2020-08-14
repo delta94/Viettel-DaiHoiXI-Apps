@@ -155,7 +155,7 @@ const DeputyGroupTabletComponent: React.FunctionComponent<DeputyGroupTabletProps
     <Tr>
       <Td alignItems='center' width={150}>
         <Text style={themedStyle.txtTd}>
-          {index}
+          {item.code}
         </Text>
       </Td>
       <Td alignItems='center' width={260}>

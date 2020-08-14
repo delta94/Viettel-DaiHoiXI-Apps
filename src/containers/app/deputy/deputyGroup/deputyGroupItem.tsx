@@ -22,6 +22,7 @@ import { ArrowIosBackFill } from '@src/assets/icons';
 interface ComponentProps {
   deputyGroup: DeputyGroupModel;
   onDeputyPress: (deputy: DeputyModel) => void;
+  keyvalue: string;
 }
 
 export type DeputyGroupItemProps = ThemedComponentProps & ComponentProps;
@@ -32,17 +33,13 @@ const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = 
   const [deputies, setDeputies] = React.useState<DeputyModel[]>([]);
   const [isShowLoadMore, setShowLoadMore] = React.useState<boolean>(false);
 
-  const onDeputyPress = (deputy: DeputyModel): void => {
-    props.onDeputyPress(deputy);
-  };
-
   const onCollapsePress = () => {
     setIsCollapse(prevState => !prevState);
   };
 
   React.useEffect(() => {
     onSliceDeputyFromDate(false);
-  }, [props.deputyGroup]);
+  }, [props.keyvalue]);
 
   const onSliceDeputyFromDate = (isMoreLoad: boolean) => {
     const Grouplength = props.deputyGroup.deputies.length;
@@ -70,14 +67,16 @@ const DeputyGroupItemComponent: React.FunctionComponent<DeputyGroupItemProps> = 
       return;
     }
   };
-
+  const onDeputyPress = (deputy: DeputyModel): void => {
+    props.onDeputyPress(deputy);
+  };
 
   const onRenderDeputies = (): React.ReactElement[] => {
     return deputies.map((item, index) => {
       return (
         <TouchableOpacity
           activeOpacity={0.75}
-          onPress={() => onDeputyPress(item)}
+          onPress={() => { onDeputyPress(item); }}
           style={themedStyle.viewItem}>
           <View style={themedStyle.viewBody}>
             <Image

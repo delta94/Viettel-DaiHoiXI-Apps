@@ -147,6 +147,7 @@ const DeputyGroupComponent: React.FunctionComponent<DeputyGroupProps> = (props) 
             <DeputyGroupItem
               deputyGroup={item}
               onDeputyPress={onDeputyPress}
+              keyvalue= {keyword}
             />
           );
         }}

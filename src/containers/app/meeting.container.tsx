@@ -106,7 +106,7 @@ export const MeetingContainer: React.FunctionComponent<NavigationInjectedProps> 
 
 
   const onSearchPress = (): void => {
-    toasts.info('Chức năng này không có sẵn!');
+    toasts.info('Chức năng này đang phát triển!');
   };
 
   if (isTablet()) {

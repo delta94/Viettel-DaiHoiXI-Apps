@@ -60,11 +60,11 @@ export const SignInContainer: React.FunctionComponent<NavigationInjectedProps> =
   };
 
   const onRecognizePress = (): void => {
-    toasts.info('Chức năng này không có sẵn!');
+    toasts.info('Chức năng này đang phát triển!');
   };
 
   const onForgotPasswordPress = () => {
-    toasts.info('Chức năng này không có sẵn!');
+    toasts.info('Chức năng này đang phát triển!');
   };
 
   if (isTablet()) {
